@@ -1,0 +1,45 @@
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 50%;
+  box-shadow: inset -5px -5px 10px 5px var(--color-primary-very-light),
+    inset 5px 5px 10px 5px rgba(94, 104, 121, 0.3),
+    0 0 40px -20px var(--color-secondary-light);
+  /* width: 225px; */
+  height: 225px;
+  aspect-ratio: 1 / 1;
+}
+
+.img-container::after {
+  content: "";
+  position: absolute;
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+  box-shadow: -5px -5px 10px 5px var(--color-primary-very-light),
+    5px 5px 10px 5px rgba(94, 104, 121, 0.3);
+  transition: 2s;
+}
+
+.img-container .img {
+  position: relative;
+  border-radius: 50%;
+  width: 65%;
+  aspect-ratio: 1/1;
+  transition: 2s;
+  overflow: hidden;
+}
+
+.img img {
+  object-fit: cover;
+}
+
+.img-container:hover::after {
+  transform: rotate(360deg);
+}
+
+.img-container:hover .img {
+  transform: scale(1.25);
+}

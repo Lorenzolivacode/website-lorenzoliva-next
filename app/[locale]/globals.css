@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Zain:wght@200;300;400;700;800;900&display=swap");
+
+:root {
+  --color-primary-very-dark: #080d13;
+  --color-primary-dark: #121a22;
+  --color-primary-medium: #30435a;
+  --color-primary-medium-light: #7a9dc7;
+  --color-primary-light: #d8e6f8;
+  --color-primary-very-light: #fefefe;
+
+  --color-primary-saturated-very-dark: #000917;
+  --color-primary-saturated-dark: #031929;
+  --color-primary-saturated-medium: #00436d;
+  --color-primary-saturated-medium-light: #3a93dc;
+  --color-primary-saturated-light: #bfdcff;
+  --color-primary-saturated-very-light: #fdfeff;
+
+  --color-secondary-dark: #a78960;
+  --color-secondary-medium: #ecd9b4;
+  --color-secondary-light: #f9f6e6;
+  --color-secondary-very-light: #fffffe;
+
+  --color-secondary-saturated-dark: #bd8b21;
+  --color-secondary-saturated-medium: #ffd46b;
+  --color-secondary-saturated-light: #fff7cd;
+
+  --color-primary-very-dark-0d8: rgba(0, 9, 23, 0.8);
+  --color-primary-very-dark-0d6: rgba(0, 9, 23, 0.6);
+  --color-primary-very-dark-0d5: rgba(0, 9, 23, 0.5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Zain", sans-serif;
+  font-weight: 300;
+  line-height: 1.5rem;
+  list-style-type: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-medium-light) var(--color-primary-medium);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
+  color: var(--color-secondary-light);
+  background-color: var(--color-primary-very-dark);
+}
+
+.art-bg {
+  position: absolute;
+  top: 70px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-color: var(--color-secondary-very-light);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+}

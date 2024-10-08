@@ -1,0 +1,92 @@
+.btn-close,
+.btn-close > span {
+  transition: all 1s ease-in-out;
+}
+
+.btn-close {
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  flex-direction: row-reverse;
+  cursor: pointer;
+}
+
+.btn-close > span:first-child {
+  transform: rotate(-45deg);
+}
+
+.btn-close > span:last-child {
+  transform: rotate(45deg);
+}
+
+.btn-close:hover {
+  animation: hoverX 1s ease-in alternate-reverse;
+}
+
+.btn-close:hover > span:first-child {
+  animation: span1 1s ease-in alternate-reverse;
+}
+.btn-close:hover > span:last-child {
+  animation: span2 1s ease-in alternate-reverse;
+}
+
+@keyframes hoverX {
+  0% {
+    gap: 0%;
+  }
+  50% {
+    gap: 90%;
+  }
+}
+
+@keyframes span1 {
+  50% {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  75% {
+    opacity: 1;
+    transform: rotate(-30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes span2 {
+  50% {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  75% {
+    opacity: 1;
+    transform: rotate(30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.btn-close:focus {
+  overflow: hidden;
+}
+
+.btn-close:focus > span:first-child,
+.btn-close:focus > span:last-child {
+  position: absolute;
+  bottom: 0;
+  animation: spanOut 1s ease-in forwards;
+}
+
+.btn-close:focus > span:first-child {
+  transform: rotate(90deg);
+}
+.btn-close:focus > span:last-child {
+  transform: rotate(-90deg);
+}
+
+@keyframes spanOut {
+  to {
+    bottom: -70%;
+  }
+}

@@ -1,0 +1,44 @@
+/* LINE-HEIGHT */
+.l-height-1d5 {
+  line-height: 1.5rem;
+}
+
+/* SIZE */
+.f-size-1 {
+  font-size: 1rem;
+}
+
+.f-size-1d2 {
+  font-size: 1.2rem;
+}
+
+.f-size-1d5 {
+  font-size: 1.5rem;
+}
+
+.f-size-1d8 {
+  font-size: 1.8rem;
+}
+
+.f-size-2 {
+  font-size: 2rem;
+}
+
+/* TEXT ALIGN */
+.txt-star {
+  text-align: start;
+}
+
+/* TEXT DECORATION */
+.txt-decoration-none {
+  text-decoration: none;
+}
+
+/* WEIGHT */
+.f-lighter {
+  font-weight: lighter;
+}
+
+.f-bold {
+  font-weight: bold;
+}

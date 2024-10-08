@@ -1,0 +1,78 @@
+{
+  "Layout": {
+    "nameCode": "Developer",
+    "nameHome": "Home",
+    "nameArt": "Artist",
+
+    "languageLabel": "Language",
+    "selectedLabel": "Select language",
+    "flagIt": "🇮🇹",
+    "flagEn": "🇬🇧",
+    "italianLabel": "Italian",
+    "englishLabel": "English",
+    "contactsLabel": "Contacts",
+    "phoneLabel": "Phone: ",
+    "mailArtLabel": "e-mail artist: ",
+    "mailDevLabel": "e-mail developer: ",
+    "phoneNumber": "3208121031",
+    "mailArt": "lorenzo@lorenzoliva.it",
+    "mailDev": "lorenzodev@lorenzoliva.it",
+    "personalInfoLabel": "Personal information",
+    "city": "Palermo",
+    "mailFormLabel": "Send a mail",
+    "emailPlaceholder": "Enter your e-mail",
+    "txtAreaPlaceholder": "Enter a message",
+    "btnSend": "Send",
+    "footerLabel1": "No part of this site or its content may be reproduced, copied, modified, or adapted without the written permission of the rightful owner.",
+    "footerLabel2": "Website created by: Lorenzo Oliva",
+    "copyrightLabel": "Copyright © 2024"
+  },
+
+  "ModalDoc": {
+    "sectionDev": "Dev",
+    "sectionArt": "Art",
+    "myCv": "Lorenzo Oliva's CV",
+    "myPortfolio": "Lorenzo Oliva's Portfolio",
+    "viewCvLabel": "View my CV",
+    "viewPortfolioLabel": "View my portfolio",
+    "docsLabel": "Documents",
+    "altTxtDocsLabel": "Open and view my documents"
+  },
+
+  "Home": {
+    "myName": "Lorenzo Oliva",
+    "webDev": "Web developer",
+    "artist": "Artist",
+    "presentationTxt1": "I am a web developer specializing in frontend, an artist, with experience in decoration and the use of digital graphic software. I graduated from art school and made several approaches to the tech world, until in 2024 I started my training in development.",
+    "presentationTxt2": "From this webpage, you have access to my two worlds: art and development.",
+    "section": "section",
+    "modalHelloLabel": "Hi, I’m Lorenzo, nice to meet you!"
+  },
+
+  "ArtSection": {
+    "maintenancePageLabel": "This page is temporarily under maintenance",
+    "checkOutSocialLabel": "Check out my social networks",
+    "imageLabel": "Image"
+  },
+
+  "DevSection": {
+    "linkedinLabel": "LinkedIn",
+    "gitHubLabel": "GitHub",
+    "contactsLabel": "Contatti",
+    "skillsLabel": "Skills",
+    "linkLabel": "Links",
+    "visitLinkedinProfile": "Visit my LinkedIn profile",
+    "visitGithubProfile": "Visit my GitHub profile",
+    "goToContacts": "Go to the contacts section",
+    "portfolioLabel": "Project portfolio",
+    "exEndLabel": "Exercise completed:",
+    "viewLabel": "View the",
+    "followCode": "Visit my GitHub profile and view the code",
+    "followProject": "Follow the link and try the project",
+    "lookCode": "View the code",
+    "tryProject": "Try the project",
+
+    "subtitleThisSite": "This website",
+    "subtitleExercises": "Exercises"
+  }
+}

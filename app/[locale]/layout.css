@@ -1,0 +1,21 @@
+.main-w-screen {
+  width: 50%;
+}
+
+@media screen and (max-width: 1024px) {
+  .main-w-screen {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-w-screen {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .main-w-screen {
+    width: 95%;
+  }
+}

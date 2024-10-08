@@ -1,0 +1,29 @@
+.jumper-container {
+  position: relative;
+  height: 300px;
+}
+
+.jumper-container > div {
+  position: absolute;
+  top: 100%;
+  transform: translateY(-100%);
+  animation: jumper-move 1.8s infinite linear alternate-reverse;
+  width: 20px;
+}
+
+@keyframes jumper-move {
+  0% {
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+  }
+  50% {
+    aspect-ratio: 1/5;
+    border-radius: 20px;
+    top: 50%;
+  }
+  100% {
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    top: 100%;
+  }
+}

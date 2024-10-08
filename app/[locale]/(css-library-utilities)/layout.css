@@ -1,0 +1,70 @@
+/* ASPECT-RATIO */
+.ratio-1 {
+  aspect-ratio: 1 / 1;
+}
+
+.ratio-6-7 {
+  aspect-ratio: 6/7;
+}
+
+/* FILTER */
+.blur-5px {
+  filter: blur(5px);
+}
+
+.backd-blur-5px {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+/* OPACITY */
+.opacity-3 {
+  opacity: 0.3;
+}
+
+.opacity-4 {
+  opacity: 0.4;
+}
+
+.opacity-8 {
+  opacity: 0.8;
+}
+
+.opacity-h-6:hover {
+  opacity: 0.6;
+}
+
+/* OVERFLOW */
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-scroll {
+  overflow: scroll;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+/* VISIBILITY */
+
+.vis-hidden {
+  visibility: hidden;
+}
+
+.vis-visible {
+  visibility: visible;
+}
+
+/* TRANSFORM */
+/* -TRANSLATE */
+.translate-y-100 {
+  transform: translateY(100%);
+}
+
+/* Z-INDEX */
+.z-i-1 {
+  z-index: 1;
+}

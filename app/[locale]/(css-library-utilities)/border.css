@@ -1,0 +1,114 @@
+/* BORDER */
+.border-none {
+  border: none;
+}
+
+.border1-p-d {
+  border: 1px solid var(--color-primary-dark);
+}
+
+.border3-p-sat-l {
+  border: 3px solid var(--color-primary-saturated-light);
+}
+
+.border1-s-v-l {
+  border: 1px solid var(--color-secondary-light);
+}
+
+.border-b-1-p-m-l {
+  border: none;
+  border-bottom: 1px solid var(--color-primary-medium-light);
+}
+
+.border-b-1-s-l {
+  border: none;
+  border-bottom: 1px solid var(--color-secondary-light);
+}
+
+.border-br-1-p-m-l {
+  border: none;
+  border-bottom: 1px solid var(--color-primary-medium-light);
+  border-right: 1px solid var(--color-primary-medium-light);
+}
+
+/* SHADOW */
+.shadow-p-very-dark {
+  box-shadow: 0 0 4px var(--color-primary-very-dark);
+}
+
+.shadow-light {
+  box-shadow: 0 0 40px -20px var(--color-secondary-light);
+}
+
+.shadow-light-small {
+  box-shadow: 0 0 13px -4px var(--color-secondary-light);
+}
+
+.shadow-light-minus10 {
+  box-shadow: 0 0 40px -10px var(--color-secondary-light);
+}
+
+.shadow-rb-p-light {
+  box-shadow: 10px 10px 0px 0px var(--color-primary-saturated-light);
+}
+
+.shadow-before-tl-2px::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% + 14px);
+  height: calc(100% + 14px);
+  box-shadow: -2px -2px 0px 0px var(--color-primary-saturated-light);
+}
+
+.shadow-20px-black {
+  box-shadow: 0 0 20px rgb(0, 0, 0);
+}
+
+.shadow-10xy-black8 {
+  box-shadow: 10px 10px 24px rgba(0, 0, 0, 0.8);
+}
+
+/* RADIUS */
+.radius-sx-full {
+  border-start-start-radius: 9999px;
+  border-start-end-radius: 2222px;
+  border-end-start-radius: 9999px;
+  border-end-end-radius: 2222px;
+}
+
+.radius-dx-full {
+  border-start-start-radius: 2222px;
+  border-start-end-radius: 9999px;
+  border-end-start-radius: 2222px;
+  border-end-end-radius: 9999px;
+}
+
+.radius-3px {
+  border-radius: 3px;
+}
+
+.radius-5px {
+  border-radius: 5px;
+}
+
+.radius-8px {
+  border-radius: 8px;
+}
+
+.radius-20px {
+  border-radius: 20px;
+}
+
+.radius-10px-1s4-3 {
+  border-radius: 0px 0px 10px 0px;
+}
+
+.radius-20px-3s4-1 {
+  border-radius: 0px 20px 20px 20px;
+}
+
+.radius-50p {
+  border-radius: 50%;
+}

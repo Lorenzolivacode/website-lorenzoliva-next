@@ -1,0 +1,64 @@
+/* BACKGROUND */
+.bg-primary-very-dark {
+  background-color: var(--color-primary-very-dark);
+}
+
+.bg-primary-very-dark-0d6 {
+  background-color: var(--color-primary-very-dark-0d6);
+}
+
+.bg-primary-very-dark-0d5 {
+  background-color: var(--color-primary-very-dark-0d5);
+}
+
+.bg-primary-light {
+  background-color: var(--color-primary-light);
+}
+
+.bg-primary-very-light {
+  background-color: var(--color-primary-very-light);
+}
+
+.bg-secondary-light {
+  background-color: var(--color-secondary-light);
+}
+
+.bg-secondary-very-light {
+  background-color: var(--color-secondary-very-light);
+}
+
+/* COLOR TXT */
+.txt-c-none {
+  color: transparent;
+}
+
+.txt-c-inherit {
+  color: inherit;
+}
+
+.txt-c-white {
+  color: #ffffff;
+}
+
+.txt-c-primary-very-dark {
+  color: var(--color-primary-very-dark);
+}
+
+.txt-c-primary-dark {
+  color: var(--color-primary-dark);
+}
+
+.txt-c-primary-medium {
+  color: var(--color-primary-medium);
+}
+
+.txt-c-primary-very-light {
+  color: var(--color-primary-very-light);
+}
+
+.txt-c-secondary-medium {
+  color: var(--color-secondary-medium);
+}
+.txt-c-secondary-light {
+  color: var(--color-secondary-light);
+}

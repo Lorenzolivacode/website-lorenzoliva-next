@@ -1,0 +1,78 @@
+{
+  "Layout": {
+    "nameCode": "Developer",
+    "nameHome": "Home",
+    "nameArt": "Artista",
+
+    "languageLabel": "Language",
+    "selectedLabel": "Seleziona la lingua",
+    "flagIt": "🇮🇹",
+    "flagEn": "🇬🇧",
+    "italianLabel": "Italiano",
+    "englishLabel": "Inglese",
+    "contactsLabel": "Contatti",
+    "phoneLabel": "Telefono: ",
+    "mailArtLabel": "e-mail artist: ",
+    "mailDevLabel": "e-mail developer: ",
+    "phoneNumber": "3208121031",
+    "mailArt": "lorenzo@lorenzoliva.it",
+    "mailDev": "lorenzodev@lorenzoliva.it",
+    "personalInfoLabel": "Informazioni personali",
+    "city": "Palermo",
+    "mailFormLabel": "Invia una mail",
+    "emailPlaceholder": "Inserisci la tua e-mail",
+    "txtAreaPlaceholder": "Inserisci un messaggio",
+    "btnSend": "Invia",
+    "footerLabel1": "Nessuna parte di questo sito o del suo contenuto può essere riprodotto, copiata, modificata o adattata senza l'autorizzazione scritta del legittimo proprietario.",
+    "footerLabel2": "Realizzazione sito Web: Lorenzo Oliva",
+    "copyrightLabel": "Copyright © 2024"
+  },
+
+  "ModalDoc": {
+    "sectionDev": "Dev",
+    "sectionArt": "Art",
+    "myCv": "CV Lorenzo Oliva",
+    "myPortfolio": "Portfolio Lorenzo Oliva",
+    "viewCvLabel": "Guarda il mio CV",
+    "viewPortfolioLabel": "Guarda il mio portfolio",
+    "docsLabel": "Documenti",
+    "altTxtDocsLabel": "Apri e guarda i miei documenti"
+  },
+
+  "Home": {
+    "myName": "Lorenzo Oliva",
+    "webDev": "Web developer",
+    "artist": "Artista",
+    "presentationTxt1": "Sono un web developer specializzato nel frontend, artista, con esperienza in decorazione e nell'utilizzo dei programmi di grafica digitale. Diplomato al liceo artistico, mi sono avvicinato più volte al mondo tech, fino ad intraprendere nel 2024 la formazione nello sviluppo.",
+    "presentationTxt2": "Da questa pagina web avete accesso ai miei due mondi: arte e sviluppo.",
+    "section": "section",
+    "modalHelloLabel": "Ciao, sono Lorenzo, piacere di conoscerti!"
+  },
+
+  "ArtSection": {
+    "maintenancePageLabel": "Questa pagina è momentaneamente in manutenzione",
+    "checkOutSocialLabel": "dà un'occhiata ai miei social network",
+    "imageLabel": "Immagine"
+  },
+
+  "DevSection": {
+    "linkedinLabel": "LinkedIn",
+    "gitHubLabel": "GitHub",
+    "contactsLabel": "Contatti",
+    "skillsLabel": "Skills",
+    "linkLabel": "Link",
+    "visitLinkedinProfile": "Visita il mio profilo LinkedIn",
+    "visitGithubProfile": "Visita il mio profilo GitHub",
+    "goToContacts": "Vai alla sezione contatti",
+    "portfolioLabel": "Portfolio progetti",
+    "exEndLabel": "Esercitazione conclusa:",
+    "viewLabel": "Guarda il",
+    "lookCode": "Guarda il codice",
+    "followCode": "Visita il mio profilo GitHub e guarda il codice",
+    "followProject": "Segui il link e prova il progetto",
+    "tryProject": "Prova il progetto",
+
+    "subtitleThisSite": "Questo sito",
+    "subtitleExercises": "Esercitazioni"
+  }
+}

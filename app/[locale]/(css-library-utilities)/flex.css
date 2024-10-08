@@ -1,0 +1,79 @@
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* DIRECTION */
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* POSITIONING */
+/* - GAP */
+.gap-5px {
+  gap: 5px;
+}
+
+.gap-10px {
+  gap: 10px;
+}
+
+.gap-20px {
+  gap: 20px;
+}
+
+.gap-30px {
+  gap: 30px;
+}
+
+.gap-50px {
+  gap: 50px;
+}
+.gap-80px {
+  gap: 80px;
+}
+
+/* - MAIN AXIS */
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flex-evenly {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.flex-stretch {
+  display: flex;
+  justify-content: stretch;
+}
+
+/* - CROSS AXIS */
+.flex-cross-center {
+  display: flex;
+  align-items: center;
+}
+
+/* WRAP */
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* ITEMS */
+/* -GROW */
+.grow-1 {
+  flex-grow: 1;
+}

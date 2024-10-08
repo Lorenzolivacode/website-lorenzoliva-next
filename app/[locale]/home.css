@@ -1,0 +1,71 @@
+.home-main-direction-screen {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.btn-container {
+  gap: 30px;
+}
+
+.radius-btn-code {
+  border-start-start-radius: 9999px;
+  border-start-end-radius: 2222px;
+  border-end-start-radius: 9999px;
+  border-end-end-radius: 2222px;
+}
+
+.radius-btn-art {
+  border-start-start-radius: 2222px;
+  border-start-end-radius: 9999px;
+  border-end-start-radius: 2222px;
+  border-end-end-radius: 9999px;
+}
+
+@media screen and (max-width: 1024px) {
+  .img-bg {
+    left: -5%;
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home-main-direction-screen {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .img-bg {
+    top: 20%;
+    left: -10%;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .img-bg {
+    top: 40%;
+    left: -15%;
+    width: 60%;
+    opacity: 0.15;
+  }
+
+  .btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .radius-btn-code {
+    border-start-start-radius: 9999px;
+    border-start-end-radius: 9999px;
+    border-end-start-radius: 2222px;
+    border-end-end-radius: 2222px;
+  }
+
+  .radius-btn-art {
+    border-start-start-radius: 2222px;
+    border-start-end-radius: 2222px;
+    border-end-start-radius: 9999px;
+    border-end-end-radius: 9999px;
+  }
+}

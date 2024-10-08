@@ -1,0 +1,4 @@
+header {
+  height: calc(auto + 16px);
+  z-index: 100;
+}
