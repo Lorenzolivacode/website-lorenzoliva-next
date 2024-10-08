@@ -1,7 +1,6 @@
 "use client";
 
 import React, { ChangeEvent } from "react";
-import "./SelectLanguage.css";
 
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
