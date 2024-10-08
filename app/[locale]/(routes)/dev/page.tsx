@@ -105,10 +105,6 @@ function Dev() {
               description={thisWebsite.description}
             />
 
-            {/* <p className="f-size-1">
-              {t("exEndLabel")} {thisWebsite.created}
-            </p> */}
-
             <a
               href={
                 thisWebsite.linkGithub.length >= 2
@@ -123,13 +119,6 @@ function Dev() {
               } btn change-img-link p-4px radius-8px f-size-1d2 txt-decoration-none txt-c-inherit p-l-20px flex-cross-center gap-10px`}
             >
               <div className="img-git-30 w-30px ratio-1" />
-              {/* <Image
-                width={30}
-                height={30}
-                src={"/assets/skills-img/GitHub-Dark-Logo.png"}
-                alt="GitHub"
-                className="w-30px"
-              /> */}
               {t("lookCode")}
             </a>
           </div>

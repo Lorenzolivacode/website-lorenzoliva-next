@@ -5,7 +5,7 @@ import { socialNetwork } from "./../../(data)/socialNetwork";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-export function ArtPage() {
+function ArtPage() {
   const t = useTranslations("ArtSection");
   const tHome = useTranslations("Home");
   return (
