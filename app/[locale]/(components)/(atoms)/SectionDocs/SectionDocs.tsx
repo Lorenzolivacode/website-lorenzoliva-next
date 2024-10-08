@@ -2,6 +2,7 @@
 import icoAUp from "/assets/nav-icon/icon-arrow-up.png"; */
 import { useTranslations } from "next-intl";
 import { IObjDoc } from "../../(molecules)/ModalDocs-client/ModalDocs";
+import Image from "next/image";
 
 interface SectionProps {
   section: string;
@@ -26,14 +27,15 @@ export function SectionDocs({
           onClick={onClick}
           className="w-30px h-30px flex-center reset-default"
         >
-          <img
+          <Image
+            width={70}
+            height={70}
             src={
               !flagDoc
                 ? "/assets/nav-icon/icon-arrow-down.png"
                 : "/assets/nav-icon/icon-arrow-up.png"
             }
             alt={t("altTxtDocsLabel")}
-            className="w-70p"
           />
         </button>
       </div>

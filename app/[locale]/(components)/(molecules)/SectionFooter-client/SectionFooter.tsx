@@ -6,6 +6,7 @@ import { socialNetwork } from "../../../(data)/socialNetwork";
 
 import "./SectionFooter.css";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export function SectionFooter() {
   const [pageDev, setPageDev] = useState(false);
@@ -53,11 +54,12 @@ export function SectionFooter() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <img
+                        <Image
+                          width={40}
+                          height={40}
                           src={socialNetwork.icon}
                           alt={socialNetwork.label}
                           title={socialNetwork.label}
-                          className="w-40px"
                         />
                       </a>
                     </li>
