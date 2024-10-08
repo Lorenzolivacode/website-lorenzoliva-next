@@ -3,7 +3,6 @@ import "./home.css";
 import Image from "next/image";
 import { Link } from "../../i18n/routing";
 import ButtonPhoto from "./(components)/(molecules)/ButtonPhoto-client/ButtonPhoto";
-import BtnClose from "./(components)/(atoms)/BtnClose/BtnClose";
 
 export default function Home() {
   const t = useTranslations("Home");
@@ -23,7 +22,6 @@ export default function Home() {
       </div>
       <ButtonPhoto />
       <div className="text-container flex-column flex-center gap-10px">
-        {/* <BtnClose></BtnClose> */}
         <h1 className="f-bold">{t("myName").toUpperCase()}</h1>
         <h2 className="f-bold">{t("webDev")}</h2>
         <h2 className="f-bold">{t("artist")}</h2>

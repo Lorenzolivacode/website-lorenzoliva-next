@@ -1,5 +1,3 @@
-/* import icoADown from "/assets/nav-icon/icon-arrow-down.png";
-import icoAUp from "/assets/nav-icon/icon-arrow-up.png"; */
 import { useTranslations } from "next-intl";
 import { IObjDoc } from "../../(molecules)/ModalDocs-client/ModalDocs";
 import Image from "next/image";

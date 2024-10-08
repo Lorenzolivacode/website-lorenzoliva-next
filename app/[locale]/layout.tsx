@@ -7,7 +7,6 @@ import { getMessages } from "next-intl/server";
 /* import { unstable_setRequestLocale } from "next-intl/server"; */
 import Header from "./(components)/(organisms)/Header/Header";
 import Footer from "./(components)/(organisms)/Footer/Footer";
-import Head from "next/head";
 
 export const metadata = {
   title: "Lorenzoliva",
@@ -22,12 +21,11 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  /* unstable_setRequestLocale(locale); */
   console.log("Current locale:", locale);
   const messages = await getMessages({ locale });
 
   return (
-    <html /* lang={locale || "it"} */>
+    <html>
       <body>
         <NextIntlClientProvider messages={messages}>
           <Header />

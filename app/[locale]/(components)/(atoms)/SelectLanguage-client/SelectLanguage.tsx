@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent } from "react";
 import "./SelectLanguage.css";
 
 import { useLocale, useTranslations } from "next-intl";
@@ -33,13 +33,6 @@ function SelectLanguage() {
       >
         <option value="it" title={t("italianLabel")}>
           {t("flagIt")}
-          {/*
-            <img
-              src={itFlag}
-              alt={t("italianLabel")}
-              className="w-16px"
-            />
-            */}
         </option>
         <option value="en" title={t("englishLabel")}>
           {t("flagEn")}

@@ -70,10 +70,6 @@ export function ModalHello({ isOpen, onClose }: ModalHelloProps) {
           onClick={(e) => e.stopPropagation()}
           className="effect-modal absolute-center shadow-10xy-black8 flex-modal-hello-screen gap-20px main-w-screen radius-8px p-10px p-b-20px bg-secondary-light txt-c-primary-medium"
         >
-          {/* <button
-            onClick={onClose}
-            className="reset-default absolute-tr-10px l-height-1d5 f-size-1d5 txt-c-primary-medium f-bold opacity-h-6"
-          ></button> */}
           <BtnClose onClose={handleBtnClose} className="absolute-tr-10px" />
           <div className="relative w-40p ratio-6-7 shadow-rb-p-light radius-5px border3-p-sat-l">
             <Image
