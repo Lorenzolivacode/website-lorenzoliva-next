@@ -19,13 +19,13 @@ export function SectionDocs({
   const t = useTranslations("ModalDoc");
   return (
     <section className="flex-column border-b-1-p-m-l p-10px">
-      <div className="flex-between gap-10px">
+      <div className="flex-between gap-10px flex-cross-center">
         <p className="f-bold f-size-1 txt-star">
           {t("docsLabel")} {section}
         </p>
         <button
           onClick={onClick}
-          className="w-30px h-30px flex-center reset-default"
+          className="w-20px h-20px relative flex-center reset-default"
         >
           <Image
             fill
