@@ -28,8 +28,9 @@ export function SectionDocs({
           className="w-30px h-30px flex-center reset-default"
         >
           <Image
-            width={70}
-            height={70}
+            fill
+            style={{ objectFit: "contain" }}
+            sizes="(max-width: 768px) 100vw"
             src={
               !flagDoc
                 ? "/assets/nav-icon/icon-arrow-down.png"
