@@ -154,8 +154,8 @@ export const portfolioData = [
       italian: "Applicazione che genera casualmente una frase ad ogni click.",
       english: "Application that generates a sentences randomly on each click.",
     },
-    linkGithub: `${githubUrlBase}Edgemony-exercises/tree/main/2024-07-15-Esercitazione2`,
-    linkProject: "",
+    linkGithub: `${githubUrlBase}advice-app`,
+    linkProject: "https://advice-app-rosy.vercel.app/",
     created: "2024-07-15",
   },
   {
@@ -213,8 +213,8 @@ export const portfolioData = [
         "Calcolatrice che permette l'utilizzo delle principali operazioni.",
       english: "Calculator that allows the use of the main operations.",
     },
-    linkGithub: `${githubUrlBase}Edgemony-exercises/tree/main/2024-06-27-Esercitazione`,
-    linkProject: "",
+    linkGithub: `${githubUrlBase}calculator`,
+    linkProject: "https://calculator-rho-teal-47.vercel.app/",
     created: "2024-06-27",
   },
   {
@@ -258,8 +258,8 @@ export const portfolioData = [
       english:
         "Application that shows a clock and a countdown. First approach with SetTimeout.",
     },
-    linkGithub: `${githubUrlBase}Edgemony-exercises/tree/main/2024-06-04-Esercitazione2`,
-    linkProject: "",
+    linkGithub: `${githubUrlBase}timer-boom`,
+    linkProject: "https://timer-boom.vercel.app/",
     created: "2024-06-04",
   },
   {
