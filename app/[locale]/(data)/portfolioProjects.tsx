@@ -155,7 +155,7 @@ export const portfolioData = [
       english: "Application that generates a sentences randomly on each click.",
     },
     linkGithub: `${githubUrlBase}Edgemony-exercises/tree/main/2024-07-15-Esercitazione2`,
-    linkProject: "https://www.lorenzoliva.it/advice-app/",
+    linkProject: "",
     created: "2024-07-15",
   },
   {
@@ -214,7 +214,7 @@ export const portfolioData = [
       english: "Calculator that allows the use of the main operations.",
     },
     linkGithub: `${githubUrlBase}Edgemony-exercises/tree/main/2024-06-27-Esercitazione`,
-    linkProject: "/(projects)/calculator/",
+    linkProject: "",
     created: "2024-06-27",
   },
   {
@@ -259,7 +259,7 @@ export const portfolioData = [
         "Application that shows a clock and a countdown. First approach with SetTimeout.",
     },
     linkGithub: `${githubUrlBase}Edgemony-exercises/tree/main/2024-06-04-Esercitazione2`,
-    linkProject: "https://www.lorenzoliva.it/timer-boom/",
+    linkProject: "",
     created: "2024-06-04",
   },
   {
@@ -274,7 +274,7 @@ export const portfolioData = [
         "Web App for a ToDo list, allows you to insert and remove new ToDos, specify a level of importance and use various filters.",
     },
     linkGithub: `${githubUrlBase}Edgemony-exercises/tree/main/2024-05-27-Project%20ToDo`,
-    linkProject: "https://www.lorenzoliva.it/todotoday/",
+    linkProject: "",
     created: "2024-05-27",
   },
   {
@@ -289,7 +289,7 @@ export const portfolioData = [
         "Static landing page of a fake online ticket office for art exhibitions.",
     },
     linkGithub: `${githubUrlBase}Edgemony-exercises/tree/main/2024-05-08-Esercitazione-sito`,
-    linkProject: "https://www.lorenzoliva.it/ticketartone/",
+    linkProject: "",
     created: "2024-05-27",
   },
 ];
