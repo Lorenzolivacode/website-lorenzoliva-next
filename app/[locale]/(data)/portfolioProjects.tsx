@@ -214,7 +214,7 @@ export const portfolioData = [
       english: "Calculator that allows the use of the main operations.",
     },
     linkGithub: `${githubUrlBase}Edgemony-exercises/tree/main/2024-06-27-Esercitazione`,
-    linkProject: "/calculator/",
+    linkProject: "/(projects)/calculator/",
     created: "2024-06-27",
   },
   {
