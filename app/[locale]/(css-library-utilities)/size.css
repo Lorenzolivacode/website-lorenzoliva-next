@@ -3,6 +3,10 @@
   height: 100%;
 }
 
+.h-50p {
+  height: 50%;
+}
+
 /* - PIXEL */
 .h-3px {
   height: 3px;
@@ -24,13 +28,16 @@
   height: 60px;
 }
 
-/* -PIXELS */
-.h-30px {
-  height: 30px;
-}
-
 .h-70px {
   height: 70px;
+}
+
+.h-100px {
+  height: 100px;
+}
+
+.h-200px {
+  height: 200px;
 }
 
 /* MIN HEIGHT DVH */
@@ -78,6 +85,14 @@
 
 .w-30px {
   width: 30px;
+}
+
+.w-100px {
+  width: 100px;
+}
+
+.w-200px {
+  width: 200px;
 }
 
 .w-240px {

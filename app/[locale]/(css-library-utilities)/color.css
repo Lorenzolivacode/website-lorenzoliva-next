@@ -19,6 +19,14 @@
   background-color: var(--color-primary-very-light);
 }
 
+.bg-primary-sat-medium {
+  background-color: var(--color-primary-saturated-medium);
+}
+
+.bg-primary-sat-medium-light {
+  background-color: var(--color-primary-saturated-medium-light);
+}
+
 .bg-secondary-light {
   background-color: var(--color-secondary-light);
 }

@@ -14,11 +14,22 @@ import PortfolioList, {
 } from "../../(components)/(organisms)/PortfolioList/PortfolioList";
 import SubtitlePortfolio from "../../(components)/(atoms)/SubtitlePortfolio/SubtitlePortfolio";
 import ParagraphList from "../../(components)/(atoms)/ParagraphList-client/ParagraphList";
+import BlurBlue from "../../(components)/(atoms)/BlurBlue/BlurBlue";
 
 function Dev() {
   const t = useTranslations("DevSection");
   return (
     <div className="code-main-direction-screen w-full">
+      <BlurBlue
+        classPosition={"fixed top-0 left-0"}
+        width={"200"}
+        height={"200"}
+      />
+      <BlurBlue
+        classPosition={"fixed right-0 bottom-0"}
+        width={"100"}
+        height={"200"}
+      />
       <section className="section-code-page flex-center flex-column gap-30px">
         <h2 className="f-bold f-size-2">{t("skillsLabel")}</h2>
         <div className="skills-container flex-wrap flex-center">
