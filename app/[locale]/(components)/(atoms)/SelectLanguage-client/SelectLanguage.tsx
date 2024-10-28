@@ -11,11 +11,12 @@ function SelectLanguage() {
 
   const router = useRouter();
   const pathname = usePathname();
+  const newPath = pathname.startsWith("/") ? pathname : `/${pathname}`;
   const locale = useLocale();
 
   const handlerChangeLanguage = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    router.replace(`/${value}/${pathname}`);
+    router.replace(`/${value}/${newPath}`);
   };
   return (
     <>

@@ -1,4 +1,8 @@
 /* LINE-HEIGHT */
+.l-height-1 {
+  line-height: 1;
+}
+
 .l-height-1d5 {
   line-height: 1.5rem;
 }

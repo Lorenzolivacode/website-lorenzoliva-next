@@ -39,15 +39,20 @@ export function Navbar() {
             <li key={section.id} className="list-item" title={section.name}>
               <Link
                 href={section.path}
-                className={`${isActive ? "item-active" : ""}`}
+                className="reset-default flex-column flex-between flex-cross-center"
               >
-                <Image
-                  width={30}
-                  height={30}
-                  src={section.icon}
-                  alt={section.name}
-                  className="w-30px"
-                />
+                <div className={`flex-center ${isActive ? "item-active" : ""}`}>
+                  <Image
+                    width={30}
+                    height={30}
+                    src={section.icon}
+                    alt={section.name}
+                    className={`w-30px `}
+                  />
+                </div>
+                <p className="txt-c-primary-very-dark f-bold txt-center">
+                  {section.name}
+                </p>
               </Link>
             </li>
           );

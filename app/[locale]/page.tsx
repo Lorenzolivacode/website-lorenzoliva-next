@@ -8,7 +8,7 @@ export default function Home() {
   const t = useTranslations("Home");
   const tLay = useTranslations("Layout");
 
-  const classNameBaseBtn = "btn w-full p-12px  txt-center txt-decoration-none";
+  const classNameBaseBtn = "btn w-full p-12px txt-center txt-decoration-none";
   return (
     <div className="home-main-direction-screen w-full flex-between flex-center gap-80px">
       <div className="img-bg">
