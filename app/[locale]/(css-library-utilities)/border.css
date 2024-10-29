@@ -48,6 +48,10 @@
   box-shadow: 0 0 40px -10px var(--color-secondary-light);
 }
 
+.shadow-t-inset-p-medium {
+  box-shadow: inset 0px 10px 30px -15px var(--color-primary-saturated-medium);
+}
+
 .shadow-rb-p-light {
   box-shadow: 10px 10px 0px 0px var(--color-primary-saturated-light);
 }

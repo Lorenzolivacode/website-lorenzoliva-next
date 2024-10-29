@@ -15,7 +15,11 @@ export interface IObjDoc {
   section: string;
 }
 
-export function ModalDocs() {
+export function ModalDocs({
+  tipology = "modal",
+}: {
+  tipology?: "modal" | "list";
+}) {
   const t = useTranslations("ModalDoc");
 
   const [pageDev, setPageDev] = useState(false);
@@ -73,7 +77,13 @@ export function ModalDocs() {
   ];
 
   return (
-    <div className=" absolute w-240px bottom-minus10px left-0 translate-y-100 flex-column gap-20px radius-20px-3s4-1 shadow-light-small p-20px p-y-30px bg-primary-very-light txt-c-primary-dark border1-p-d">
+    <div
+      className={`flex-column gap-20px txt-c-primary-dark ${
+        tipology === "modal"
+          ? "absolute w-240px bottom-minus20px left-40px translate-y-100 radius-20px-3s4-1 shadow-light-small p-20px p-y-30px bg-primary-very-light border1-p-d"
+          : ""
+      }`}
+    >
       {!pageArt && (
         <SectionDocs
           section={"dev"}

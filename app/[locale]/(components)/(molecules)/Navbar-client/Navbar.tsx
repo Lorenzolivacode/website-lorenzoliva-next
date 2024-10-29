@@ -43,14 +43,14 @@ export function Navbar() {
               >
                 <div className={`flex-center ${isActive ? "item-active" : ""}`}>
                   <Image
-                    width={30}
-                    height={30}
+                    width={25}
+                    height={25}
                     src={section.icon}
                     alt={section.name}
-                    className={`w-30px `}
+                    /* className={`w-30px `} */
                   />
                 </div>
-                <p className="txt-c-primary-very-dark f-bold txt-center">
+                <p className="txt-c-primary-dark f-bold txt-center">
                   {section.name}
                 </p>
               </Link>

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import "./ButtonDocs.css";
 
-import ModalDocs from "../../(molecules)/ModalDocs-client/ModalDocs";
+import ModalDocs from "../ModalDocs-client/ModalDocs";
 
 function ButtonDocs() {
   const [modalOn, setModalOn] = useState(false);

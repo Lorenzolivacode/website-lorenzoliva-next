@@ -1,0 +1,36 @@
+.appear-to-left {
+  animation: appear-to-left 0.5s ease-in-out;
+}
+
+@keyframes appear-to-left {
+  from {
+    left: -500px;
+  }
+  to {
+    left: 0;
+  }
+}
+
+.delete-up {
+  animation: delete-up 0.5s ease-in-out;
+}
+
+@keyframes delete-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.to-backd-blur-4px {
+  animation: to-backd-blur-4px 0.5s ease-in-out forwards;
+}
+
+@keyframes to-backd-blur-4px {
+  to {
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+}

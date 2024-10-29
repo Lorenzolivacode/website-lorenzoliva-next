@@ -12,6 +12,10 @@
   margin-top: 100px;
 }
 
+.mt-70px {
+  margin-top: 70px;
+}
+
 /* -MARGIN BOTTOM */
 .mb-100px {
   margin-bottom: 100px;
@@ -72,6 +76,14 @@
 
 .p-l-20px {
   padding-left: 20px;
+}
+
+.p-l-30px {
+  padding-left: 30px;
+}
+
+.p-l-40px {
+  padding-left: 40px;
 }
 
 .p-x-6px {

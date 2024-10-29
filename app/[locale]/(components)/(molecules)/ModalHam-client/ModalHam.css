@@ -1,0 +1,21 @@
+.modal-ham-w {
+  width: 30%;
+}
+
+@media screen and (max-width: 1024px) {
+  .modal-ham-w {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modal-ham-w {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .modal-ham-w {
+    width: 100%;
+  }
+}

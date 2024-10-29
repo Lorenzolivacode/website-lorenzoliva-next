@@ -20,6 +20,10 @@
   height: 20px;
 }
 
+.h-25px {
+  height: 25px;
+}
+
 .h-30px {
   height: 30px;
 }
@@ -50,6 +54,7 @@
 }
 
 /* MAX HEIGHT */
+/* -- % */
 .max-h-30p {
   max-height: 30%;
 }
@@ -70,9 +75,18 @@
   max-height: 80%;
 }
 
+/* -- PIXEL */
+.max-h-35px {
+  max-height: 35px;
+}
+
 /* WIDTH */
 .w-auto {
   width: auto;
+}
+
+.w-2px {
+  width: 2px;
 }
 
 .w-3px {

@@ -44,7 +44,7 @@ export function SectionDocs({
             key={doc.id}
             href={doc.doc}
             download
-            className="reset-default txt-star"
+            className="reset-default txt-star p-l-20px"
           >
             {doc.label()}
           </a>

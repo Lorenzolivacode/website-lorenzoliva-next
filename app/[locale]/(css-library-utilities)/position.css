@@ -61,6 +61,10 @@
 }
 
 /* BOTTOM */
+.bottom-minus20px {
+  bottom: -20px;
+}
+
 .bottom-minus10px {
   bottom: -10px;
 }
@@ -84,6 +88,10 @@
 
 .left-20px {
   left: 20px;
+}
+
+.left-40px {
+  left: 40px;
 }
 
 .left-50p {
