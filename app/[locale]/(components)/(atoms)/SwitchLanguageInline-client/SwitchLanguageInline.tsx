@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, useState } from "react";
+import React from "react";
 
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -50,7 +50,7 @@ function SelectLanguage() {
               <li
                 id={language.value}
                 key={language.value + 1}
-                title={t("italianLabel")}
+                title={language.altImg}
                 onClick={() => handlerChangeLanguage(language.value)}
                 className={`flex-column flex-cross-center pointer ${
                   locale !== language.value && "opacity-6"
