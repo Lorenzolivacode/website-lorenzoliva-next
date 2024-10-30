@@ -39,3 +39,12 @@
 .item-active + p {
   display: none;
 }
+
+.list-item p {
+  transition: all 0.3s;
+}
+
+.list-item:hover p {
+  opacity: 0;
+  position: absolute;
+}
