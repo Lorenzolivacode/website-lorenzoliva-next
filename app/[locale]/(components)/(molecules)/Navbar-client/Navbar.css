@@ -3,7 +3,7 @@
 }
 
 .list-item:hover {
-  transform: scale(1.1) translateY(4px);
+  transform: scale(1.2);
 }
 
 /* .list-item:hover {

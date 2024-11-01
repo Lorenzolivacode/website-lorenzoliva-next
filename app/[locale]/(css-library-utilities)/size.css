@@ -101,12 +101,24 @@
   width: 30px;
 }
 
+.w-50px {
+  width: 50px;
+}
+
+.w-55px {
+  width: 55px;
+}
+
 .w-100px {
   width: 100px;
 }
 
 .w-200px {
   width: 200px;
+}
+
+.w-210px {
+  width: 210px;
 }
 
 .w-240px {

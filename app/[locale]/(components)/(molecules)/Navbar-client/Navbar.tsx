@@ -36,7 +36,11 @@ export function Navbar() {
         {navSections.map((section) => {
           const isActive = pathname === section.path;
           return (
-            <li key={section.id} className="list-item" title={section.name}>
+            <li
+              key={section.id}
+              className="list-item w-50px ratio-1 flex-center"
+              title={section.name}
+            >
               <Link
                 href={section.path}
                 className="reset-default flex-column flex-between flex-cross-center"
