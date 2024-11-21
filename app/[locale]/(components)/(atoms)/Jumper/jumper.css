@@ -1,9 +1,9 @@
-.jumper-container {
+.jumper_container {
   position: relative;
   height: 300px;
 }
 
-.jumper-container > div {
+.jumper_container > div {
   position: absolute;
   top: 100%;
   transform: translateY(-100%);

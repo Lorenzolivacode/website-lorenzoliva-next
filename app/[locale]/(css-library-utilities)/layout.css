@@ -36,6 +36,15 @@
   filter: drop-shadow(0 0 1px var(--color-primary-very-dark));
 }
 
+/* HOVER */
+.hover-scale-1d1 {
+  transition: transform 0.35s ease-in;
+}
+
+.hover-scale-1d1:hover {
+  transform: scale(1.1);
+}
+
 /* OPACITY */
 .opacity-3 {
   opacity: 0.3;
@@ -83,6 +92,18 @@
 
 /* TRANSFORM */
 /* -TRANSLATE */
+.translate-x--50 {
+  transform: translateX(-50%);
+}
+
+.translate-x-100 {
+  transform: translateX(100%);
+}
+
+.translate-y--50 {
+  transform: translateY(-50%);
+}
+
 .translate-y-100 {
   transform: translateY(100%);
 }
@@ -106,4 +127,8 @@
 
 .z-i-100 {
   z-index: 100;
+}
+
+.z-i-110 {
+  z-index: 110;
 }

@@ -21,7 +21,7 @@ export function SectionFooter() {
 
   return (
     <section
-      id="section-contacts"
+      id="contacts"
       className="sections-footer-direction-screen flex-around"
     >
       <div className="section-footer">

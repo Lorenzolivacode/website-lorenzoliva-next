@@ -15,11 +15,13 @@ import PortfolioList, {
 import SubtitlePortfolio from "../../(components)/(atoms)/SubtitlePortfolio/SubtitlePortfolio";
 import ParagraphList from "../../(components)/(atoms)/ParagraphList-client/ParagraphList";
 import BlurBlue from "../../(components)/(atoms)/BlurBlue/BlurBlue";
+import Link from "next/link";
 
 function Dev() {
   const t = useTranslations("DevSection");
   return (
     <div className="code-main-direction-screen w-full">
+      {/* <SectionObserver /> */}
       <BlurBlue
         classPosition={"fixed top-0 left-0"}
         width={"200"}
@@ -30,7 +32,10 @@ function Dev() {
         width={"100"}
         height={"200"}
       />
-      <section className="section-code-page flex-center flex-column gap-30px">
+      <section
+        id="skills"
+        className="section-code-page flex-center flex-column gap-30px"
+      >
         <h2 className="f-bold f-size-2">{t("skillsLabel")}</h2>
         <div className="skills-container flex-wrap flex-center">
           {skills.map((skill) => (
@@ -49,7 +54,10 @@ function Dev() {
           ))}
         </div>
       </section>
-      <section className="section-code-page flex-center flex-center flex-column gap-30px">
+      <section
+        id="links"
+        className="section-code-page flex-center flex-center flex-column gap-30px"
+      >
         <h2 className="f-bold f-size-2">{t("linkLabel")}</h2>
         <ul className="flex-column gap-30px w-full">
           {links.map((link) => {
@@ -78,7 +86,10 @@ function Dev() {
           })}
         </ul>
       </section>
-      <section className="section-code-page flex-center flex-column gap-30px">
+      <section
+        id="portfolio"
+        className="section-code-page flex-center flex-column gap-30px"
+      >
         <h1 className="f-bold f-size-2">{t("portfolioLabel")}</h1>
         <SubtitlePortfolio label={t("subtitleThisSite")} />
         <div className="project-list-el carousel-child p-y-12px">
@@ -116,7 +127,7 @@ function Dev() {
               description={thisWebsite.description}
             />
 
-            <a
+            <Link
               href={
                 thisWebsite.linkGithub.length >= 2
                   ? thisWebsite.linkGithub
@@ -131,7 +142,7 @@ function Dev() {
             >
               <div className="img-git-30 w-30px ratio-1" />
               {t("lookCode")}
-            </a>
+            </Link>
           </div>
         </div>
         <SubtitlePortfolio label={t("subtitleExercises")} />

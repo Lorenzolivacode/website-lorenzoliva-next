@@ -72,13 +72,13 @@ export const links = [
     label: "gitHubLabel",
     id: generateId(),
   },
-  {
+  /* {
     icon: "/assets/skills-img/Contacts-Dark-Logo.png",
     url: "#section-contacts",
     title: "goToContacts",
     label: "contactsLabel",
     id: generateId(),
-  },
+  }, */
 ];
 
 const githubUrlBase = "https://github.com/Lorenzolivacode/";

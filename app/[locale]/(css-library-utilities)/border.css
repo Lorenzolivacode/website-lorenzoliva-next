@@ -20,6 +20,11 @@
   border-bottom: 1px solid var(--color-primary-medium-light);
 }
 
+.border-b-3-p-m-l {
+  border: none;
+  border-bottom: 3px solid var(--color-primary-medium-light);
+}
+
 .border-b-1-s-l {
   border: none;
   border-bottom: 1px solid var(--color-secondary-light);
@@ -40,8 +45,12 @@
   box-shadow: 0 0 40px -20px var(--color-secondary-light);
 }
 
+.shadow-light-ms {
+  box-shadow: 0 0 20px -4px var(--color-secondary-light);
+}
+
 .shadow-light-small {
-  box-shadow: 0 0 13px -4px var(--color-secondary-light);
+  box-shadow: 0 0 12px -4px var(--color-secondary-light);
 }
 
 .shadow-light-minus10 {
@@ -107,6 +116,10 @@
 
 .radius-10px-1s4-3 {
   border-radius: 0px 0px 10px 0px;
+}
+
+.radius-20px-1s4-3 {
+  border-radius: 0px 0px 20px 0px;
 }
 
 .radius-20px-3s4-1 {

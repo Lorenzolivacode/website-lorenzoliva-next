@@ -58,7 +58,7 @@
   "DevSection": {
     "linkedinLabel": "LinkedIn",
     "gitHubLabel": "GitHub",
-    "contactsLabel": "Contatti",
+    "contactsLabel": "Contacts",
     "skillsLabel": "Skills",
     "linkLabel": "Links",
     "visitLinkedinProfile": "Visit my LinkedIn profile",
@@ -71,8 +71,8 @@
     "followProject": "Follow the link and try the project",
     "lookCode": "View the code",
     "tryProject": "Try the project",
-
     "subtitleThisSite": "This website",
-    "subtitleExercises": "Exercises"
+    "subtitleExercises": "Exercises",
+    "goTo": "Go to..."
   }
 }

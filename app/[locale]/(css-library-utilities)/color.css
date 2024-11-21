@@ -15,6 +15,22 @@
   background-color: var(--color-primary-dark);
 }
 
+.bg-primary-medium {
+  background-color: var(--color-primary-medium);
+}
+
+.bg-primary-medium-light {
+  background-color: var(--color-primary-medium-light);
+}
+
+.bg-primary-medium-light-0d8 {
+  background-color: var(--color-primary-medium-light-0d8);
+}
+
+.bg-primary-medium-light-0d5 {
+  background-color: var(--color-primary-medium-light-0d5);
+}
+
 .bg-primary-light {
   background-color: var(--color-primary-light);
 }
@@ -31,12 +47,35 @@
   background-color: var(--color-primary-saturated-medium-light);
 }
 
+.bg-primary-sat-light {
+  background-color: var(--color-primary-saturated-light);
+}
+
 .bg-secondary-light {
   background-color: var(--color-secondary-light);
 }
 
 .bg-secondary-very-light {
   background-color: var(--color-secondary-very-light);
+}
+
+/* --GRADIENT */
+.bg-x-p-sat-ml-l {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 67, 109, 1) 0%,
+    rgba(191, 220, 255, 1) 33%,
+    rgba(183, 214, 249, 1) 66%,
+    rgba(0, 67, 109, 1) 100%
+  );
+}
+
+.bg-radial-p-sat-ml-l {
+  background: radial-gradient(
+    circle,
+    var(--color-primary-saturated-light) 30%,
+    var(--color-primary-saturated-medium) 100%
+  );
 }
 
 /* COLOR TXT */

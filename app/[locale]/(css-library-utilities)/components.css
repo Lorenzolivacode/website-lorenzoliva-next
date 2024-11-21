@@ -75,6 +75,16 @@
   line-height: normal;
 }
 
+/* HOVER */
+.hover-trx20px-scale105 {
+  transition: transform 0.5s ease-in-out;
+}
+.hover-trx20px-scale105:hover,
+.hover-trx20px-scale105:active,
+.hover-trx20px-scale105:focus {
+  transform: translateX(20px) scale(1.05);
+}
+
 /* LIST */
 .img-bg-project-el {
   position: absolute;

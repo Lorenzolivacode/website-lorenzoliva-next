@@ -1,4 +1,9 @@
 header {
-  height: calc(auto + 16px);
-  z-index: 100;
+  justify-content: space-around;
+}
+
+@media screen and (max-width: 480px) {
+  header {
+    justify-content: start;
+  }
 }

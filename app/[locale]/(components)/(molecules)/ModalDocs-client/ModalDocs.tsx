@@ -16,9 +16,9 @@ export interface IObjDoc {
 }
 
 export function ModalDocs({
-  tipology = "modal",
+  typology = "modal",
 }: {
-  tipology?: "modal" | "list";
+  typology?: "modal" | "list";
 }) {
   const t = useTranslations("ModalDoc");
 
@@ -45,7 +45,7 @@ export function ModalDocs({
 
   const objDocDev = [
     {
-      id: crypto.randomUUID(),
+      id: "doc-dev-cv",
       doc: "/doc/dev-doc/CV-Lorenzo-Oliva.pdf",
       title: t("myCv"),
       label: function () {
@@ -57,7 +57,7 @@ export function ModalDocs({
 
   const objDocArt = [
     {
-      id: crypto.randomUUID(),
+      id: "doc-art-cv",
       doc: "/doc/art-doc/Cv-Artistico.pdf",
       title: t("myCv"),
       label: function () {
@@ -66,7 +66,7 @@ export function ModalDocs({
       section: t("sectionArt"),
     },
     {
-      id: crypto.randomUUID(),
+      id: "doc-art-portfolio",
       doc: "/doc/art-doc/Portfolio-artistico-Oliva-Lorenzo.pdf",
       title: t("myPortfolio"),
       label: function () {
@@ -79,7 +79,7 @@ export function ModalDocs({
   return (
     <div
       className={`flex-column gap-20px txt-c-primary-dark ${
-        tipology === "modal"
+        typology === "modal"
           ? "absolute w-240px bottom-minus20px left-40px translate-y-100 radius-20px-3s4-1 shadow-light-small p-20px p-y-30px bg-primary-very-light border1-p-d"
           : ""
       }`}

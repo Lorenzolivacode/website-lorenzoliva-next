@@ -27,6 +27,11 @@
   --color-primary-very-dark-0d8: rgba(0, 9, 23, 0.8);
   --color-primary-very-dark-0d6: rgba(0, 9, 23, 0.6);
   --color-primary-very-dark-0d5: rgba(0, 9, 23, 0.5);
+  --color-primary-very-dark-0d3: rgba(8, 13, 19, 0.3);
+  --color-primary-medium-light-0d8: rgba(122, 157, 199, 0.8);
+  --color-primary-medium-light-0d5: rgba(122, 157, 199, 0.5);
+
+  --color-primary-saturated-medium-light-0d8: rgba(58, 147, 220, 0.8);
 }
 
 * {
@@ -52,7 +57,7 @@ body {
 
 .art-bg {
   position: absolute;
-  top: 70px;
+  top: 0px;
   right: 0;
   bottom: 0;
   left: 0;

@@ -21,7 +21,6 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  console.log("Current locale:", locale);
   const messages = await getMessages({ locale });
 
   return (

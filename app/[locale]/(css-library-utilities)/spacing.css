@@ -25,6 +25,12 @@
   margin-bottom: 50px;
 }
 
+/* - MARGIN AXIS */
+.my-35px {
+  margin-top: 35px;
+  margin-bottom: 35px;
+}
+
 /* PADDING */
 .p-2px {
   padding: 2px;
@@ -48,6 +54,10 @@
 
 .p-20px {
   padding: 20px;
+}
+
+.p-t-70px {
+  padding-top: 70px;
 }
 
 .p-t-110px {
@@ -101,6 +111,11 @@
   padding-right: 12px;
 }
 
+.p-x-20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .p-x-24px {
   padding-left: 24px;
   padding-right: 24px;
@@ -117,6 +132,11 @@
 .p-y-6px {
   padding-top: 6px;
   padding-bottom: 6px;
+}
+
+.p-y-10px {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .p-y-12px {

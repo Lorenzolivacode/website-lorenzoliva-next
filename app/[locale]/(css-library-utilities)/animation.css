@@ -11,6 +11,21 @@
   }
 }
 
+.appear-to-right-rotate45 {
+  animation: appear-to-right 0.5s ease-in-out;
+}
+
+@keyframes appear-to-right {
+  from {
+    right: -500px;
+    transform: rotate(-45deg);
+  }
+  to {
+    right: 0;
+    transform: rotate(0deg);
+  }
+}
+
 .delete-up {
   animation: delete-up 0.5s ease-in-out;
 }
@@ -21,6 +36,23 @@
   }
   to {
     transform: translateY(-100%);
+  }
+}
+
+.h-0-to-full-3s {
+  animation: h-0-to-full 3s ease-in-out;
+}
+
+.h-0-to-full-4s-reverse {
+  animation: h-0-to-full 4s ease-in-out reverse forwards;
+}
+
+@keyframes h-0-to-full {
+  from {
+    max-height: 0;
+  }
+  to {
+    max-height: 5000px;
   }
 }
 
