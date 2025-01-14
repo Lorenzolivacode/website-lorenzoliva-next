@@ -32,6 +32,8 @@ export const getIcon = (requirement: string) => {
       return "/assets/skills-img/Next-bl-Logo.png";
     case "supabase":
       return "/assets/skills-img/Supabase-Logo.svg";
+    case "firebase":
+      return "/assets/skills-img/Firebase-Logo.svg";
   }
 };
 

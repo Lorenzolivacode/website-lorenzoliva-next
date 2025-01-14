@@ -55,6 +55,11 @@ export const skills = [
     label: "NextJs",
     icon: "/assets/skills-img/Next-bl-Logo.png",
   },
+  {
+    id: crypto.randomUUID(),
+    label: "Google Firebase",
+    icon: "/assets/skills-img/Firebase-Logo.svg",
+  },
 ];
 
 export const links = [
@@ -103,13 +108,13 @@ export const portfolioData = [
   {
     id: generateId(),
     title: "SCB - Simple contacts book",
-    tecnicalRequirements: ["next", "css", "typescript", "supabase"],
+    tecnicalRequirements: ["next", "css", "typescript", "firebase"],
     img: "/assets/projects-img/Scb-screen.webp",
     description: {
       italian:
-        "SCB è un'applicazione web progettata per la gestione di contatti personali. Permette agli utenti di aggiungere, modificare, visualizzare ed eliminare contatti in modo semplice e intuitivo, con un'interfaccia moderna e un'architettura basata su Supabase e Next.js.",
+        "SCB è un'applicazione web progettata per la gestione di contatti personali. Permette agli utenti di aggiungere, modificare, visualizzare ed eliminare contatti in modo semplice e intuitivo, con un'interfaccia moderna e un'architettura basata su Google Firebase e Next.js.",
       english:
-        "SCB is a web application designed for managing personal contacts. It allows users to add, edit, view, and delete contacts easily and intuitively, featuring a modern interface and an architecture powered by Supabase and Next.js.",
+        "SCB is a web application designed for managing personal contacts. It allows users to add, edit, view, and delete contacts easily and intuitively, featuring a modern interface and an architecture powered by Google Firebase and Next.js.",
     },
     linkGithub: `${githubUrlBase}SCB-Simple-Contacts-Book`,
     linkProject: "https://scb-simple-contacts-book.vercel.app/it",
