@@ -102,6 +102,21 @@ export const thisWebsite = {
 export const portfolioData = [
   {
     id: generateId(),
+    title: "SCB - Simple contacts book",
+    tecnicalRequirements: ["next", "css", "typescript", "supabase"],
+    img: "/assets/projects-img/Scb-screen.webp",
+    description: {
+      italian:
+        "SCB è un'applicazione web progettata per la gestione di contatti personali. Permette agli utenti di aggiungere, modificare, visualizzare ed eliminare contatti in modo semplice e intuitivo, con un'interfaccia moderna e un'architettura basata su Supabase e Next.js.",
+      english:
+        "SCB is a web application designed for managing personal contacts. It allows users to add, edit, view, and delete contacts easily and intuitively, featuring a modern interface and an architecture powered by Supabase and Next.js.",
+    },
+    linkGithub: `${githubUrlBase}SCB-Simple-Contacts-Book`,
+    linkProject: "https://scb-simple-contacts-book.vercel.app/it",
+    created: "2024-11-15",
+  },
+  {
+    id: generateId(),
     title: "HeracleApp",
     tecnicalRequirements: ["next", "sass", "typescript", "tailwind"],
     img: "/assets/projects-img/Heraclea-screen.webp",

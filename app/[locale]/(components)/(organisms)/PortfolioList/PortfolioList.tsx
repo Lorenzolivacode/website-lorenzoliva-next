@@ -30,6 +30,8 @@ export const getIcon = (requirement: string) => {
       return "/assets/skills-img/Typescript-Logo.png";
     case "next":
       return "/assets/skills-img/Next-bl-Logo.png";
+    case "supabase":
+      return "/assets/skills-img/Supabase-Logo.svg";
   }
 };
 
