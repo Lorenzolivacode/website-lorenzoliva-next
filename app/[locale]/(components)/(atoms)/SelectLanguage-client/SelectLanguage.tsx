@@ -16,6 +16,7 @@ function SelectLanguage() {
 
   const handlerChangeLanguage = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
+    localStorage.setItem("locale", value);
     router.replace(`/${value}/${newPath}`);
   };
   return (

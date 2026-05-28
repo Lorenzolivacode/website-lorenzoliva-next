@@ -1,10 +1,12 @@
 import { useTranslations } from "next-intl";
+import { unstable_setRequestLocale } from "next-intl/server";
 import "./home.css";
 import Image from "next/image";
 import { Link } from "../../i18n/routing";
 import ButtonPhoto from "./(components)/(molecules)/ButtonPhoto-client/ButtonPhoto";
 
-export default function Home() {
+export default function Home({ params: { locale } }: { params: { locale: string } }) {
+  unstable_setRequestLocale(locale);
   const t = useTranslations("Home");
   const tLay = useTranslations("Layout");
 

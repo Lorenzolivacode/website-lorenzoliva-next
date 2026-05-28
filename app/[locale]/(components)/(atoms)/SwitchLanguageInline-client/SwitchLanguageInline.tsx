@@ -32,6 +32,7 @@ function SelectLanguage() {
   ];
 
   const handlerChangeLanguage = (language: string) => {
+    localStorage.setItem("locale", language);
     router.replace(`/${language}/${newPath}`);
   };
   return (

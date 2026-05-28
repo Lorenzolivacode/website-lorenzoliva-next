@@ -3,9 +3,11 @@ import React from "react";
 import { socialNetwork } from "./../../(data)/socialNetwork";
 
 import { useTranslations } from "next-intl";
+import { unstable_setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 
-function ArtPage() {
+function ArtPage({ params: { locale } }: { params: { locale: string } }) {
+  unstable_setRequestLocale(locale);
   const t = useTranslations("ArtSection");
   const tHome = useTranslations("Home");
   return (

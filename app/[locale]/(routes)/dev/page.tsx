@@ -1,6 +1,7 @@
 import "./Dev.css";
 
 import { useTranslations } from "next-intl";
+import { unstable_setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 
 import {
@@ -17,7 +18,8 @@ import ParagraphList from "../../(components)/(atoms)/ParagraphList-client/Parag
 import BlurBlue from "../../(components)/(atoms)/BlurBlue/BlurBlue";
 import Link from "next/link";
 
-function Dev() {
+function Dev({ params: { locale } }: { params: { locale: string } }) {
+  unstable_setRequestLocale(locale);
   const t = useTranslations("DevSection");
   return (
     <div className="code-main-direction-screen w-full">
