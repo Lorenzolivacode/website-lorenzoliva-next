@@ -45,9 +45,25 @@ Scelte confermate dall'utente, da usare come guida per priorità e implementazio
 
 ---
 
+## LAVORO GIÀ SVOLTO (sessione 2026-05-29) — non rifare
+
+Una sessione di ridimensionamento UI è stata completata. **Prima di toccare CSS/dimensioni, leggi qui** per non duplicare o contraddire:
+
+- **Bug line-height risolto:** `globals.css` `* { line-height }` era in `rem` (fisso) → ora unitless (`1.5`). Non reintrodurre unità.
+- **Scala tipografica ridotta ~12-20%** e resa fluida con `clamp()`. Le classi font seguono la convenzione **nome=valore** (vedi `CLAUDE.md` §7.1, regola CRITICA): valore fisso → `f-size-0d875` (=0.875rem, body 14px); fluido → `f-size-<min>-<max>` (es. `f-size-0d95-1d05` = `clamp(0.95rem,…,1.05rem)`). **Mai cambiare il valore dietro un nome esistente: creare una nuova classe.**
+- **Header rimpicciolito ~20%:** introdotta variabile `--header-h: 56px` in `globals.css` (+ `--header-clearance`), unica fonte per gli offset (main, ModalHam, NavbarDev, art layout). Cambiare l'altezza header = toccare solo la variabile.
+- **Header "staccato dal top" risolto:** il wrapper usa `flex-cross-start` (non più `-center`), così resta ancorato al top a prescindere dall'altezza di NavbarDev.
+- **Ridotti ~20%:** `.btn`, ButtonHam (30px), icone nav (20px)/docs(24px)/menu-dev(24px), ButtonPhoto home (180px), icone skill (72px)/link(44px)/tech(24px, classe nuova `w-24px`), padding `.section-code-page` (48px), footer (padding 1.2rem, social 32px, copyright a 14px).
+- **In sospeso (non bloccante):** il trigger di `NavbarDev` (`RoundedIconEl` in `NavbarDev.tsx`) ha ancora `w-100px h-70px`, tarato sul vecchio header da 70px. Innocuo, ma se il pulsante-menu di /dev appare un filo basso rispetto all'header (56px), riallinearlo. Da valutare a video.
+- **Problema preesistente notato (non risolto):** in `size.css` le classi `.w-20px` e `.w-30px` sono **duplicate** (definite 2 volte). Pulizia minore, vedi punto 10.
+
+> I punti sotto che toccano dimensioni (6 tipografia, 7 ButtonPhoto, 8 responsive) vanno riletti alla luce di quanto sopra: alcune osservazioni potrebbero essere già superate.
+
+---
+
 ## PRIORITA' ALTA — impatto significativo, effort contenuto
 
-### 1. SEO e metadati
+### 1. SEO e metadati ✅ FATTO (2026-05-29)
 
 **Stato attuale:** solo `<title>` ("Lorenzoliva") e favicon. Nessun Open Graph, description, sitemap, robots.txt, structured data.
 
@@ -55,23 +71,32 @@ Scelte confermate dall'utente, da usare come guida per priorità e implementazio
 
 **Suggerimenti:**
 
-- [ ] Aggiungere metadata nel layout `app/[locale]/layout.tsx`:
-  - `description` per locale
-  - `og:title`, `og:description`, `og:image` (preview social)
-  - `og:locale` (`it_IT` / `en_GB`)
-  - `twitter:card` (`summary_large_image`)
-- [ ] Creare `public/robots.txt`:
-  ```
-  User-agent: *
-  Allow: /
-  Sitemap: https://lorenzoliva.it/sitemap.xml
-  ```
-- [ ] Creare `public/sitemap.xml` con le 6 URL statiche
-- [ ] Aggiungere `<html lang={locale}>` (attualmente `<html>` senza `lang`, in `app/[locale]/layout.tsx` riga 33)
-- [ ] JSON-LD structured data (tipo `Person` + `WebSite`) per rich snippet Google
-- [ ] **Metadata duplicato** — sia `app/layout.tsx` sia `app/[locale]/layout.tsx` esportano `metadata` con lo stesso `title: "Lorenzoliva"`. `app/layout.tsx` rende solo un Fragment con `{children}` (niente `<html>/<body>`), ha un `import Head from "next/head"` inutilizzato e un blocco `<html>/<Head>` commentato → consolidare i metadata in un unico punto (preferibilmente per locale)
+- [x] Aggiungere metadata nel layout `app/[locale]/layout.tsx`:
+  - [x] `description` per locale
+  - [x] `og:title`, `og:description`, `og:image` (preview social)
+  - [x] `og:locale` (`it_IT` / `en_GB`) + `og:locale:alternate`
+  - [x] `twitter:card` (`summary_large_image`)
+- [x] Creare `public/robots.txt`
+- [x] Creare `public/sitemap.xml` con le 6 URL statiche
+- [x] Aggiungere `<html lang={locale}>`
+- [x] JSON-LD structured data (tipo `Person` + `WebSite`) per rich snippet Google
+- [x] **Metadata duplicato** consolidato — `app/layout.tsx` ora è un root layout minimale (solo CSS + Fragment); rimossi `import Head` inutilizzato, blocco commentato e metadata duplicato. Unica fonte di verità: i metadata per-locale.
 
-**File coinvolti:** `app/layout.tsx`, `app/[locale]/layout.tsx`, `public/robots.txt` (nuovo), `public/sitemap.xml` (nuovo)
+**COSA È STATO FATTO (dettaglio):**
+
+- **Builder metadata centralizzato** in nuovo modulo `app/[locale]/seo.ts` → funzione `buildMetadata(locale, path)` che costruisce title/description/OG/twitter/canonical/hreflang **per-pagina**. Stringhe da i18n (nuova sezione `Seo`) via `getTranslations`.
+- **`generateMetadata` per-pagina**: `layout.tsx` (home, path `""`), `dev/page.tsx` (`/dev`), `art/page.tsx` (`/art`) → ognuna espone la **propria** `og:url` e `canonical` (non più tutte la home).
+- **Canonical + hreflang per-pagina** (`alternates.canonical` + `languages` it/en): inizialmente rinviati perché a livello layout avrebbero fatto puntare le sottopagine alla home; risolti col builder per-pagina. Gli hreflang sono **anche** nel `sitemap.xml` (it/en/x-default su tutte e 6 le URL).
+- **JSON-LD** `Person` + `WebSite` (`@graph`) iniettato nel `<body>` del layout; `sameAs` raccolto dai dati esistenti (LinkedIn, GitHub da `portfolioProjects`; Facebook, Instagram da `socialNetwork`) senza duplicazione. `jobTitle`/`inLanguage` per-locale, `address` = Palermo.
+- **Immagine OG** `public/assets/og-image.png` (1200×630) generata ad hoc: palette e font (Zain) del sito, logo "LO" in cerchio, nome + tagline + tech + dominio. Generata con tool usa-e-getta (`@resvg/resvg-js` in dir temporanea poi rimossa) → **nessuna dipendenza runtime aggiunta**.
+- **Nuova sezione i18n `Seo`** (`siteTitle`, `siteDescription`, `ogImageAlt`) in `it.json` **e** `en.json`.
+- **Decisioni di contenuto (utente):** tagline/titolo **dev-first** e aggiornato a **"Web Developer Full Stack"** + **Node.js** tra le tech (non più solo frontend); OG image con **logo** (non foto, per coerenza col dark theme).
+
+**Verificato** sull'export `out/`: `lang` per locale, OG/twitter/description, `og:image` come URL assoluto, JSON-LD valido, `og:url`/`canonical`/`hreflang` per-pagina, sitemap XML ben formato (6 loc, 18 hreflang), robots/sitemap/immagine copiati. Build statico riuscito (10/10).
+
+**Test residui (post-deploy, richiedono URL live):** LinkedIn Post Inspector, Facebook Sharing Debugger, Google Rich Results Test, raggiungibilità `/robots.txt` e `/sitemap.xml`, invio sitemap a Search Console.
+
+**File coinvolti (effettivi):** `app/layout.tsx`, `app/[locale]/layout.tsx`, `app/[locale]/seo.ts` (nuovo), `app/[locale]/(routes)/dev/page.tsx`, `app/[locale]/(routes)/art/page.tsx`, `messages/it.json`, `messages/en.json`, `public/robots.txt` (nuovo), `public/sitemap.xml` (nuovo), `public/assets/og-image.png` (nuovo)
 
 **Effort umano:** 2-3h | **Effort agente:** ~20 min | **Impatto:** alto
 
@@ -325,7 +350,7 @@ Spunti emersi dalla rilettura del codice, da leggere con la lente del focus scel
 
 | #   | Suggerimento            | Priorita'   | Effort umano | Effort agente | Impatto    |
 | --- | ----------------------- | ----------- | ------------ | ------------- | ---------- |
-| 1   | SEO e metadati          | Alta        | 2-3h         | ~20 min       | Alto       |
+| 1   | SEO e metadati ✅ FATTO | Alta        | 2-3h         | ~20 min       | Alto       |
 | 2   | Accessibilita'          | Alta        | 3-4h         | ~30 min       | Alto       |
 | 3   | Pagina Art incompleta   | Alta        | 2-6h         | 1-3h \*       | Alto       |
 | 4   | Flusso navigazione      | Media       | 2-3h         | ~20 min       | Medio      |

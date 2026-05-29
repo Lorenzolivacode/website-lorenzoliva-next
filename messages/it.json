@@ -1,4 +1,10 @@
 {
+  "Seo": {
+    "siteTitle": "Lorenzo Oliva — Web Developer Full Stack & Artista",
+    "siteDescription": "Lorenzo Oliva, web developer full stack (React, Next.js, Node.js, TypeScript) e artista. Portfolio di progetti di sviluppo e lavori artistici.",
+    "ogImageAlt": "Lorenzo Oliva — Web Developer Full Stack & Artista"
+  },
+
   "Layout": {
     "nameCode": "Developer",
     "nameHome": "Home",

@@ -5,6 +5,16 @@ import { socialNetwork } from "./../../(data)/socialNetwork";
 import { useTranslations } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Image from "next/image";
+import { buildMetadata } from "../../seo";
+
+// og:url + canonical propri della pagina /art
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  return buildMetadata(locale, "/art");
+}
 
 function ArtPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);

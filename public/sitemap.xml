@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Home -->
+  <url>
+    <loc>https://lorenzoliva.it/it</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://lorenzoliva.it/it"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lorenzoliva.it/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lorenzoliva.it/it"/>
+  </url>
+  <url>
+    <loc>https://lorenzoliva.it/en</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://lorenzoliva.it/it"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lorenzoliva.it/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lorenzoliva.it/it"/>
+  </url>
+  <!-- Dev -->
+  <url>
+    <loc>https://lorenzoliva.it/it/dev</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://lorenzoliva.it/it/dev"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lorenzoliva.it/en/dev"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lorenzoliva.it/it/dev"/>
+  </url>
+  <url>
+    <loc>https://lorenzoliva.it/en/dev</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://lorenzoliva.it/it/dev"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lorenzoliva.it/en/dev"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lorenzoliva.it/it/dev"/>
+  </url>
+  <!-- Art -->
+  <url>
+    <loc>https://lorenzoliva.it/it/art</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://lorenzoliva.it/it/art"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lorenzoliva.it/en/art"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lorenzoliva.it/it/art"/>
+  </url>
+  <url>
+    <loc>https://lorenzoliva.it/en/art</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://lorenzoliva.it/it/art"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lorenzoliva.it/en/art"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lorenzoliva.it/it/art"/>
+  </url>
+</urlset>

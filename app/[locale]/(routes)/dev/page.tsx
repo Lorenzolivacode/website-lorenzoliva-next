@@ -17,6 +17,16 @@ import SubtitlePortfolio from "../../(components)/(atoms)/SubtitlePortfolio/Subt
 import ParagraphList from "../../(components)/(atoms)/ParagraphList-client/ParagraphList";
 import BlurBlue from "../../(components)/(atoms)/BlurBlue/BlurBlue";
 import Link from "next/link";
+import { buildMetadata } from "../../seo";
+
+// og:url + canonical propri della pagina /dev
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  return buildMetadata(locale, "/dev");
+}
 
 function Dev({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);

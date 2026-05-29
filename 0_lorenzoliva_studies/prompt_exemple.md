@@ -85,3 +85,31 @@ crea [ un ulteriore sezione da aggiungere ad AppShell utile ] per [ la visualizz
 > > Se necessario, elabora delle domande al termine del file per comprendere meglio contesto e obiettivi, poi suggerisci le modifiche da effettuare
 
 ---
+
+Lavoriamo su website-lorenzoliva-next. Procediamo con la PRIORITÀ ALTA dei
+suggerimenti in:
+website-lorenzoliva-next/0_lorenzoliva_studies/suggestions/001_suggerimenti-miglioramento-sito.md
+
+Prima di iniziare, leggi in quel file: la sezione "DECISIONI E ASSUNZIONI",
+"LAVORO GIÀ SVOLTO" (sessione precedente di UI resizing — non rifarla), e poi
+i punti 1-3. Leggi anche CLAUDE.md (in particolare §7.1 sulla convenzione CSS
+nome=valore) e Architecture.md.
+
+Affrontiamo nell'ordine, UNO alla volta, fermandoti per conferma tra uno e
+l'altro:
+
+1. SEO e metadati (punto 1)
+2. Accessibilità / a11y (punto 2)
+3. Pagina Art — opzione B, gallery minimale (punto 3)
+
+Vincoli chiave già decisi: static export (niente middleware/server), focus
+"lavoro dev", dominio https://lorenzoliva.it, og:locale it_IT/en_GB,
+tel:+393208121031. Ogni stringa va in i18n (it.json + en.json).
+
+Parti da SEO (punto 1): mostrami un piano prima di scrivere codice.
+
+Due accortezze che ho incluso nel prompt apposta:
+
+- "uno alla volta, fermandoti per conferma" — SEO/a11y/Art sono indipendenti e corposi; conviene  
+  chiuderne uno per volta invece di un mega-diff.
+- "mostrami un piano prima di scrivere codice" — per il punto 1 ci sono scelte (es. quale immagine OG, formato JSON-LD) che è meglio validare prima.
