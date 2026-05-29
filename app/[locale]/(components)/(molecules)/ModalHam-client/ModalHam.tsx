@@ -13,7 +13,7 @@ function ModalHam({ className }: { className?: string }) {
     <>
       <div className="fixed top-0 left-0 min-h-screen modal-ham-w to-backd-blur-4px z-i--1"></div>
       <div
-        className={`${className} ${"fixed appear-to-left overflow-auto top-0 left-0 flex-column gap-30px mt-70px shadow-t-inset-p-medium p-20px min-h-screen modal-ham-w opacity-8 bg-primary-very-light z-i--1"}`}
+        className={`${className} ${"modal-ham-panel fixed appear-to-left overflow-auto top-0 left-0 flex-column gap-30px shadow-t-inset-p-medium p-20px min-h-screen modal-ham-w opacity-8 bg-primary-very-light z-i--1"}`}
       >
         <Navbar isDirectionY={true} />
         <ModalDocs typology="list" />

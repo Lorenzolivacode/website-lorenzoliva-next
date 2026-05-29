@@ -4,28 +4,30 @@
 }
 
 .l-height-1d5 {
-  line-height: 1.5rem;
+  line-height: 1.5;
 }
 
-/* SIZE */
+/* SIZE — scala fluida con clamp(min, preferito, max).
+   Il max coincide col valore precedente (desktop invariato);
+   su viewport piccole la dimensione scende fino al min. */
 .f-size-1 {
   font-size: 1rem;
 }
 
 .f-size-1d2 {
-  font-size: 1.2rem;
+  font-size: clamp(1.1rem, 1.05rem + 0.3vw, 1.2rem);
 }
 
 .f-size-1d5 {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
 }
 
 .f-size-1d8 {
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 1.15rem + 1.2vw, 1.8rem);
 }
 
 .f-size-2 {
-  font-size: 2rem;
+  font-size: clamp(1.6rem, 1.35rem + 1.1vw, 2rem);
 }
 
 /* TEXT ALIGN */

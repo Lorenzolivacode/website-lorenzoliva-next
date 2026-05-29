@@ -1,5 +1,6 @@
 .h-line-path {
-  height: calc(100% - 95.5px);
+  /* 95.5px = header (var) + offset interni del path-icon (~25.5px) */
+  height: calc(100% - (var(--header-h) + 25.5px));
 }
 
 .h-line-path > div {

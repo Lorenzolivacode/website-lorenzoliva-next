@@ -34,7 +34,7 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider messages={messages}>
           <Header />
-          <main className="main-w-screen min-h-screen flex-center m-auto p-t-110px p-b-20px">
+          <main className="main-w-screen min-h-screen flex-center m-auto p-b-20px">
             {children}
           </main>
           <Footer />

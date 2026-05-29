@@ -32,6 +32,11 @@
   --color-primary-medium-light-0d5: rgba(122, 157, 199, 0.5);
 
   --color-primary-saturated-medium-light-0d8: rgba(58, 147, 220, 0.8);
+
+  /* LAYOUT — altezza dell'header fisso, usata come unica fonte per gli offset */
+  --header-h: 70px;
+  /* spazio da lasciare sotto l'header fisso: header + padding del wrapper (16px) + gap */
+  --header-clearance: calc(var(--header-h) + 40px);
 }
 
 * {
@@ -40,7 +45,7 @@
   box-sizing: border-box;
   font-family: "Zain", sans-serif;
   font-weight: 300;
-  line-height: 1.5rem;
+  line-height: 1.5;
   list-style-type: none;
   scrollbar-width: thin;
   scrollbar-color: var(--color-primary-medium-light) var(--color-primary-medium);
@@ -63,6 +68,11 @@ body {
   left: 0;
   z-index: -1;
   background-color: var(--color-secondary-very-light);
+}
+
+/* offset sotto l'header fisso per il layout della pagina Art */
+.art-clearance {
+  padding-top: var(--header-h);
 }
 
 h1,

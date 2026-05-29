@@ -1,3 +1,8 @@
+/* padding-top per liberare l'header fisso (vedi --header-clearance) */
+main {
+  padding-top: var(--header-clearance);
+}
+
 .main-w-screen {
   width: 50%;
 }

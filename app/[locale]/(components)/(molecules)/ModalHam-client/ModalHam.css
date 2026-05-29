@@ -2,6 +2,11 @@
   width: 30%;
 }
 
+/* il pannello parte sotto l'header fisso */
+.modal-ham-panel {
+  margin-top: var(--header-h);
+}
+
 @media screen and (max-width: 1024px) {
   .modal-ham-w {
     width: 40%;

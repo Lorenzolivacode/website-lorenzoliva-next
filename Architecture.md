@@ -1,7 +1,8 @@
 # Architecture — website-lorenzoliva-next
 
 Sito portfolio personale bilingue (IT/EN) costruito con Next.js 14 App Router.
-Nessun backend, nessun database, nessuna autenticazione. Dati hardcoded, output puramente statico.
+Nessun backend, nessun database, nessuna autenticazione. Dati hardcoded, output puramente statico (`output: "export"`).
+**Niente `middleware.ts`**: rimosso per il deploy statico su Aruba (Apache, nessun runtime Node).
 
 ---
 
@@ -13,8 +14,8 @@ Nessun backend, nessun database, nessuna autenticazione. Dati hardcoded, output 
 | Linguaggio | TypeScript (strict: false)          |
 | Styling    | CSS custom utility library (no preprocessor, no Tailwind) |
 | i18n       | next-intl ^3.20.0 (IT, EN)         |
-| Font       | Google Fonts (Zain), Geist/GeistMono (locale in app/fonts/) |
-| Deploy     | Static export → Aruba hosting Linux base (Apache) |
+| Font       | Google Fonts (Zain) via `@import` in globals.css. I file Geist/GeistMono in `app/fonts/` esistono ma **non sono referenziati** (non importati) |
+| Deploy     | Static export (`output: "export"`) → Aruba hosting Linux base (Apache) |
 
 ---
 
@@ -58,7 +59,7 @@ website-lorenzoliva-next/
 │       │   └── socialNetwork.tsx     # Array social network
 │       │
 │       ├── (Provider)/               # Context providers
-│       │   └── HashContext.tsx        # Context per tracking sezione corrente (non utilizzato)
+│       │   └── HashContext.tsx        # Context per tracking sezione corrente (usato da NavbarDev)
 │       │
 │       └── Interface/
 │           └── IPortfolioProject.tsx  # Interfaccia TypeScript per i progetti
@@ -69,10 +70,9 @@ website-lorenzoliva-next/
 │
 ├── messages/
 │   ├── it.json                       # Traduzioni italiane (~78 chiavi)
-│   └── en.json                       # Traduzioni inglesi (~78 chiavi)
+│   └── en.json                       # Traduzioni inglesi (~64 chiavi)
 │
-├── middleware.ts                      # i18n middleware (da rimuovere per static export)
-├── next.config.mjs                    # Config Next.js + next-intl plugin
+├── next.config.mjs                    # Config Next.js: output:"export", images.unoptimized, plugin next-intl
 ├── tsconfig.json                      # TypeScript config
 ├── jsconfig.json                      # Path alias: @/* → ./*
 ├── package.json
@@ -141,7 +141,7 @@ app/layout.tsx                          → CSS globali, shell HTML minima
 | SelectLanguage-client       | Si     | Dropdown `<select>` cambio lingua          |
 | SubtitlePortfolio           | No     | Sottotitolo sezione portfolio              |
 | SwitchLanguageInline-client | Si     | Switch lingua con bandiere (click)         |
-| Toast                       | No     | Notifica toast                             |
+| Toast                       | No     | Notifica toast — **stub vuoto** (`return <div></div>`), non utilizzato |
 
 ### Molecules (`(components)/(molecules)/`)
 
@@ -150,7 +150,7 @@ app/layout.tsx                          → CSS globali, shell HTML minima
 | ButtonDocs-client     | Si     | Bottone apertura documenti                          |
 | ButtonHam             | No     | Bottone hamburger menu                              |
 | ButtonPhoto-client    | Si     | Bottone foto con modale                             |
-| Carousel-client       | Si     | Carousel progetti (legge `useLocale` per descrizioni) |
+| Carousel-client       | Si     | Carousel progetti (legge `useLocale`) — **non importato da nessuna page** (codice morto: `PortfolioList` usa direttamente la classe CSS `.carousel`) |
 | ModalDocs-client      | Si     | Modale documenti (CV, portfolio PDF)                |
 | ModalHam-client       | Si     | Menu mobile (createPortal)                          |
 | ModalHello-client     | Si     | Modale benvenuto con foto                           |
@@ -178,8 +178,8 @@ i18n/routing.ts
 i18n/request.ts
   └── getRequestConfig: carica messages/{locale}.json
 
-middleware.ts
-  └── intercetta richieste, rileva locale, redirige (SOLO runtime Node.js)
+(nessun middleware.ts: con output statico il locale è enumerato a build da
+ generateStaticParams; il redirect "/" → "/{locale}" è client-side in app/page.tsx)
 
 messages/it.json, messages/en.json
   └── chiavi: Layout.*, ModalDoc.*, Home.*, DevSection.*, ArtSection.*
@@ -260,7 +260,7 @@ Le variabili colore principali sono definite in `globals.css` come CSS custom pr
 
 ### HashContext (`(Provider)/HashContext.tsx`)
 
-Context con `currentHash` (string) e `setCurrentHash`. Definito ma **non attivamente utilizzato** nel layout. Era pensato per tracking della sezione visibile nella pagina dev.
+Context con `currentHash` (string) e `setCurrentHash`. **Utilizzato da `NavbarDev`**: `NavbarDev` wrappa il proprio contenuto in `HashProvider` e legge `currentHash` via `useHash()` (insieme a `SectionObserver`) per evidenziare la sezione visibile e calcolare il progresso di scroll nella pagina dev. Non è invece montato a livello di layout globale.
 
 ---
 
