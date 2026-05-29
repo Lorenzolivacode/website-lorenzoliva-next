@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 import "./BtnClose.css";
 
 interface BtnProps {
@@ -13,6 +14,7 @@ function BtnClose({
   color = "dark",
   className,
 }: BtnProps) {
+  const t = useTranslations("Layout");
   const colorX =
     color === "dark" ? "bg-primary-very-dark" : "bg-secondary-light";
   return (
@@ -21,6 +23,7 @@ function BtnClose({
         color === "dark" ? "dark" : "light"
       } flex ${className ? className : ""}`}
       onClick={onClose}
+      aria-label={t("closeLabel")}
     >
       <span
         className={`${colorX} ${`h-${widthPx}px`}  w-3px display-inline-block radius-3px`}

@@ -37,7 +37,7 @@ function SelectLanguage() {
   };
   return (
     <>
-      <label htmlFor="selectLanguage" className="diplay-none">
+      <label htmlFor="selectLanguage" className="sr-only">
         {t("selectedLabel")}
       </label>
       <ul

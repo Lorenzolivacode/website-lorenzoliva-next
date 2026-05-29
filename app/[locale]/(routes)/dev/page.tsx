@@ -148,8 +148,10 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
               target={thisWebsite.linkGithub.length >= 2 ? "_blank" : "_self"}
               rel="noopener noreferrer"
               title={t("followCode")}
+              aria-disabled={thisWebsite.linkGithub.length < 2 ? true : undefined}
+              tabIndex={thisWebsite.linkGithub.length < 2 ? -1 : undefined}
               className={`${
-                thisWebsite.linkGithub.length < 2 && "opacity-4"
+                thisWebsite.linkGithub.length < 2 ? "opacity-4 pointer-events-none" : ""
               } btn change-img-link p-4px radius-8px f-size-0d95-1d05 txt-decoration-none txt-c-inherit p-l-20px flex-cross-center gap-10px`}
             >
               <div className="img-git-30 w-30px ratio-1" />

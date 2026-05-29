@@ -5,11 +5,13 @@ import "./ButtonHam.css";
 
 import ModalHam from "../ModalHam-client/ModalHam";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 function ButtonDocs() {
   const [hambActive, setHambActive] = useState(false);
   const [modalOn, setModalOn] = useState(false);
 
+  const t = useTranslations("Layout");
   const pathname = usePathname();
 
   const handleDocsMenu = () => {
@@ -32,6 +34,8 @@ function ButtonDocs() {
           hambActive ? "ham-modalon" : ""
         }`}
         onClick={handleDocsMenu}
+        aria-label={t("navMenuLabel")}
+        aria-expanded={hambActive}
       >
         <div />
         <div />

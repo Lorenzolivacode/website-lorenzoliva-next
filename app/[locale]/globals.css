@@ -83,3 +83,27 @@ h5,
 h6 {
   font-weight: bold;
 }
+
+/* feedback di focus da tastiera, coerente su tutti gli elementi interattivi */
+:focus-visible {
+  outline: 2px solid var(--color-secondary-saturated-medium);
+  outline-offset: 2px;
+}
+
+/* link "salta al contenuto": fuori schermo finché non riceve focus da tastiera */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 8px 16px;
+  background-color: var(--color-secondary-saturated-medium);
+  color: var(--color-primary-very-dark);
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}

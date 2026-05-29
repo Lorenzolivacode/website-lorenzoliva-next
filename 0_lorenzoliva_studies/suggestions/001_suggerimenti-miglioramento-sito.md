@@ -102,24 +102,32 @@ Una sessione di ridimensionamento UI è stata completata. **Prima di toccare CSS
 
 ---
 
-### 2. Accessibilita' (a11y)
+### 2. Accessibilita' (a11y) ✅ FATTO (2026-05-29)
 
 **Problemi rilevati dall'analisi del codice:**
 
-- [ ] **`alt=""` su immagine profilo** in `app/[locale]/page.tsx` riga 22 (`src` a riga 19) — dovrebbe essere `alt="Lorenzo Oliva - Web Developer e Artista"`
-- [ ] **Secondo `alt=""`** in `app/[locale]/(routes)/art/page.tsx` riga 21 (immagine di sfondo `img-bg-workart.png`) → valutare `alt` descrittivo o `role="presentation"` se puramente decorativa
-- [ ] **`ButtonHam.tsx`** — 3 `<div>` vuoti in un `<button>`, nessun testo screen reader → aggiungere `aria-label="Menu di navigazione"` + `aria-expanded={hambActive}`
-- [ ] **`BtnClose.tsx`** — solo span visuali → aggiungere `aria-label="Chiudi"`
-- [ ] **`ButtonPhoto.tsx`** — `onClick` su `<div className="img-container">` (riga 16) → cambiare in `<button>` con `aria-label`
-- [ ] **Link disabilitati** — quando un link `< 2` caratteri punta a `"#"` ma resta cliccabile (solo `opacity-4`) → usare `aria-disabled="true"` + `pointer-events: none`, oppure renderizzare `<span>` al posto di `<a>`. Il pattern ricorre in più punti: `PortfolioList.tsx` (sia `linkGithub` riga 88 sia `linkProject` riga 107) e `dev/page.tsx` (blocco `thisWebsite`, `linkGithub` riga 132)
-- [ ] **`<label>` del selettore lingua nascosta** — in `SelectLanguage.tsx` (riga 24) e `SwitchLanguageInline.tsx` (riga 40) la `<label htmlFor="selectLanguage">` ha classe `diplay-none` (`display:none`) → tolta dall'albero di accessibilità, lo screen reader non legge l'etichetta del select. Usare una classe `sr-only`/visually-hidden invece di `display:none` (e correggere il refuso, vedi sotto)
-- [ ] **Contrasto colore** — font-weight 300 su testo chiaro (`secondary-light`) su sfondo scuro (`primary-very-dark`) → verificare rapporto WCAG AA, eventualmente portare a weight 400
-- [ ] **Manca uno stile `:focus-visible` globale/coerente** — esistono solo focus puntuali (`.btn-close:focus` in `BtnClose.css`, `.hover-trx20px-scale105:focus` in `components.css:84`); link, bottoni e nav non hanno feedback da tastiera → aggiungere una regola `:focus-visible` globale
-- [ ] **Manca skip-to-content** → aggiungere link nascosto "Salta al contenuto" per keyboard navigation
-- [ ] **Modali senza focus trap** — `ModalHello.tsx` (ha solo l'handler Escape) e `ModalHam.tsx` non intrappolano il focus, il tab esce dalla modale
-- [ ] **Refuso CSS `.diplay-none`** in `display.css` riga 1 (manca una "s") — NON è un bug latente: la classe è effettivamente usata (`SelectLanguage.tsx:24`, `SwitchLanguageInline.tsx:40`) e combacia col selettore (anch'esso col refuso), quindi "funziona" per coincidenza. Va comunque corretto in `.display-none` insieme agli usi, per pulizia e per evitare regressioni future
+- [x] **`alt=""` su immagine profilo** in `app/[locale]/page.tsx` riga 22 — **deciso: resta `alt=""`**. È lo sfondo decorativo `.img-bg` (opacity 0.3); la foto profilo "vera" è in `ButtonPhoto` e ha già `alt="Lorenzo Oliva"`. Sfondo decorativo → `alt=""` è corretto.
+- [x] **Secondo `alt=""`** in `art/page.tsx` riga 31 (`img-bg-workart.png`) — **deciso: resta `alt=""`** (immagine di sfondo puramente decorativa).
+- [x] **`ButtonHam.tsx`** — aggiunti `aria-label={t("navMenuLabel")}` + `aria-expanded={hambActive}` (con `useTranslations("Layout")`).
+- [x] **`BtnClose.tsx`** — aggiunto `aria-label={t("closeLabel")}` (con `useTranslations("Layout")`).
+- [x] **`ButtonPhoto.tsx`** — `<div onClick>` → `<button className="img-container reset-default pointer">` con `aria-label={t("photoButtonLabel")}`.
+- [x] **Link disabilitati** — approccio (a): quando il link `< 2` char → `aria-disabled={true}` + `tabIndex={-1}` + nuova utility `.pointer-events-none` (mantenendo `opacity-4`). Applicato in `PortfolioList.tsx` (`linkGithub` r.87, `linkProject` r.106) e `dev/page.tsx` (`thisWebsite.linkGithub` r.142). Fixato anche il `&& "opacity-4"` che interpolava la stringa fantasma `"false"` → ternario.
+- [x] **`<label>` del selettore lingua nascosta** — `diplay-none` → nuova classe `.sr-only` (visually-hidden accessibile) in `SelectLanguage.tsx:24` e `SwitchLanguageInline.tsx:40`. (Nota residua, fuori scope: in `SwitchLanguageInline` la label punta a un `<ul>`, associazione `htmlFor` non valida — testo comunque leggibile dallo SR.)
+- [ ] **Contrasto colore** — **RINVIATO al punto 6**: il rapporto `secondary-light` (#f9f6e6) su `primary-very-dark` (#080d13) è ≈17:1, supera ampiamente WCAG AA. Il tema reale è la leggibilità del weight 300, che è una scelta tipografica del punto 6 (priorità media).
+- [x] **`:focus-visible` globale** — aggiunta regola globale in `globals.css`: `outline: 2px solid var(--color-secondary-saturated-medium)` (gold) + `outline-offset: 2px`.
+- [x] **skip-to-content** — classe `.skip-link` in `globals.css` (fuori schermo finché non riceve focus) + `<a href="#main-content">` in `layout.tsx` con `id="main-content"` sul `<main>`. Testo da nuova chiave `Layout.skipToContentLabel`.
+- [x] **Modali senza focus trap** — aggiunto focus-trap (focus iniziale nella modale, trap `Tab`/`Shift+Tab`, ripristino focus all'elemento precedente alla chiusura) in `ModalHello.tsx` e `ModalHam.tsx`. Logica inline in ciascun componente (no nuova cartella/hook, per CLAUDE §13).
+- [x] **Refuso CSS `.diplay-none`** — rimossa la regola refuso da `display.css`; `.display-none` (corretta) lasciata; usi migrati a `.sr-only`. Nessun `diplay-none` residuo nel codice.
 
-**File coinvolti:** `ButtonHam.tsx`, `BtnClose.tsx`, `ButtonPhoto.tsx`, `PortfolioList.tsx`, `dev/page.tsx`, `SelectLanguage.tsx`, `SwitchLanguageInline.tsx`, `ModalHello.tsx`, `ModalHam.tsx`, `app/[locale]/page.tsx`, `art/page.tsx`, `globals.css`, `display.css`
+**COSA È STATO FATTO (dettaglio):**
+
+- **Nuove utility CSS** (nomi proposti e confermati prima di scriverle, §7.1): `.pointer-events-none` e `.sr-only` in `display.css`; regola globale `:focus-visible` e classe componente `.skip-link` in `globals.css`.
+- **Nuove chiavi i18n** (sezione `Layout`, IT **e** EN): `navMenuLabel`, `closeLabel`, `photoButtonLabel`, `skipToContentLabel`.
+- **Decisioni utente:** alt sfondi → decorativi (`alt=""`); link disabilitati → approccio (a) `aria-disabled`; colore focus → gold; contrasto/weight → rinviato al punto 6.
+
+**Verificato** sull'export `out/`: build statico riuscito (10/10 pagine); nell'HTML statico presenti `class="skip-link"`, "Salta al contenuto", `id="main-content"`, `aria-expanded`, `aria-label` (menu/foto), `aria-disabled="true"` sui link disabilitati; nel bundle CSS presenti `:focus-visible{outline…}` e `.sr-only{position…}`. (aria-label di BtnClose e focus-trap dei modali non sono nell'HTML statico perché montati client-side al click — atteso.)
+
+**File coinvolti (effettivi):** `ButtonHam.tsx`, `BtnClose.tsx`, `ButtonPhoto.tsx`, `PortfolioList.tsx`, `dev/page.tsx`, `SelectLanguage.tsx`, `SwitchLanguageInline.tsx`, `ModalHello.tsx`, `ModalHam.tsx`, `layout.tsx`, `globals.css`, `display.css`, `messages/it.json`, `messages/en.json`
 
 **Effort umano:** 3-4h | **Effort agente:** ~30 min | **Impatto:** alto
 
@@ -351,7 +359,7 @@ Spunti emersi dalla rilettura del codice, da leggere con la lente del focus scel
 | #   | Suggerimento            | Priorita'   | Effort umano | Effort agente | Impatto    |
 | --- | ----------------------- | ----------- | ------------ | ------------- | ---------- |
 | 1   | SEO e metadati ✅ FATTO | Alta        | 2-3h         | ~20 min       | Alto       |
-| 2   | Accessibilita'          | Alta        | 3-4h         | ~30 min       | Alto       |
+| 2   | Accessibilita' ✅ FATTO | Alta        | 3-4h         | ~30 min       | Alto       |
 | 3   | Pagina Art incompleta   | Alta        | 2-6h         | 1-3h \*       | Alto       |
 | 4   | Flusso navigazione      | Media       | 2-3h         | ~20 min       | Medio      |
 | 5   | Contenuto e testi       | Media       | 1-2h         | ~15 min \*    | Medio      |
@@ -371,4 +379,4 @@ Spunti emersi dalla rilettura del codice, da leggere con la lente del focus scel
 | Tutto (1-11)              | ~20-34h             | ~4-7h + verifiche |
 | Idee aggiuntive (12)      | da stimare per voce | + verifiche       |
 
-**Approccio consigliato:** partire da SEO (1) + accessibilita' (2) + fix testi (5) — miglior rapporto impatto/effort, nessun redesign. La pagina Art (3, opzione B) è il primo intervento di contenuto. Le idee UI/UX (12) sono mini-redesign da pesare singolarmente, non incluse nel "core".
+**Approccio consigliato:** SEO (1) ✅ e accessibilita' (2) ✅ sono FATTI (2026-05-29) — miglior rapporto impatto/effort, nessun redesign. **Prossimo step: pagina Art (3, opzione B)**, primo intervento di contenuto; poi eventualmente fix testi (5). Le idee UI/UX (12) sono mini-redesign da pesare singolarmente, non incluse nel "core".

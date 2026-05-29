@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -19,6 +19,7 @@ export function ModalHello({ isOpen, onClose }: ModalHelloProps) {
   const t = useTranslations("Home");
   const [displayedLetters, setDisplayedLetters] = useState("");
   const modalHelloLabel = t("modalHelloLabel");
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     /* console.log("open"); */
@@ -54,6 +55,43 @@ export function ModalHello({ isOpen, onClose }: ModalHelloProps) {
     };
   }, [onClose]);
 
+  // focus trap: porto il focus nella modale, intrappolo il Tab, lo ripristino alla chiusura
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const modal = modalRef.current;
+    if (!modal) return;
+
+    const getFocusable = () =>
+      modal.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+
+    // focus iniziale sul contenitore (non sul primo bottone: eviterebbe l'animazione :focus di BtnClose)
+    modal.focus();
+
+    const handleTab = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+      const items = getFocusable();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+      if (event.shiftKey && (active === first || active === modal)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    modal.addEventListener("keydown", handleTab);
+    return () => {
+      modal.removeEventListener("keydown", handleTab);
+      previouslyFocused?.focus();
+    };
+  }, []);
+
   const handleBtnClose = () => {
     setTimeout(() => {
       onClose();
@@ -67,6 +105,8 @@ export function ModalHello({ isOpen, onClose }: ModalHelloProps) {
         className="bg-blur-modal fixed backd-blur-5px top-0 w-full h-full bg-primary-very-dark-0d5"
       >
         <div
+          ref={modalRef}
+          tabIndex={-1}
           onClick={(e) => e.stopPropagation()}
           className="effect-modal absolute-center shadow-10xy-black8 flex-modal-hello-screen gap-20px main-w-screen radius-8px p-10px p-b-20px bg-secondary-light txt-c-primary-medium"
         >

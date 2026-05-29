@@ -12,6 +12,10 @@
 
     "languageLabel": "Language",
     "selectedLabel": "Seleziona la lingua",
+    "navMenuLabel": "Menu di navigazione",
+    "closeLabel": "Chiudi",
+    "photoButtonLabel": "Apri la presentazione",
+    "skipToContentLabel": "Salta al contenuto",
     "flagIt": "🇮🇹",
     "flagEn": "🇬🇧",
     "italianLabel": "Italiano",

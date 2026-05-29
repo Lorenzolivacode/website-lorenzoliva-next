@@ -38,6 +38,7 @@ export default async function RootLayout({
   unstable_setRequestLocale(locale);
   const messages = await getMessages({ locale });
   const t = await getTranslations({ locale, namespace: "Seo" });
+  const tLayout = await getTranslations({ locale, namespace: "Layout" });
 
   // structured data (Person + WebSite) per i rich snippet Google.
   // sameAs raccoglie i profili esterni già presenti nei dati (no duplicazione)
@@ -86,8 +87,15 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <NextIntlClientProvider messages={messages}>
+          {/* skip-link: primo elemento focalizzabile, porta al contenuto principale */}
+          <a href="#main-content" className="skip-link">
+            {tLayout("skipToContentLabel")}
+          </a>
           <Header />
-          <main className="main-w-screen min-h-screen flex-center m-auto p-b-20px">
+          <main
+            id="main-content"
+            className="main-w-screen min-h-screen flex-center m-auto p-b-20px"
+          >
             {children}
           </main>
           <Footer />

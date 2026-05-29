@@ -86,30 +86,68 @@ crea [ un ulteriore sezione da aggiungere ad AppShell utile ] per [ la visualizz
 
 ---
 
-Lavoriamo su website-lorenzoliva-next. Procediamo con la PRIORITÀ ALTA dei
-suggerimenti in:
+## website-lorenzoliva — Punto 3 (Pagina Art — opzione B)
+
+Lavoriamo su website-lorenzoliva-next. Procediamo con la PRIORITÀ ALTA, punto 3
+(Pagina Art incompleta) dei suggerimenti in:
 website-lorenzoliva-next/0_lorenzoliva_studies/suggestions/001_suggerimenti-miglioramento-sito.md
 
-Prima di iniziare, leggi in quel file: la sezione "DECISIONI E ASSUNZIONI",
-"LAVORO GIÀ SVOLTO" (sessione precedente di UI resizing — non rifarla), e poi
-i punti 1-3. Leggi anche CLAUDE.md (in particolare §7.1 sulla convenzione CSS
-nome=valore) e Architecture.md.
+Contesto: il punto 1 (SEO/metadati) e il punto 2 (accessibilità) sono GIÀ FATTI e
+verificati — non rifarli. Vedi i blocchi "✅ FATTO" sotto i punti 1 e 2 in quel file
+(contengono le decisioni prese, le nuove utility CSS e le chiavi i18n già introdotte:
+es. `.sr-only`, `.pointer-events-none`, `.skip-link`, `:focus-visible`, sezione i18n
+`Seo`, chiavi `Layout.*` per a11y). Non duplicarle né contraddirle.
 
-Affrontiamo nell'ordine, UNO alla volta, fermandoti per conferma tra uno e
-l'altro:
+Prima di iniziare leggi, in quel file: il punto 3 PER INTERO, il punto 12.1
+(coerenza tema dark↔light — impatta direttamente la gallery), la sezione
+"DECISIONI E ASSUNZIONI" e "LAVORO GIÀ SVOLTO (UI resizing)". Leggi anche
+CLAUDE.md (in particolare §5 data layer, §6 i18n, §7.1 convenzione CSS nome=valore
+— REGOLA CRITICA, §8 static export) e Architecture.md.
 
-1. SEO e metadati (punto 1)
-2. Accessibilità / a11y (punto 2)
-3. Pagina Art — opzione B, gallery minimale (punto 3)
+Vincoli chiave già decisi:
+- Opzione B (CONFERMATA): gallery minimale con 5-8 immagini rappresentative estratte
+  dal PDF `public/doc/art-doc/Portfolio-artistico-Oliva-Lorenzo.pdf` + i social già
+  presenti. La sezione Art resta SECONDARIA rispetto a Dev: curata e finita, ma senza
+  investirci quanto sul portfolio dev. Niente redesign del resto del sito.
+- Static export: niente middleware/server/route handler/server action a runtime.
+  L'eventuale estrazione/ottimizzazione immagini dal PDF va fatta con un tool
+  usa-e-getta (come per l'OG image del punto 1) → NESSUNA dipendenza runtime aggiunta;
+  gli asset finali (WebP) vivono in `public/assets/artPage/`.
+- Ogni stringa user-facing va in i18n con la STESSA chiave in it.json E en.json
+  (riusa la sezione esistente `ArtSection` prima di crearne una nuova).
+- Convenzione CSS: il nome della utility È il suo valore. MAI cambiare il valore
+  dietro un nome esistente → crea una nuova classe. Se servono nuove utility
+  (es. per una griglia/masonry), proponi nome/file PRIMA di scriverle invece di
+  indovinare; conferma che una classe esista prima di usarla. Colori SOLO da
+  variabili CSS in globals.css.
 
-Vincoli chiave già decisi: static export (niente middleware/server), focus
-"lavoro dev", dominio https://lorenzoliva.it, og:locale it_IT/en_GB,
-tel:+393208121031. Ogni stringa va in i18n (it.json + en.json).
+Stato attuale (verifica sul codice, le righe possono essere cambiate):
+`app/[locale]/(routes)/art/page.tsx` mostra `ArtSection.maintenancePageLabel`
+("in manutenzione") + `checkOutSocialLabel` + i social (`socialNetwork.tsx`) + l'immagine
+`LO-img-3.3.png`; ha già `generateMetadata` via `buildMetadata(locale, "/art")` (NON
+toccare la logica SEO). `art/layout.tsx` è solo un wrapper CSS (`art-bg` bianco,
+`art-clearance`). Le chiavi `ArtSection` attuali: `maintenancePageLabel`,
+`checkOutSocialLabel`, `imageLabel`.
 
-Parti da SEO (punto 1): mostrami un piano prima di scrivere codice.
+Il punto 3 (opzione B) include:
+- Estrarre 5-8 immagini dal PDF e salvarle ottimizzate (WebP) in `public/assets/artPage/`.
+- Sostituire il blocco "in manutenzione" con una gallery responsive (griglia/masonry)
+  coerente con lo stile del sito; usare `next/image` con `width`/`height` o `fill`+`sizes`
+  (immagini `unoptimized`, §8).
+- Mantenere i social e il link al PDF completo (già in `ModalDocs`).
+- Aggiungere le chiavi i18n in `ArtSection` (titolo sezione, eventuali didascalie, alt
+  delle immagini) in IT+EN e rimuovere l'uso di `maintenancePageLabel`.
 
-Due accortezze che ho incluso nel prompt apposta:
+Affrontiamo UNO step alla volta, fermandoti per conferma tra uno e l'altro.
+Parti mostrandomi un PIANO prima di scrivere codice: raggruppa il lavoro in
+sotto-step logici (es. estrazione/ottimizzazione immagini, struttura JSX della gallery,
+CSS responsive, i18n + rimozione "manutenzione", tema), segnala dove servono nuove
+utility CSS o nuove chiavi i18n, e DIMMI quali voci richiedono una mia decisione, in
+particolare: (a) TEMA della gallery — sfondo chiaro "galleria bianca" o uniformato al
+dark del resto (punto 12.1); (b) QUALI 5-8 immagini estrarre dal PDF e in che ordine;
+(c) layout (griglia regolare vs masonry) e se servono didascalie; (d) testo del titolo
+sezione e delle eventuali didascalie/alt; (e) se mantenere o meno l'immagine `LO-img-3.3.png`.
+Verifica il tutto con un build statico alla fine (`npm run build`, type-check ed eslint
+puliti, e controllo sull'export `out/`).
 
-- "uno alla volta, fermandoti per conferma" — SEO/a11y/Art sono indipendenti e corposi; conviene  
-  chiuderne uno per volta invece di un mega-diff.
-- "mostrami un piano prima di scrivere codice" — per il punto 1 ci sono scelte (es. quale immagine OG, formato JSON-LD) che è meglio validare prima.
+---

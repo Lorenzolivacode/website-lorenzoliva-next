@@ -89,8 +89,10 @@ export function PortfolioList({ data }: { data: IPortfolioData[] }) {
               target={project.linkGithub.length >= 2 ? "_blank" : "_self"}
               rel="noopener noreferrer"
               title={t("followCode")}
+              aria-disabled={project.linkGithub.length < 2 ? true : undefined}
+              tabIndex={project.linkGithub.length < 2 ? -1 : undefined}
               className={`${
-                project.linkGithub.length < 2 && "opacity-4"
+                project.linkGithub.length < 2 ? "opacity-4 pointer-events-none" : ""
               } btn change-img-link p-4px radius-8px f-size-0d95-1d05 txt-decoration-none txt-c-inherit p-l-20px flex-cross-center gap-10px`}
             >
               <div className="img-git-30 w-30px ratio-1" />
@@ -108,8 +110,10 @@ export function PortfolioList({ data }: { data: IPortfolioData[] }) {
               target={project.linkProject.length >= 2 ? "_blank" : "_self"}
               rel="noopener noreferrer"
               title={t("followProject")}
+              aria-disabled={project.linkProject.length < 2 ? true : undefined}
+              tabIndex={project.linkProject.length < 2 ? -1 : undefined}
               className={`${
-                project.linkProject.length < 2 && "opacity-4"
+                project.linkProject.length < 2 ? "opacity-4 pointer-events-none" : ""
               } btn change-img-link p-4px radius-8px f-size-0d95-1d05 txt-decoration-none txt-c-inherit p-l-20px flex-cross-center gap-10px`}
             >
               <div className="img-link-30 w-30px ratio-1" />
