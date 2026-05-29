@@ -65,10 +65,10 @@ export function PortfolioList({ data }: { data: IPortfolioData[] }) {
                 /* console.log(project.title, ": ", requirement); */
                 return (
                   <Image
-                    width={30}
-                    height={30}
+                    width={24}
+                    height={24}
                     key={`${project.id}-${index}`}
-                    className="w-30px"
+                    className="w-24px"
                     src={getIcon(requirement)}
                     alt={requirement}
                     title={requirement}
@@ -77,10 +77,10 @@ export function PortfolioList({ data }: { data: IPortfolioData[] }) {
               })}
             </div>
           </div>
-          <div className="project-el-details flex-column gap-10px f-size-1d2">
+          <div className="project-el-details flex-column gap-10px f-size-0d95-1d05">
             <ParagraphList description={project.description} />
 
-            <p className="f-size-1">
+            <p className="f-size-0d875">
               {t("exEndLabel")} {project.created}
             </p>
 
@@ -91,7 +91,7 @@ export function PortfolioList({ data }: { data: IPortfolioData[] }) {
               title={t("followCode")}
               className={`${
                 project.linkGithub.length < 2 && "opacity-4"
-              } btn change-img-link p-4px radius-8px f-size-1d2 txt-decoration-none txt-c-inherit p-l-20px flex-cross-center gap-10px`}
+              } btn change-img-link p-4px radius-8px f-size-0d95-1d05 txt-decoration-none txt-c-inherit p-l-20px flex-cross-center gap-10px`}
             >
               <div className="img-git-30 w-30px ratio-1" />
               {/* <Image
@@ -110,7 +110,7 @@ export function PortfolioList({ data }: { data: IPortfolioData[] }) {
               title={t("followProject")}
               className={`${
                 project.linkProject.length < 2 && "opacity-4"
-              } btn change-img-link p-4px radius-8px f-size-1d2 txt-decoration-none txt-c-inherit p-l-20px flex-cross-center gap-10px`}
+              } btn change-img-link p-4px radius-8px f-size-0d95-1d05 txt-decoration-none txt-c-inherit p-l-20px flex-cross-center gap-10px`}
             >
               <div className="img-link-30 w-30px ratio-1" />
               {/* <Image

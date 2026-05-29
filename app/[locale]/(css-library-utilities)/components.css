@@ -23,7 +23,7 @@
   background-position: -100% 0%; /* Posizione di partenza */
   cursor: pointer;
   transition: all 0.5s ease-in-out; /* Transizione fluida del background */
-  font-size: clamp(1.1rem, 1.05rem + 0.3vw, 1.2rem);
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
 }
 
 .btn:hover,

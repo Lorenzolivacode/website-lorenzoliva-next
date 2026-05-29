@@ -29,11 +29,11 @@ function RoundedIconEl({
     <div className="flex-column gap-10px p-10px p-x-24px w-100px h-70px">
       {!href ? (
         <div onClick={onClick} title={title} className={roundedElClass}>
-          <Image alt={alt} width={30} height={30} src={src} />
+          <Image alt={alt} width={24} height={24} src={src} />
         </div>
       ) : (
         <Link title={title} href={href} className={roundedElClass}>
-          <Image alt={alt} width={30} height={30} src={src} />
+          <Image alt={alt} width={24} height={24} src={src} />
         </Link>
       )}
       <div className=" flex-center radius-5px bg-primary-very-dark-0d6">

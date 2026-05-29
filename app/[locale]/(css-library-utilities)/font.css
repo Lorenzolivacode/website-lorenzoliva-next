@@ -7,27 +7,37 @@
   line-height: 1.5;
 }
 
-/* SIZE — scala fluida con clamp(min, preferito, max).
-   Il max coincide col valore precedente (desktop invariato);
-   su viewport piccole la dimensione scende fino al min. */
+/* SIZE — convenzione nome=valore ("d" = punto, rem implicito):
+   - valore fisso  → f-size-<val>            (es. f-size-0d875 = 0.875rem)
+   - valore fluido → f-size-<min>-<max>      (clamp; 1° numero = min, 2° = max)
+   Classi ordinate per valore crescente. */
+.f-size-0d875 {
+  /* 14px — body text (fisso: non scende sotto i 14px per leggibilità) */
+  font-size: 0.875rem;
+}
+
 .f-size-1 {
   font-size: 1rem;
 }
 
-.f-size-1d2 {
-  font-size: clamp(1.1rem, 1.05rem + 0.3vw, 1.2rem);
+.f-size-0d95-1d05 {
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
 }
 
-.f-size-1d5 {
+.f-size-1d2 {
+  font-size: 1.2rem;
+}
+
+.f-size-1d05-1d25 {
+  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
+}
+
+.f-size-1d25-1d5 {
   font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
 }
 
-.f-size-1d8 {
-  font-size: clamp(1.4rem, 1.15rem + 1.2vw, 1.8rem);
-}
-
-.f-size-2 {
-  font-size: clamp(1.6rem, 1.35rem + 1.1vw, 2rem);
+.f-size-1d35-1d65 {
+  font-size: clamp(1.35rem, 1.15rem + 0.9vw, 1.65rem);
 }
 
 /* TEXT ALIGN */

@@ -34,9 +34,9 @@
   --color-primary-saturated-medium-light-0d8: rgba(58, 147, 220, 0.8);
 
   /* LAYOUT — altezza dell'header fisso, usata come unica fonte per gli offset */
-  --header-h: 70px;
-  /* spazio da lasciare sotto l'header fisso: header + padding del wrapper (16px) + gap */
-  --header-clearance: calc(var(--header-h) + 40px);
+  --header-h: 56px; /* ridotto ~20% (era 70px) */
+  /* spazio da lasciare sotto l'header fisso: header + padding del wrapper + gap */
+  --header-clearance: calc(var(--header-h) + 32px);
 }
 
 * {

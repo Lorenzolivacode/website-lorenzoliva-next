@@ -85,6 +85,11 @@
   align-items: center;
 }
 
+.flex-cross-start {
+  display: flex;
+  align-items: flex-start;
+}
+
 /* WRAP */
 .flex-wrap {
   display: flex;

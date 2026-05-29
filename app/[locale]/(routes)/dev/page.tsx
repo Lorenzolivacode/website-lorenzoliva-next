@@ -38,18 +38,18 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
         id="skills"
         className="section-code-page flex-center flex-column gap-30px"
       >
-        <h2 className="f-bold f-size-2">{t("skillsLabel")}</h2>
+        <h2 className="f-bold f-size-1d35-1d65">{t("skillsLabel")}</h2>
         <div className="skills-container flex-wrap flex-center">
           {skills.map((skill) => (
             <div key={skill.id} className="img-skill-container">
               <Image
-                width={90}
-                height={90}
+                width={72}
+                height={72}
                 src={skill.icon}
                 alt={skill.label}
                 title={skill.label}
               />
-              <p className="skill-label txt-center f-bold f-size-1d2 txt-c-primary-very-light">
+              <p className="skill-label txt-center f-bold f-size-0d95-1d05 txt-c-primary-very-light">
                 {skill.label}
               </p>
             </div>
@@ -60,7 +60,7 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
         id="links"
         className="section-code-page flex-center flex-center flex-column gap-30px"
       >
-        <h2 className="f-bold f-size-2">{t("linkLabel")}</h2>
+        <h2 className="f-bold f-size-1d35-1d65">{t("linkLabel")}</h2>
         <ul className="flex-column gap-30px w-full">
           {links.map((link) => {
             return (
@@ -73,11 +73,11 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
                       ? "noopener noreferrer"
                       : undefined
                   }
-                  className="link-el flex-center flex-evenly shadow-light-small radius-20px p-8px txt-c-primary-very-dark f-size-1d8 f-bold txt-decoration-none bg-primary-very-light"
+                  className="link-el flex-center flex-evenly shadow-light-small radius-20px p-8px txt-c-primary-very-dark f-size-1d25-1d5 f-bold txt-decoration-none bg-primary-very-light"
                 >
                   <Image
-                    width={55}
-                    height={55}
+                    width={44}
+                    height={44}
                     src={link.icon}
                     alt={`Image ${t(link.label)}`}
                   />
@@ -92,7 +92,7 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
         id="portfolio"
         className="section-code-page flex-center flex-column gap-30px"
       >
-        <h1 className="f-bold f-size-2">{t("portfolioLabel")}</h1>
+        <h1 className="f-bold f-size-1d35-1d65">{t("portfolioLabel")}</h1>
         <SubtitlePortfolio label={t("subtitleThisSite")} />
         <div className="project-list-el carousel-child p-y-12px">
           <div className="project-el-show overflow-hidden shadow-light-small flex-column flex-cross-center flex-evenly relative">
@@ -111,10 +111,10 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
               {thisWebsite.tecnicalRequirements.map((requirement, index) => {
                 return (
                   <Image
-                    width={30}
-                    height={30}
+                    width={24}
+                    height={24}
                     key={`${thisWebsite.id}-${index}`}
-                    className="w-30px"
+                    className="w-24px"
                     src={getIcon(requirement)}
                     alt={requirement}
                     title={requirement}
@@ -123,7 +123,7 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
               })}
             </div>
           </div>
-          <div className="project-el-details flex-column flex-between f-size-1d2">
+          <div className="project-el-details flex-column flex-between f-size-0d95-1d05">
             <ParagraphList
               maxHeight="80"
               description={thisWebsite.description}
@@ -140,7 +140,7 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
               title={t("followCode")}
               className={`${
                 thisWebsite.linkGithub.length < 2 && "opacity-4"
-              } btn change-img-link p-4px radius-8px f-size-1d2 txt-decoration-none txt-c-inherit p-l-20px flex-cross-center gap-10px`}
+              } btn change-img-link p-4px radius-8px f-size-0d95-1d05 txt-decoration-none txt-c-inherit p-l-20px flex-cross-center gap-10px`}
             >
               <div className="img-git-30 w-30px ratio-1" />
               {t("lookCode")}

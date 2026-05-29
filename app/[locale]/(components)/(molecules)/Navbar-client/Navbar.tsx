@@ -61,8 +61,8 @@ export function Navbar({ isDirectionY = false }: { isDirectionY?: boolean }) {
                   }`}
                 >
                   <Image
-                    width={25}
-                    height={25}
+                    width={20}
+                    height={20}
                     src={section.icon}
                     alt={section.name}
                     /* className={`w-30px `} */

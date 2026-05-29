@@ -80,7 +80,7 @@ export function ModalHello({ isOpen, onClose }: ModalHelloProps) {
               alt="Lorenzo Oliva"
             />
           </div>
-          <div className="display-inline flex-center w-full f-size-1d5">
+          <div className="display-inline flex-center w-full f-size-1d05-1d25">
             <p className="txt-center f-bold">
               {displayedLetters.split("").map((letter, index) => (
                 <span key={index}>{letter}</span>

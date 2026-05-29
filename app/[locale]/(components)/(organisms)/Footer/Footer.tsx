@@ -8,7 +8,7 @@ export function Footer() {
       <SectionFooter />
       <section
         id="footer-end"
-        className="txt-center f-lighter txt-c-primary-dark"
+        className="txt-center f-lighter f-size-0d875 txt-c-primary-dark"
       >
         <p>{t("footerLabel1")}</p>
         <p>{t("footerLabel2")}</p>

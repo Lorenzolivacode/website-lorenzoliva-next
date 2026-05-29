@@ -55,8 +55,8 @@ export function SectionFooter() {
                         rel="noopener noreferrer"
                       >
                         <Image
-                          width={40}
-                          height={40}
+                          width={32}
+                          height={32}
                           src={socialNetwork.icon}
                           alt={socialNetwork.label}
                           title={socialNetwork.label}

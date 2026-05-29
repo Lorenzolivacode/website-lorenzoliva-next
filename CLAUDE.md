@@ -155,6 +155,27 @@ This project uses a **custom CSS utility-class library — there is no Tailwind*
 - Component- or page-specific styles go in a **colocated `.css`** imported at the top of the component (`import "./Navbar.css"`).
 - Inline `style={...}` is acceptable only for dynamic values that can't be a class (e.g. `objectFit` on `next/image`), not for colors or static layout.
 
+### 7.1 The utility name IS its value — never break this contract
+
+The library is **self-describing, Tailwind-style**: a class name declares its own value. This is the single most important rule of the styling system.
+
+- `f-size-1` = `font-size: 1rem`. `gap-30px` = `gap: 30px`. `w-50p` = `width: 50%`. `p-t-110px` = `padding-top: 110px`. `radius-8px` = `border-radius: 8px`.
+- **NEVER change the value behind an existing name.** Editing `.f-size-1` to `0.875rem` makes the name lie — every `f-size-1` in the JSX now silently renders the wrong size. This is forbidden.
+- **To get a new value, create a new class** whose name encodes that value, then use it in the JSX. Do not repurpose an existing one.
+
+**Name-encoding scheme** (follow it exactly when adding classes):
+- `.` in a number → `d`: `0.875rem` → `f-size-0d875`; `1.2rem` → `f-size-1d2`.
+- unit suffix: `px` → `…px` (`w-45px`), `%` → `…p` (`w-45p`), `rem` → no suffix on `f-size-*` (the rem is implied).
+- negative → `minus` or `--` per existing examples (`bottom-minus20px`, `left--20px`). Match the prefix already used in that file.
+- **Fixed value** → single number: `f-size-0d875` = `font-size: 0.875rem`.
+- **Fluid value (`clamp()`)** → encode BOTH bounds, `f-size-<min>-<max>` (first number = clamp min, second = clamp max): `f-size-0d95-1d05` = `clamp(0.95rem, …, 1.05rem)`. Only the middle "preferred" term (e.g. `0.9rem + 0.25vw`) is left out of the name — encoding it would be unreadable; the name stays honest about the *bounds*, which is what matters when composing a layout.
+
+**Exceptions (these legitimately don't follow name=value):**
+- **Component classes** (`.btn`, `.btn-hamb`, `.img-container`, `.section-code-page`, …) describe a *thing*, not a value — their dimensions can change freely.
+- **Semantic CSS variables** (`--header-h`, `--header-clearance` in `globals.css`) describe a *role* — change the variable to rescale every consumer at once. Prefer these for cross-cutting dimensions.
+
+**When unsure about the right name for a new utility (encoding, file, or whether one already exists): STOP and ask the user** rather than guessing. Before using any utility class, confirm it actually exists in `(css-library-utilities)/` — an invented class fails silently (no error, just wrong rendering).
+
 ---
 
 ## 8. Static Export Constraints — do not break the build
@@ -224,6 +245,8 @@ Always:
 | Hardcoded user-facing strings (bypassing next-intl)           |
 | A translation key in one locale file but not the other        |
 | Tailwind classes or raw hex/rgb colors in components          |
+| Changing the value behind an existing utility name (breaks name=value, §7.1) |
+| Using a utility class without confirming it exists (silent failure) |
 | Colors not sourced from `globals.css` CSS variables           |
 | `next/link` / `next/navigation` for locale-scoped in-app nav  |
 | Business logic or data fetching inside UI components          |

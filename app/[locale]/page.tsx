@@ -27,8 +27,8 @@ export default function Home({ params: { locale } }: { params: { locale: string 
         <h1 className="f-bold">{t("myName").toUpperCase()}</h1>
         <h2 className="f-bold">{t("webDev")}</h2>
         <h2 className="f-bold">{t("artist")}</h2>
-        <p className="f-size-1 w-full">{t("presentationTxt1")}</p>
-        <p className="f-size-1 w-full">{t("presentationTxt2")}</p>
+        <p className="f-size-0d875 w-full">{t("presentationTxt1")}</p>
+        <p className="f-size-0d875 w-full">{t("presentationTxt2")}</p>
         <div className="w-full flex mt-30px btn-container">
           <Link href={"/dev"} className={`${classNameBaseBtn} radius-btn-code`}>
             {tLay("nameCode")}

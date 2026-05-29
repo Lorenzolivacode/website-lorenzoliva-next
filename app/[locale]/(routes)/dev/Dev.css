@@ -8,9 +8,9 @@
   border-radius: 20px;
   box-shadow: 0 0 3px 3px var(--color-primary-light);
   padding: 20px;
-  padding-left: 90px;
-  padding-right: 90px;
-  padding-bottom: 60px;
+  padding-left: 48px;
+  padding-right: 48px;
+  padding-bottom: 48px;
 }
 
 .skills-container {
@@ -26,8 +26,8 @@
   gap: 10px;
   transition: 0.4s;
 
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
 
 .img-skill-container:hover {
@@ -71,8 +71,8 @@
 
 @media screen and (max-width: 1440px) {
   .section-code-page {
-    padding-left: 45px;
-    padding-right: 45px;
+    padding-left: 36px;
+    padding-right: 36px;
   }
 }
 

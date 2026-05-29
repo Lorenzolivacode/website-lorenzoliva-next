@@ -19,8 +19,8 @@ function ButtonDocs() {
         onClick={handleDocsMenu}
       >
         <Image
-          width={30}
-          height={30}
+          width={24}
+          height={24}
           src={"/assets/nav-icon/icon-docs.png"}
           alt="Documents"
         />

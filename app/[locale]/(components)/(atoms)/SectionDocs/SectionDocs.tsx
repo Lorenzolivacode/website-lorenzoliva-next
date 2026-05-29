@@ -18,7 +18,7 @@ export function SectionDocs({
   return (
     <section className="flex-column border-b-1-p-m-l p-10px">
       <div className="flex-between gap-10px flex-cross-center">
-        <p className="f-bold f-size-1 txt-star">
+        <p className="f-bold f-size-0d875 txt-star">
           {t("docsLabel")} {section}
         </p>
         <button
