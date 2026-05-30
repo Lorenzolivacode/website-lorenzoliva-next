@@ -1,0 +1,416 @@
+/* Lightbox opera — vetro scuro semi-trasparente con blur, layout a due colonne
+   su desktop. Classi COMPONENTE (eccezione legittima a nome=valore, CLAUDE §7.1).
+   Colori solo da variabili CSS di globals.css. */
+
+/* overlay: scurisce e sfoca ciò che sta dietro (più trasparente del pannello).
+   Il padding (margine attorno alla modale) è gestito qui, non con utility, per
+   poterlo ridurre su mobile senza conflitti di specificità. */
+.artwork-modal-overlay {
+  z-index: 1000;
+  padding: 20px;
+  background-color: var(--color-primary-very-dark-0d5);
+  backdrop-filter: blur(8px);
+  animation: artwork-overlay-in 0.25s ease both;
+}
+
+@keyframes artwork-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* pannello: vetro scuro semi-trasparente */
+.artwork-modal {
+  width: 100%;
+  max-width: 1100px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: var(--color-primary-very-dark-0d8);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-primary-medium-light-0d5);
+  box-shadow: 0 20px 60px var(--color-primary-very-dark-0d8);
+  animation: artwork-modal-in 0.3s ease both;
+}
+
+/* transizione di apertura: scale + opacity (rispettando reduce-motion) */
+@keyframes artwork-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .artwork-modal-overlay,
+  .artwork-modal {
+    animation: none;
+  }
+}
+
+/* pulsante di chiusura in alto a destra, sopra ogni cosa */
+.artwork-modal-close {
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+}
+
+/* --- corpo a due colonne (desktop): opera | dettagli --- */
+/* flex:1 + min-height:0 → il corpo occupa l'altezza disponibile e può ridursi,
+   così la striscia in fondo resta sempre visibile senza scroll della modale */
+.artwork-modal-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* --- colonna opera --- */
+.artwork-stage {
+  gap: 8px;
+  min-height: 0;
+}
+
+/* "cornice": passepartout scuro + bordo sottile + ombra per staccare l'opera */
+.artwork-frame {
+  display: flex;
+  min-height: 0;
+  max-height: 100%;
+  padding: 12px;
+  background-color: var(--color-primary-very-dark);
+  border: 1px solid var(--color-primary-medium);
+  border-radius: 4px;
+  box-shadow: 0 8px 30px var(--color-primary-very-dark-0d6);
+}
+
+/* opera più piccola (56vh) così opera + dettagli + striscia stanno in verticale */
+.artwork-modal-img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 56vh;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+/* "occhio" cliccabile in basso a sinistra dell'opera → apre lo schermo intero */
+.artwork-zoom-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  color: var(--color-secondary-light);
+  background-color: var(--color-primary-very-dark-0d6);
+  border: 1px solid var(--color-primary-medium);
+  opacity: 0.85;
+  transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.artwork-zoom-hint:hover,
+.artwork-zoom-hint:focus-visible {
+  opacity: 1;
+  color: var(--color-primary-very-dark);
+  background-color: var(--color-secondary-saturated-medium);
+}
+
+/* contatore "n / totale" in sovrimpressione sull'opera */
+.artwork-counter {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--color-secondary-light);
+  background-color: var(--color-primary-very-dark-0d8);
+}
+
+/* frecce di navigazione opera: vetro scuro, hover dorato */
+.artwork-nav-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--color-secondary-light);
+  background-color: var(--color-primary-very-dark-0d6);
+  border: 1px solid var(--color-primary-medium);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.artwork-nav-btn:hover {
+  color: var(--color-primary-very-dark);
+  background-color: var(--color-secondary-saturated-medium);
+}
+
+/* --- colonna dettagli --- */
+/* la colonna è stretchata all'altezza della riga (= altezza opera); flex column
+   con min-height:0 perché la descrizione possa riempire e scrollare al suo interno */
+.artwork-meta {
+  min-height: 0;
+}
+
+.artwork-title {
+  font-size: 1.5rem;
+  color: var(--color-secondary-light);
+}
+
+/* dati tecnici come "pill" con bordo dorato su fondo scuro */
+.artwork-pills {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.artwork-pill {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  color: var(--color-secondary-saturated-medium);
+  background-color: var(--color-primary-very-dark);
+  border: 1px solid var(--color-secondary-saturated-dark);
+}
+
+/* descrizione: il blocco riempie l'altezza rimasta della colonna (flex:1).
+   DESKTOP: il toggle è solo un titolo (icona nascosta), la descrizione è
+   sempre visibile e scrolla internamente solo se più lunga dello spazio. */
+.artwork-desc {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--color-primary-medium);
+  padding-top: 12px;
+}
+
+.artwork-desc-toggle {
+  flex-shrink: 0;
+  text-align: left;
+  color: var(--color-secondary-saturated-medium);
+  cursor: default; /* su desktop non è un vero accordion */
+}
+
+/* l'icona +/- serve solo all'accordion mobile */
+.artwork-desc-icon {
+  display: none;
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+/* contenitore che prende tutta l'altezza disponibile; il testo è in absolute
+   così non gonfia il layout: lo scroll compare SOLO se il testo eccede il box */
+.artwork-desc-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.artwork-desc-body {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  text-align: left;
+  line-height: 1.8;
+  color: var(--color-primary-light);
+  padding-right: 8px;
+}
+
+/* --- striscia di anteprime: paginata con frecce, NESSUNO scroll --- */
+.artwork-strip-wrap {
+  flex-shrink: 0;
+  width: 100%;
+  justify-content: center;
+  border-top: 1px solid var(--color-primary-medium);
+  padding-top: 12px;
+}
+
+.artwork-strip {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+/* frecce della striscia: discrete, disattivate ai bordi */
+.artwork-strip-nav {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--color-secondary-light);
+  background-color: var(--color-primary-very-dark-0d6);
+  border: 1px solid var(--color-primary-medium);
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.artwork-strip-nav:hover:not(:disabled) {
+  color: var(--color-primary-very-dark);
+  background-color: var(--color-secondary-saturated-medium);
+}
+
+.artwork-strip-nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.artwork-strip-item {
+  display: block;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  opacity: 0.5;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.artwork-strip-item:hover,
+.artwork-strip-item:focus-visible {
+  opacity: 1;
+}
+
+.artwork-strip-item-active {
+  opacity: 1;
+  border-color: var(--color-secondary-saturated-medium);
+}
+
+.artwork-strip-img {
+  object-fit: cover;
+}
+
+/* --- seconda modale: opera sola a schermo intero (sopra la lightbox) --- */
+.artwork-fs-overlay {
+  z-index: 1100; /* sopra la lightbox (1000) */
+  padding: 24px;
+  background-color: var(--color-primary-very-dark-0d8);
+  backdrop-filter: blur(10px);
+  animation: artwork-overlay-in 0.2s ease both;
+}
+
+.artwork-fs {
+  width: 100%;
+  height: 100%;
+}
+
+.artwork-fs-img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 2px;
+  box-shadow: 0 10px 50px var(--color-primary-very-dark-0d8);
+}
+
+.artwork-fs-close {
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .artwork-fs-overlay {
+    animation: none;
+  }
+}
+
+/* --- responsive: sotto i 768px --- colonna singola, TUTTA la modale scrolla in Y;
+   niente scroll interni; descrizione come accordion; carosello sempre sotto. */
+@media (max-width: 768px) {
+  /* overlay quasi senza margini: la modale va praticamente a schermo intero */
+  .artwork-modal-overlay {
+    padding: 8px;
+  }
+
+  .artwork-modal {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    padding: 16px;
+    overflow-y: auto; /* scrolla l'intera modale */
+  }
+
+  /* il corpo prende altezza naturale (niente flex:1) così il contenuto spinge
+     in basso il carosello invece di sovrapporsi */
+  .artwork-modal-body {
+    flex: none;
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .artwork-stage {
+    min-height: auto;
+  }
+
+  .artwork-frame {
+    max-height: none;
+  }
+
+  .artwork-nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.6rem;
+  }
+
+  .artwork-modal-img {
+    max-height: 50vh;
+  }
+
+  .artwork-pills {
+    justify-content: center;
+  }
+
+  /* accordion: il toggle diventa cliccabile e mostra l'icona +/- */
+  .artwork-desc {
+    flex: none;
+  }
+
+  .artwork-desc-toggle {
+    cursor: pointer;
+  }
+
+  .artwork-desc-icon {
+    display: inline;
+  }
+
+  /* chiusa di default: il box è nascosto finché non si apre */
+  .artwork-desc-scroll {
+    flex: none;
+    min-height: auto;
+    display: none;
+  }
+
+  .artwork-desc-scroll.artwork-desc-open {
+    display: block;
+  }
+
+  /* aperta: testo a flusso naturale (niente absolute, niente scroll interno) */
+  .artwork-desc-body {
+    position: static;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .artwork-strip {
+    overflow: hidden;
+  }
+}

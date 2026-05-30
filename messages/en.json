@@ -60,9 +60,18 @@
   },
 
   "ArtSection": {
-    "maintenancePageLabel": "This page is temporarily under maintenance",
-    "checkOutSocialLabel": "Check out my social networks",
-    "imageLabel": "Image"
+    "galleryTitle": "Works",
+    "galleryEyebrow": "Painting · mixed media · 2017–2021",
+    "galleryLead": "My work centres on painting — mainly oil and mixed media — through which I explore the human soul, nature, time and existence, with an evocative use of colour and light.",
+    "galleryStatement": "In my view, art should not stop at mere representation but portray the essence of its creator, reconciling ethics with aesthetics. Drawing on all my knowledge, through painting I lay out my thought: not concise stories, but universal concepts rooted in my vision of human life. My aim is to look towards the future of art with works turned to the contemporary, while following in the footsteps of the past. Every work is like a dream through which the artist reveals himself.",
+    "openArtworkLabel": "Open the artwork:",
+    "descriptionLabel": "Description",
+    "prevLabel": "Previous artwork",
+    "nextLabel": "Next artwork",
+    "stripPrevLabel": "Previous thumbnails",
+    "stripNextLabel": "Next thumbnails",
+    "viewFullscreenLabel": "View the artwork fullscreen",
+    "viewFullPortfolioLabel": "View the full art portfolio (PDF)"
   },
 
   "DevSection": {

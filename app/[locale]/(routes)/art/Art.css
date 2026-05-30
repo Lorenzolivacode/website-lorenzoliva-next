@@ -1,0 +1,78 @@
+/* Stili di pagina della sezione Art. Classi COMPONENTE/pagina (eccezione a
+   nome=valore, CLAUDE §7.1). Colori solo da variabili CSS di globals.css. */
+
+/* strato di sfondo "galleria bianca" a tutto schermo, dietro al contenuto.
+   z-index -3: sopra il fondo scuro del body, sotto l'immagine decorativa
+   .img-bg (z-index -2) e sotto il contenuto della pagina. */
+.art-bg-fixed {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background-color: var(--color-secondary-very-light);
+}
+
+.art-page {
+  width: 100%;
+  max-width: 1200px;
+  padding-bottom: 50px;
+}
+
+/* --- intro --- */
+.art-intro {
+  max-width: 720px;
+  margin-bottom: 6px;
+}
+
+/* occhiello sopra il titolo: piccolo, maiuscoletto spaziato, in oro */
+.art-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-secondary-saturated-dark);
+}
+
+.art-page-title {
+  font-size: 1.8rem;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+/* filetto decorativo dorato sotto il titolo */
+.art-page-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 3px;
+  border-radius: 3px;
+  background-color: var(--color-secondary-saturated-medium);
+}
+
+.art-lead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-primary-medium);
+}
+
+/* artist statement: descrizione personale, in corsivo, con filetto laterale dorato */
+.art-statement {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 4px 0 4px 18px;
+  border-left: 3px solid var(--color-secondary-saturated-medium);
+  font-style: italic;
+  line-height: 1.8;
+  text-align: left;
+  color: var(--color-primary-medium);
+}
+
+/* modifier del componente .btn per il link al PDF del portfolio: la label è
+   lunga, quindi tolgo l'altezza fissa di .btn e la lascio adattare al testo,
+   togliendo la sottolineatura di default dell'<a>. */
+.art-pdf-link {
+  height: auto;
+  padding: 10px 18px;
+  text-decoration: none;
+}

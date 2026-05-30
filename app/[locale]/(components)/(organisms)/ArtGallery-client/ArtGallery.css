@@ -1,0 +1,97 @@
+/* Griglia opere: classi COMPONENTE (eccezione legittima a nome=valore, CLAUDE §7.1).
+   Colori solo da variabili CSS di globals.css. Tema chiaro "galleria bianca". */
+
+.art-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* reveal-on-scroll: la cella entra con un leggero fade+slide quando è in viewport.
+   Lo stato iniziale "nascosto" è applicato solo se JS aggiunge poi la classe
+   -visible; senza JS le celle restano comunque visibili (vedi componente). */
+.art-gallery-cell {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.art-gallery-cell-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .art-gallery-cell {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.art-gallery-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--color-secondary-dark);
+  background-color: var(--color-secondary-very-light);
+}
+
+.art-gallery-img {
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.art-gallery-item:hover .art-gallery-img,
+.art-gallery-item:focus-visible .art-gallery-img {
+  transform: scale(1.06);
+}
+
+/* didascalia (titolo) che compare in overlay su hover/focus della cella */
+.art-gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 12px;
+  color: var(--color-secondary-light);
+  background-color: var(--color-primary-very-dark-0d6);
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.art-gallery-item:hover .art-gallery-caption,
+.art-gallery-item:focus-visible .art-gallery-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .art-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .art-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /* su touch non c'è hover: la didascalia resta sempre leggibile */
+  .art-gallery-caption {
+    opacity: 1;
+    transform: translateY(0);
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+}

@@ -1,11 +1,15 @@
 import React from "react";
 
 import { socialNetwork } from "./../../(data)/socialNetwork";
+import { artworks } from "./../../(data)/artworks";
 
 import { useTranslations } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import { buildMetadata } from "../../seo";
+import ArtGallery from "../../(components)/(organisms)/ArtGallery-client/ArtGallery";
+
+import "./Art.css";
 
 // og:url + canonical propri della pagina /art
 export async function generateMetadata({
@@ -19,48 +23,59 @@ export async function generateMetadata({
 function ArtPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
   const t = useTranslations("ArtSection");
-  const tHome = useTranslations("Home");
+
   return (
-    <div className="txt-c-primary-dark txt-center">
+    <section className="art-page flex-column flex-cross-center gap-30px p-20px txt-c-primary-dark txt-center">
+      {/* sfondo decorativo della sezione (immagine fissa, opacità ridotta) */}
       <div className="img-bg">
         <Image
           fill
           style={{ objectFit: "contain" }}
-          sizes="(max-width: 768px) 100vw"
+          sizes="(max-width: 768px) 100vw, 30vw"
           src="/assets/artPage/img-bg-workart.png"
           alt=""
         />
       </div>
-      <h2>{t("maintenancePageLabel")}</h2>
-      <h3>{t("checkOutSocialLabel")}</h3>
+
+      {/* intro: occhiello + titolo con filetto gold + estratto dall'artist statement.
+          NB: uso <div>, non <header> — esiste una regola globale header{height:--header-h}
+          (Header.css) che schiaccerebbe questo blocco e lo farebbe sovrapporre alla gallery. */}
+      <div className="art-intro flex-column flex-cross-center gap-10px">
+        <p className="art-eyebrow">{t("galleryEyebrow")}</p>
+        <h1 className="art-page-title f-bold">{t("galleryTitle")}</h1>
+        <p className="art-lead">{t("galleryLead")}</p>
+      </div>
+
+      {/* descrizione personale (artist statement) sopra la sezione delle opere */}
+      <p className="art-statement">{t("galleryStatement")}</p>
+
+      <ArtGallery artworks={artworks} />
+
+      <a
+        className="btn flex-center gap-10px art-pdf-link"
+        href="/doc/art-doc/Portfolio-artistico-Oliva-Lorenzo.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {t("viewFullPortfolioLabel")}
+      </a>
+
       <ul className="flex-center gap-20px p-10px">
-        {socialNetwork.map((socialNetwork) => {
-          return (
-            <li key={socialNetwork.id}>
-              <a
-                href={socialNetwork.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  width={40}
-                  height={40}
-                  src={socialNetwork.icon}
-                  alt={socialNetwork.label}
-                  title={socialNetwork.label}
-                />
-              </a>
-            </li>
-          );
-        })}
+        {socialNetwork.map((social) => (
+          <li key={social.id}>
+            <a href={social.url} target="_blank" rel="noopener noreferrer">
+              <Image
+                width={40}
+                height={40}
+                src={social.icon}
+                alt={social.label}
+                title={social.label}
+              />
+            </a>
+          </li>
+        ))}
       </ul>
-      <Image
-        width={80}
-        height={80}
-        src="/LO-img-3.3.png"
-        alt={`${t("imageLabel")}${tHome("myName")}`}
-      />
-    </div>
+    </section>
   );
 }
 

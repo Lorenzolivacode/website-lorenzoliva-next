@@ -105,6 +105,7 @@ CLAUDE.md (in particolare §5 data layer, §6 i18n, §7.1 convenzione CSS nome=v
 — REGOLA CRITICA, §8 static export) e Architecture.md.
 
 Vincoli chiave già decisi:
+
 - Opzione B (CONFERMATA): gallery minimale con 5-8 immagini rappresentative estratte
   dal PDF `public/doc/art-doc/Portfolio-artistico-Oliva-Lorenzo.pdf` + i social già
   presenti. La sezione Art resta SECONDARIA rispetto a Dev: curata e finita, ma senza
@@ -130,7 +131,9 @@ toccare la logica SEO). `art/layout.tsx` è solo un wrapper CSS (`art-bg` bianco
 `checkOutSocialLabel`, `imageLabel`.
 
 Il punto 3 (opzione B) include:
+
 - Estrarre 5-8 immagini dal PDF e salvarle ottimizzate (WebP) in `public/assets/artPage/`.
+  > **NB** dimmi se è preferibile che io stesso carichi le immagini in `public/assets/artPage/`, non è un problema.
 - Sostituire il blocco "in manutenzione" con una gallery responsive (griglia/masonry)
   coerente con lo stile del sito; usare `next/image` con `width`/`height` o `fill`+`sizes`
   (immagini `unoptimized`, §8).
@@ -151,3 +154,24 @@ Verifica il tutto con un build statico alla fine (`npm run build`, type-check ed
 puliti, e controllo sull'export `out/`).
 
 ---
+
+1 of 1 error
+Next.js (14.2.13) is outdated (learn more)
+Server Error
+Error: Cannot find module './vendor-chunks/@formatjs.js'
+Require stack:
+
+- C:\Personal\Doc\Lorenzo\Codec\Project\project-website-lorenzoliva\website-lorenzoliva-next\.next\server\webpack-runtime.js
+- C:\Personal\Doc\Lorenzo\Codec\Project\project-website-lorenzoliva\website-lorenzoliva-next\.next\server\app\[locale]\(routes)\art\page.js
+- C:\Personal\Doc\Lorenzo\Codec\Project\project-website-lorenzoliva\website-lorenzoliva-next\node_modules\next\dist\server\require.js
+- C:\Personal\Doc\Lorenzo\Codec\Project\project-website-lorenzoliva\website-lorenzoliva-next\node_modules\next\dist\server\load-components.js
+- C:\Personal\Doc\Lorenzo\Codec\Project\project-website-lorenzoliva\website-lorenzoliva-next\node_modules\next\dist\build\utils.js
+- C:\Personal\Doc\Lorenzo\Codec\Project\project-website-lorenzoliva\website-lorenzoliva-next\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Personal\Doc\Lorenzo\Codec\Project\project-website-lorenzoliva\website-lorenzoliva-next\node_modules\next\dist\compiled\jest-worker\processChild.js
+
+This error happened while generating the page. Any console logs will be displayed in the terminal window.
+Call Stack
+Next.js
+TracingChannel.traceSync
+node:diagnostics_channel (328:14)
+Next.js

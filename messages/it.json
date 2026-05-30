@@ -60,9 +60,18 @@
   },
 
   "ArtSection": {
-    "maintenancePageLabel": "Questa pagina è momentaneamente in manutenzione",
-    "checkOutSocialLabel": "dà un'occhiata ai miei social network",
-    "imageLabel": "Immagine"
+    "galleryTitle": "Opere",
+    "galleryEyebrow": "Pittura · tecniche miste · 2017–2021",
+    "galleryLead": "La mia ricerca si concentra sulla pittura — prevalentemente olio e tecniche miste — attraverso cui indago l'animo umano, la natura, il tempo e l'esistenza, con un uso evocativo del colore e della luce.",
+    "galleryStatement": "Secondo la mia concezione, l'arte non deve fermarsi a una mera rappresentazione, ma raffigurare l'essenza del proprio creatore, conciliando l'etica con l'estetica. Traendo spunto da ogni mia conoscenza, espongo tramite la pittura il mio pensiero: non storie concise, ma concetti universali fondati sulla mia visione della vita umana. Il mio obiettivo è guardare al futuro dell'arte con opere rivolte alla contemporaneità, pur ricalcando le orme del passato. Ogni opera è come un sogno attraverso cui l'artista si rivela.",
+    "openArtworkLabel": "Apri l'opera:",
+    "descriptionLabel": "Descrizione",
+    "prevLabel": "Opera precedente",
+    "nextLabel": "Opera successiva",
+    "stripPrevLabel": "Anteprime precedenti",
+    "stripNextLabel": "Anteprime successive",
+    "viewFullscreenLabel": "Vedi l'opera a schermo intero",
+    "viewFullPortfolioLabel": "Guarda il portfolio artistico completo (PDF)"
   },
 
   "DevSection": {
