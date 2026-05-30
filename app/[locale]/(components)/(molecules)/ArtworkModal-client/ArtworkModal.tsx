@@ -101,16 +101,21 @@ function ArtworkModal({
             <span aria-hidden="true">&#8249;</span>
           </button>
 
-          <div className="artwork-frame relative flex">
-            <Image
-              key={artwork.id}
-              src={artwork.full}
-              width={artwork.width}
-              height={artwork.height}
-              sizes="(max-width: 768px) 90vw, 50vw"
-              alt={artwork.title}
-              className="artwork-modal-img"
-            />
+          <div className="artwork-frame relative flex-center">
+            {/* box con l'aspect-ratio dell'opera: riserva lo spazio così la
+                cornice non collassa mentre la nuova immagine carica */}
+            <div
+              className="artwork-img-box relative"
+              style={{ aspectRatio: `${artwork.width} / ${artwork.height}` }}
+            >
+              <Image
+                fill
+                src={artwork.full}
+                sizes="(max-width: 768px) 90vw, 50vw"
+                alt={artwork.title}
+                className="artwork-modal-img"
+              />
+            </div>
             {/* solo l'occhio è cliccabile: apre la vista a schermo intero */}
             <button
               type="button"

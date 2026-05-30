@@ -91,12 +91,17 @@
   box-shadow: 0 8px 30px var(--color-primary-very-dark-0d6);
 }
 
-/* opera più piccola (56vh) così opera + dettagli + striscia stanno in verticale */
-.artwork-modal-img {
-  width: auto;
+/* box che riserva lo spazio (aspect-ratio dell'opera, via inline style):
+   altezza guidata da 56vh, larghezza dall'aspect-ratio, clampata alla colonna.
+   Così la cornice non collassa durante il caricamento della nuova immagine. */
+.artwork-img-box {
+  height: 56vh;
   max-width: 100%;
-  height: auto;
   max-height: 56vh;
+}
+
+/* opera: riempie il box (fill) mantenendo le proporzioni */
+.artwork-modal-img {
   object-fit: contain;
   border-radius: 2px;
 }
@@ -371,7 +376,8 @@
     font-size: 1.6rem;
   }
 
-  .artwork-modal-img {
+  .artwork-img-box {
+    height: 50vh;
     max-height: 50vh;
   }
 
