@@ -10,7 +10,13 @@
   padding: 20px;
   background-color: var(--color-primary-very-dark-0d5);
   backdrop-filter: blur(8px);
-  animation: artwork-overlay-in 0.25s ease both;
+  animation: artwork-overlay-in 0.4s ease both;
+}
+
+/* uscita: il base Modal mette data-closing durante l'animazione di chiusura.
+   Durata = EXIT_MS in Modal.tsx (450ms): tenerle allineate. */
+.artwork-modal-overlay[data-closing] {
+  animation: artwork-overlay-out 0.45s ease both;
 }
 
 @keyframes artwork-overlay-in {
@@ -19,6 +25,15 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes artwork-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
@@ -32,7 +47,11 @@
   backdrop-filter: blur(12px);
   border: 1px solid var(--color-primary-medium-light-0d5);
   box-shadow: 0 20px 60px var(--color-primary-very-dark-0d8);
-  animation: artwork-modal-in 0.3s ease both;
+  animation: artwork-modal-in 0.4s ease both;
+}
+
+.artwork-modal[data-closing] {
+  animation: artwork-modal-out 0.45s ease both;
 }
 
 /* transizione di apertura: scale + opacity (rispettando reduce-motion) */
@@ -47,9 +66,24 @@
   }
 }
 
+@keyframes artwork-modal-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .artwork-modal-overlay,
-  .artwork-modal {
+  .artwork-modal,
+  .artwork-modal-overlay[data-closing],
+  .artwork-modal[data-closing],
+  .artwork-fs-overlay,
+  .artwork-fs-overlay[data-closing] {
     animation: none;
   }
 }
@@ -306,7 +340,11 @@
   padding: 24px;
   background-color: var(--color-primary-very-dark-0d8);
   backdrop-filter: blur(10px);
-  animation: artwork-overlay-in 0.2s ease both;
+  animation: artwork-overlay-in 0.4s ease both;
+}
+
+.artwork-fs-overlay[data-closing] {
+  animation: artwork-overlay-out 0.45s ease both;
 }
 
 .artwork-fs {
@@ -330,11 +368,6 @@
   z-index: 2;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .artwork-fs-overlay {
-    animation: none;
-  }
-}
 
 /* --- responsive: sotto i 768px --- colonna singola, TUTTA la modale scrolla in Y;
    niente scroll interni; descrizione come accordion; carosello sempre sotto. */
@@ -398,21 +431,24 @@
     display: inline;
   }
 
-  /* chiusa di default: il box è nascosto finché non si apre */
+  /* accordion animato: grid-rows 0fr (chiuso) → 1fr (aperto), transizione fluida.
+     Il figlio (.artwork-desc-body) ha overflow:hidden + min-height:0 per collassare. */
   .artwork-desc-scroll {
     flex: none;
-    min-height: auto;
-    display: none;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
   }
 
   .artwork-desc-scroll.artwork-desc-open {
-    display: block;
+    grid-template-rows: 1fr;
   }
 
-  /* aperta: testo a flusso naturale (niente absolute, niente scroll interno) */
+  /* testo a flusso naturale; overflow:hidden necessario al collasso del grid */
   .artwork-desc-body {
     position: static;
-    overflow: visible;
+    overflow: hidden;
+    min-height: 0;
     padding-right: 0;
   }
 

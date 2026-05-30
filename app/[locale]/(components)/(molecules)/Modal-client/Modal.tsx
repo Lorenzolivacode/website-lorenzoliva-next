@@ -1,16 +1,26 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-// Modale base riusabile: incapsula createPortal, overlay, focus-trap,
-// chiusura con Esc/overlay e ripristino del focus. È behavior-only: lo stile
-// di overlay e dialog arriva dal consumer via props (overlayClassName/className),
-// così ogni variante (lightbox, centrata, laterale) resta libera nel suo CSS.
-// Le singole modali del progetto possono migrare qui in modo retroattivo.
+// durata dell'animazione di uscita (deve combaciare con i keyframes *-out del CSS)
+const EXIT_MS = 450;
+
+// API passata ai figli quando `children` è una funzione: permette di chiudere
+// la modale con l'animazione di uscita (es. dal bottone X) invece di smontarla secca.
+export interface ModalApi {
+  requestClose: () => void;
+}
+
+// Modale base riusabile: incapsula createPortal, overlay, focus-trap, chiusura
+// con Esc/overlay, ripristino del focus e animazione di entrata/uscita.
+// È behavior-only: lo stile di overlay e dialog arriva dal consumer via props.
+// Lo stato di chiusura è esposto col data-attribute `data-closing` su overlay e
+// dialog → il CSS del consumer ci attacca i keyframes di uscita.
 interface ModalProps {
   onClose: () => void;
-  children: React.ReactNode;
+  // ReactNode classico, oppure una funzione che riceve { requestClose }
+  children: React.ReactNode | ((api: ModalApi) => React.ReactNode);
   // dove montare il portal: il body (default) oppure l'<header> (es. menu mobile)
   portalTarget?: "body" | "header";
   closeOnOverlayClick?: boolean;
@@ -32,16 +42,27 @@ function Modal({
   className = "",
 }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const [closing, setClosing] = useState(false);
+  const closingRef = useRef(false);
+
+  // avvia la fase di uscita (anima) e propaga onClose a fine animazione.
+  // protetto contro doppie chiamate (overlay + Esc + X insieme).
+  const requestClose = useCallback(() => {
+    if (closingRef.current) return;
+    closingRef.current = true;
+    setClosing(true);
+    window.setTimeout(onClose, EXIT_MS);
+  }, [onClose]);
 
   // chiusura con Esc (opzionale)
   useEffect(() => {
     if (!closeOnEsc) return;
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") requestClose();
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [closeOnEsc, onClose]);
+  }, [closeOnEsc, requestClose]);
 
   // focus trap: porto il focus nel dialog, intrappolo il Tab, lo ripristino alla chiusura
   useEffect(() => {
@@ -87,10 +108,14 @@ function Modal({
       : document.body;
   if (!target) return null;
 
+  const content =
+    typeof children === "function" ? children({ requestClose }) : children;
+
   return createPortal(
     <div
       className={overlayClassName}
-      onClick={closeOnOverlayClick ? onClose : undefined}
+      data-closing={closing || undefined}
+      onClick={closeOnOverlayClick ? requestClose : undefined}
     >
       <div
         ref={dialogRef}
@@ -98,10 +123,11 @@ function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={ariaLabel}
+        data-closing={closing || undefined}
         onClick={(e) => e.stopPropagation()}
         className={className}
       >
-        {children}
+        {content}
       </div>
     </div>,
     target
