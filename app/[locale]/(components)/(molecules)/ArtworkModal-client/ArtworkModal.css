@@ -399,7 +399,12 @@
     min-height: auto;
   }
 
+  /* la cornice riempie lo spazio fra le due frecce (flex:1) e può restringersi
+     (min-width:0): così la sua larghezza è definita dalla colonna — non
+     dall'opera — e l'opera (width:100%) non può più sforare → niente scroll X */
   .artwork-frame {
+    flex: 1 1 0;
+    min-width: 0;
     max-height: none;
   }
 
@@ -409,9 +414,14 @@
     font-size: 1.6rem;
   }
 
+  /* su mobile l'opera è dimensionata per LARGHEZZA (non più altezza fissa): così
+     non può mai eccedere la colonna — frecce comprese — e si rimpicciolisce sui
+     telefoni stretti. L'altezza segue l'aspect-ratio, con un tetto per le opere
+     molto slanciate (oltre il quale next/image le contiene comunque). */
   .artwork-img-box {
-    height: 50vh;
-    max-height: 50vh;
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
   }
 
   .artwork-pills {

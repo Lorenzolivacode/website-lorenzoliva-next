@@ -133,28 +133,42 @@ Una sessione di ridimensionamento UI è stata completata. **Prima di toccare CSS
 
 ---
 
-### 3. Pagina Art incompleta
+### 3. Pagina Art incompleta ✅ FATTO (opzione B, verificato sul codice 2026-05-31)
 
-**Stato attuale:** `app/[locale]/(routes)/art/page.tsx` mostra solo "Questa pagina e' momentaneamente in manutenzione" + link social. Sezione intera vuota su un portfolio personale.
+**Stato attuale (prima):** `app/[locale]/(routes)/art/page.tsx` mostrava solo "Questa pagina e' momentaneamente in manutenzione" + link social. Sezione intera vuota su un portfolio personale.
 
 **Opzioni:**
 
 - [ ] ~~**A (minima):** rimuovere route `/art` e bottone dalla home~~ — scartata
-- [x] **B (rapida): SCELTA** — gallery minimale con 5-8 immagini estratte dal PDF portfolio artistico + link social
+- [x] **B (rapida): SCELTA E REALIZZATA** — gallery delle opere + lightbox + social. Realizzata oltre la stima iniziale (17 opere invece di 5-8, con lightbox completa anziché semplice griglia).
 - [ ] ~~**C (completa):** sezione con gallery, categorie opere, link social~~ — eventuale evoluzione futura
 
-**Implementazione opzione B:**
+**Implementazione opzione B — checklist:**
 
-- [ ] Estrarre 5-8 immagini rappresentative dal PDF `Portfolio-artistico-Oliva-Lorenzo.pdf` e salvarle ottimizzate (WebP) in `public/assets/artPage/`
-- [ ] Sostituire il blocco "in manutenzione" con una gallery responsive (griglia/masonry) coerente con lo stile del sito
-- [ ] Mantenere i social (`socialNetwork.tsx`) e il link al PDF completo (già in `ModalDocs`)
-- [ ] Aggiungere le chiavi i18n in `ArtSection` (titolo sezione, eventuali didascalie) e rimuovere `maintenancePageLabel` dall'uso
-- [ ] Coerente con focus "lavoro dev": la gallery sblocca la sezione (non più "in manutenzione", che dà cattiva impressione) ma resta secondaria rispetto a Dev — basta che sia curata e finita, senza investirci quanto sul portfolio dev
-- [ ] Decisione tema: definire se la gallery resta su sfondo chiaro ("galleria bianca") o si uniforma al dark del resto (vedi punto 12.1)
+- [x] Estrarre immagini dal PDF `Portfolio-artistico-Oliva-Lorenzo.pdf` e salvarle ottimizzate (WebP). **Fatto: 17 opere** (non 5-8), ciascuna in coppia `thumb` + `full` (34 file) in `public/assets/artPage/gallery/`.
+- [x] Sostituire il blocco "in manutenzione" con una gallery responsive coerente con lo stile del sito → griglia `ArtGallery` con reveal progressivo delle celle.
+- [x] Mantenere i social (`socialNetwork.tsx`) e il link al PDF completo → entrambi presenti in fondo alla pagina (`art-pdf-link` apre il PDF; lista social invariata).
+- [x] Aggiungere le chiavi i18n in `ArtSection` e rimuovere `maintenancePageLabel` dall'uso → **12 chiavi nuove** IT+EN allineate; `maintenancePageLabel` **non più referenziato** (verificato: nessun uso in `app/` né `messages/`).
+- [x] Coerente con focus "lavoro dev": sezione sbloccata, curata ma secondaria a Dev.
+- [x] Decisione tema (punto 12.1) → **risolta: "galleria bianca"** (identità voluta). Strato fisso `.art-bg-fixed` (`--color-secondary-very-light`) dietro al contenuto; testo `txt-c-primary-dark`. La lightbox resta scura per far risaltare l'opera.
 
-**File coinvolti:** `app/[locale]/(routes)/art/page.tsx`, `messages/it.json` + `messages/en.json` (`ArtSection`), nuove immagini in `public/assets/artPage/`. La home (`app/[locale]/page.tsx`) e il bottone "Artista" restano invariati.
+**COSA È STATO FATTO (dettaglio):**
 
-**Effort umano:** 2-6h | **Effort agente:** 1-3h (richiede scelta utente su quale opzione) | **Impatto:** alto
+- **Dati opere** in nuovo modulo `(data)/artworks.tsx` (`artworks: IArtwork[]`): 17 opere ordinate dalla più recente alla più datata, con **ID statici** (`art-0068`, …) per evitare mismatch di hydration. Ogni opera porta `thumb`/`full`, `width`/`height` (per l'aspect-ratio di `next/image`), `title`, `technique` e `description` **bilingui** (riusano `IDescriptionPData`), `year`, `dimensions`. Alcune descrizioni sono volutamente vuote (gestite a runtime, vedi sotto).
+- **Nuova interfaccia** `Interface/IArtwork.tsx`.
+- **`ArtGallery`** (organism client, `ArtGallery-client/`): griglia di pulsanti-cella; al click apre la lightbox con navigazione **circolare** (`prev`/`next` in modulo su `total`). Micro-interazione di **reveal progressivo** delle celle via `IntersectionObserver`, con fallback se assente o `prefers-reduced-motion`.
+- **`ArtworkModal`** (molecule client, `ArtworkModal-client/`): lightbox costruita sopra la modale base `Modal` (portal/overlay/focus-trap/Esc). Aggiunge: layout a due colonne (opera + dettagli), frecce prev/next + tastiera (`ArrowLeft`/`ArrowRight`), **contatore** `index/total`, **pills** (tecnica/anno/dimensioni), **descrizione ad accordion** (sempre aperta su desktop via CSS, comprimibile su mobile; nascosta se vuota → `hasDescription`), **striscia di anteprime paginata** (7 per pagina, niente scroll: si pagina con frecce, anteprima attiva evidenziata), e **vista a schermo intero** (seconda `Modal` annidata, con Esc che chiude prima il fullscreen via `closeOnEsc`).
+- **Pagina** `art/page.tsx`: intro (occhiello `galleryEyebrow` + titolo `galleryTitle` con filetto gold + lead `galleryLead`), artist statement `galleryStatement`, `<ArtGallery>`, link al PDF completo, lista social. `generateMetadata` per-pagina già presente (canonical/og:url `/art`). Sfondo decorativo `.img-bg` con `alt=""` (deciso al punto 2).
+- **i18n** sezione `ArtSection` (IT **e** EN): `galleryTitle`, `galleryEyebrow`, `galleryLead`, `galleryStatement`, `openArtworkLabel`, `descriptionLabel`, `prevLabel`, `nextLabel`, `stripPrevLabel`, `stripNextLabel`, `viewFullscreenLabel`, `viewFullPortfolioLabel`. Tutti gli `aria-label` dei controlli passano da qui.
+- **CSS** colocato (`Art.css`, `ArtGallery.css`, `ArtworkModal.css`): classi componente/pagina (eccezione legittima a nome=valore, §7.1); colori solo da variabili `globals.css`.
+
+**Scostamenti dal piano iniziale (in meglio):** opzione B prevedeva "5-8 immagini + griglia"; la realizzazione è più ricca — 17 opere e una lightbox completa con striscia, accordion e fullscreen. Resta comunque sezione *secondaria* a Dev (nessun investimento sproporzionato), in linea con il focus scelto.
+
+**File coinvolti (effettivi):** `app/[locale]/(routes)/art/page.tsx`, `app/[locale]/(routes)/art/Art.css`, `app/[locale]/(routes)/art/layout.tsx`, `app/[locale]/(data)/artworks.tsx` (nuovo), `app/[locale]/Interface/IArtwork.tsx` (nuovo), `app/[locale]/(components)/(organisms)/ArtGallery-client/ArtGallery.tsx` + `.css` (nuovi), `app/[locale]/(components)/(molecules)/ArtworkModal-client/ArtworkModal.tsx` + `.css` (nuovi), `messages/it.json` + `messages/en.json` (`ArtSection`), immagini in `public/assets/artPage/gallery/` (34 WebP). La home e il bottone "Artista" sono rimasti invariati.
+
+**Verifica residua (manuale/visiva):** resa responsive della griglia ai vari breakpoint, leggibilità della striscia paginata su mobile e transizione tema scuro (Home/Dev) → chiaro (Art) — vedi punto 12.1, ora deciso ma da rifinire visivamente se il passaggio risulta netto.
+
+**Effort umano:** 2-6h | **Effort agente:** 1-3h | **Impatto:** alto
 
 ---
 
@@ -360,7 +374,7 @@ Spunti emersi dalla rilettura del codice, da leggere con la lente del focus scel
 | --- | ----------------------- | ----------- | ------------ | ------------- | ---------- |
 | 1   | SEO e metadati ✅ FATTO | Alta        | 2-3h         | ~20 min       | Alto       |
 | 2   | Accessibilita' ✅ FATTO | Alta        | 3-4h         | ~30 min       | Alto       |
-| 3   | Pagina Art incompleta   | Alta        | 2-6h         | 1-3h \*       | Alto       |
+| 3   | Pagina Art ✅ FATTO     | Alta        | 2-6h         | 1-3h          | Alto       |
 | 4   | Flusso navigazione      | Media       | 2-3h         | ~20 min       | Medio      |
 | 5   | Contenuto e testi       | Media       | 1-2h         | ~15 min \*    | Medio      |
 | 6   | Colori e tipografia     | Media       | 1-2h         | ~10 min       | Medio      |
@@ -375,8 +389,8 @@ Spunti emersi dalla rilettura del codice, da leggere con la lente del focus scel
 
 | Totale                    | Effort umano        | Effort agente     |
 | ------------------------- | ------------------- | ----------------- |
-| Solo priorita' alta (1-3) | ~7-13h              | ~2-4h             |
+| Solo priorita' alta (1-3) | ~7-13h ✅ COMPLETATA | ~2-4h             |
 | Tutto (1-11)              | ~20-34h             | ~4-7h + verifiche |
 | Idee aggiuntive (12)      | da stimare per voce | + verifiche       |
 
-**Approccio consigliato:** SEO (1) ✅ e accessibilita' (2) ✅ sono FATTI (2026-05-29) — miglior rapporto impatto/effort, nessun redesign. **Prossimo step: pagina Art (3, opzione B)**, primo intervento di contenuto; poi eventualmente fix testi (5). Le idee UI/UX (12) sono mini-redesign da pesare singolarmente, non incluse nel "core".
+**Approccio consigliato:** l'intera **priorità alta è completata** — SEO (1) ✅ e accessibilità (2) ✅ FATTI (2026-05-29), pagina Art (3, opzione B) ✅ FATTA (verificata sul codice 2026-05-31), con realizzazione più ricca del previsto (17 opere + lightbox). **Prossimo step: priorità media** — fix testi (5) e flusso di navigazione (4) sono i candidati a miglior rapporto impatto/effort. Le idee UI/UX (12) sono mini-redesign da pesare singolarmente, non incluse nel "core".

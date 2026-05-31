@@ -45,7 +45,7 @@ export function Navbar({ isDirectionY = false }: { isDirectionY?: boolean }) {
               className={`${
                 isDirectionY
                   ? "w-50p min-w-150px hover-trx20px-scale105"
-                  : "list-item flex-center ratio-1 w-30px"
+                  : "list-item flex-center ratio-1 w-75px"
               }`}
               title={section.name}
             >
