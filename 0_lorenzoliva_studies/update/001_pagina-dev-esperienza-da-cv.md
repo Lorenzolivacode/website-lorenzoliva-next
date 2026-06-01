@@ -1,8 +1,8 @@
 # 001 — Pagina Dev: sezioni "Esperienza / Formazione / Chi sono" dal CV
 
-**Data analisi:** 2026-05-31
-**Stato:** ⏸️ **IN ATTESA DELLE RISPOSTE UTENTE** (vedi §8). Finché la §8 non è compilata, **non scrivere codice**: produci al massimo un piano.
-**Tipo:** documento di handoff (contesto + analisi + domande). NON è ancora un piano esecutivo.
+**Data analisi:** 2026-05-31 · **Valutazione risposte:** 2026-06-01 · **Piano operativo:** 2026-06-01
+**Stato:** 🔵 **IN IMPLEMENTAZIONE (autorizzata 2026-06-01)**. Decisioni §8 + §10.3 chiuse, piano §12 approvato. L'utente ha dato **via libera in totale autonomia** sui default §12.8 (badge "In corso" sì, intro sezione no) e §12.9 (bozze testi finali). Vincolo: **non pushare nulla** (e comunque non è un repo git). Esecuzione secondo la sequenza §12.10; aggiornare questo stato a fine lavoro.
+**Tipo:** documento di handoff → ora **piano esecutivo in corso** (contesto + analisi + decisioni + piano).
 **Origine:** richiesta utente — analizzare `public/doc/dev-doc/CV Lorenzo Oliva.pdf` per capire come arricchire la pagina `/dev` con sezioni su esperienza ed altro.
 
 ---
@@ -12,6 +12,7 @@
 Stai riprendendo un lavoro in corso su un **sito portfolio personale bilingue (IT/EN)** di Lorenzo Oliva (web developer + artista), in **Next.js 14 App Router** esportato come **sito statico** (`output: "export"`, deploy su Aruba/Apache, **nessun backend/SSR/API/middleware**). Non hai la memoria della conversazione che ha prodotto questo file: ricostruisci il contesto leggendo le fonti qui sotto **prima di agire**.
 
 ### Regole d'oro (non negoziabili — dettagli in `CLAUDE.md`)
+
 - **Static export**: niente codice server a runtime. `new Date().getFullYear()` ecc. è ok solo se valutato a build.
 - **i18n obbligatoria**: ogni stringa visibile passa da next-intl, e ogni chiave va aggiunta in **entrambi** i file `messages/it.json` **e** `messages/en.json`.
 - **CSS utility "nome = valore"** (`CLAUDE.md` §7.1): mai cambiare il valore dietro una classe esistente; se serve un valore nuovo, crea una classe nuova. Nel dubbio sul nome, chiedi.
@@ -19,6 +20,7 @@ Stai riprendendo un lavoro in corso su un **sito portfolio personale bilingue (I
 - **Default server component**; `"use client"` solo se servono hook/eventi/browser API (le cartelle client hanno suffisso `-client`).
 
 ### File da leggere PRIMA (in quest'ordine, con motivo)
+
 1. `website-lorenzoliva-next/CLAUDE.md` — regole ingegneristiche complete (static export §8, i18n §6, styling §7, naming §3, vietati §13). **Obbligatorio.**
 2. `website-lorenzoliva-next/Architecture.md` — mappa di directory, route, componenti, flusso i18n/dati.
 3. **Memoria auto-caricata** (in `~/.claude/.../memory/`, già in contesto a inizio sessione): `MEMORY.md` (indice) → `website-lorenzoliva-decisioni.md` (decisioni di prodotto già prese: focus "lavoro dev", static export senza middleware, pagina Art opzione B, SEO, P.IVA in footer, fix punto 4, ecc.) e `website-lorenzoliva-css-convention.md`. **Verifica sempre sul codice** ciò che la memoria afferma (può essere datata).
@@ -33,6 +35,7 @@ Stai riprendendo un lavoro in corso su un **sito portfolio personale bilingue (I
 6. `public/doc/dev-doc/CV Lorenzo Oliva.pdf` — fonte dei contenuti (riassunto nella §1, ma rileggilo per i dettagli/tono).
 
 ### Come procedere (workflow)
+
 1. Leggi le fonti sopra e **ricostruisci il contesto**.
 2. Leggi le **risposte utente nella §8**. Se mancano/incomplete → fermati e chiedi, non improvvisare scelte di contenuto o di scope.
 3. Trasforma analisi + risposte in un **piano operativo** (sezioni da creare, dati, i18n, eventuale refactor NavbarDev).
@@ -46,15 +49,15 @@ Stai riprendendo un lavoro in corso su un **sito portfolio personale bilingue (I
 
 Estratto dal PDF (1 pagina). Contenuti riutilizzabili sul sito:
 
-| Blocco CV                     | Contenuto |
-| ----------------------------- | --- |
-| **Profilo professionale**     | Sviluppatore Front-end con base solida in HTML/CSS/JavaScript, attenzione al *pixel perfect*; arte e design influenzano positivamente l'approccio al web dev; intenzione di ampliare framework/linguaggi. |
+| Blocco CV                     | Contenuto                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Profilo professionale**     | Sviluppatore Front-end con base solida in HTML/CSS/JavaScript, attenzione al _pixel perfect_; arte e design influenzano positivamente l'approccio al web dev; intenzione di ampliare framework/linguaggi.                                                                                                                                                                                                                                                                                                                                          |
 | **Esperienze lavorative** (3) | **1) Web developer full stack — Riverloop srls** (Gen 2025 – presente): progetti commissionati in team; progettazione, Frontend e Backend Next.js, DB Prisma; piattaforme digitali e sistemi di gestione dati, elementi modulari, interfacce e funzionalità avanzate.<br>**2) Docente Web developer — Riverloop srls** (Mar 2025 – presente): lezioni live, supporto formativo.<br>**3) Artista e decoratore di legno e pareti** (2016 – 2024): settore artistico, clienti, creatività, attenzione ai dettagli, metodo e ottimizzazione dei tempi. |
-| **Formazione**                | 2024 — Corso Frontend developer full time, Coding Bootcamp **Edgemony**; 2015/2018 — corsi professionali di restauro; 2012 — Diploma **Liceo Artistico** E. Catalano. |
-| **Riassunto competenze**      | HTML, CSS, Tailwind, JavaScript, TypeScript, React, Next.js, GraphQL, Prisma (+ Linktree). |
-| **Profilo personale**         | Passione per arte, sport e logica → equilibrio tra creatività, disciplina e pensiero critico. |
-| **Contatti**                  | lorenzodev@lorenzoliva.it, **lorenzo.oliva.1308@gmail.com** (personale), tel 3208121031, Palermo, LinkedIn, GitHub. |
-| **Titolo CV**                 | "Frontend Web Developer **Junior** \| P.IVA & Artist". |
+| **Formazione**                | 2024 — Corso Frontend developer full time, Coding Bootcamp **Edgemony**; 2015/2018 — corsi professionali di restauro; 2012 — Diploma **Liceo Artistico** E. Catalano.                                                                                                                                                                                                                                                                                                                                                                              |
+| **Riassunto competenze**      | HTML, CSS, Tailwind, JavaScript, TypeScript, React, Next.js, GraphQL, Prisma (+ Linktree).                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| **Profilo personale**         | Passione per arte, sport e logica → equilibrio tra creatività, disciplina e pensiero critico.                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **Contatti**                  | lorenzodev@lorenzoliva.it, **lorenzo.oliva.1308@gmail.com** (personale), tel 3208121031, Palermo, LinkedIn, GitHub.                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **Titolo CV**                 | "Frontend Web Developer **Junior** \| P.IVA & Artist".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ---
 
@@ -68,7 +71,7 @@ Estratto dal PDF (1 pagina). Contenuti riutilizzabili sul sito:
 
 I contatti vivono nel footer (`#contacts` / `#footer-end`).
 
-**Manca completamente il racconto professionale**: nessuna sezione "Chi sono", "Esperienza", "Formazione". Per un portfolio con focus *lavoro dev / recruiter* è il buco più vistoso ora che le priorità alte (SEO, a11y, Art) sono chiuse.
+**Manca completamente il racconto professionale**: nessuna sezione "Chi sono", "Esperienza", "Formazione". Per un portfolio con focus _lavoro dev / recruiter_ è il buco più vistoso ora che le priorità alte (SEO, a11y, Art) sono chiuse.
 
 ---
 
@@ -76,7 +79,7 @@ I contatti vivono nel footer (`#contacts` / `#footer-end`).
 
 Questo è il punto centrale del "come gestire le modifiche".
 
-- **`SectionObserver`** osserva *tutte* le `<section>` con `querySelectorAll("section")` → una nuova sezione viene tracciata in automatico. **Nessun intervento qui.**
+- **`SectionObserver`** osserva _tutte_ le `<section>` con `querySelectorAll("section")` → una nuova sezione viene tracciata in automatico. **Nessun intervento qui.**
 - **`NavbarDev`** invece ha una lista **hardcoded e ordine-sensibile**:
   ```ts
   const labels = ["Skills", "Links", "Portfolio", "Contacts"];
@@ -86,6 +89,7 @@ Questo è il punto centrale del "come gestire le modifiche".
 - NavbarDev è esattamente il componente **fragile** che al punto 4 (file suggerimenti) avevamo deciso di **rinviare** (HashContext + observer + timeout + z-index). Aggiungere sezioni ci obbliga a rimetterci le mani.
 
 ### Implicazioni operative per OGNI nuova sezione Dev
+
 1. `<section id="...">` in `dev/page.tsx` (ordine top→bottom = ordine in `labels`).
 2. Voce in `NavbarDev.labels` nella **posizione giusta** (l'ordine guida la barra).
 3. Nuova **icona** `${id}-icon.svg` (+ eventuale `.png`) in `public/assets/nav-icon/nav-dev-icon/`.
@@ -94,17 +98,29 @@ Questo è il punto centrale del "come gestire le modifiche".
 6. Eventuali dati in `(data)/*.tsx` + interfaccia in `Interface/*.tsx`.
 
 ### Raccomandazione architetturale (riduce il rischio)
+
 Estrarre l'elenco sezioni in **un'unica fonte di verità** condivisa, es. `(data)/devSections.tsx`:
+
 ```ts
 export const devSections = [
-  { id: "skills",    titleKey: "skillsLabel",     icon: "skills-icon.svg" },
-  { id: "experience",titleKey: "experienceLabel", icon: "experience-icon.svg" },
-  { id: "links",     titleKey: "linkLabel",       icon: "links-icon.svg" },
-  { id: "portfolio", titleKey: "portfolioLabel",  icon: "portfolio-icon.svg" },
-  { id: "contacts",  titleKey: "contactsLabel",   icon: "contacts-icon.svg" },
+  { id: "skills", titleKey: "skillsLabel", icon: "skills-icon.svg" },
+  {
+    id: "experience",
+    titleKey: "experienceLabel",
+    icon: "experience-icon.svg",
+  },
+  { id: "links", titleKey: "linkLabel", icon: "links-icon.svg" },
+  { id: "portfolio", titleKey: "portfolioLabel", icon: "portfolio-icon.svg" },
+  { id: "contacts", titleKey: "contactsLabel", icon: "contacts-icon.svg" },
 ];
 ```
+
 Consumato sia da `dev/page.tsx` (per ordinare/renderizzare) sia da `NavbarDev` (menu + barra + i18n titolo). Così **aggiungere una sezione = un solo edit**, l'ordine resta coerente per costruzione e si sistema en-passant il debito i18n del menu. È un piccolo refactor di NavbarDev, ma mirato e a basso rischio (niente tocco alla logica di hash/observer/timeout).
+
+> ⚠️ **Correzioni verificate sul codice (2026-06-01)** — l'esempio `devSections` sopra è incompleto su due punti, da recepire nel piano:
+>
+> 1. **`contacts` NON è una `<section>` di `/dev`.** Nel codice i contatti vivono nel footer (`#section-contacts` / `#footer-end`); `dev/page.tsx` ha solo `skills`/`links`/`portfolio`, mentre `labels` include comunque `"Contacts"`. Quindi `devSections` **non può** essere usato ingenuamente come "renderizza tutte le sezioni" dalla pagina: `contacts` è una voce **solo-menu** che punta a un'ancora esterna. Serve distinguerla, es. con un flag `isPageSection: false` (oppure due liste: voci-menu vs sezioni-pagina). Senza questo, una pagina che renderizza l'array genererebbe una sezione `contacts` fantasma.
+> 2. **Terzo consumer di `labels`:** oltre a (a) menu, (b) `href`, (c) path icona, (d) barra di avanzamento, c'è **`compareIndex`** (`NavbarDev.tsx` righe 54-65) che decide l'highlight "attivo" di tutte le icone fino a quella corrente, sempre via `labels.indexOf`. Il refactor a fonte unica deve alimentare **anche** `compareIndex` dalla stessa lista (cambio meccanico — è già lo stesso array — ma va incluso esplicitamente per non lasciare un secondo punto-verità).
 
 ---
 
@@ -113,27 +129,32 @@ Consumato sia da `dev/page.tsx` (per ordinare/renderizzare) sia da `NavbarDev` (
 Ordinate per impatto sul focus "lavoro dev".
 
 ### 4.1 — "Esperienza" (priorità ALTA) ⭐
+
 Le 3 esperienze del CV. È il contenuto che più manca a un recruiter.
-- **Riverloop (full stack)** e **Riverloop (docente)**: lavoro **reale, commissionato, in team** → qualitativamente diverso dalle "Esercitazioni". Smentisce di fatto la nota in memoria "i 14 progetti sono tutti esercitazioni": ora *c'è* esperienza professionale reale (da Gen 2025).
-- **Artista/decoratore (2016-2024)**: lega il mondo arte a quello dev (coerente con la narrazione del sito), utile come *background*.
+
+- **Riverloop (full stack)** e **Riverloop (docente)**: lavoro **reale, commissionato, in team** → qualitativamente diverso dalle "Esercitazioni". Smentisce di fatto la nota in memoria "i 14 progetti sono tutti esercitazioni": ora _c'è_ esperienza professionale reale (da Gen 2025).
+- **Artista/decoratore (2016-2024)**: lega il mondo arte a quello dev (coerente con la narrazione del sito), utile come _background_.
 - **Forma suggerita:** timeline / card verticali con `ruolo · azienda · periodo · descrizione · (tag tecnologici riusando `getIcon`)`. Niente screenshot/repo (vedi §5: possibile NDA sui commissionati).
 
 ### 4.2 — "Formazione" (priorità MEDIA)
+
 Edgemony 2024, restauro 2015/2018, Liceo Artistico 2012. Blocco compatto (anno · titolo · ente). Rafforza il profilo "arte → tech".
 
 ### 4.3 — "Chi sono / Profilo" (priorità DA DECIDERE)
+
 Profilo professionale + personale (arte/sport/logica). **Dove?** Due strade:
+
 - come **sezione `/dev`** (in cima, prima di Skills), oppure
 - per **arricchire la Home** (lega col punto 12.2 "gerarchia hero" del file suggerimenti: nome → tagline → CTA → blocco "About").
-Da non duplicare con la presentazione Home esistente (`Home.presentationTxt1/2`).
+  Da non duplicare con la presentazione Home esistente (`Home.presentationTxt1/2`).
 
 ---
 
 ## 5. Note di attenzione (content)
 
-- **NDA / riservatezza:** i progetti Riverloop sono *commissionati*. Probabile impossibilità di mostrare screenshot, nome cliente finale o repo. → trattarli come **racconto** (ruolo + cosa hai fatto), non come card portfolio cliccabili. **Da confermare con l'utente cosa è divulgabile** (anche solo "Riverloop srls" come datore).
+- **NDA / riservatezza:** i progetti Riverloop sono _commissionati_. Probabile impossibilità di mostrare screenshot, nome cliente finale o repo. → trattarli come **racconto** (ruolo + cosa hai fatto), non come card portfolio cliccabili. **Da confermare con l'utente cosa è divulgabile** (anche solo "Riverloop srls" come datore).
 - **Email personale Gmail** (`lorenzo.oliva.1308@gmail.com`): è nel CV ma **non va messa sul sito** (spam/privacy); il sito usa già `lorenzodev@lorenzoliva.it`. Tenerla fuori.
-- **"Junior":** il CV dice "Frontend Web Developer Junior", ma il sito (decisione SEO 2026-05-29) usa tagline **"Web Developer Full Stack"**; e il CV stesso ora dichiara Frontend **+ Backend** (Next.js + Prisma). C'è una piccola tensione *Junior/full-stack* da sciogliere: che etichetta vuoi esporre pubblicamente?
+- **"Junior":** il CV dice "Frontend Web Developer Junior", ma il sito (decisione SEO 2026-05-29) usa tagline **"Web Developer Full Stack"**; e il CV stesso ora dichiara Frontend **+ Backend** (Next.js + Prisma). C'è una piccola tensione _Junior/full-stack_ da sciogliere: che etichetta vuoi esporre pubblicamente?
 - **Date "presente":** "Gennaio 2025 – presente" / "Marzo 2025 – presente". Tenere "presente" come stringa i18n (no logica data). Coerente con date leggibili del punto 5 testi (file suggerimenti).
 - **Tassonomia (collega al punto 12.3 del file suggerimenti):** l'esperienza Riverloop è materiale da **"Collaborazioni"** (sezione futura prevista, oggi vuota). Va deciso se "Esperienza" e "Collaborazioni" sono la stessa cosa o due cose distinte (esperienza = ruoli/timeline; collaborazioni = progetti specifici).
 
@@ -166,33 +187,298 @@ Da non duplicare con la presentazione Home esistente (`Home.presentationTxt1/2`)
 
 ---
 
-## 8. RISPOSTE UTENTE  ⬅️ COMPILARE QUI (l'agente legge da qui)
+## 8. RISPOSTE UTENTE ⬅️ COMPILARE QUI (l'agente legge da qui)
 
 > Istruzione per l'utente: rispondi sotto ogni voce (anche in forma breve). Istruzione per l'agente: usa **solo** ciò che è scritto qui come decisione; se una risposta manca o è ambigua, **chiedi prima di implementare**.
 
-1. Sezioni da aggiungere: _____
-2. Esperienza — collocazione: _____
-3. NavbarDev (refactor `devSections` vs intervento minimo): _____
-4. Riverloop — cosa è divulgabile (nome azienda / ruoli / progetti / NDA): _____
-5. Etichetta pubblica (Full Stack / Junior / altro): _____
-6. "Chi sono" — collocazione (Home vs /dev): _____
-7. Formazione — ampiezza (tutto / solo tech): _____
-8. Tassonomia (Esperienza vs Collaborazioni): _____
-9. Testi — chi li fornisce (utente / bozza da validare): _____
+1. Sezioni da aggiungere: (a)
+2. Esperienza — collocazione: (dev, fra link e portfolio)
+3. NavbarDev (refactor `devSections` vs intervento minimo): (se la consigli, fonte unica)
+4. Riverloop — cosa è divulgabile (nome azienda / ruoli / progetti / NDA): (Si può nominare "Riverloop srls", descrizione del ruolo e tipologie di progetti)
+5. Etichetta pubblica (Full Stack / Junior / altro): (valuta in base alle competenze emerse dal cv)
+6. "Chi sono" — collocazione (Home vs /dev): (/dev deve riguardare solo ambito dev, possiamo ampliare la home, senza snaturare o dilungarci)
+7. Formazione — ampiezza (tutto / solo tech): (non inseriamo > interessa solo ambito dev e non è sufficente, omettiamo)
+8. Tassonomia (Esperienza vs Collaborazioni): (sono distinte, nelle collab andranno altri progetti esterni non direttamente collegati al lavoro)
+9. Testi — chi li fornisce (utente / bozza da validare): (bozza da validare in base a ciò che viene elaborato a partire dal cv)
 
-**Note libere aggiuntive dell'utente:** _____
+**Note libere aggiuntive dell'utente:** **\_**
 
 ---
 
-## 9. File che verranno coinvolti (quando si implementerà)
+## 10. Valutazione risposte §8 + domande residue (2026-06-01)
+
+Risposte §8 lette e valutate sul codice. **Coerenti tra loro e con lo scope minimale** del `CLAUDE.md`: 1 + 6 + 7 disegnano la stessa linea ("/dev resta dev, una sola sezione nuova, niente riempitivi"). Sotto: esito per voce, poi le **decisioni recepite** e le **domande residue**.
+
+### 10.1 — Esito per voce
+
+| #   | Risposta utente                                               | Esito                                                                                                                      |
+| --- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Solo Esperienza (a)                                           | ✅ Scope chiuso. **Questa task = UNA sola sezione.** L'arricchimento "chi sono" in Home diventa task separata futura.      |
+| 2   | Esperienza tra Links e Portfolio                              | ⚠️ Legittima ma vedi alternativa in §10.3-C. Ordine risultante: `Skills · Links · Experience · Portfolio · Contacts`.      |
+| 3   | NavbarDev: deleghi la scelta                                  | ✅ **Confermo fonte unica `devSections`** — ma con le 2 correzioni di §3 (contacts non-sezione + `compareIndex`).          |
+| 4   | Riverloop: nome + ruolo + tipologie progetto, no clienti/repo | ✅ Chiaro e prudente su NDA. Trattare come **racconto**, non card cliccabili.                                              |
+| 5   | Etichetta: deleghi la scelta                                  | → Raccomandazione in §10.2; conferma richiesta in §10.3-B.                                                                 |
+| 6   | Chi sono fuori da /dev, eventualmente Home                    | ✅ "Chi sono" **non entra in questa task** (lega al punto 12.2 hero, lavoro Home separato).                                |
+| 7   | Formazione omessa                                             | ✅ Coerente con 1(a). Indebolisce un filo la narrazione arte→tech, ma scelta esplicita.                                    |
+| 8   | Esperienza ≠ Collaborazioni                                   | ✅ Esperienza = ruoli/timeline (Riverloop); Collaborazioni (futuro) = progetti esterni. Da aggiornare memoria (vedi §6.5). |
+| 9   | Bozza testi IT/EN dal CV, da validare                         | ✅ L'agente produce bozza, l'utente valida.                                                                                |
+
+### 10.2 — Decisioni recepite (default operativi)
+
+- **Scope:** una sola sezione nuova `Experience` su `/dev`. Niente Formazione, niente "Chi sono" qui.
+- **Refactor:** fonte unica `devSections` con flag `isPageSection` (per gestire `contacts`) e wiring di `compareIndex` (vedi §3, correzioni).
+- **Riverloop:** raccontato come ruolo + tipologie di progetto; "Riverloop srls" nominabile; nessun cliente/repo/screenshot.
+- **Etichetta (raccomandazione):** mantenere **"Web Developer Full Stack"**, **non** reintrodurre "Junior". Razionale: (a) coerenza con decisione SEO 2026-05-29 già in memoria; (b) il CV documenta FE **+** BE (Next.js full stack, Prisma, DB) → "Full Stack" è onesto; (c) "Junior" in un hero di portfolio si auto-limita senza aggiungere informazione. L'anzianità (~da Gen 2025) si comunica con le **date**, non con l'etichetta.
+- **Memoria:** correggere la nota "i 14 progetti sono tutti esercitazioni / niente collaborazioni" → ora c'è esperienza professionale reale (Riverloop, Gen 2025).
+
+### 10.3 — Domande residue ⬅️ COMPILARE QUI (chiudere prima del piano)
+
+> Istruzione utente: rispondi sotto ogni voce. Istruzione agente: senza queste risposte, redigi il piano usando i **default consigliati** indicati, ma **non scrivere codice**.
+
+**A — Icona `experience-icon.svg`.** Il menu NavbarDev richiede un'icona per la nuova voce in `public/assets/nav-icon/nav-dev-icon/`. Le altre voci usano asset esistenti. La fornisci tu o procedo con un placeholder/SVG provvisorio da sostituire?
+_Default consigliato:_ placeholder provvisorio, da sostituire con asset definitivo.
+**Risposta:** usa icona di lucide react, stesa cosa per gli altri step, scegli tu
+
+**B — Etichetta pubblica.** Confermi la raccomandazione §10.2 ("Web Developer Full Stack", niente "Junior")?
+_Default consigliato:_ sì (mantieni Full Stack).
+**Risposta:** ok
+
+**C — Ordine della sezione.** Confermi `Experience` **tra Links e Portfolio**, o preferisci l'alternativa `Skills · Experience · Portfolio · … · Links` (tiene vicini i blocchi "cosa so / cosa ho fatto davvero / cosa ho costruito", spinge i social più in basso — narrazione più orientata al recruiter)?
+_Default consigliato:_ la tua scelta attuale (tra Links e Portfolio) — Esperienza e Portfolio restano adiacenti.
+**Risposta:** ok
+
+### 10.4 — Esito §10.3 + micro-conferme recepite (2026-06-01)
+
+- **A → lucide-react** (utente: "usa lucide-react, stessa cosa per gli altri step, scegli tu"). Recepito: si introduce la dipendenza `lucide-react` e si **migra l'intero set di icone del menu NavbarDev** (Skills, Links, Experience, Portfolio, Contacts) a componenti lucide. Set scelto: `Skills→Wrench`, `Experience→Briefcase`, `Links→Link2`, `Portfolio→FolderGit2`, `Contacts→Mail`. Dettagli e implicazioni architetturali in §12.2–12.4.
+- **B → etichetta "Web Developer Full Stack", niente "Junior"** (utente: "ok"). Confermato.
+- **C → ordine `Skills · Links · Experience · Portfolio · Contacts`** (utente: "ok"). Confermato.
+- **Micro-conferme prese come default** (non bloccanti, vedi feedback 2026-06-01):
+  1. **Ok introdurre la dipendenza** `lucide-react` (deviazione consapevole dalla convenzione "icone come asset in `public/`"; da registrare in memoria).
+  2. **"Altri step" = solo le voci del menu NavbarDev.** Le icone della **griglia Skills** e dei **Links** in pagina sono **brand/logo = contenuto** → restano asset `next/image`, **non** si toccano.
+
+---
+
+## 11. File che verranno coinvolti (quando si implementerà)
 
 - `app/[locale]/(routes)/dev/page.tsx` — nuove `<section>`
 - `app/[locale]/(components)/(molecules)/NavbarDev-client/NavbarDev.tsx` — menu/barra (refactor o array)
-- `app/[locale]/(data)/devSections.tsx` *(nuovo, se refactor)*, `(data)/experiences.tsx` *(nuovo)*, `(data)/education.tsx` *(nuovo)*
-- `app/[locale]/Interface/IExperience.tsx`, `IEducation.tsx` *(nuovi)*
+- `app/[locale]/(data)/devSections.tsx` _(nuovo, se refactor)_, `(data)/experiences.tsx` _(nuovo)_, `(data)/education.tsx` _(nuovo)_
+- `app/[locale]/Interface/IExperience.tsx`, `IEducation.tsx` _(nuovi)_
 - eventuale nuovo organism/molecule per la timeline esperienze + CSS colocato
 - `public/assets/nav-icon/nav-dev-icon/experience-icon.svg` (+ altre icone se più sezioni)
 - `messages/it.json` + `messages/en.json` — nuova sezione/chiavi `DevSection`
 - aggiornare `Architecture.md` (mappa) e la memoria
 
 > **Riferimenti incrociati:** file suggerimenti `0_lorenzoliva_studies/suggestions/001_suggerimenti-miglioramento-sito.md` — punti 4 (NavbarDev rinviato), 5 (testi), 12.2 (hero), 12.3 (tassonomia Collaborazioni/Progetti personali).
+
+---
+
+## 12. PIANO OPERATIVO (2026-06-01)
+
+> Obiettivo: aggiungere la sezione **Experience** su `/dev` (tra Links e Portfolio), introdurre la **fonte unica `devSections`**, **migrare le icone del menu NavbarDev a lucide-react**, modellare i **dati esperienze** bilingui e fornire una **bozza testi IT/EN** da validare. Implementazione **dopo** l'ok a questo piano. Tutto deve restare compatibile con lo **static export** (`CLAUDE.md` §8) e passare da next-intl in **entrambi** i locale (§6).
+
+### 12.1 — Dipendenza nuova
+
+- `npm install lucide-react` → entra in `package.json` `dependencies`. Compatibile con `output: "export"` (sono componenti SVG React, resi dentro `NavbarDev` che è già `"use client"`; tree-shakeable, peso trascurabile).
+
+### 12.2 — Fonte unica `devSections` — `app/[locale]/(data)/devSections.tsx` _(nuovo)_
+
+Risolve l'accoppiamento descritto in §3. Dati **puri** (nessun import di UI): l'icona è una **chiave-stringa**, non il componente.
+
+```ts
+import { IDevSection } from "../Interface/IDevSection";
+
+// Ordine = ordine visivo in pagina e nel menu (guida la barra di avanzamento).
+// isPageSection=false → voce solo-menu (contacts vive nel footer, non è una <section> di /dev).
+export const devSections: IDevSection[] = [
+  {
+    id: "skills",
+    titleKey: "navSkills",
+    iconKey: "skills",
+    isPageSection: true,
+  },
+  { id: "links", titleKey: "navLinks", iconKey: "links", isPageSection: true },
+  {
+    id: "experience",
+    titleKey: "navExperience",
+    iconKey: "experience",
+    isPageSection: true,
+  },
+  {
+    id: "portfolio",
+    titleKey: "navPortfolio",
+    iconKey: "portfolio",
+    isPageSection: true,
+  },
+  {
+    id: "contacts",
+    titleKey: "navContacts",
+    iconKey: "contacts",
+    isPageSection: false,
+  },
+];
+```
+
+- `Interface/IDevSection.tsx` _(nuovo)_: `{ id: string; titleKey: string; iconKey: string; isPageSection: boolean }`.
+- **`titleKey` dedicati al menu** (`navSkills`…`navContacts`): tengono la pill **corta**. Necessario perché il titolo della pill è anche il `<p>` sotto l'icona in `RoundedIconEl`; riusare `portfolioLabel` ("Portfolio progetti") allungherebbe la pill → regressione di layout. Vedi §12.8-A.
+- Il **link** di ogni voce resta derivato `#${id}` (comportamento attuale invariato, contacts→`#contacts`). `isPageSection` **non** tocca il link: governa solo cosa renderizza la pagina (vedi §12.5).
+
+### 12.3 — Refactor `NavbarDev` — `(components)/(molecules)/NavbarDev-client/NavbarDev.tsx`
+
+Sostituisce l'array hardcoded `labels` con `devSections`. Mappa **iconKey → componente lucide** (la mappa vive nel client, non nei dati):
+
+```tsx
+import { Wrench, Link2, Briefcase, FolderGit2, Mail } from "lucide-react";
+const DEV_ICONS = {
+  skills: Wrench,
+  links: Link2,
+  experience: Briefcase,
+  portfolio: FolderGit2,
+  contacts: Mail,
+};
+```
+
+Interventi puntuali (niente tocco a HashContext / observer / timeout):
+
+- `navDevList` deriva da `devSections`: `{ id, link: '#'+id, Icon: DEV_ICONS[s.iconKey], titleKey }`.
+- **Barra di avanzamento**: `indexOfHash = devSections.findIndex(s => s.id === hash)` (via `id`, niente più capitalize); denominatore `devSections.length - 1`; resta il caso speciale `footer-end → 100`.
+- **`compareIndex`** (terzo consumer, §3): riscritto su `devSections.findIndex(s => s.id === id) <= indexOfHash || hash === "footer-end"`.
+- **Titolo i18n per TUTTE le voci**: `t(section.titleKey)` (sana il debito i18n del menu — prima solo "Contacts" era tradotto).
+- Le icone passano da `<Image src=".svg">` a componente lucide → vedi §12.4. Spariscono i path `${id}-icon.svg`; gli SVG in `public/assets/nav-icon/nav-dev-icon/` diventano inutilizzati (lasciati lì, non bloccanti).
+- **Trigger rotondo** (`path-icon.png`): **resta com'è** (non è uno "step"; default §12.8 lo conferma).
+
+### 12.4 — Refactor atomo `RoundedIconEl` — `(components)/(atoms)/RoundedIconEl/RoundedIconEl.tsx`
+
+Usato **solo** da NavbarDev (verificato) → blast-radius contenuto. Reso **retro-compatibile** per non rompere il trigger (che usa ancora `src` PNG):
+
+- Props: rendere `src?: string` opzionale e aggiungere `Icon?: LucideIcon`.
+- Render: se `Icon` presente → `<Icon size={24} aria-hidden />`; altrimenti → `<Image …>` come oggi (trigger).
+- `alt` diventa opzionale (icona decorativa); il testo accessibile resta il `title` mostrato sotto.
+
+### 12.5 — Pagina `/dev` — `app/[locale]/(routes)/dev/page.tsx`
+
+- Inserire `<section id="experience" className="section-code-page …">` **tra** `#links` e `#portfolio` (ordine = `devSections`). `SectionObserver` la traccia in automatico (`querySelectorAll("section")`, §3).
+- Heading `h2` con `t("experienceTitle")`; rendering della lista esperienze tramite il nuovo organism (§12.6), dati passati via props: `<ExperienceList data={experiences} />`.
+- **Nota onesta sull'`isPageSection`**: il markup delle sezioni è bespoke (skills-grid, links-list, portfolio ≠ generici), quindi la pagina **non** itera `devSections` per generare le sezioni; le sezioni restano JSX esplicito **ordinato a mano** per combaciare con `devSections`. `isPageSection` resta come campo di verità/guardia (distingue `contacts` nav-only) e per usi futuri, non come motore di rendering in questa iterazione.
+
+### 12.6 — Dati esperienze + interfaccia + UI
+
+- `Interface/IExperience.tsx` _(nuovo)_:
+  ```ts
+  import { IDescriptionPData } from "./IPortfolioProject"; // { italian; english }
+  export interface IExperience {
+    id: string;
+    role: IDescriptionPData; // ruolo (bilingue)
+    company: string; // "Riverloop srls" (invariato nelle due lingue)
+    period: IDescriptionPData; // "Gen 2025 – presente" / "Jan 2025 – present" (stringa, NO logica data)
+    description: IDescriptionPData; // racconto bilingue
+    tech: string[]; // tag tecnologici (pill testuali, vedi §12.8-B)
+    current: boolean; // ruolo in corso (badge opzionale)
+  }
+  ```
+- `(data)/experiences.tsx` _(nuovo)_: ID statici (come `artworks`), contenuti `{ italian, english }`, **solo le 2 esperienze dev Riverloop** (full stack + docente). L'esperienza **Artista/decoratore (2016-2024) è OMESSA** da `/dev` perché non-dev (coerente con §8.6 "/dev solo ambito dev"); vive semmai nella narrazione Art. Vedi §12.8-C.
+- `(components)/(organisms)/ExperienceList/ExperienceList.tsx` + `ExperienceList.css` _(nuovi)_: **server component** (nessuna interattività), riceve `data: IExperience[]` via props, sceglie il campo bilingue con `useLocale()` (come `ParagraphList`). Card verticali: `ruolo · azienda · periodo · descrizione · tech pills`. Etichette statiche (es. badge "In corso") via `useTranslations`. Rispettare `CLAUDE.md` §10 (≤200-300 righe) e §7 (utility class esistenti; se serve un valore nuovo, **creare** la classe con nome=valore o **chiedere**, §7.1).
+
+### 12.7 — i18n (`messages/it.json` + `messages/en.json`, sezione `DevSection`, **stesse chiavi in entrambi**)
+
+Nuove chiavi (testi strutturali; i contenuti delle esperienze stanno nei **dati**, non qui):
+| chiave | IT | EN |
+| - | - | - |
+| `navSkills` | Skills | Skills |
+| `navLinks` | Link | Links |
+| `navExperience` | Esperienza | Experience |
+| `navPortfolio` | Portfolio | Portfolio |
+| `navContacts` | Contatti | Contacts |
+| `experienceTitle` | Esperienza | Experience |
+| `currentRole` | In corso | Current |
+_(le esistenti `skillsLabel/linkLabel/portfolioLabel/contactsLabel` restano per gli `h2`/contenuti di pagina; le `nav_` sono le versioni corte per le pill del menu.)\*
+
+### 12.8 — Micro-decisioni di contenuto/UX (default consigliati — confermabili o modificabili)
+
+- **A — Pill menu corte (`nav*` keys):** _default_ introdurre chiavi corte dedicate per non allungare le pill. Alternativa: riusare le label esistenti (ma "Portfolio progetti" rischia di rompere il layout della pill).
+- **B — Tag tecnologici nelle esperienze = pill testuali:** _default_ testo (es. `Next.js · TypeScript · Prisma`), perché `getIcon` **non** ha i loghi di Prisma/GraphQL e si è scelto lucide per le icone-UI (no nuovi asset brand). Alternativa: aggiungere i loghi mancanti e riusare `getIcon` (più asset da reperire).
+- **C — Artista/decoratore (2016-2024) OMESSO da /dev:** _default_ omettere (non-dev, coerente con §8.6). Alternativa: una riga di _background_ in fondo alla sezione.
+
+### 12.9 — Contenuti bozza esperienze v2 (rielaborata da §13 — da validare)
+
+Vincolo NDA (§8.4): "Riverloop srls" nominabile, ruolo + tipologie di progetto, **niente** clienti/repo/screenshot. Fonte: risposte §13 (nessun dettaglio inventato). **Scelta utente (2026-06-01):** restare **vaghi** sui domini specifici (no "scolastico/ristorazione" espliciti). **Pothos confermato** come schema-builder GraphQL.
+
+**1) Web Developer Full Stack — Riverloop srls — Gen 2025 – presente** (`current: true`)
+
+- IT: «Sviluppo full stack di applicazioni web commissionate in un team ristretto, con piena autonomia: dalla progettazione e dallo studio architetturale fino al rilascio. Ho realizzato gestionali e piattaforme SaaS in ambiti differenti, alcune con funzionalità basate su AI. Lato backend curo in prima persona la modellazione dei dati e le API: PostgreSQL con Prisma e un layer GraphQL (Pothos). Lato frontend sviluppo l'interfaccia in Next.js e React, con attenzione all'UX/UI, definendone spesso il design in autonomia. Integro stabilmente strumenti di AI nel flusso di lavoro — non solo per generare codice, ma per studio, pianificazione e ragionamento architetturale — gestendo il processo in modo strutturato e con revisione critica.»
+- EN: «Full-stack development of commissioned web applications in a small team, with full autonomy: from design and architectural planning through to delivery. I built management systems and SaaS platforms across different sectors, some featuring AI-based functionality. On the backend I personally handle data modelling and APIs: PostgreSQL with Prisma and a GraphQL layer (Pothos). On the frontend I develop the interface in Next.js and React, with care for UX/UI, often defining the design myself. I consistently integrate AI tools into my workflow — not just to generate code, but for study, planning and architectural reasoning — running the process in a structured, critically-reviewed way.»
+- tech: `Next.js · React · TypeScript · PostgreSQL · Prisma · GraphQL (Pothos)`
+
+**2) Docente Web Developer — Riverloop srls — Mar 2025 – presente** (`current: true`)
+
+- IT: «Docente di sviluppo web per studenti adulti principianti, in gruppi di circa dieci persone. Tengo lezioni teorico-pratiche strutturate, incentrate su JavaScript, React e Next.js, e preparo personalmente il materiale didattico — slide, esercizi e lezioni organizzate su Notion.»
+- EN: «Web development instructor for adult beginner students, in groups of around ten. I deliver structured theory-and-practice lessons focused on JavaScript, React and Next.js, and I personally prepare the teaching materials — slides, exercises and lessons organised in Notion.»
+- tech: `JavaScript · React · Next.js`
+
+`period` bilingue: IT "Gen 2025 – presente" / EN "Jan 2025 – present"; IT "Mar 2025 – presente" / EN "Mar 2025 – present".
+`role` bilingue: IT "Web Developer Full Stack" / EN "Full Stack Web Developer"; IT "Docente Web Developer" / EN "Web Development Instructor".
+
+**Skill "AI-assisted development" (§13.10-12) — collocazione:**
+
+- **Ora:** integrata come **frase finale nella descrizione Riverloop Full Stack** (sopra), inquadrata sul _metodo_ (studio/pianificazione/architettura + revisione critica), non come slogan — coerente con lo stile di lavoro metodico e pianificato che emerge dalla memoria di progetto.
+- **Poi:** quando le `skills` verranno aggiornate (nota §13: "le skills andranno aggiornate in base al CV"), aggiungere una voce dedicata. Nota tecnica: la griglia `skills` usa loghi brand PNG; per l'AI non esiste un logo asset → si userebbe un'icona lucide (`Sparkles`/`Bot`), piccola deviazione coerente con l'adozione di lucide nel menu. **Fuori scope di questa task** (rientra nell'update skills futuro).
+
+### 12.10 — Ordine di implementazione (quando approvato)
+
+1. `npm install lucide-react`.
+2. `Interface/IDevSection.tsx` + `(data)/devSections.tsx`.
+3. Refactor `RoundedIconEl` (supporto `Icon`), poi `NavbarDev` (devSections + mappa lucide + barra/compareIndex/i18n).
+4. `Interface/IExperience.tsx` + `(data)/experiences.tsx` (bozza §12.9).
+5. `ExperienceList` (organism + css).
+6. `dev/page.tsx`: nuova `<section id="experience">` tra links e portfolio.
+7. i18n: nuove chiavi in **it.json + en.json** (§12.7).
+8. **`next build`** → static export 10/10; ispezione `out/` (HTML sezione + menu) nei due locale.
+9. Aggiornare `Architecture.md` (nuovi file/dep) e **memoria** (`website-lorenzoliva-decisioni.md`): sezione Experience aggiunta, lucide adottato, etichetta "Full Stack" confermata, correggere la nota "14 progetti = tutte esercitazioni" (ora c'è esperienza reale Riverloop). Aggiornare lo **stato** in cima a questo file.
+
+### 12.11 — Rischi & non-obiettivi
+
+- **Rischi:** (a) layout pill menu se le label sono lunghe → mitigato da `nav*` corte (§12.8-A); (b) barra avanzamento se l'indice non trova l'id → mitigato dal passaggio a `findIndex(id)` e dal caso `footer-end`; (c) dimenticare una chiave i18n in un solo locale → check finale su entrambi i file (§13 CLAUDE.md).
+- **Non-obiettivi (fuori scope qui):** Formazione (§8.7), "Chi sono"/arricchimento Home (§8.6, task separata), sezione "Collaborazioni" (§8.8, futura), refactor profondo di HashContext/observer (punto 4 suggerimenti, resta rinviato).
+
+---
+
+## 13. Domande mirate per arricchire le descrizioni esperienze ⬅️ COMPILARE QUI
+
+> Motivo: la bozza §12.9 è onesta ma **generica** (parafrasa il CV). Per renderla concreta e credibile per un recruiter servono dettagli reali. Rispondi in bullet/telegrafico, salta ciò che non si applica. **Vincolo NDA (§8.4): niente nomi clienti / repo / screenshot.** L'agente userà **solo** ciò che è scritto qui — non inventa dettagli. A risposte date, riscrive la §12.9 in versione concreta IT/EN.
+
+### A — Riverloop, Full Stack (esperienza principale)
+
+1. **Tipi di progetto / domini** (senza nomi clienti): gestionali, dashboard, e-commerce, booking, CMS, portali…? Quali davvero?
+   **Risposta:** Gestionale per le scuole, saas per elaborazione testi e aiuto studio da testi con AI, saas/gestionale per ristoranti (ti serve sapere il contesto, non entrare nel merito dei progetti, fa altre domande se devi)
+2. **Backend gestito in prima persona:** schema/modelli **Prisma** + migrazioni? API/route handlers o server actions? **autenticazione** (quale)? integrazioni terze (pagamenti, email, mappe, storage)? Quale **DB** (Postgres/MySQL/…)?
+   **Risposta:** gestito in prima persona, db postgres gestito con prisma e photos (graphql)
+3. **GraphQL** (è nel CV): usato a Riverloop o solo da formazione? (decide se citarlo)
+   **Risposta:** su tutti i progetti con riverloop e nei progetti personali (non ancora aggiunti al sito)
+4. **Frontend:** design system / libreria componenti riusabile? responsive, accessibilità, performance, animazioni? Partite da Figma / pixel-perfect?
+   **Risposta:** poche reference, soprattutto gestione UX/UI al momento
+5. **Team & metodo:** quante persone? Tuo ruolo (feature in autonomia, code review, mentoring junior)? Git flow / PR / sprint?
+   **Risposta:** team di 2 persone (me compreso), stesso livello, autonomia totale, niente mentoring (solo poco all'inizio) o code review, sprint autogestiti, progettazione del lavoro, sugli ultimi progetti (per ristoranti) anche studio architetturale
+6. **Quantificabile** (anche soft): n° progetti consegnati, riduzione tempi, riuso componenti tra progetti…?
+   **Risposta:** i menzionati portati a termine, niente o poco riutilizzo; 2-3 mesi in solitaria sugli ultimi due progetti
+
+### B — Riverloop, Docente
+
+7. **A chi insegni** (livello: principianti / bootcamp / aziendale) e **n° studenti** indicativo?
+   **Risposta:** studenti adulti, intorno alla decina, principianti
+8. **Cosa insegni** (HTML/CSS/JS, React, Next, Git…) e **come** (lezioni live, code-along, review progetti, supporto 1:1)?
+   **Risposta:** lezioni teorico-pratiche strutturate, ho parlato per lo più di JS, react e next.js
+9. Hai **creato materiale** tuo (esercizi, curriculum, slide)?
+   **Risposta:** materiale elaborato personalmente: slide, esercizi, lezioni su Notion
+
+### C — Lavorare con l'AI come skill (AI-assisted / agentic development)
+
+> Da inquadrare come competenza professionale moderna, non come "uso ChatGPT".
+
+10. **Framing/tono preferito:** "Sviluppo AI-assisted" / "Pair programming con agenti AI (Claude Code)" / "Workflow agentici" / altro?
+    **Risposta:** hai modo di valutare in base a ciò che trovi in memoria? faccio molto studio e pianificazione con AI, non "devo fare questo, vai"
+11. **Cosa ci fai davvero** quotidianamente: scaffolding, refactoring, review, debugging, architettura/decisioni, documentazione, automazioni?
+    **Risposta:** rifatti a 10 e valuta, un po' tutto con occhio attento
+12. **Dove la collochi:** (a) voce nella **griglia Skills** — nota: la griglia usa loghi brand PNG; per l'AI non c'è asset logo → si userebbe un'icona lucide (`Sparkles`/`Bot`), piccola deviazione da valutare; (b) **riga dentro la descrizione Riverloop**; (c) **entrambe**.
+    **Risposta:** suggerisci. in eseprienza, valutare in che modo altrove
+
+**Note libere aggiuntive:** le skills andranno aggiornate in seguito in base a ciò che è segnato nel cv
