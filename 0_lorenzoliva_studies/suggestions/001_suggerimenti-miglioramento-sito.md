@@ -174,17 +174,23 @@ Una sessione di ridimensionamento UI è stata completata. **Prima di toccare CSS
 
 ## PRIORITA' MEDIA — miglioramenti qualitativi
 
-### 4. UX — Flusso di navigazione
+### 4. UX — Flusso di navigazione ✅ FATTO in gran parte (2026-05-31)
 
 - [x] ~~**Navbar ordine** — `Dev | Home | Art` → `Home | Dev | Art`~~ — **SCARTATO** (decisione utente 2026-05-29): si mantiene l'ordine attuale `Dev | Home | Art`. Con focus dev, avere Dev come primo elemento è anzi coerente
-- [ ] **NavbarDev poco discoverable** — menu sezioni dev nascosto dietro bottone rotondo → renderlo visibile di default su desktop
+- [ ] **NavbarDev poco discoverable** — menu sezioni dev nascosto dietro bottone rotondo → renderlo visibile di default su desktop. **RINVIATO (decisione utente 2026-05-31):** è un mini-redesign su componente fragile (HashContext + SectionObserver + `setTimeout` coreografati + z-index), fuori dal principio "migliorare senza rivoluzionare". Da riprendere a parte, con calma.
   - File: `app/[locale]/(components)/(molecules)/NavbarDev-client/NavbarDev.tsx`
-- [ ] **Contatti non cliccabili** — telefono e email nel footer sono testo semplice → aggiungere `<a href="tel:+393208121031">` e `<a href="mailto:...">`
-  - File: `app/[locale]/(components)/(molecules)/SectionFooter-client/SectionFooter.tsx`
-- [ ] **Copyright 2024 hardcoded** → aggiornare o rendere dinamico con `new Date().getFullYear()`
-  - File: `messages/it.json` e `messages/en.json`, chiave `Layout.copyrightLabel`
-- [ ] **`scroll-behavior: smooth` già presente ma mal collocato** — è definito in `components.css:43` (non assente, come si poteva pensare) → per coerenza spostarlo su `html` in `globals.css`
-- [ ] **Due componenti per cambio lingua** — `SelectLanguage` (dropdown) e `SwitchLanguageInline` (bandiere) fanno la stessa cosa → valutare se unificare
+- [x] **Contatti non cliccabili** — telefono ed email nel footer ora sono link: `tel:+39{phoneNumber}` (→ `tel:+393208121031`) e `mailto:{mailDev|mailArt}`. Numero/email mostrati invariati; nuova classe component-local `.contact-link` (underline solo su hover/focus) sopra `reset-default` (eredita il colore scuro del footer).
+  - File: `app/[locale]/(components)/(molecules)/SectionFooter-client/SectionFooter.tsx` + `.css`
+- [x] **Copyright 2024 hardcoded** → ora **dinamico**: chiave `copyrightLabel` ridotta a `"Copyright ©"` (IT+EN), anno aggiunto in `Footer.tsx` via `new Date().getFullYear()`. `Footer` è server component → valutato a **build** (no runtime, ok static export, CLAUDE §8). Export verificato: rende `Copyright © 2026`.
+  - File: `app/[locale]/(components)/(organisms)/Footer/Footer.tsx`, `messages/it.json` + `messages/en.json`
+- [x] **`scroll-behavior: smooth` già presente ma mal collocato** — aggiunta regola `html { scroll-behavior: smooth }` in `globals.css`, **+ `scroll-padding-top: var(--header-clearance)`** (le ancore `#skills`/`#links`/`#contacts` non finiscono più sotto l'header fisso) **+ override `prefers-reduced-motion`**. La regola su `.carousel` (components.css:43) è **lasciata**: è uno scroller distinto (screenshot portfolio), non duplica la preoccupazione globale.
+  - File: `app/[locale]/globals.css`
+- [x] **Due componenti per cambio lingua** — **chiarito sul codice (2026-05-31):** il dropdown `SelectLanguage` (atoms/SelectLanguage-client) **non è importato da nessuna parte** (dead code); l'unico switch attivo è `SwitchLanguageInline` (nel menu hamburger di `ModalHam`, visibile anche su desktop). Non c'è quindi una vera "duplicazione" da unificare. **Decisione utente 2026-05-31: lasciato com'è** (non rimosso). La rimozione del dead code resta tracciata come pulizia minore → vedi punto 10.
+
+- [x] **P.IVA in footer** (aggiunta su richiesta utente, 2026-05-31, fuori dalla lista originale): `P.IVA 07312340826` nel footer (tra `footerLabel2` e copyright). Motivo: vetrina di attività professionale → indicazione prevista dall'art. 7 D.Lgs 70/2003 + professionalità B2B. Numero verificato formalmente valido (checksum). Nuova chiave i18n `Layout.vatLabel`: IT `"P. IVA 07312340826"`, EN `"VAT IT07312340826"`.
+  - File: `Footer.tsx`, `messages/it.json` + `messages/en.json`
+
+**COSA È STATO FATTO (dettaglio):** i 3 fix puliti (contatti, copyright, scroll) applicati e **verificati sull'export statico** (`out/`): presenti `href="tel:+393208121031"`, `mailto:` per entrambe le email, `class="contact-link reset-default"`; copyright reso come `Copyright © 2026` (it+en); nel bundle CSS `html{scroll-behavior:smooth}` + `scroll-padding-top:var(--header-clearance)`. Build statico riuscito (10/10). NavbarDev rinviato, dropdown lingua lasciato (entrambi per scelta utente).
 
 **Effort umano:** 2-3h | **Effort agente:** ~20 min | **Impatto:** medio
 
@@ -291,6 +297,7 @@ Una sessione di ridimensionamento UI è stata completata. **Prima di toccare CSS
 
 - [ ] **`Toast.tsx` vuoto** — componente con solo `<div></div>` → rimuovere
 - [ ] **`Carousel.tsx` non importato** — esiste ma nessuna page lo importa (verificato: nessun `import` del componente). `PortfolioList` usa la classe CSS `.carousel` direttamente. Inoltre il componente renderizza un `<h2>{locale}</h2>` di debug → rimuovere il componente
+- [ ] **`SelectLanguage` (dropdown) dead code** — confermato 2026-05-31: la cartella `(atoms)/SelectLanguage-client` non è importata da nessuna parte (l'unico switch lingua usato è `SwitchLanguageInline` in `ModalHam`). Rimuoverla è pulizia sicura. (Emerso al punto 4, dove l'utente ha scelto di lasciarla per ora.) NB: entrambi i file definiscono `function SelectLanguage()` come nome interno, anche `SwitchLanguageInline` → rinominare quest'ultimo per coerenza
 - [ ] **`ButtonHam.tsx` esporta `ButtonDocs`** — nome funzione sbagliato (`function ButtonDocs()` come export default, non causa bug ma confonde)
 - [ ] **`import Head from "next/head"` non usato** in `app/layout.tsx` → rimuovere (insieme al blocco `<html>/<Head>` commentato)
 - [ ] **`alt={"ciao"}` placeholder** in `NavbarDev.tsx` riga 84 (icona `path-icon.png`) → alt non significativo, da sostituire con testo descrittivo o `alt=""` se decorativa
@@ -302,7 +309,7 @@ Una sessione di ridimensionamento UI è stata completata. **Prima di toccare CSS
 
 ### 11. Micro-animazioni
 
-- [ ] **`scroll-behavior: smooth` già presente** (in `components.css:43`) → eventualmente spostarlo su `html` in `globals.css` per coerenza (vedi punto 4) — NON è un'aggiunta mancante
+- [x] **`scroll-behavior: smooth` già presente** (in `components.css:43`) → **FATTO al punto 4 (2026-05-31):** aggiunta regola `html { scroll-behavior: smooth; scroll-padding-top: var(--header-clearance) }` in `globals.css` (+ override `prefers-reduced-motion`). La regola su `.carousel` è stata lasciata (scroller distinto). — NON era un'aggiunta mancante
 - [ ] **Transizioni pagina istantanee** → fade leggera (200-300ms) con wrapper opacity o CSS `@view-transition`
 - [ ] **Hover skill icons wave** → aggiungere `transition-delay` sfalsato per effetto onda sulla griglia
 - [ ] **Loading indicator PDF** → progress indicator per download 86MB (se mantenuto)
@@ -375,7 +382,7 @@ Spunti emersi dalla rilettura del codice, da leggere con la lente del focus scel
 | 1   | SEO e metadati ✅ FATTO | Alta        | 2-3h         | ~20 min       | Alto       |
 | 2   | Accessibilita' ✅ FATTO | Alta        | 3-4h         | ~30 min       | Alto       |
 | 3   | Pagina Art ✅ FATTO     | Alta        | 2-6h         | 1-3h          | Alto       |
-| 4   | Flusso navigazione      | Media       | 2-3h         | ~20 min       | Medio      |
+| 4   | Flusso navigazione ✅   | Media       | 2-3h         | ~20 min       | Medio      |
 | 5   | Contenuto e testi       | Media       | 1-2h         | ~15 min \*    | Medio      |
 | 6   | Colori e tipografia     | Media       | 1-2h         | ~10 min       | Medio      |
 | 7   | Componenti UI specifici | Media       | 4-6h         | 1-2h \*       | Medio      |
@@ -387,10 +394,10 @@ Spunti emersi dalla rilettura del codice, da leggere con la lente del focus scel
 
 \* = richiede input/validazione utente (scelte creative, verifica visiva, approvazione testi)
 
-| Totale                    | Effort umano        | Effort agente     |
-| ------------------------- | ------------------- | ----------------- |
+| Totale                    | Effort umano         | Effort agente     |
+| ------------------------- | -------------------- | ----------------- |
 | Solo priorita' alta (1-3) | ~7-13h ✅ COMPLETATA | ~2-4h             |
-| Tutto (1-11)              | ~20-34h             | ~4-7h + verifiche |
-| Idee aggiuntive (12)      | da stimare per voce | + verifiche       |
+| Tutto (1-11)              | ~20-34h              | ~4-7h + verifiche |
+| Idee aggiuntive (12)      | da stimare per voce  | + verifiche       |
 
-**Approccio consigliato:** l'intera **priorità alta è completata** — SEO (1) ✅ e accessibilità (2) ✅ FATTI (2026-05-29), pagina Art (3, opzione B) ✅ FATTA (verificata sul codice 2026-05-31), con realizzazione più ricca del previsto (17 opere + lightbox). **Prossimo step: priorità media** — fix testi (5) e flusso di navigazione (4) sono i candidati a miglior rapporto impatto/effort. Le idee UI/UX (12) sono mini-redesign da pesare singolarmente, non incluse nel "core".
+**Approccio consigliato:** **priorità alta completata** — SEO (1) ✅, accessibilità (2) ✅ (2026-05-29), pagina Art (3, opzione B) ✅ (2026-05-31, 17 opere + lightbox). **Priorità media avviata:** flusso di navigazione (4) ✅ in gran parte (2026-05-31: contatti cliccabili, copyright dinamico, scroll-behavior; **NavbarDev rinviato** come mini-redesign). **Prossimo step suggerito: fix testi (5)** — titolo tab, presentazione home, date leggibili, label "Esercitazioni" — molti richiedono validazione testi dall'utente. Poi colori/tipografia (6) e componenti UI (7). Le idee UI/UX (12) restano mini-redesign da pesare singolarmente.

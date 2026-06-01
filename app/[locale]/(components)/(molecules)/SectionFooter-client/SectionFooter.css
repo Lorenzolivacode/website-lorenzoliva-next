@@ -13,6 +13,13 @@
   flex-direction: row;
 }
 
+/* contatti cliccabili (tel/mailto): ereditano il colore del footer (reset-default),
+   underline solo su hover/focus per segnalare che sono link senza appesantirli */
+.contact-link:hover,
+.contact-link:focus-visible {
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 1024px) {
   .section-footer {
     width: 40%;

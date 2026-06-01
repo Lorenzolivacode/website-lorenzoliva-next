@@ -39,6 +39,20 @@
   --header-clearance: calc(var(--header-h) + 32px);
 }
 
+/* scroll fluido per la navigazione ad ancore (#skills, #links, #contacts, …);
+   scroll-padding-top evita che la sezione bersaglio finisca sotto l'header fisso */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-clearance);
+}
+
+/* chi preferisce meno movimento: niente smooth scroll */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;

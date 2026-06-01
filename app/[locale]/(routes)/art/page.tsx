@@ -52,29 +52,13 @@ function ArtPage({ params: { locale } }: { params: { locale: string } }) {
       <ArtGallery artworks={artworks} />
 
       <a
-        className="btn flex-center gap-10px art-pdf-link"
+        className="btn change-img-link p-4px radius-8px f-size-0d95-1d05 txt-decoration-none txt-c-inherit p-l-20px flex-cross-center gap-10px art-pdf-link"
         href="/doc/art-doc/Portfolio-artistico-Oliva-Lorenzo.pdf"
         target="_blank"
         rel="noopener noreferrer"
       >
         {t("viewFullPortfolioLabel")}
       </a>
-
-      <ul className="flex-center gap-20px p-10px">
-        {socialNetwork.map((social) => (
-          <li key={social.id}>
-            <a href={social.url} target="_blank" rel="noopener noreferrer">
-              <Image
-                width={40}
-                height={40}
-                src={social.icon}
-                alt={social.label}
-                title={social.label}
-              />
-            </a>
-          </li>
-        ))}
-      </ul>
     </section>
   );
 }

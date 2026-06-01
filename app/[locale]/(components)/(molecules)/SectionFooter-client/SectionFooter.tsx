@@ -29,18 +29,34 @@ export function SectionFooter() {
         <ul>
           <li>
             {t("phoneLabel")}
-            {t("phoneNumber")}
+            {/* tel: con prefisso internazionale +39, numero mostrato senza */}
+            <a
+              className="contact-link reset-default"
+              href={`tel:+39${t("phoneNumber")}`}
+            >
+              {t("phoneNumber")}
+            </a>
           </li>
           {!pageArt && (
             <li>
               {t("mailDevLabel")}
-              {t("mailDev")}
+              <a
+                className="contact-link reset-default"
+                href={`mailto:${t("mailDev")}`}
+              >
+                {t("mailDev")}
+              </a>
             </li>
           )}
           {!pageDev && (
             <li>
               {t("mailArtLabel")}
-              {t("mailArt")}
+              <a
+                className="contact-link reset-default"
+                href={`mailto:${t("mailArt")}`}
+              >
+                {t("mailArt")}
+              </a>
             </li>
           )}
           {pageArt && (

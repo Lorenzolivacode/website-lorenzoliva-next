@@ -35,7 +35,8 @@
     "btnSend": "Invia",
     "footerLabel1": "Nessuna parte di questo sito o del suo contenuto può essere riprodotto, copiata, modificata o adattata senza l'autorizzazione scritta del legittimo proprietario.",
     "footerLabel2": "Realizzazione sito Web: Lorenzo Oliva",
-    "copyrightLabel": "Copyright © 2024"
+    "vatLabel": "P. IVA 07312340826",
+    "copyrightLabel": "Copyright ©"
   },
 
   "ModalDoc": {
