@@ -75,6 +75,7 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
         className="section-code-page flex-center flex-column gap-30px"
       >
         <h2 className="f-bold f-size-1d35-1d65">{t("experienceTitle")}</h2>
+        <p className="w-full f-size-0d95-1d05">{t("experienceIntro")}</p>
         <ExperienceList data={experiences} />
       </section>
       <section

@@ -28,6 +28,24 @@ function ShowcaseCard({ project }: { project: IShowcaseProject }) {
 
       <div className="showcase-card-body flex-column gap-10px">
         <h3 className="f-bold f-size-1d25-1d5">{project.title}</h3>
+        {project.author && (
+          <p className="showcase-card-author f-size-0d875 txt-c-primary-medium-light">
+            {t("projectBy")}{" "}
+            {project.author.href ? (
+              <a
+                href={project.author.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={project.author.name}
+                className="txt-c-primary-very-light"
+              >
+                {project.author.name}
+              </a>
+            ) : (
+              project.author.name
+            )}
+          </p>
+        )}
         <p className="f-size-0d95-1d05">{project.tagline[lang]}</p>
 
         <TechIconList

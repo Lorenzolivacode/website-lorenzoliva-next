@@ -27,6 +27,19 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://lorenzoliva.it/en/dev"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://lorenzoliva.it/it/dev"/>
   </url>
+  <!-- Dev · Freedihare (approfondimento progetto personale) -->
+  <url>
+    <loc>https://lorenzoliva.it/it/dev/freedihare</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://lorenzoliva.it/it/dev/freedihare"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lorenzoliva.it/en/dev/freedihare"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lorenzoliva.it/it/dev/freedihare"/>
+  </url>
+  <url>
+    <loc>https://lorenzoliva.it/en/dev/freedihare</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://lorenzoliva.it/it/dev/freedihare"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lorenzoliva.it/en/dev/freedihare"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lorenzoliva.it/it/dev/freedihare"/>
+  </url>
   <!-- Art -->
   <url>
     <loc>https://lorenzoliva.it/it/art</loc>

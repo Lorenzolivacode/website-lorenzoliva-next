@@ -8,6 +8,7 @@ export interface IShowcaseProject {
   title: string; // nome del progetto (invariato nelle due lingue)
   logo: string; // path asset del logo in public/
   tagline: IDescriptionPData; // descrizione breve bilingue
+  author?: { name: string; href?: string }; // credito autore (es. collaborazioni): nome + link opzionale al sito
   tech: string[]; // chiavi requirement lowercase → icona via getIcon/BrandIcon
   link: {
     href: string; // rotta interna (es. "/dev/freedihare") oppure URL esterno

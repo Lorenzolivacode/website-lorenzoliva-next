@@ -175,6 +175,20 @@ function FreedipharePage({ params: { locale } }: { params: { locale: string } })
           <TechIconList tech={freedihare.tech} size={28} listClassName="fh-tech" />
         )}
       </FhSection>
+
+      {/* credito collaboratrice */}
+      <p className="fh-collaborator f-size-0d875 txt-c-primary-medium-light">
+        {t("collaboratorCredit")}{" "}
+        <a
+          href="https://portfolio-rho-drab-24.vercel.app/it"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Fabrizia Fisichella"
+          className="txt-c-primary-very-light"
+        >
+          Fabrizia Fisichella
+        </a>
+      </p>
     </div>
   );
 }

@@ -177,7 +177,7 @@ app/layout.tsx                          → CSS globali, shell HTML minima
 | Footer         | No     | Compone SectionFooter + testi copyright (`useTranslations`) |
 | PortfolioList  | No     | Lista progetti con Carousel (dati da portfolioProjects.tsx) |
 | ExperienceList | No     | Card esperienze professionali (dati da experiences.tsx); `useLocale` per i contenuti bilingui; descrizione come `<p>` intero; periodo reso con atomo `Tag`; tech come icone `BrandIcon` (via `getIcon`) |
-| ShowcaseCard | No | Card-logo riusabile per "Progetti personali" e "Collaborazioni": logo + descrizione + icone tech (`TechIconList`) + un button **interno** (`Link` i18n, rotta) o **esterno** (`<a>` _blank, sito) secondo `project.link.external` |
+| ShowcaseCard | No | Card-logo riusabile per "Progetti personali" e "Collaborazioni": logo + descrizione + (opz.) credito autore (`projectBy` + link al sito) + icone tech (`TechIconList`) + un button **interno** (`Link` i18n, rotta) o **esterno** (`<a>` _blank, sito) secondo `project.link.external` |
 
 ---
 
@@ -245,7 +245,7 @@ Esporta:
 Esporta:
 - `experiences: IExperience[]` — esperienze professionali dev (ruolo, azienda, periodo, descrizione bilingue, tech, `current`). Vincolo NDA: nomi azienda/ruolo/tipologie, niente clienti/repo. Renderizzate da `ExperienceList` nella sezione `/dev #experience`.
 
-> Nota: le card-logo (`IShowcaseProject`: logo, tagline bilingue, `tech`, `link {href, labelKey, external}`; forma distinta da `IPortfolioData`) coprono sia `personalProjects` (Freedihare → link interno `/dev/freedihare`) sia `collaborations` (JobInBox → link esterno). Vivono dentro `portfolioData` in `portfolioProjects.tsx`; rese da `ShowcaseCard`. Il file separato `personalProjects.tsx` e l'interfaccia `IPersonalProject` sono stati rimossi/sostituiti.
+> Nota: le card-logo (`IShowcaseProject`: logo, tagline bilingue, `tech`, `link {href, labelKey, external}`, `author?` opzionale `{name, href?}`; forma distinta da `IPortfolioData`) coprono sia `personalProjects` (Freedihare → link interno `/dev/freedihare`) sia `collaborations` (JobInBox → link esterno). Vivono dentro `portfolioData` in `portfolioProjects.tsx`; rese da `ShowcaseCard`. Il file separato `personalProjects.tsx` e l'interfaccia `IPersonalProject` sono stati rimossi/sostituiti.
 
 ### `socialNetwork.tsx`
 

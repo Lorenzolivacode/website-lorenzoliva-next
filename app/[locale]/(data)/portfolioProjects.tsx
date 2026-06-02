@@ -286,6 +286,10 @@ const collaborations: IShowcaseProject[] = [
       english:
         "Mobile app that organises your job search automatically. It connects to your inbox, recognises messages from the main job portals (LinkedIn, Indeed, Glassdoor) and turns them into a tidy overview: it tracks your applications and centralises offers in an always-updated feed, updating each application's status on its own. In open beta.",
     },
+    author: {
+      name: "Fabrizia Fisichella",
+      href: "https://portfolio-rho-drab-24.vercel.app/it",
+    },
     tech: ["react", "typescript", "supabase"],
     link: { href: "https://jobinbox.it/", labelKey: "visitSite", external: true },
   },

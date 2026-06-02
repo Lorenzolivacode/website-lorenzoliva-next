@@ -16,6 +16,11 @@
   min-width: 240px;
 }
 
+/* credito autore: il nome è un link sottolineato (segnala la cliccabilità) */
+.showcase-card-author a {
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 480px) {
   .showcase-card-logo {
     width: 100%;

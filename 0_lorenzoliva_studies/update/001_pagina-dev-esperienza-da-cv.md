@@ -772,3 +772,16 @@ Risposte recepite (C1 JobInBox · C2 no riclassifica · C3 unico progetto · C4 
 **JobInBox** aggiunto a `portfolioData.collaborations`: descrizione **originale** IT/EN sintetizzata dal post di lancio (non copiata), tech `react·typescript·supabase` (aggiunto `supabase` a `BRAND_ICONS`; React Native → icona React), logo `public/assets/projects-img/jobinbox-logo.svg` (SVG col path duplicato, **da verificare a vista**), button esterno → jobinbox.it. i18n nuove: `visitSite`, `collaborationsIntro`. Build statico **12/12**, Collaborazioni verificata visibile in IT+EN con link `target=_blank`.
 
 **File:** nuovi `Interface/IShowcaseProject.tsx`, `(organisms)/ShowcaseCard/{tsx,css}`; modificati `(data)/portfolioProjects.tsx` (JobInBox + tipi), `(data)/techIcons.tsx` (supabase), `dev/page.tsx` (ShowcaseCard + intro), `messages/*.json`; rimossi `PersonalProjectCard/`, `IPersonalProject.tsx`. **15.2 CHIUSA** (Progetti personali + Collaborazioni).
+
+---
+
+## 21. Rifiniture post-15.2 (2026-06-02)
+
+Tutte verificate, build 12/12, IT+EN.
+
+- **Riordino sottosezioni Portfolio** (scelta utente): ordine finale **Progetti personali → Collaborazioni → Questo sito → Esercitazioni** (il blocco "Questo sito" spostato tra Collaborazioni ed Esercitazioni). `dev/page.tsx`.
+- **Sitemap**: aggiunte le voci `/it/dev/freedihare` e `/en/dev/freedihare` (con hreflang) in `public/sitemap.xml` (mancavano).
+- **Credito autrice JobInBox**: campo opzionale `author {name, href?}` su `IShowcaseProject`; la card mostra "Progetto di Fabrizia Fisichella" (nome = link sottolineato al portfolio). i18n `projectBy`. Link esterno usato: `portfolio-rho-drab-24.vercel.app/it`.
+- **Credito collaboratrice su `/dev/freedihare`**: dopo "Sotto il cofano", riga **"Con la collaborazione di Fabrizia Fisichella"** (link al portfolio). i18n `collaboratorCredit`. (Crediti incrociati: Lorenzo su JobInBox, Fabrizia su Freedihare.)
+- **PostgreSQL — decisione tassonomica**: resta **fuori dalle Skills** (usato per lo più via Prisma/GraphQL, non SQL diretto) ma **dentro gli stack** dei progetti (Experience Riverloop, Freedihare). Principio: *Skill = competenza diretta; Stack = composizione reale del progetto*. JobInBox usa `supabase` (Postgres-based, ma la tech usata è Supabase).
+- **Posizionamento AI + intro Esperienza**: aggiunto `experienceIntro` (i18n IT+EN) tra titolo "Esperienza" e card, che fa emergere il **metodo** in modo sobrio (progettazione/architettura prima del codice, passi verificabili, coerenza struttura + decisioni documentate) con **una sola riga sull'AI inquadrata sul metodo** ("a supporto del ragionamento e non in sua sostituzione: scelte e revisione critica restano mie"). **Decisione: AI-come-metodo solo a parole** (intro + descrizione Riverloop), **mai logo Claude/AI nella griglia Skills** (rischio percezione "vibe coding" + mismatch di categoria tool-vendor vs stack).

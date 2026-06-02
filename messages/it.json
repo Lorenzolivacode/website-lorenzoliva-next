@@ -100,9 +100,11 @@
     "navPortfolio": "Portfolio",
     "navContacts": "Contatti",
     "experienceTitle": "Esperienza",
+    "experienceIntro": "Lavoro partendo dalla progettazione: studio il problema e definisco architettura e modello dei dati prima di scrivere codice, procedendo per passi piccoli e verificabili. Curo la coerenza della struttura (convenzioni chiare, componenti riusabili, decisioni documentate) perché il codice resti leggibile e manutenibile nel tempo. Uso gli strumenti moderni, AI compresa, come supporto al ragionamento e non in sua sostituzione: progettazione, scelte e revisione critica restano mie.",
     "subtitlePersonalProjects": "Progetti personali",
     "subtitleCollaborations": "Collaborazioni",
     "collaborationsIntro": "Progetti di terzi a cui ho contribuito su porzioni di sviluppo e nel confronto progettuale.",
+    "projectBy": "Progetto di",
     "visitSite": "Visita il sito",
     "discoverMore": "Scopri di più"
   },
@@ -154,6 +156,7 @@
     "dayDinner": "Cena · controlla il grafico calorie e chiudi la giornata.",
     "dayTrend": "Nel tempo · passa al Diario per vedere l'andamento su settimana, mese o anno.",
     "closingTitle": "Sotto il cofano",
-    "closingText": "Freedihare è un progetto personale, progettato e sviluppato end-to-end: dal modello dati e dalle API fino all'interfaccia desktop. È un MVP strutturato, attualmente in fase di test e destinato a essere ampliato."
+    "closingText": "Freedihare è un progetto personale, progettato e sviluppato end-to-end: dal modello dati e dalle API fino all'interfaccia desktop. È un MVP strutturato, attualmente in fase di test e destinato a essere ampliato.",
+    "collaboratorCredit": "Con la collaborazione di"
   }
 }

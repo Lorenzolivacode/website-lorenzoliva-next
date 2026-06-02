@@ -313,6 +313,11 @@
   margin: 0;
 }
 
+/* credito collaboratrice: nome come link sottolineato */
+.fh-collaborator a {
+  text-decoration: underline;
+}
+
 /* ── Responsive ────────────────────────────── */
 @media screen and (max-width: 768px) {
   .fh-grid {

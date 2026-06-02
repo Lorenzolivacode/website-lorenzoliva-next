@@ -100,9 +100,11 @@
     "navPortfolio": "Portfolio",
     "navContacts": "Contacts",
     "experienceTitle": "Experience",
+    "experienceIntro": "I work design-first: I study the problem and define the architecture and data model before writing code, moving in small, verifiable steps. I care about a coherent structure (clear conventions, reusable components, documented decisions) so the code stays readable and maintainable over time. I use modern tools, AI included, as support for reasoning rather than a replacement for it: design, decisions and critical review remain mine.",
     "subtitlePersonalProjects": "Personal projects",
     "subtitleCollaborations": "Collaborations",
     "collaborationsIntro": "Third-party projects I contributed to on parts of the development and the design discussion.",
+    "projectBy": "Project by",
     "visitSite": "Visit the site",
     "discoverMore": "Discover more"
   },
@@ -154,6 +156,7 @@
     "dayDinner": "Dinner · check the calorie chart and close the day.",
     "dayTrend": "Over time · switch to the Diary to see how you are doing across week, month or year.",
     "closingTitle": "Under the hood",
-    "closingText": "Freedihare is a personal project, designed and built end-to-end: from the data model and the APIs through to the desktop interface. It is a structured MVP, currently in testing and set to be expanded."
+    "closingText": "Freedihare is a personal project, designed and built end-to-end: from the data model and the APIs through to the desktop interface. It is a structured MVP, currently in testing and set to be expanded.",
+    "collaboratorCredit": "With the collaboration of"
   }
 }
