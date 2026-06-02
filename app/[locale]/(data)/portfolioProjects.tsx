@@ -27,18 +27,18 @@ export const skills = [
   { id: "skill-github", label: "GitHub", icon: siGithub },
   { id: "skill-html", label: "HTML", icon: siHtml5 },
   { id: "skill-css", label: "CSS", icon: siCss },
+  { id: "skill-sass", label: "Sass", icon: siSass },
+  { id: "skill-tailwind", label: "Tailwind", icon: siTailwindcss },
   { id: "skill-javascript", label: "JavaScript", icon: siJavascript },
+  { id: "skill-typescript", label: "TypeScript", icon: siTypescript },
   { id: "skill-react", label: "React", icon: siReact },
   { id: "skill-reactrouter", label: "ReactRouter", icon: siReactrouter },
-  { id: "skill-tailwind", label: "Tailwind", icon: siTailwindcss },
-  { id: "skill-sass", label: "Sass", icon: siSass },
-  { id: "skill-typescript", label: "TypeScript", icon: siTypescript },
   { id: "skill-nextjs", label: "NextJs", icon: siNextdotjs },
   { id: "skill-nodejs", label: "Node.js", icon: siNodedotjs },
+  { id: "skill-firebase", label: "Google Firebase", icon: siFirebase },
   { id: "skill-graphql", label: "GraphQL", icon: siGraphql },
   { id: "skill-prisma", label: "Prisma", icon: siPrisma },
   { id: "skill-electron", label: "Electron", icon: siElectron },
-  { id: "skill-firebase", label: "Google Firebase", icon: siFirebase },
 ];
 
 export const links = [
@@ -56,13 +56,6 @@ export const links = [
     label: "gitHubLabel",
     id: generateId(),
   },
-  /* {
-    icon: "/assets/skills-img/Contacts-Dark-Logo.png",
-    url: "#section-contacts",
-    title: "goToContacts",
-    label: "contactsLabel",
-    id: generateId(),
-  }, */
 ];
 
 const githubUrlBase = "https://github.com/Lorenzolivacode/";

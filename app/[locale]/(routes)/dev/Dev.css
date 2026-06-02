@@ -14,7 +14,7 @@
 }
 
 .skills-container {
-  gap: 30px;
+  gap: 24px;
 }
 
 .img-skill-container {
@@ -26,8 +26,8 @@
   gap: 10px;
   transition: 0.4s;
 
-  width: 80px;
-  height: 80px;
+  width: 72px;
+  height: 72px;
 }
 
 .img-skill-container:hover {
