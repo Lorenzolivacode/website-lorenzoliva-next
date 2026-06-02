@@ -521,6 +521,7 @@ Implementazione completata in autonomia secondo la sequenza §12.10. Build stati
 **Dipendenza:** `lucide-react` aggiunta a `package.json`.
 
 **File creati:**
+
 - `app/[locale]/Interface/IDevSection.tsx`
 - `app/[locale]/Interface/IExperience.tsx`
 - `app/[locale]/(data)/devSections.tsx`
@@ -529,6 +530,7 @@ Implementazione completata in autonomia secondo la sequenza §12.10. Build stati
 - `app/[locale]/(components)/(organisms)/ExperienceList/ExperienceList.css`
 
 **File modificati:**
+
 - `app/[locale]/(components)/(atoms)/RoundedIconEl/RoundedIconEl.tsx` (prop `Icon` lucide oppure `src` immagine)
 - `app/[locale]/(components)/(molecules)/NavbarDev-client/NavbarDev.tsx` (fonte unica `devSections` + mappa icone lucide + barra/`compareIndex`/i18n su `id`)
 - `app/[locale]/(routes)/dev/page.tsx` (nuova `<section id="experience">` tra links e portfolio)
@@ -542,6 +544,7 @@ Implementazione completata in autonomia secondo la sequenza §12.10. Build stati
 ### 14.1 — Rifiniture grafiche post-review (2026-06-01)
 
 Confronto della card esperienza con gli altri elementi `/dev` (portfolio/links/section-code-page) e correzioni:
+
 - **Badge "In corso/Current":** era `bg-x-p-sat-ml-l` (gradiente navy→azzurro→navy, illeggibile col testo scuro ai bordi: bug). Ora **`bg-primary-sat-medium` (#00436d) + `txt-c-primary-very-light`** (contrasto alto, accento blu coerente).
 - **Pill tech → atomo `Tag` generico (nuovo):** `(components)/(atoms)/Tag/` (server component) con sfondo **semi-trasparente + bordo** e colore via prop (`color`, default `"primary"` → `bg-primary-medium-light-0d3` + `border1-p-m-l-0d5` + testo chiaro). Usato per il tech stack delle esperienze (`<Tag label={tech} color="primary" />`). Riutilizzabile altrove; nuovi colori = nuova voce nella mappa `TAG_COLOR_CLASS` con utility esistenti. Rimossa la pill ad-hoc `experience-tech-pill`; hook lista rinominato `technical-list` → `experience-tech-list`. **Nuove utility aggiunte (convenzione nome=valore):** var `--color-primary-medium-light-0d3` (rgba 0.3) + `.bg-primary-medium-light-0d3` (color.css); `.border1-p-m-l-0d5` (border.css, riusa la var `-0d5` esistente).
 - **Superficie card → opzione B (scelta utente):** rimosso il pannello scuro pieno `bg-primary-very-dark-0d6`; la card è ora **trasparente con `shadow-light-small` + `radius-20px`**, mirror in piccolo di `.section-code-page` per massima coerenza col linguaggio "contenitore" della pagina.
@@ -618,9 +621,11 @@ Implementato lo stile **monocromatico tinto** deciso al §15.1. Build statico **
 **Dipendenza:** `simple-icons` aggiunta a `package.json`.
 
 **File creati:**
+
 - `app/[locale]/(components)/(atoms)/BrandIcon/BrandIcon.tsx` (server component: rende un path simple-icons come svg `fill=currentColor`, colore via classe).
 
 **File modificati:**
+
 - `(css-library-utilities)/color.css` — nuova utility `.txt-c-primary-medium-light` (var `#7a9dc7`).
 - `(data)/portfolioProjects.tsx` — `skills` con `icon`=oggetto simple-icons + **ID statici**; aggiunte **GraphQL** e **Prisma**; rimosso `crypto.randomUUID()` per le skill (resta `generateId` per links/portfolio).
 - `(components)/(organisms)/PortfolioList/PortfolioList.tsx` — `getIcon` ora mappa requirement→oggetto simple-icons (con `postgresql`, pronto per 15.2) e ritorna `undefined` se sconosciuto; tag resi con `BrandIcon` (salto se senza icona).
@@ -631,6 +636,104 @@ Implementato lo stile **monocromatico tinto** deciso al §15.1. Build statico **
 **Scelte applicate:** tinta azzurra `medium-light` (no hover-variant); esperienze invariate (tag testuali `Tag`); PNG `skills-img/` lasciati (inutilizzati nella griglia, restano per i Links LinkedIn/GitHub).
 
 **Decisioni utente 2026-06-02 (15.1 CHIUSA):**
+
 1. **Skill tenute tutte** — GitHub/ReactRouter/Sass/Firebase restano in griglia (niente potatura verso il CV).
 2. **Skill "AI-assisted"** resta solo nel racconto dell'esperienza, non entra nella griglia.
 3. Validazione visiva a carico dell'utente ("completa e vedo io").
+
+---
+
+## 17. 15.2 — Sottosezione "Progetti personali" + rotta `/dev/freedihare` (analisi 2026-06-02)
+
+> Richiesta utente: prima sottosezione **"Progetti personali"**, primo progetto **Freedihare** (app desktop nutrizione). Mantenere il pattern "Esercitazioni" (logo, breve descrizione, button), ma il button apre una **nuova rotta `/dev/freedihare`** che elabora il README (`0_lorenzoliva_studies/doc_reference/README.html` + `Freedihare-Logo.svg`) con **stile lorenzoliva + cenni dei colori app** (ibridazione). Sotto: contesto verificato, proposta di ibridazione, domande aperte (rispondere in §17.3).
+
+### 17.1 — Contesto verificato sul codice
+
+- **`IPortfolioData` NON ha `category`** (confermato): è modellato per screenshot (`img`) + due link esterni (`linkGithub`/`linkProject`). Freedihare invece vuole logo + 1 button verso rotta interna → forma diversa.
+- **Sottosezioni Portfolio attuali** (`dev/page.tsx` §12.5): "Questo sito" (blocco bespoke) + `SubtitlePortfolio("Esercitazioni")` + `PortfolioList(portfolioData)`. Le card esercitazione (`PortfolioList`) rendono: img di sfondo, titolo, icone tech (`getIcon`+`BrandIcon`), descrizione (`ParagraphList`), bottoni GitHub/live.
+- **Rotta dedicata = modello `/art`**: `(routes)/art/` ha `page.tsx` + `layout.tsx` + `Art.css`; usa `generateMetadata(buildMetadata(locale, "/art"))`, `unstable_setRequestLocale`, `useTranslations`. Una rotta `/dev/freedihare` = `(routes)/dev/freedihare/page.tsx` (+ css), statica, bilingue.
+- **⚠️ NavbarDev su sotto-rotta**: `NavbarDev` si renderizza quando `pathname.includes("dev")` (`NavbarDev.tsx`), quindi comparirebbe anche su `/dev/freedihare`; ma le sue ancore (`#skills`, `#experience`…) puntano alle sezioni di `/dev` → su questa pagina si romperebbero (scroll a id inesistenti). Serve una scelta (vedi Q7).
+- **Asset Freedihare**: logo SVG `viewBox 0 0 300 300`, 2 colori brand **teal `#205976` + verde `#C3DB99`**. Palette app (README): bg navy `#0f172a`, accent cyan `#53b6d6`, verde `#c1f8a0`, macro-palette di 8 colori.
+- **Lingua**: il README è **solo IT**; la i18n del sito è obbligatoria IT+EN (`CLAUDE.md` §6) → il contenuto EN va prodotto (volume non banale, vedi Q1).
+
+### 17.2 — Proposta di ibridazione (stile lorenzoliva × identità Freedihare)
+
+Principio: **lo "chassis" è lorenzoliva, l'identità Freedihare entra come accento**, così la pagina resta parte del sito ma "sa" di app.
+
+- **Chassis = sito**: tema scuro (`--color-primary-very-dark`), font Zain, utility-class, contenitori in stile `.section-code-page`, `BlurBlue` decorativi, bottoni `.btn`, scale heading (`f-size-1d35-1d65`…) e spaziature del sito.
+- **Accento = Freedihare, scoped alla pagina**: poche custom property locali sul wrapper `.freedihare-page` (NON in `globals.css`, per non inquinare la palette globale con colori di una singola app), usate **solo** in `freedihare.css`: `--fh-accent` (cyan `#53b6d6`), `--fh-green` (`#c1f8a0`), `--fh-teal` (`#205976`). Le applico a: occhiello/titoli di sezione, filetti divisori, bordi delle "feature-card" in hover, numeri del flusso "giornata tipo"/"primo accesso". Riprende l'impaginazione della guida originale (h2 con filetto, feature-grid 2col, flow-box numerati) ma con tipografia/spaziatura del sito. _(Nota CSS §7.1: sono custom property semantiche locali, non utility "nome=valore"; coerente con l'eccezione "variabili semantiche". Da confermare comunque, Q3.)_
+- **Macro-palette = citazione autentica**: la sezione "I macro tracciati" resa coi **chip colorati originali** (Kcal verde, Proteine corallo, Grassi azzurro, …): è l'unico punto dove i colori-app entrano "pieni", come richiamo fedele all'app.
+- **Logo a colori originali** (teal+verde): è brand-content, come i loghi LinkedIn/GitHub nei Links (che restano `next/image`). Sul fondo scuro del sito risalta bene.
+- **Struttura `/dev/freedihare`**: hero (logo + tagline "Nutrizione consapevole, sotto controllo." + etimologia _Free+Feeding+Share_ + intro) → "Le 5 sezioni" → blocchi Dashboard/Diario/Alimenti/Pasti/Profilo → Account collegati → Macro-palette → Giornata tipo / Primo accesso (flow numerati) → CTA finale (torna a `/dev` ed eventuale link esterno). Contenuto **curato** (vedi Q2), bilingue.
+- **Card "Progetti personali"** (nella sezione `#portfolio`, sopra "Esercitazioni"): stesso linguaggio delle card esercitazione (shadow, radius, descrizione breve) ma con **logo** al posto dello screenshot e **un button "Scopri di più" → `/dev/freedihare`** (Link locale i18n). Implementazione pulita: NON forzare `IPortfolioData` (screenshot+link esterni); usare un **piccolo componente dedicato** `PersonalProjectCard` con dati propri (logo, titolo, descrizione bilingue, route, tech opzionali), riusando le classi CSS esistenti.
+
+### 17.3 — Domande aperte ⬅️ COMPILARE QUI (rispondere prima di implementare)
+
+**Q1 — Lingua della pagina `/dev/freedihare`.** Il README è solo IT; il sito è bilingue obbligatorio. Traduco tutti i contenuti anche in EN?
+_Default consigliato:_ sì, bilingue, ma su una **versione curata** (non l'intero README) per contenere il volume di traduzione.
+**Risposta:** si, su quello che viene renderizzato nella nuova rotta
+
+**Q2 — Quanto contenuto del README riportare.** Tutto (lungo) o una **selezione curata**: hero/intro + le 5 sezioni (sintetiche) + account collegati + macro-palette + 1 flusso (giornata tipo _oppure_ primo accesso)?
+_Default consigliato:_ selezione curata (come sopra); ometto le sotto-procedure di dettaglio (es. "come creare una fase" passo-passo) o le riduco.
+**Risposta:** ok, non usare emoji; mantieni le info che rendono comprensibile l'utilità dell'app; aggiorna con grafica accattivante, distaccati dallo stile statico del readme
+
+**Q3 — Colori ibridi: dove vivono.** Custom property **locali** alla pagina (`.freedihare-page`, in `freedihare.css`) oppure nuove `--color-*` in `globals.css` (come fu per il gold di Art)?
+_Default consigliato:_ locali alla pagina (sono colori di una singola app, non palette di sistema).
+**Risposta:** locali
+
+**Q4 — Accento principale.** Uso il **cyan `#53b6d6`** (accent README) o il **teal `#205976`** (logo) come accento dominante della pagina? (il verde resta accento secondario)
+_Default consigliato:_ cyan `#53b6d6` (più vivo, è l'accento "ufficiale" dell'app); teal come accento profondo/bordi.
+**Risposta:** ok, ma usa anche i colori del logo. menzionando kcal e macro usa i colori inseriti in readme
+
+**Q5 — Card "Progetti personali": forma e link.** Logo + descrizione breve + button "Scopri di più" → `/dev/freedihare`. Tengo **anche** un link esterno (sito/GitHub dell'app) o **solo** il button interno? La card mostra le icone tech (Electron/React/…)?
+_Default consigliato:_ solo button interno per ora (niente link esterno finché non c'è un URL pubblico); **sì** icone tech (coerenza con le card esercitazione).
+**Risposta:** solo button link interno; si
+
+**Q6 — Modello dati.** Creo un componente/dati dedicati `PersonalProjectCard` (logo, route, descrizione, tech) **separati** da `IPortfolioData`, oppure aggiungo `category` a `IPortfolioData` e ci infilo Freedihare?
+_Default consigliato:_ dedicato e separato (Freedihare non ha screenshot/doppio link esterno: forzarlo sporca `IPortfolioData`). `category` su `IPortfolioData` resta per le future Collaborazioni/Esercitazioni.
+**Risposta:** dedicato, stesso pattern potrà essere utile per altri progetti futuri. lo stack possiamo prenderlo come fatto per /dev
+
+**Q7 — NavbarDev su `/dev/freedihare`.** La barra menu `/dev` comparirebbe anche qui, con ancore rotte. Cosa preferisci: (a) **nasconderla** su `/dev/freedihare` (condizione `pathname` più stretta) e mettere un semplice "← Torna a /dev"; (b) tenerla ma far puntare le ancore a `/dev#sezione`; (c) altro?
+_Default consigliato:_ (a) nascondere NavbarDev sulla sotto-rotta + back-link a `/dev` (la pagina Freedihare è una "scheda di approfondimento", non una pagina a sezioni con quella barra).
+**Risposta:** concordo con consigliato
+
+**Q8 — Posizione e ordine sottosezioni Portfolio.** Ordine proposto: "Questo sito" → **"Progetti personali"** → (Collaborazioni, futura) → "Esercitazioni". Confermi? E "Progetti personali" resta dentro `#portfolio` (niente nuova voce NavbarDev)?
+_Default consigliato:_ sì all'ordine; sì, dentro `#portfolio` senza nuova voce menu (coerente con memoria §15.2).
+**Risposta:** confermo
+
+**Q9 — Asset logo.** Dove metto il logo: `public/assets/projects-img/freedihare-logo.svg`? Lo uso a colori originali (teal+verde), giusto?
+_Default consigliato:_ sì, in `public/assets/projects-img/`, colori originali.
+**Risposta:** si
+
+**Q10 — Titoli/voci app in EN.** Termini come "Dashboard/Diario/Alimenti/Pasti/Profilo" e i nomi sezione: in EN li traduco (Diary/Foods/Meals/Profile) o resto sui nomi IT dell'app?
+_Default consigliato:_ tradurre le etichette descrittive, mantenendo "Dashboard"/"Freedihare" invariati.
+**Risposta:** traduci
+
+### 17.4 — Esito risposte (recepite 2026-06-02)
+
+Q1 bilingue sul renderizzato · Q2 selezione curata, **niente emoji, grafica accattivante non statica** · Q3 colori locali · Q4 cyan dominante **+ teal/verde logo + macro coi colori README** · Q5 solo button interno + icone tech · Q6 componente dedicato riusabile · Q7 nascondi NavbarDev + back-link · Q8 confermato · Q9 sì colori originali · Q10 traduci. Stack confermato: **Electron, React, TypeScript, Node.js, Prisma, PostgreSQL, GraphQL**. Grafiche: l'utente caricherà gli screenshot (vedi §18).
+
+---
+
+## 18. ESITO 15.2 — Progetti personali + /dev/freedihare (2026-06-02)
+
+Build statico **10/10** (12 pagine, `/dev/freedihare` IT+EN). Tutto verificato nell'export.
+
+**File creati:**
+- `Interface/IPersonalProject.tsx`, `(data)/personalProjects.tsx` (Freedihare).
+- `(components)/(organisms)/PersonalProjectCard/PersonalProjectCard.tsx` + `.css`.
+- `(routes)/dev/freedihare/page.tsx` + `Freedihare.css`.
+- `public/assets/projects-img/freedihare/freedihare-logo.svg` (copiato da doc_reference).
+
+**File modificati:**
+- `(components)/(organisms)/PortfolioList/PortfolioList.tsx` — `getIcon` esteso (`electron`, `nodejs`).
+- `(components)/(molecules)/NavbarDev-client/NavbarDev.tsx` — condizione `/\/dev\/?$/` (nascosta sulle sotto-rotte).
+- `(routes)/dev/page.tsx` — sottosezione "Progetti personali" tra "Questo sito" e "Esercitazioni".
+- `messages/it.json` + `messages/en.json` — chiavi `subtitlePersonalProjects`/`discoverMore` (DevSection) + nuova sezione **`Freedihare`** (IT+EN).
+- `Architecture.md`, memoria.
+
+**Ibridazione realizzata:** chassis lorenzoliva (tema scuro, Zain, BlurBlue, `.btn`, utility) + accenti `--fh-*` scoped (cyan/verde/teal). Grafiche CSS: **anello calorie** (richiama il bilancio dell'app), **chip macro** coi colori ufficiali del README, card sezioni con icone `lucide`, flusso "giornata tipo" numerato. Niente emoji, niente `<header>`.
+
+**Screenshot (FATTO 2026-06-02):** l'utente ha caricato 3 PNG **verticali** (dashboard 571×773, diary 592×853, profile 571×874). Essendo portrait (non landscape come ipotizzato), invece dell'affiancamento testo+immagine ho scelto una **vetrina "Uno sguardo all'app"**: 3 cornici in stile finestra affiancate (3 col desktop → 1 mobile), subito dopo la hero. Convertiti in **WebP** (q90, sharp temporaneo poi rimosso): dashboard 30KB, diary 31KB, profile 23KB. PNG originali spostati in `0_lorenzoliva_studies/doc_reference/app-screens-png/` (fuori da `public/`). Nuova chiave i18n `showcaseTitle`; CSS `.fh-showcase`/`.fh-shot-frame`. Build 10/10, vetrina verificata IT+EN.
+
+**Aperto (prossimo):** sottosezione **"Collaborazioni"** (l'altra delle due previste) e campo `category` in `IPortfolioProject`, non ancora fatti.

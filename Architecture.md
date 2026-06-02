@@ -110,7 +110,8 @@ website-lorenzoliva-next/
 | --------------- | ------------------------------------- | ------------------- |
 | `/`             | `app/page.js`                         | Redirect a `/{locale}` |
 | `/{locale}`     | `app/[locale]/page.tsx`               | Home page           |
-| `/{locale}/dev` | `app/[locale]/(routes)/dev/page.tsx`  | Portfolio sviluppatore (skills, links, esperienza, portfolio) |
+| `/{locale}/dev` | `app/[locale]/(routes)/dev/page.tsx`  | Portfolio sviluppatore (skills, esperienza, portfolio, links) |
+| `/{locale}/dev/freedihare` | `app/[locale]/(routes)/dev/freedihare/page.tsx` | Approfondimento progetto personale Freedihare (stile sito + accenti app). NavbarDev nascosta qui (condizione `/\/dev\/?$/`) |
 | `/{locale}/art` | `app/[locale]/(routes)/art/page.tsx`  | Portfolio artistico |
 
 Locale validi: `it`, `en`. Default: `it`.
@@ -124,6 +125,7 @@ app/layout.tsx                          → CSS globali, shell HTML minima
   └── app/[locale]/layout.tsx           → NextIntlClientProvider, Header, <main>, Footer
         ├── page.tsx                    → Home
         ├── (routes)/dev/page.tsx       → Dev (nessun layout proprio)
+        │     └── dev/freedihare/page.tsx → Approfondimento Freedihare (sotto-rotta)
         └── (routes)/art/layout.tsx     → Wrapper CSS art
               └── art/page.tsx          → Art
 ```
@@ -173,6 +175,7 @@ app/layout.tsx                          → CSS globali, shell HTML minima
 | Footer         | No     | Compone SectionFooter + testi copyright (`useTranslations`) |
 | PortfolioList  | No     | Lista progetti con Carousel (dati da portfolioProjects.tsx) |
 | ExperienceList | No     | Card esperienze professionali (dati da experiences.tsx); `useLocale` per i contenuti bilingui; descrizione come `<p>` intero; periodo reso con atomo `Tag`; tech come icone `BrandIcon` (via `getIcon`) |
+| PersonalProjectCard | No | Card progetto personale (sottosezione `#portfolio` "Progetti personali"): logo + descrizione breve + icone tech (`getIcon`) + CTA `Link` interna verso la rotta di approfondimento |
 
 ---
 
@@ -190,7 +193,7 @@ i18n/request.ts
  generateStaticParams; il redirect "/" → "/{locale}" è client-side in app/page.tsx)
 
 messages/it.json, messages/en.json
-  └── chiavi: Layout.*, ModalDoc.*, Home.*, DevSection.*, ArtSection.*
+  └── chiavi: Layout.*, ModalDoc.*, Home.*, DevSection.*, ArtSection.*, Freedihare.*
 
 app/[locale]/layout.tsx
   └── <NextIntlClientProvider messages={messages}> wrappa tutta l'app
@@ -229,6 +232,11 @@ Esporta:
 
 Esporta:
 - `experiences: IExperience[]` — esperienze professionali dev (ruolo, azienda, periodo, descrizione bilingue, tech, `current`). Vincolo NDA: nomi azienda/ruolo/tipologie, niente clienti/repo. Renderizzate da `ExperienceList` nella sezione `/dev #experience`.
+
+### `personalProjects.tsx`
+
+Esporta:
+- `personalProjects: IPersonalProject[]` — progetti personali (sottosezione `/dev #portfolio` "Progetti personali"). Forma dedicata (logo, tagline bilingue, `route` interna, `tech`), distinta da `IPortfolioData` (che è per screenshot + link esterni). Primo elemento: **Freedihare** → rotta di approfondimento `/dev/freedihare`. Reso da `PersonalProjectCard`.
 
 ### `socialNetwork.tsx`
 

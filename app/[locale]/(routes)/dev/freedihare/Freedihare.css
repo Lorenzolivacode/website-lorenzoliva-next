@@ -1,0 +1,325 @@
+/* Pagina di approfondimento Freedihare.
+   Chassis = stile lorenzoliva (tema scuro globale, font Zain, .btn, utility).
+   Identità Freedihare = accenti SCOPED a questa pagina: le custom property --fh-* vivono
+   solo qui (non in globals.css) perché sono i colori di una singola app, non palette di sistema.
+   Eccezione consapevole alla regola "colori dai globals" (come il gold della pagina Art),
+   limitata e documentata: i colori dei macro sono quelli ufficiali dell'app (dal suo README). */
+
+.freedihare-page {
+  /* accenti app */
+  --fh-accent: #53b6d6; /* cyan: accento dominante */
+  --fh-green: #c1f8a0; /* verde app */
+  --fh-teal: #205976; /* teal del logo */
+  --fh-bg: #0f172a; /* navy: sfondo finestra app (letterbox della vetrina) */
+
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 20px 0 40px;
+}
+
+/* ── Hero ──────────────────────────────────── */
+.fh-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+.fh-hero-text {
+  flex: 1;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.fh-hero-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+.fh-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  color: var(--fh-accent);
+}
+.fh-title {
+  font-size: clamp(2.2rem, 1.8rem + 2vw, 3rem);
+  line-height: 1.1;
+  color: var(--fh-green);
+}
+.fh-wordmark {
+  color: var(--fh-accent);
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+.fh-tagline {
+  color: var(--color-primary-very-light);
+  font-style: italic;
+}
+/* badge di stato: progetto MVP in evoluzione */
+.fh-status {
+  align-self: flex-start;
+  padding: 3px 12px;
+  border-radius: 20px;
+  color: var(--fh-green);
+  border: 1px solid var(--fh-green);
+  background: rgba(193, 248, 160, 0.08);
+}
+
+/* anello calorie (richiama il grafico circolare "bilancio" dell'app) */
+.fh-ring {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+.fh-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.fh-ring circle {
+  fill: none;
+  stroke-width: 10;
+}
+.fh-ring-track {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+.fh-ring-value {
+  stroke: var(--fh-accent);
+  stroke-linecap: round;
+  stroke-dasharray: 327; /* 2*pi*52 */
+  stroke-dashoffset: 98; /* ~70% completato */
+}
+.fh-ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.fh-ring-num {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--fh-green);
+}
+.fh-ring-unit {
+  font-size: 0.8rem;
+  color: var(--color-primary-medium-light);
+}
+
+/* ── Sezioni ───────────────────────────────── */
+.fh-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.fh-section-title {
+  color: var(--fh-accent);
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(83, 182, 214, 0.3);
+}
+
+/* ── Vetrina screenshot (verticali, cornice finestra) ── */
+.fh-showcase {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.fh-shot {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.fh-shot-frame {
+  /* cornice di dimensione UNIFORME (la più alta): le immagini più corte restano
+     centrate con object-fit:contain, lasciando spazio vuoto sopra/sotto (niente crop) */
+  aspect-ratio: 571 / 874;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(83, 182, 214, 0.25);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--fh-bg);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+.fh-shot-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.fh-shot-cap {
+  text-align: center;
+  color: var(--color-primary-medium-light);
+  font-size: 0.85rem;
+}
+@media screen and (max-width: 768px) {
+  .fh-showcase {
+    grid-template-columns: 1fr;
+    max-width: 340px;
+    margin-inline: auto;
+  }
+}
+
+/* ── Pills panoramica ──────────────────────── */
+.fh-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.fh-pill {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 130px;
+  padding: 12px 18px;
+  border: 1px solid rgba(83, 182, 214, 0.25);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.fh-pill-label {
+  color: var(--color-primary-very-light);
+}
+.fh-pill-sub {
+  color: var(--color-primary-medium-light);
+}
+
+/* ── Griglia card sezioni ──────────────────── */
+.fh-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.fh-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+.fh-card:hover {
+  border-color: var(--fh-accent);
+  transform: translateY(-2px);
+}
+.fh-card-icon {
+  width: 42px;
+  height: 42px;
+  color: var(--fh-accent);
+  background: rgba(83, 182, 214, 0.12);
+}
+.fh-card h3 {
+  color: var(--color-primary-very-light);
+}
+
+/* ── Macro chip (colori ufficiali dell'app, dal README) ── */
+.fh-macros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.fh-macro {
+  padding: 4px 14px;
+  border: 1px solid;
+  border-radius: 20px;
+}
+.fh-macro-kcal {
+  color: #afd482;
+  border-color: #afd482;
+}
+.fh-macro-proteins {
+  color: #d47461;
+  border-color: #d47461;
+}
+.fh-macro-fats {
+  color: #8ec8f2;
+  border-color: #8ec8f2;
+}
+.fh-macro-saturated {
+  color: #c4d9e9;
+  border-color: #c4d9e9;
+}
+.fh-macro-carbs {
+  color: #fbcd6a;
+  border-color: #fbcd6a;
+}
+.fh-macro-sugars {
+  color: #ffe2a2;
+  border-color: #ffe2a2;
+}
+.fh-macro-fiber {
+  color: #dbc89c;
+  border-color: #dbc89c;
+}
+.fh-macro-salt {
+  color: #b6e3e1;
+  border-color: #b6e3e1;
+}
+
+/* ── Flusso "giornata tipo" ────────────────── */
+.fh-flow {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fh-flow-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.fh-flow-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  background: var(--fh-accent);
+  color: var(--color-primary-very-dark);
+  font-size: 0.85rem;
+}
+
+/* ── Stack + CTA ───────────────────────────── */
+.fh-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Responsive ────────────────────────────── */
+@media screen and (max-width: 768px) {
+  .fh-grid {
+    grid-template-columns: 1fr;
+  }
+  .fh-hero {
+    justify-content: center;
+    text-align: left;
+  }
+}

@@ -11,10 +11,12 @@ import {
   thisWebsite,
 } from "./../../(data)/portfolioProjects";
 import { experiences } from "./../../(data)/experiences";
+import { personalProjects } from "./../../(data)/personalProjects";
 import PortfolioList, {
   getIcon,
 } from "../../(components)/(organisms)/PortfolioList/PortfolioList";
 import ExperienceList from "../../(components)/(organisms)/ExperienceList/ExperienceList";
+import PersonalProjectCard from "../../(components)/(organisms)/PersonalProjectCard/PersonalProjectCard";
 import BrandIcon from "../../(components)/(atoms)/BrandIcon/BrandIcon";
 import SubtitlePortfolio from "../../(components)/(atoms)/SubtitlePortfolio/SubtitlePortfolio";
 import ParagraphList from "../../(components)/(atoms)/ParagraphList-client/ParagraphList";
@@ -137,6 +139,12 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
               {t("lookCode")}
             </Link>
           </div>
+        </div>
+        <SubtitlePortfolio label={t("subtitlePersonalProjects")} />
+        <div className="w-full flex-column gap-20px">
+          {personalProjects.map((project) => (
+            <PersonalProjectCard key={project.id} project={project} />
+          ))}
         </div>
         <SubtitlePortfolio label={t("subtitleExercises")} />
         <PortfolioList data={portfolioData} />

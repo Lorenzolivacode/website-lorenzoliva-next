@@ -20,10 +20,12 @@ import {
   siSass,
   siTypescript,
   siNextdotjs,
+  siNodedotjs,
   siFirebase,
   siGraphql,
   siPrisma,
   siPostgresql,
+  siElectron,
 } from "simple-icons";
 
 // mappa requirement (stringa lowercase nei dati progetto) → icona simple-icons.
@@ -38,10 +40,12 @@ const ICON_BY_REQUIREMENT: Record<string, { title: string; path: string }> = {
   sass: siSass,
   typescript: siTypescript,
   next: siNextdotjs,
+  nodejs: siNodedotjs,
   firebase: siFirebase,
   graphql: siGraphql,
   prisma: siPrisma,
   postgresql: siPostgresql,
+  electron: siElectron,
 };
 
 export const getIcon = (requirement: string) => ICON_BY_REQUIREMENT[requirement];

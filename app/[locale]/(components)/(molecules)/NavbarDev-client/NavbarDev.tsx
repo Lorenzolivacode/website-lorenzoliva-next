@@ -89,7 +89,9 @@ function NavDevContent() {
 
   return (
     <>
-      {pathname.includes("dev") && (
+      {/* solo sulla pagina /dev, non sulle sotto-rotte (es. /dev/freedihare):
+          le ancore del menu puntano alle sezioni di /dev e altrove si romperebbero */}
+      {/\/dev\/?$/.test(pathname) && (
         <div className=" z-i--10">
           <RoundedIconEl
             src={"/assets/nav-icon/nav-dev-icon/path-icon.png"}
