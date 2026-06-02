@@ -16,7 +16,7 @@ import {
 import { buildMetadata } from "../../../seo";
 import BlurBlue from "../../../(components)/(atoms)/BlurBlue/BlurBlue";
 import TechIconList from "../../../(components)/(molecules)/TechIconList/TechIconList";
-import { personalProjects } from "../../../(data)/personalProjects";
+import { portfolioData } from "../../../(data)/portfolioProjects";
 import {
   fhPills,
   fhSections,
@@ -54,7 +54,9 @@ function FreedipharePage({ params: { locale } }: { params: { locale: string } })
   const t = useTranslations("Freedihare");
 
   const logo = "/assets/projects-img/freedihare/freedihare-logo.svg";
-  const freedihare = personalProjects.find((p) => p.id === "freedihare");
+  const freedihare = portfolioData.personalProjects.find(
+    (p) => p.id === "freedihare"
+  );
 
   return (
     <div className="freedihare-page w-full">

@@ -49,12 +49,12 @@ export function PortfolioList({ data }: { data: IPortfolioData[] }) {
               title={t("followCode")}
               iconClass="img-git-30"
             />
-            <ProjectLinkButton
+            {/* <ProjectLinkButton
               href={project.linkProject}
               label={t("tryProject")}
               title={t("followProject")}
               iconClass="img-link-30"
-            />
+            /> */}
           </div>
         </li>
       ))}

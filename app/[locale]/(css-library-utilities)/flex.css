@@ -74,6 +74,11 @@
   justify-content: end;
 }
 
+.flex-start {
+  display: flex;
+  justify-content: start;
+}
+
 .flex-stretch {
   display: flex;
   justify-content: stretch;

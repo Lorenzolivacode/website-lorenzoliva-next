@@ -471,46 +471,13 @@ Vincolo NDA (§8.4): "Riverloop srls" nominabile, ruolo + tipologie di progetto,
 
 ---
 
-## 13. Domande mirate per arricchire le descrizioni esperienze ⬅️ COMPILARE QUI
+## 13. Interviste esperienze Riverloop (COMPATTATO) — esiti canonici in §12.9 + `(data)/experiences.tsx`
 
-> Motivo: la bozza §12.9 è onesta ma **generica** (parafrasa il CV). Per renderla concreta e credibile per un recruiter servono dettagli reali. Rispondi in bullet/telegrafico, salta ciò che non si applica. **Vincolo NDA (§8.4): niente nomi clienti / repo / screenshot.** L'agente userà **solo** ciò che è scritto qui — non inventa dettagli. A risposte date, riscrive la §12.9 in versione concreta IT/EN.
-
-### A — Riverloop, Full Stack (esperienza principale)
-
-1. **Tipi di progetto / domini** (senza nomi clienti): gestionali, dashboard, e-commerce, booking, CMS, portali…? Quali davvero?
-   **Risposta:** Gestionale per le scuole, saas per elaborazione testi e aiuto studio da testi con AI, saas/gestionale per ristoranti (ti serve sapere il contesto, non entrare nel merito dei progetti, fa altre domande se devi)
-2. **Backend gestito in prima persona:** schema/modelli **Prisma** + migrazioni? API/route handlers o server actions? **autenticazione** (quale)? integrazioni terze (pagamenti, email, mappe, storage)? Quale **DB** (Postgres/MySQL/…)?
-   **Risposta:** gestito in prima persona, db postgres gestito con prisma e photos (graphql)
-3. **GraphQL** (è nel CV): usato a Riverloop o solo da formazione? (decide se citarlo)
-   **Risposta:** su tutti i progetti con riverloop e nei progetti personali (non ancora aggiunti al sito)
-4. **Frontend:** design system / libreria componenti riusabile? responsive, accessibilità, performance, animazioni? Partite da Figma / pixel-perfect?
-   **Risposta:** poche reference, soprattutto gestione UX/UI al momento
-5. **Team & metodo:** quante persone? Tuo ruolo (feature in autonomia, code review, mentoring junior)? Git flow / PR / sprint?
-   **Risposta:** team di 2 persone (me compreso), stesso livello, autonomia totale, niente mentoring (solo poco all'inizio) o code review, sprint autogestiti, progettazione del lavoro, sugli ultimi progetti (per ristoranti) anche studio architetturale
-6. **Quantificabile** (anche soft): n° progetti consegnati, riduzione tempi, riuso componenti tra progetti…?
-   **Risposta:** i menzionati portati a termine, niente o poco riutilizzo; 2-3 mesi in solitaria sugli ultimi due progetti
-
-### B — Riverloop, Docente
-
-7. **A chi insegni** (livello: principianti / bootcamp / aziendale) e **n° studenti** indicativo?
-   **Risposta:** studenti adulti, intorno alla decina, principianti
-8. **Cosa insegni** (HTML/CSS/JS, React, Next, Git…) e **come** (lezioni live, code-along, review progetti, supporto 1:1)?
-   **Risposta:** lezioni teorico-pratiche strutturate, ho parlato per lo più di JS, react e next.js
-9. Hai **creato materiale** tuo (esercizi, curriculum, slide)?
-   **Risposta:** materiale elaborato personalmente: slide, esercizi, lezioni su Notion
-
-### C — Lavorare con l'AI come skill (AI-assisted / agentic development)
-
-> Da inquadrare come competenza professionale moderna, non come "uso ChatGPT".
-
-10. **Framing/tono preferito:** "Sviluppo AI-assisted" / "Pair programming con agenti AI (Claude Code)" / "Workflow agentici" / altro?
-    **Risposta:** hai modo di valutare in base a ciò che trovi in memoria? faccio molto studio e pianificazione con AI, non "devo fare questo, vai"
-11. **Cosa ci fai davvero** quotidianamente: scaffolding, refactoring, review, debugging, architettura/decisioni, documentazione, automazioni?
-    **Risposta:** rifatti a 10 e valuta, un po' tutto con occhio attento
-12. **Dove la collochi:** (a) voce nella **griglia Skills** — nota: la griglia usa loghi brand PNG; per l'AI non c'è asset logo → si userebbe un'icona lucide (`Sparkles`/`Bot`), piccola deviazione da valutare; (b) **riga dentro la descrizione Riverloop**; (c) **entrambe**.
-    **Risposta:** suggerisci. in eseprienza, valutare in che modo altrove
-
-**Note libere aggiuntive:** le skills andranno aggiornate in seguito in base a ciò che è segnato nel cv
+> Domande mirate per concretizzare le descrizioni; risposte recepite e già fuse nei contenuti finali. Sintesi dei fatti (NDA: niente clienti/repo/screenshot):
+> - **Full Stack:** gestionali/SaaS in ambiti vari (alcune con AI); backend in prima persona (PostgreSQL + Prisma, layer GraphQL/Pothos); frontend Next.js/React con UX/UI spesso in autonomia; team di 2 pari, autonomia totale, sprint autogestiti, studio architetturale sugli ultimi progetti; ~2-3 mesi in solitaria sugli ultimi due.
+> - **Docente:** adulti principianti (~10), lezioni teorico-pratiche su JS/React/Next.js, materiale proprio (slide/esercizi/Notion).
+> - **AI come metodo** (studio/pianificazione/architettura + revisione critica): resa come frase finale nella descrizione full-stack; voce skill dedicata rinviata.
+> - Nota utente: le skills andranno aggiornate in base al CV (poi fatto, §15.1/§16).
 
 ---
 
@@ -667,47 +634,9 @@ Principio: **lo "chassis" è lorenzoliva, l'identità Freedihare entra come acce
 - **Struttura `/dev/freedihare`**: hero (logo + tagline "Nutrizione consapevole, sotto controllo." + etimologia _Free+Feeding+Share_ + intro) → "Le 5 sezioni" → blocchi Dashboard/Diario/Alimenti/Pasti/Profilo → Account collegati → Macro-palette → Giornata tipo / Primo accesso (flow numerati) → CTA finale (torna a `/dev` ed eventuale link esterno). Contenuto **curato** (vedi Q2), bilingue.
 - **Card "Progetti personali"** (nella sezione `#portfolio`, sopra "Esercitazioni"): stesso linguaggio delle card esercitazione (shadow, radius, descrizione breve) ma con **logo** al posto dello screenshot e **un button "Scopri di più" → `/dev/freedihare`** (Link locale i18n). Implementazione pulita: NON forzare `IPortfolioData` (screenshot+link esterni); usare un **piccolo componente dedicato** `PersonalProjectCard` con dati propri (logo, titolo, descrizione bilingue, route, tech opzionali), riusando le classi CSS esistenti.
 
-### 17.3 — Domande aperte ⬅️ COMPILARE QUI (rispondere prima di implementare)
+### 17.3 — Domande Freedihare (COMPATTATO) — esiti in §17.4, implementati in §18/§18.1
 
-**Q1 — Lingua della pagina `/dev/freedihare`.** Il README è solo IT; il sito è bilingue obbligatorio. Traduco tutti i contenuti anche in EN?
-_Default consigliato:_ sì, bilingue, ma su una **versione curata** (non l'intero README) per contenere il volume di traduzione.
-**Risposta:** si, su quello che viene renderizzato nella nuova rotta
-
-**Q2 — Quanto contenuto del README riportare.** Tutto (lungo) o una **selezione curata**: hero/intro + le 5 sezioni (sintetiche) + account collegati + macro-palette + 1 flusso (giornata tipo _oppure_ primo accesso)?
-_Default consigliato:_ selezione curata (come sopra); ometto le sotto-procedure di dettaglio (es. "come creare una fase" passo-passo) o le riduco.
-**Risposta:** ok, non usare emoji; mantieni le info che rendono comprensibile l'utilità dell'app; aggiorna con grafica accattivante, distaccati dallo stile statico del readme
-
-**Q3 — Colori ibridi: dove vivono.** Custom property **locali** alla pagina (`.freedihare-page`, in `freedihare.css`) oppure nuove `--color-*` in `globals.css` (come fu per il gold di Art)?
-_Default consigliato:_ locali alla pagina (sono colori di una singola app, non palette di sistema).
-**Risposta:** locali
-
-**Q4 — Accento principale.** Uso il **cyan `#53b6d6`** (accent README) o il **teal `#205976`** (logo) come accento dominante della pagina? (il verde resta accento secondario)
-_Default consigliato:_ cyan `#53b6d6` (più vivo, è l'accento "ufficiale" dell'app); teal come accento profondo/bordi.
-**Risposta:** ok, ma usa anche i colori del logo. menzionando kcal e macro usa i colori inseriti in readme
-
-**Q5 — Card "Progetti personali": forma e link.** Logo + descrizione breve + button "Scopri di più" → `/dev/freedihare`. Tengo **anche** un link esterno (sito/GitHub dell'app) o **solo** il button interno? La card mostra le icone tech (Electron/React/…)?
-_Default consigliato:_ solo button interno per ora (niente link esterno finché non c'è un URL pubblico); **sì** icone tech (coerenza con le card esercitazione).
-**Risposta:** solo button link interno; si
-
-**Q6 — Modello dati.** Creo un componente/dati dedicati `PersonalProjectCard` (logo, route, descrizione, tech) **separati** da `IPortfolioData`, oppure aggiungo `category` a `IPortfolioData` e ci infilo Freedihare?
-_Default consigliato:_ dedicato e separato (Freedihare non ha screenshot/doppio link esterno: forzarlo sporca `IPortfolioData`). `category` su `IPortfolioData` resta per le future Collaborazioni/Esercitazioni.
-**Risposta:** dedicato, stesso pattern potrà essere utile per altri progetti futuri. lo stack possiamo prenderlo come fatto per /dev
-
-**Q7 — NavbarDev su `/dev/freedihare`.** La barra menu `/dev` comparirebbe anche qui, con ancore rotte. Cosa preferisci: (a) **nasconderla** su `/dev/freedihare` (condizione `pathname` più stretta) e mettere un semplice "← Torna a /dev"; (b) tenerla ma far puntare le ancore a `/dev#sezione`; (c) altro?
-_Default consigliato:_ (a) nascondere NavbarDev sulla sotto-rotta + back-link a `/dev` (la pagina Freedihare è una "scheda di approfondimento", non una pagina a sezioni con quella barra).
-**Risposta:** concordo con consigliato
-
-**Q8 — Posizione e ordine sottosezioni Portfolio.** Ordine proposto: "Questo sito" → **"Progetti personali"** → (Collaborazioni, futura) → "Esercitazioni". Confermi? E "Progetti personali" resta dentro `#portfolio` (niente nuova voce NavbarDev)?
-_Default consigliato:_ sì all'ordine; sì, dentro `#portfolio` senza nuova voce menu (coerente con memoria §15.2).
-**Risposta:** confermo
-
-**Q9 — Asset logo.** Dove metto il logo: `public/assets/projects-img/freedihare-logo.svg`? Lo uso a colori originali (teal+verde), giusto?
-_Default consigliato:_ sì, in `public/assets/projects-img/`, colori originali.
-**Risposta:** si
-
-**Q10 — Titoli/voci app in EN.** Termini come "Dashboard/Diario/Alimenti/Pasti/Profilo" e i nomi sezione: in EN li traduco (Diary/Foods/Meals/Profile) o resto sui nomi IT dell'app?
-_Default consigliato:_ tradurre le etichette descrittive, mantenendo "Dashboard"/"Freedihare" invariati.
-**Risposta:** traduci
+> 10 domande chiuse. Sintesi decisioni: bilingue su contenuto curato · niente emoji, grafica accattivante non statica · colori locali alla pagina · cyan dominante + teal/verde logo + macro coi colori del README · solo button interno + icone tech · componente dedicato (`PersonalProjectCard`, riusabile) · NavbarDev nascosta sulla sotto-rotta · ordine sottosezioni confermato · logo a colori originali · etichette EN tradotte (nomi propri invariati).
 
 ### 17.4 — Esito risposte (recepite 2026-06-02)
 
@@ -736,4 +665,63 @@ Build statico **10/10** (12 pagine, `/dev/freedihare` IT+EN). Tutto verificato n
 
 **Screenshot (FATTO 2026-06-02):** l'utente ha caricato 3 PNG **verticali** (dashboard 571×773, diary 592×853, profile 571×874). Essendo portrait (non landscape come ipotizzato), invece dell'affiancamento testo+immagine ho scelto una **vetrina "Uno sguardo all'app"**: 3 cornici in stile finestra affiancate (3 col desktop → 1 mobile), subito dopo la hero. Convertiti in **WebP** (q90, sharp temporaneo poi rimosso): dashboard 30KB, diary 31KB, profile 23KB. PNG originali spostati in `0_lorenzoliva_studies/doc_reference/app-screens-png/` (fuori da `public/`). Nuova chiave i18n `showcaseTitle`; CSS `.fh-showcase`/`.fh-shot-frame`. Build 10/10, vetrina verificata IT+EN.
 
-**Aperto (prossimo):** sottosezione **"Collaborazioni"** (l'altra delle due previste) e campo `category` in `IPortfolioProject`, non ancora fatti.
+### 18.1 — Rifiniture /dev/freedihare + card (2026-06-02)
+
+- **Vetrina frame uniformi (richiesta utente):** i 3 frame hanno dimensione identica (`aspect-ratio: 571/874`, il più alto); le immagini più corte restano centrate con `object-fit: contain` (niente crop, spazio vuoto sopra/sotto). Sfondo letterbox = navy app (`--fh-bg #0f172a`).
+- **Stato MVP nel copy:** badge verde **"MVP in fase di test"/"MVP in testing"** nella hero (`statusBadge`, classe `.fh-status`); `closingText` e la tagline della card precisano "MVP strutturato, in test, in espansione".
+- **Back-link rimossi:** tolti i due "Torna alla pagina dev" (ridondanti con l'header) da `/dev/freedihare`; rimossi `.fh-back`/`.fh-cta` e la chiave i18n `backToDev`.
+- **Button "Scopri di più" (card):** ora **`w-full`** come gli altri + icona lucide `ArrowRight`.
+- **Card "Progetti personali" senza riquadro (richiesta utente):** rimosso `shadow-light-small radius-20px` dal contenitore esterno (creava un box che le altre voci del Portfolio non hanno); il logo resta thumbnail sul suo pannello, niente padding orizzontale → allineata alle sottosezioni sorelle.
+
+---
+
+## 19. Refactor componentizzazione/struttura (2026-06-02)
+
+Su richiesta utente: ridurre ridondanze e generalizzare. Nessun cambio visivo, build 10/10. Scelti A+B+C+D.
+
+- **A — `(components)/(molecules)/TechIconList`** _(nuovo)_: incapsula il pattern `getIcon`+`BrandIcon`+skip, prima **duplicato in 5 punti** (PortfolioList, dev/page "Questo sito", ExperienceList, PersonalProjectCard, freedihare). Props `tech: string[]`, `size?`, `listClassName?`.
+- **B — `(components)/(molecules)/ProjectLinkButton`** _(nuovo)_: button-link esterno con stato disabled, prima **duplicato 3×** (PortfolioList ×2, dev/page). Props `href/label/title/iconClass`.
+- **C — freedihare snellita:** array estratti in **`(data)/freedihareContent.tsx`** (`fhPills/fhSections/fhMacros/fhDay/fhShots`, dati puri con `iconKey`) + helper colocato **`(routes)/dev/freedihare/FhSection.tsx`** (titolo+contenuto, elimina l'`<h2>` ripetuto 5×). La pagina è ora quasi solo wiring.
+- **D — `(data)/techIcons.tsx`** _(nuovo)_: registro unico **`BRAND_ICONS`** + `getIcon` (prima in `PortfolioList`). Un solo elenco di import `simple-icons` nel progetto; `skills` referenzia `BRAND_ICONS.*`. Risolto l'import organism→organism.
+
+**Effetto:** 5 duplicazioni icone-tech → 1 molecola; 3 duplicazioni button → 1 molecola; `simple-icons` importato in 1 solo file; `getIcon` in `(data)`; freedihare page da 224 a ~190 righe di solo wiring. Verifica export invariata (144 icone-tech su /dev, 60 button, chip ora `<ul.technical-list>`, stack freedihare 7). `Architecture.md` (molecole TechIconList/ProjectLinkButton, data techIcons/freedihareContent) e memoria aggiornate.
+
+---
+
+**STATO 15.2:** ✅ sottosezione "Progetti personali" + Freedihare (card, rotta, vetrina, copy MVP) + refactor. **In corso (§20):** sottosezione **"Collaborazioni"** + campo `category` in `IPortfolioProject`.
+
+---
+
+## 20. 15.2b — Sottosezione "Collaborazioni" + campo `category` ⬅️ DOMANDE DA COMPILARE
+
+> **Contesto (verificato sul codice):** `IPortfolioData` NON ha ancora `category`. Approccio previsto (piano §15.2): aggiungere `category` (default `"exercise"` sui 14 progetti) e far filtrare `portfolioData` alle sottosezioni. Le Collaborazioni sono **progetti esterni / di team non legati al lavoro Riverloop** (quello è la sezione Experience; vale comunque l'NDA se commissionati). La card riuserebbe `PortfolioList` (screenshot + icone tech via `TechIconList` + button via `ProjectLinkButton`).
+>
+> Posso costruire **subito lo scaffolding** (campo `category` + filtro + sottotitolo) senza tue risposte; ma per **popolare** la sottosezione mi servono i progetti reali. Rispondi sotto ogni voce.
+
+**Q1 — Quali progetti vanno in "Collaborazioni"?** Per ciascuno servono: titolo, screenshot (file in `public/assets/projects-img/`), tech (chiavi requirement: react/next/typescript/...), descrizione IT/EN (o tue note → redigo la bozza), link GitHub e/o live, data.
+_Default:_ nessuno pronto ora → costruisco solo lo scaffolding e la sottosezione resta **nascosta** finché non ci sono progetti (niente sezione vuota).
+**Risposta:** \_
+
+**Q2 — Riclassificare progetti esistenti?** Tra i 14 "esercitazioni" alcuni sono di team (es. **HeracleApp**, prototipo di 5 persone). Vuoi spostarne qualcuno in "Collaborazioni"? Quali?
+_Default:_ no, restano esercitazioni; riclassifico solo quelli che indichi esplicitamente.
+**Risposta:** \_
+
+**Q3 — Forma della card.** Collaborazioni riusa la card "Esercitazioni" (screenshot + icone tech + button GitHub/live)?
+_Default:_ sì, riusa la card esercitazioni (progetti esterni con repo/demo); niente rotta di approfondimento (a differenza di Freedihare).
+**Risposta:** \_
+
+**Q4 — Modello dati.** Confermo `category: "exercise" | "collaboration"` su `IPortfolioData` (default `"exercise"` sui 14) + due `PortfolioList` filtrate in `dev/page.tsx`? Oppure preferisci un array separato `collaborations`?
+_Default:_ campo `category` + filtro su `portfolioData` (una sola fonte, come da piano §15.2).
+**Risposta:** \_
+
+**Q5 — Ordine sottosezioni Portfolio.** "Questo sito → Progetti personali → Collaborazioni → Esercitazioni"? O Collaborazioni prima di Progetti personali?
+_Default:_ Questo sito → Progetti personali → Collaborazioni → Esercitazioni.
+**Risposta:** \_
+
+**Q6 — NDA / link.** I progetti di collaborazione hanno repo/demo pubblici mostrabili? O alcuni sono riservati (solo descrizione, niente link)?
+_Default:_ mostro i link quando ci sono; per i riservati il button resta disabilitato (già gestito da `ProjectLinkButton`).
+**Risposta:** \_
+
+**Q7 — Intro della sottosezione.** Una riga introduttiva sotto il titolo "Collaborazioni" (es. "Progetti realizzati in team o per terzi") o solo il sottotitolo come le altre?
+_Default:_ solo `SubtitlePortfolio` come le altre (coerenza); intro eventuale dopo.
+**Risposta:** \_

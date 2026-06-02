@@ -11,7 +11,6 @@ import {
   thisWebsite,
 } from "./../../(data)/portfolioProjects";
 import { experiences } from "./../../(data)/experiences";
-import { personalProjects } from "./../../(data)/personalProjects";
 import PortfolioList from "../../(components)/(organisms)/PortfolioList/PortfolioList";
 import ExperienceList from "../../(components)/(organisms)/ExperienceList/ExperienceList";
 import PersonalProjectCard from "../../(components)/(organisms)/PersonalProjectCard/PersonalProjectCard";
@@ -118,12 +117,19 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
         </div>
         <SubtitlePortfolio label={t("subtitlePersonalProjects")} />
         <div className="w-full flex-column gap-20px">
-          {personalProjects.map((project) => (
+          {portfolioData.personalProjects.map((project) => (
             <PersonalProjectCard key={project.id} project={project} />
           ))}
         </div>
+        {/* Collaborazioni: mostrata solo quando ci sono progetti (niente sezione vuota) */}
+        {portfolioData.collaborations.length > 0 && (
+          <>
+            <SubtitlePortfolio label={t("subtitleCollaborations")} />
+            <PortfolioList data={portfolioData.collaborations} />
+          </>
+        )}
         <SubtitlePortfolio label={t("subtitleExercises")} />
-        <PortfolioList data={portfolioData} />
+        <PortfolioList data={portfolioData.exercises} />
       </section>
       <section
         id="links"

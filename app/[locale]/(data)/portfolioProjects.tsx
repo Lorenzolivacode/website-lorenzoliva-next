@@ -1,4 +1,6 @@
 import { BRAND_ICONS } from "./techIcons";
+import { IPortfolioData } from "../Interface/IPortfolioProject";
+import { IPersonalProject } from "../Interface/IPersonalProject";
 
 const generateId = () => {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -60,7 +62,8 @@ export const thisWebsite = {
   created: "2024-10-07",
 };
 
-export const portfolioData = [
+// Esercitazioni (i 14 progetti formativi). Forma IPortfolioData (screenshot + link esterni).
+const exercises = [
   {
     id: generateId(),
     title: "SCB - Simple contacts book",
@@ -269,3 +272,42 @@ export const portfolioData = [
     created: "2024-05-27",
   },
 ];
+
+// Collaborazioni: progetti esterni / di team non legati al lavoro Riverloop.
+// Stessa forma delle esercitazioni (IPortfolioData). Vuoto finché non si aggiungono progetti reali.
+const collaborations: IPortfolioData[] = [];
+
+// Progetti personali (forma propria IPersonalProject: logo + rotta di approfondimento, niente
+// screenshot/link esterni). Resi da PersonalProjectCard.
+const personalProjects: IPersonalProject[] = [
+  {
+    id: "freedihare",
+    title: "Freedihare",
+    logo: "/assets/projects-img/freedihare/freedihare-logo.svg",
+    tagline: {
+      italian:
+        "Applicazione desktop per pianificare, registrare e analizzare la propria alimentazione giorno per giorno: calorie, macro, obiettivi e trend nel tempo, con condivisione tra account collegati. Attualmente un MVP strutturato in fase di test, in continua espansione.",
+      english:
+        "Desktop application to plan, log and analyse your daily nutrition: calories, macros, goals and trends over time, with sharing between linked accounts. Currently a structured MVP in testing, being actively expanded.",
+    },
+    route: "/dev/freedihare",
+    tech: [
+      "electron",
+      "react",
+      "typescript",
+      "nodejs",
+      "prisma",
+      "postgresql",
+      "graphql",
+    ],
+  },
+];
+
+// Fonte unica dei dati del portfolio /dev, raggruppati per sottosezione.
+// exercises/collaborations → card PortfolioList; personalProjects → card PersonalProjectCard.
+// (thisWebsite resta export a sé: è un singolo elemento in evidenza, non una lista.)
+export const portfolioData = {
+  exercises,
+  collaborations,
+  personalProjects,
+};

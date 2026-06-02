@@ -15,9 +15,14 @@ function PersonalProjectCard({ project }: { project: IPersonalProject }) {
   const t = useTranslations("DevSection");
 
   return (
-    <article className="personal-card flex-wrap flex-cross-center gap-20px w-full">
+    <article className="personal-card flex-wrap flex-cross-start gap-20px w-full">
       <div className="personal-card-logo flex-center radius-20px bg-primary-very-dark-0d6">
-        <Image src={project.logo} alt={project.title} width={110} height={110} />
+        <Image
+          src={project.logo}
+          alt={project.title}
+          width={110}
+          height={110}
+        />
       </div>
 
       <div className="personal-card-body flex-column gap-10px">
