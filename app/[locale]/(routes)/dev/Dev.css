@@ -83,7 +83,9 @@
     padding-right: 20px;
   }
 
-  .section-code-page > h2 {
+  /* titolo di sezione: h2 ovunque tranne Skills (h1 di pagina) → includo entrambi */
+  .section-code-page > h2,
+  .section-code-page > h1 {
     border-bottom: 2px solid var(--color-secondary-very-light);
     padding-bottom: 4px;
   }

@@ -10,5 +10,5 @@ export interface IExperience {
   period: IDescriptionPData; // es. "Gen 2025 – presente" / "Jan 2025 – present"
   description: IDescriptionPData; // racconto bilingue dell'esperienza
   tech: string[]; // tag tecnologici come testo (pill)
-  current: boolean; // ruolo ancora in corso → badge "In corso"
+  current: boolean; // ruolo ancora in corso (metadato: nessun badge, riservato a un indicatore visivo futuro)
 }

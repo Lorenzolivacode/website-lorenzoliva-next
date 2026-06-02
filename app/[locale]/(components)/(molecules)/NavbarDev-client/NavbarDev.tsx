@@ -93,7 +93,7 @@ function NavDevContent() {
         <div className=" z-i--10">
           <RoundedIconEl
             src={"/assets/nav-icon/nav-dev-icon/path-icon.png"}
-            alt={"ciao"}
+            alt={t("goTo")}
             title={t("goTo")}
             isActive={true}
             onClick={handleMenu}

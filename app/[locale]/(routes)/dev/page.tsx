@@ -46,11 +46,13 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
         width={"100"}
         height={"200"}
       />
+      {/* ⚠️ GUARDIA: l'ordine di queste <section> DEVE combaciare con (data)/devSections.tsx
+          (voci isPageSection:true) o la barra di avanzamento di NavbarDev si disallinea. */}
       <section
         id="skills"
         className="section-code-page flex-center flex-column gap-30px"
       >
-        <h2 className="f-bold f-size-1d35-1d65">{t("skillsLabel")}</h2>
+        <h1 className="f-bold f-size-1d35-1d65">{t("skillsLabel")}</h1>
         <div className="skills-container flex-wrap flex-center">
           {skills.map((skill) => (
             <div key={skill.id} className="img-skill-container">
@@ -79,7 +81,7 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
         id="portfolio"
         className="section-code-page flex-center flex-column gap-30px"
       >
-        <h1 className="f-bold f-size-1d35-1d65">{t("portfolioLabel")}</h1>
+        <h2 className="f-bold f-size-1d35-1d65">{t("portfolioLabel")}</h2>
         <SubtitlePortfolio label={t("subtitleThisSite")} />
         <div className="project-list-el carousel-child p-y-12px">
           <div className="project-el-show overflow-hidden shadow-light-small flex-column flex-cross-center flex-evenly relative">
