@@ -13,6 +13,7 @@ Nessun backend, nessun database, nessuna autenticazione. Dati hardcoded, output 
 | Framework  | Next.js 14.2.13 (App Router)       |
 | Linguaggio | TypeScript (strict: false)          |
 | Styling    | CSS custom utility library (no preprocessor, no Tailwind) |
+| Icone      | `lucide-react` per le voci del menu `/dev` (NavbarDev); loghi brand (skills/links/progetti) restano asset PNG/SVG in `public/` |
 | i18n       | next-intl ^3.20.0 (IT, EN)         |
 | Font       | Google Fonts (Zain) via `@import` in globals.css. I file Geist/GeistMono in `app/fonts/` esistono ma **non sono referenziati** (non importati) |
 | Deploy     | Static export (`output: "export"`) → Aruba hosting Linux base (Apache) |
@@ -56,13 +57,17 @@ website-lorenzoliva-next/
 │       │
 │       ├── (data)/                   # Dati hardcoded
 │       │   ├── portfolioProjects.tsx # Array progetti, skills, links
+│       │   ├── devSections.tsx       # Fonte unica voci /dev (menu NavbarDev + barra)
+│       │   ├── experiences.tsx       # Esperienze professionali (sezione /dev #experience)
 │       │   └── socialNetwork.tsx     # Array social network
 │       │
 │       ├── (Provider)/               # Context providers
 │       │   └── HashContext.tsx        # Context per tracking sezione corrente (usato da NavbarDev)
 │       │
 │       └── Interface/
-│           └── IPortfolioProject.tsx  # Interfaccia TypeScript per i progetti
+│           ├── IPortfolioProject.tsx  # Interfaccia TypeScript per i progetti
+│           ├── IDevSection.tsx        # Forma voce navigazione /dev
+│           └── IExperience.tsx        # Forma singola esperienza professionale
 │
 ├── i18n/
 │   ├── routing.ts                    # Config locale + export Link, usePathname, useRouter, redirect
@@ -105,7 +110,7 @@ website-lorenzoliva-next/
 | --------------- | ------------------------------------- | ------------------- |
 | `/`             | `app/page.js`                         | Redirect a `/{locale}` |
 | `/{locale}`     | `app/[locale]/page.tsx`               | Home page           |
-| `/{locale}/dev` | `app/[locale]/(routes)/dev/page.tsx`  | Portfolio sviluppatore |
+| `/{locale}/dev` | `app/[locale]/(routes)/dev/page.tsx`  | Portfolio sviluppatore (skills, links, esperienza, portfolio) |
 | `/{locale}/art` | `app/[locale]/(routes)/art/page.tsx`  | Portfolio artistico |
 
 Locale validi: `it`, `en`. Default: `it`.
@@ -135,12 +140,13 @@ app/layout.tsx                          → CSS globali, shell HTML minima
 | BtnClose                    | No     | Bottone chiudi                             |
 | Jumper                      | No     | Animazione decorativa (usato in 404)       |
 | ParagraphList-client        | Si     | Lista paragrafi con scroll, legge `useLocale` per scegliere lingua descrizione |
-| RoundedIconEl               | No     | Icona con link (usa `Link` da i18n/routing) |
+| RoundedIconEl               | No     | Icona tonda con link (usa `Link` da i18n/routing); accetta un'icona come componente lucide (`Icon`) **o** come immagine (`src`) |
 | SectionDocs                 | No     | Sezione documenti (usa `useTranslations`)  |
 | SectionObserver-client      | Si     | Observer per tracking sezione visibile     |
 | SelectLanguage-client       | Si     | Dropdown `<select>` cambio lingua          |
 | SubtitlePortfolio           | No     | Sottotitolo sezione portfolio              |
 | SwitchLanguageInline-client | Si     | Switch lingua con bandiere (click)         |
+| Tag                         | No     | Etichetta generica con sfondo semi-trasparente; colore via prop (`color`, default `"primary"`). Usato per il tech stack delle esperienze |
 | Toast                       | No     | Notifica toast — **stub vuoto** (`return <div></div>`), non utilizzato |
 
 ### Molecules (`(components)/(molecules)/`)
@@ -155,16 +161,17 @@ app/layout.tsx                          → CSS globali, shell HTML minima
 | ModalHam-client       | Si     | Menu mobile (createPortal)                          |
 | ModalHello-client     | Si     | Modale benvenuto con foto                           |
 | Navbar-client         | Si     | Navigazione principale (Link da i18n/routing)       |
-| NavbarDev-client      | Si     | Navigazione sezione dev (anchor link a sezioni)     |
+| NavbarDev-client      | Si     | Navigazione sezione dev (anchor link a sezioni). Voci/ordine/barra derivati dalla fonte unica `devSections`; icone come componenti lucide (mappa `iconKey`→componente) |
 | SectionFooter-client  | Si     | Contenuto footer (contatti, docs, social)           |
 
 ### Organisms (`(components)/(organisms)/`)
 
 | Componente    | Client | Descrizione                                                |
 | ------------- | ------ | ---------------------------------------------------------- |
-| Header        | No     | Compone ButtonHam + Navbar + NavbarDev                     |
-| Footer        | No     | Compone SectionFooter + testi copyright (`useTranslations`) |
-| PortfolioList | No     | Lista progetti con Carousel (dati da portfolioProjects.tsx) |
+| Header         | No     | Compone ButtonHam + Navbar + NavbarDev                     |
+| Footer         | No     | Compone SectionFooter + testi copyright (`useTranslations`) |
+| PortfolioList  | No     | Lista progetti con Carousel (dati da portfolioProjects.tsx) |
+| ExperienceList | No     | Card esperienze professionali (dati da experiences.tsx); `useLocale` per i contenuti bilingui, riusa `ParagraphList` + token grafici esistenti |
 
 ---
 
@@ -194,7 +201,7 @@ Componenti:
 
 **Componenti che usano `useTranslations`:** Home page, Dev page, Art page, Footer, SectionFooter, Navbar, NavbarDev, ModalDocs, ModalHello, SectionDocs, SelectLanguage, SwitchLanguageInline, ParagraphList, PortfolioList, portfolioProjects (dati).
 
-**Componenti che usano `useLocale`:** ParagraphList, Carousel, SwitchLanguageInline, SelectLanguage.
+**Componenti che usano `useLocale`:** ParagraphList, Carousel, SwitchLanguageInline, SelectLanguage, ExperienceList.
 
 **Componenti che usano `Link`/`usePathname` da i18n/routing:** Navbar, SectionFooter, SelectLanguage, SwitchLanguageInline, ModalDocs, RoundedIconEl, Home page.
 
@@ -211,6 +218,16 @@ Esporta:
 - `skills: {id, icon, label}[]` — loghi tecnologie conosciute
 - `links: {id, icon, label, title, url}[]` — link esterni (GitHub, LinkedIn, contatti)
 - `thisWebsite: IPortfolioData` — dati del sito stesso (mostrato separatamente in dev page)
+
+### `devSections.tsx`
+
+Esporta:
+- `devSections: IDevSection[]` — fonte unica delle voci `/dev` (id, `titleKey` i18n, `iconKey` per la mappa lucide, `isPageSection`). L'ordine guida menu, barra di avanzamento e highlight in `NavbarDev`. `contacts` ha `isPageSection: false` (voce solo-menu: i contatti vivono nel footer).
+
+### `experiences.tsx`
+
+Esporta:
+- `experiences: IExperience[]` — esperienze professionali dev (ruolo, azienda, periodo, descrizione bilingue, tech, `current`). Vincolo NDA: nomi azienda/ruolo/tipologie, niente clienti/repo. Renderizzate da `ExperienceList` nella sezione `/dev #experience`.
 
 ### `socialNetwork.tsx`
 

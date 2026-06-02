@@ -15,6 +15,10 @@
   border: 1px solid var(--color-secondary-light);
 }
 
+.border1-p-m-l-0d5 {
+  border: 1px solid var(--color-primary-medium-light-0d5);
+}
+
 .border-b-1-p-m-l {
   border: none;
   border-bottom: 1px solid var(--color-primary-medium-light);

@@ -10,9 +10,11 @@ import {
   links,
   thisWebsite,
 } from "./../../(data)/portfolioProjects";
+import { experiences } from "./../../(data)/experiences";
 import PortfolioList, {
   getIcon,
 } from "../../(components)/(organisms)/PortfolioList/PortfolioList";
+import ExperienceList from "../../(components)/(organisms)/ExperienceList/ExperienceList";
 import SubtitlePortfolio from "../../(components)/(atoms)/SubtitlePortfolio/SubtitlePortfolio";
 import ParagraphList from "../../(components)/(atoms)/ParagraphList-client/ParagraphList";
 import BlurBlue from "../../(components)/(atoms)/BlurBlue/BlurBlue";
@@ -67,36 +69,11 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
         </div>
       </section>
       <section
-        id="links"
-        className="section-code-page flex-center flex-center flex-column gap-30px"
+        id="experience"
+        className="section-code-page flex-center flex-column gap-30px"
       >
-        <h2 className="f-bold f-size-1d35-1d65">{t("linkLabel")}</h2>
-        <ul className="flex-column gap-30px w-full">
-          {links.map((link) => {
-            return (
-              <li key={link.id} title={`${t(link.title)}`}>
-                <a
-                  href={link.url}
-                  target={link.url !== "#section-contacts" ? "_blank" : "_self"}
-                  rel={
-                    link.url !== "#section-contacts"
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  className="link-el flex-center flex-evenly shadow-light-small radius-20px p-8px txt-c-primary-very-dark f-size-1d25-1d5 f-bold txt-decoration-none bg-primary-very-light"
-                >
-                  <Image
-                    width={44}
-                    height={44}
-                    src={link.icon}
-                    alt={`Image ${t(link.label)}`}
-                  />
-                  <p className="f-bold">{t(link.label)}</p>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        <h2 className="f-bold f-size-1d35-1d65">{t("experienceTitle")}</h2>
+        <ExperienceList data={experiences} />
       </section>
       <section
         id="portfolio"
@@ -161,6 +138,38 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
         </div>
         <SubtitlePortfolio label={t("subtitleExercises")} />
         <PortfolioList data={portfolioData} />
+      </section>
+      <section
+        id="links"
+        className="section-code-page flex-center flex-center flex-column gap-30px"
+      >
+        <h2 className="f-bold f-size-1d35-1d65">{t("linkLabel")}</h2>
+        <ul className="flex-column gap-30px w-full">
+          {links.map((link) => {
+            return (
+              <li key={link.id} title={`${t(link.title)}`}>
+                <a
+                  href={link.url}
+                  target={link.url !== "#section-contacts" ? "_blank" : "_self"}
+                  rel={
+                    link.url !== "#section-contacts"
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
+                  className="link-el flex-center flex-evenly shadow-light-small radius-20px p-8px txt-c-primary-very-dark f-size-1d25-1d5 f-bold txt-decoration-none bg-primary-very-light"
+                >
+                  <Image
+                    width={44}
+                    height={44}
+                    src={link.icon}
+                    alt={`Image ${t(link.label)}`}
+                  />
+                  <p className="f-bold">{t(link.label)}</p>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
       </section>
     </div>
   );

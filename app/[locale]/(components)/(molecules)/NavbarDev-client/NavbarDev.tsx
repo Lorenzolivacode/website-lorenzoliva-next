@@ -3,18 +3,36 @@
 import React, { useEffect, useState } from "react";
 import RoundedIconEl from "../../(atoms)/RoundedIconEl/RoundedIconEl";
 import { usePathname } from "next/navigation";
+import {
+  Wrench,
+  Link2,
+  Briefcase,
+  FolderGit2,
+  Mail,
+  LucideIcon,
+} from "lucide-react";
 
 import HashProvider, { useHash } from "../../../(Provider)/HashContext";
 import SectionObserver from "../../(atoms)/SectionObserver-client/SectionObserver";
+import { devSections } from "../../../(data)/devSections";
 
 import "./NavbarDev.css";
 import { useTranslations } from "next-intl";
+
+// mappa chiave-icona → componente lucide: la UI vive qui, i dati (devSections) restano puri
+const DEV_ICONS: Record<string, LucideIcon> = {
+  skills: Wrench,
+  links: Link2,
+  experience: Briefcase,
+  portfolio: FolderGit2,
+  contacts: Mail,
+};
 
 function NavDevContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOn, setIsModalOn] = useState(false);
 
-  const [capitalizeHash, setCapitalizeHash] = useState("");
+  const [hashId, setHashId] = useState("");
   const [indexOfHash, setIndexOfHash] = useState(-1);
 
   const [pathCompletly, setPathCompletly] = useState(0);
@@ -26,42 +44,35 @@ function NavDevContent() {
 
   useEffect(() => {
     const hash = currentHash.slice(1);
-    const capitalizeHash =
-      hash.charAt(0).toUpperCase() + hash.slice(1).toLowerCase();
-    const indexOfHash = labels.indexOf(capitalizeHash);
+    const index = devSections.findIndex((section) => section.id === hash);
 
-    setCapitalizeHash(capitalizeHash);
-    setIndexOfHash(indexOfHash);
+    setHashId(hash);
+    setIndexOfHash(index);
 
     if (hash === "footer-end") {
       setPathCompletly(100);
       return;
     }
 
-    const percentage = 100 * (indexOfHash / (labels.length - 1));
-    setPathCompletly(percentage);
+    // se l'hash non è tra le sezioni (index -1) la percentuale resta 0, mai negativa
+    const percentage = 100 * (index / (devSections.length - 1));
+    setPathCompletly(percentage < 0 ? 0 : percentage);
   }, [currentHash]);
 
-  const labels = ["Skills", "Links", "Portfolio", "Contacts"];
-
-  const navDevList = labels.map((label) => ({
-    id: `nd-${label.toLowerCase()}`,
-    label,
-    link: `#${label.toLowerCase()}`,
-    icon: `/assets/nav-icon/nav-dev-icon/${label.toLowerCase()}-icon.svg`,
+  const navDevList = devSections.map((section) => ({
+    id: `nd-${section.id}`,
+    sectionId: section.id,
+    link: `#${section.id}`,
+    icon: DEV_ICONS[section.iconKey],
+    titleKey: section.titleKey,
   }));
 
-  const compareIndex = (label: string) => {
-    const capitalizeLabel =
-      label.charAt(0).toUpperCase() + label.slice(1).toLowerCase();
-    /* const hash = currentHash.slice(1);
-    const capitalizeHash =
-      hash.charAt(0).toUpperCase() + hash.slice(1).toLowerCase(); */
-
-    const indexOfLabel = labels.indexOf(capitalizeLabel);
-    /* const indexOfHash = labels.indexOf(capitalizeHash); */
-
-    return indexOfLabel <= indexOfHash || capitalizeHash === "Footer-end";
+  // una voce è "attiva" se precede o coincide con la sezione corrente (o se siamo a fine pagina)
+  const compareIndex = (sectionId: string) => {
+    const indexOfLabel = devSections.findIndex(
+      (section) => section.id === sectionId
+    );
+    return indexOfLabel <= indexOfHash || hashId === "footer-end";
   };
 
   const handleMenu = () => {
@@ -107,15 +118,10 @@ function NavDevContent() {
                   return (
                     <li key={liEl.id}>
                       <RoundedIconEl
-                        isActive={compareIndex(liEl.label) ? true : false}
+                        isActive={compareIndex(liEl.sectionId)}
                         href={liEl.link}
-                        src={liEl.icon}
-                        alt={liEl.label}
-                        title={
-                          liEl.label === "Contacts"
-                            ? t("contactsLabel")
-                            : liEl.label
-                        }
+                        Icon={liEl.icon}
+                        title={t(liEl.titleKey)}
                       />
                     </li>
                   );

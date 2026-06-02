@@ -1,9 +1,38 @@
 # 001 — Pagina Dev: sezioni "Esperienza / Formazione / Chi sono" dal CV
 
-**Data analisi:** 2026-05-31 · **Valutazione risposte:** 2026-06-01 · **Piano operativo:** 2026-06-01
-**Stato:** 🔵 **IN IMPLEMENTAZIONE (autorizzata 2026-06-01)**. Decisioni §8 + §10.3 chiuse, piano §12 approvato. L'utente ha dato **via libera in totale autonomia** sui default §12.8 (badge "In corso" sì, intro sezione no) e §12.9 (bozze testi finali). Vincolo: **non pushare nulla** (e comunque non è un repo git). Esecuzione secondo la sequenza §12.10; aggiornare questo stato a fine lavoro.
-**Tipo:** documento di handoff → ora **piano esecutivo in corso** (contesto + analisi + decisioni + piano).
-**Origine:** richiesta utente — analizzare `public/doc/dev-doc/CV Lorenzo Oliva.pdf` per capire come arricchire la pagina `/dev` con sezioni su esperienza ed altro.
+**Date:** analisi 2026-05-31 · piano 2026-06-01 · esecuzione e rifiniture 2026-06-01/06-02 · prossimi passi 2026-06-03 (§15)
+**Stato:** ✅ **SEZIONE ESPERIENZA COMPLETATA E VERIFICATA** (build statico 10/10, IT+EN). Restano lavori **pianificati per domani** (Skills da CV + 2 sottosezioni Portfolio): vedi §15. Niente push (non è un repo git).
+**Tipo:** documento di handoff → piano esecutivo → **log di lavoro**. **Per un nuovo agente: leggere il blocco "★ TL;DR" qui sotto, poi §14 (esecuzione) e §15 (prossimi passi). Le §1–§13 sono la traccia storica delle decisioni (contesto, non stato corrente).**
+**Origine:** richiesta utente — analizzare `public/doc/dev-doc/CV Lorenzo Oliva.pdf` per arricchire la pagina `/dev`.
+
+---
+
+## ★ TL;DR PER IL NUOVO AGENTE (leggere per primo)
+
+> Punto di ingresso unico: cosa è **già implementato e verificato** e cosa **resta da fare**. Dettaglio file in §11, log di esecuzione in §14, prossimi passi in §15. Le §0–§13 sono la traccia storica delle decisioni (contesto, non stato corrente).
+
+### Cosa è stato implementato (sezione Esperienza su `/dev`) — DONE, build 10/10, IT+EN
+
+- **Sezione `/dev #experience`**: 2 esperienze **Riverloop srls** (Full Stack, Docente), dati bilingui in `(data)/experiences.tsx` (`Interface/IExperience.tsx`), rese da `(components)/(organisms)/ExperienceList/` (server component; descrizione come `<p>` intero, niente clamp/scroll, vedi §14.2). Testi finali in §12.9.
+- **Fonte unica `(data)/devSections.tsx`** (`Interface/IDevSection.tsx`): unico punto-verità per **ordine sezioni + menu NavbarDev + barra di avanzamento + highlight**. `contacts` ha `isPageSection:false` (voce solo-menu, vive nel footer). Toccando solo questo array si aggiungono/riordinano voci.
+- **Icone menu NavbarDev = `lucide-react`** (dipendenza nuova): mappa `iconKey`→componente dentro `NavbarDev`. `RoundedIconEl` accetta `Icon` (lucide) **o** `src` (immagine; il trigger `path-icon.png` resta immagine) e impone `txt-c-primary-very-dark` (fix icone "viola" da colore link visitati, §14.4).
+- **Atomo `Tag` generico** `(components)/(atoms)/Tag/`: sfondo **semi-trasparente + bordo**, colore via prop (`color="primary"`). Usato per il tech stack delle esperienze. Utility nuove aggiunte (nome=valore): `--color-primary-medium-light-0d3` + `.bg-primary-medium-light-0d3` (color.css), `.border1-p-m-l-0d5` (border.css).
+- **Ordine sezioni `/dev` (finale):** **Skills · Experience · Portfolio · Links** (Contacts = footer). Vedi §14.5.
+- **i18n** (`DevSection`, IT+EN): aggiunte `navSkills/navLinks/navExperience/navPortfolio/navContacts` (pill menu corte) + `experienceTitle`. Nessun badge "In corso" (ridondante con "presente", §14.3).
+
+### Decisioni bloccate (NON rimettere in discussione)
+
+- Etichetta pubblica **"Web Developer Full Stack"**, mai "Junior".
+- **`/dev` resta solo-dev**: niente Formazione, niente "Chi sono" (semmai in Home, task separata).
+- **NDA Riverloop**: azienda + ruolo + tipologie di progetto; niente clienti/repo/screenshot; domini tenuti vaghi.
+- **Mai il trattino lungo "—" nei testi** (usare `:` / `(...)` / `,`). Memoria: [[no-em-dash]].
+- **CSS "nome = valore"** (`CLAUDE.md` §7.1): mai cambiare il valore dietro una classe; crearne una nuova. Confermare sempre che una utility esista prima di usarla (fallimento silenzioso).
+- Tassonomia: **Esperienza** (ruoli/timeline) **≠ Collaborazioni** (progetti esterni).
+
+### Prossimi passi (pianificati 2026-06-03) → dettaglio e contesto in §15
+
+1. **Aggiornare la sezione Skills** dai dati del CV (anche valutando la skill "AI-assisted" rinviata).
+2. **Aggiungere due sottosezioni al Portfolio** (presumibilmente Collaborazioni + Progetti personali).
 
 ---
 
@@ -482,3 +511,84 @@ Vincolo NDA (§8.4): "Riverloop srls" nominabile, ruolo + tipologie di progetto,
     **Risposta:** suggerisci. in eseprienza, valutare in che modo altrove
 
 **Note libere aggiuntive:** le skills andranno aggiornate in seguito in base a ciò che è segnato nel cv
+
+---
+
+## 14. ESITO ESECUZIONE (2026-06-01)
+
+Implementazione completata in autonomia secondo la sequenza §12.10. Build statico **10/10** (`/it/dev` + `/en/dev` inclusi); contenuti verificati nell'HTML di `out/` in entrambi i locale (sezione `id="experience"`, "Pothos", "In corso" / "Current", "Full Stack Web Developer"). I warning di build (autoprefixer in `flex.css`, `react-hooks/exhaustive-deps` in file preesistenti) **non** sono stati introdotti da questo lavoro.
+
+**Dipendenza:** `lucide-react` aggiunta a `package.json`.
+
+**File creati:**
+- `app/[locale]/Interface/IDevSection.tsx`
+- `app/[locale]/Interface/IExperience.tsx`
+- `app/[locale]/(data)/devSections.tsx`
+- `app/[locale]/(data)/experiences.tsx`
+- `app/[locale]/(components)/(organisms)/ExperienceList/ExperienceList.tsx`
+- `app/[locale]/(components)/(organisms)/ExperienceList/ExperienceList.css`
+
+**File modificati:**
+- `app/[locale]/(components)/(atoms)/RoundedIconEl/RoundedIconEl.tsx` (prop `Icon` lucide oppure `src` immagine)
+- `app/[locale]/(components)/(molecules)/NavbarDev-client/NavbarDev.tsx` (fonte unica `devSections` + mappa icone lucide + barra/`compareIndex`/i18n su `id`)
+- `app/[locale]/(routes)/dev/page.tsx` (nuova `<section id="experience">` tra links e portfolio)
+- `messages/it.json` + `messages/en.json` (chiavi `navSkills/navLinks/navExperience/navPortfolio/navContacts`, `experienceTitle`, `currentRole`)
+- `Architecture.md`, memoria `website-lorenzoliva-decisioni.md` + `MEMORY.md`
+
+**Default UX applicati:** badge "In corso/Current" sì; nessuna intro di sezione. **Skill AI** resa come frase finale della descrizione full-stack; voce skill dedicata rinviata al futuro update `skills`. **Note di stile:** nessun trattino lungo nei testi.
+
+**Aperti per dopo (non in questa task):** voce skill "AI-assisted" nella griglia (icona lucide `Sparkles`/`Bot`) al prossimo update skills; pulizia SVG `nav-dev-icon/*.svg` ora inutilizzati (lasciati in `public/`, non bloccanti).
+
+### 14.1 — Rifiniture grafiche post-review (2026-06-01)
+
+Confronto della card esperienza con gli altri elementi `/dev` (portfolio/links/section-code-page) e correzioni:
+- **Badge "In corso/Current":** era `bg-x-p-sat-ml-l` (gradiente navy→azzurro→navy, illeggibile col testo scuro ai bordi: bug). Ora **`bg-primary-sat-medium` (#00436d) + `txt-c-primary-very-light`** (contrasto alto, accento blu coerente).
+- **Pill tech → atomo `Tag` generico (nuovo):** `(components)/(atoms)/Tag/` (server component) con sfondo **semi-trasparente + bordo** e colore via prop (`color`, default `"primary"` → `bg-primary-medium-light-0d3` + `border1-p-m-l-0d5` + testo chiaro). Usato per il tech stack delle esperienze (`<Tag label={tech} color="primary" />`). Riutilizzabile altrove; nuovi colori = nuova voce nella mappa `TAG_COLOR_CLASS` con utility esistenti. Rimossa la pill ad-hoc `experience-tech-pill`; hook lista rinominato `technical-list` → `experience-tech-list`. **Nuove utility aggiunte (convenzione nome=valore):** var `--color-primary-medium-light-0d3` (rgba 0.3) + `.bg-primary-medium-light-0d3` (color.css); `.border1-p-m-l-0d5` (border.css, riusa la var `-0d5` esistente).
+- **Superficie card → opzione B (scelta utente):** rimosso il pannello scuro pieno `bg-primary-very-dark-0d6`; la card è ora **trasparente con `shadow-light-small` + `radius-20px`**, mirror in piccolo di `.section-code-page` per massima coerenza col linguaggio "contenitore" della pagina.
+
+Build statico **10/10** ri-verificato dopo ogni modifica.
+
+### 14.2 — Fix scroll verticale forzato nella descrizione esperienza (2026-06-01)
+
+**Sintomo:** scrollbar verticale interna alla card esperienza, senza motivo apparente. **Causa (misurata, non ipotizzata):** la descrizione riusava `ParagraphList`, che applica `overflow-auto grow-1 max-h-80p`; in quel contesto flex `max-height:80%` **si risolve davvero** (clamp a ~207px su contenuto ~379px) → scrollbar interna. Misura via Edge headless + `puppeteer-core` (dep temporanea installata per il debug e **poi rimossa**) sul dev server: il `<p>` esperienza compariva tra gli `innerScrollers`. **Fix:** nelle esperienze la descrizione va mostrata per intero → rimosso `ParagraphList`, sostituito con `<p className="f-size-0d95-1d05">{exp.description[lang]}</p>` (la card cresce col contenuto). **Verifica:** nell'HTML servito la descrizione è ora un `<p>` semplice e in pagina resta un solo `max-h-80p` (la card portfolio "Questo sito", preesistente e voluta). Le descrizioni del portfolio (`max-h-50p`/`80p`) restano invariate: lì lo scroll è intenzionale nelle card ad aspect-ratio fisso.
+
+### 14.3 — Rimosso badge "In corso/Current" (2026-06-02)
+
+Ridondante col periodo ("Gen 2025 – presente" dice già che è in corso). Rimosso il badge dalla card; `useTranslations` non più necessario in `ExperienceList`; chiave i18n `currentRole` eliminata da it.json + en.json; regole CSS `.experience-badge`/`.experience-meta` rimosse; il periodo è ora un `<p className="experience-period">` allineato in alto. Il campo dati `current` resta nel modello (metadato legittimo, disponibile per un eventuale indicatore visivo non testuale in futuro, es. piccolo dot accent). Build statico 10/10, badge assente in entrambi i locale.
+
+### 14.4 — Fix icone NavbarDev viola (2026-06-02)
+
+**Sintomo:** le icone del menu NavbarDev apparivano viola. **Causa:** le icone lucide usano `stroke="currentColor"`; le voci del menu sono `<Link>` (`<a>`) e, senza un `color` esplicito, ereditavano il **colore dei link visitati del browser (viola)**. Con le vecchie icone-immagine il problema non emergeva (avevano colore proprio; gli SVG originali erano `#080d13`). **Fix:** aggiunto `txt-c-primary-very-dark` a `roundedElClass` in `RoundedIconEl` → `currentColor` = `#080d13`, replicando il colore scuro originale e coerente su stato attivo/inattivo. **Verifica (Edge headless, menu aperto):** l'`<svg>` dell'icona calcola `rgb(8,13,19)` su `color`/`stroke` e sull'`<a>` → niente più viola. Build 10/10.
+
+### 14.5 — Ordine sezioni aggiornato (2026-06-02) — SUPERA §10.3-C/§12.5
+
+Scelta utente: **Skills · Experience · Portfolio · Links** (Contacts ultima, voce solo-menu/footer). Sostituisce l'ordine precedente "Experience tra Links e Portfolio" (§10.3-C/§12.5). Aggiornati in coerenza: `(data)/devSections.tsx` (ordine = menu + barra + highlight) e l'ordine delle `<section>` in `dev/page.tsx` (Experience spostata dopo Skills, Links spostata dopo Portfolio). Razionale: tiene vicini "cosa so / cosa ho fatto / cosa ho costruito" e spinge i social (Links) in fondo (orientamento recruiter). Verificato nell'HTML esportato: ordine `skills → experience → portfolio → links`. Build 10/10.
+
+---
+
+## 15. PROSSIMI PASSI (pianificati 2026-06-03) — NON ancora implementati
+
+> Lavori dichiarati dall'utente per il giorno dopo. Qui il contesto per partire senza ricostruire tutto. Valgono tutte le regole del TL;DR (CSS nome=valore, i18n in entrambi i locale, niente "—", static export, ecc.).
+
+### 15.1 — Aggiornare la sezione Skills (da CV)
+
+- **Dove:** array `skills` in `(data)/portfolioProjects.tsx` (`{ id, label, icon }`, `icon` = path asset in `public/assets/skills-img/`). Reso nella `<section id="skills">` di `dev/page.tsx` (griglia immagini, hover mostra label).
+- **Skill attuali:** GitHub, HTML, CSS, JavaScript, React, ReactRouter, Tailwind, Sass, TypeScript, NextJs, Google Firebase.
+- **Dal CV** risultano anche **GraphQL** e **Prisma** (già citati come testo nei tech delle esperienze). Per aggiungerli alla griglia servono i **loghi** (asset PNG/SVG in `skills-img/`): da reperire/ottimizzare. Allineare l'elenco a quanto dichiarato nel CV.
+- **Skill "AI-assisted development" (rinviata da §12.9):** valutare se inserirla qui. La griglia usa loghi brand; per l'AI non esiste un logo → usare un'icona **lucide** (`Sparkles`/`Bot`), coerente con l'adozione di lucide nel menu. Inquadrarla sul **metodo** (studio/pianificazione/architettura + revisione critica), non come slogan. NB: la griglia oggi rende `<Image src=...>`; per un'icona lucide servirà una piccola variante di rendering nella cella skills (componente o ramo condizionale), oppure un mini-atomo.
+- **`getIcon`** (`PortfolioList`) mappa `requirement`→logo per i **tag dei progetti**: NON ha prisma/graphql. Se le nuove sottosezioni Portfolio (15.2) useranno tag-icona per quelle tech, va esteso (oppure si usa l'atomo `Tag` testuale).
+
+### 15.2 — Due sottosezioni nel Portfolio
+
+- **Cosa sono (decisione di prodotto già presa):** sopra le **Esercitazioni** vanno **Collaborazioni** e **Progetti personali** (memoria `website-lorenzoliva-decisioni` + `suggestions/001…` punto 12.3 + §8.8 di questo doc). Le "due sottosezioni" sono presumibilmente queste.
+- **Predisposizione prevista:** campo `category` in `IPortfolioProject` (default `"exercise"`); ogni sottosezione filtra `portfolioData` per categoria. Oggi `IPortfolioProject` NON ha ancora `category`: andrà aggiunto (e i 14 progetti restano `"exercise"`).
+- **Riuso UI:** restano valide le card portfolio esistenti (`.project-list-el` / `.project-el-show` / `.project-el-details`, `SubtitlePortfolio` per i titoli di sottosezione, `ParagraphList`, `getIcon`). Per i tag tecnologici valutare il nuovo atomo **`Tag`** (oggi i progetti usano icone via `getIcon`; coerenza da decidere con l'utente).
+- **Sono SOTTOsezioni** dentro la `<section id="portfolio">` (come "Questo sito" ed "Esercitazioni", separate da `SubtitlePortfolio`): quindi **non** servono nuove voci in `devSections`/NavbarDev, a meno che non si vogliano ancore di menu dedicate (in tal caso aggiungere voci a `devSections` con icona lucide e `isPageSection` adeguato).
+- **Coerenza tassonomica:** l'esperienza Riverloop sta in **Experience** (ruoli/timeline), non in Collaborazioni. Le "Collaborazioni" sono progetti esterni; se commissionati vale comunque l'NDA. Chiedere all'utente quali progetti reali popolano le due sottosezioni e i relativi contenuti bilingui.
+- **i18n:** nuovi sottotitoli/etichette in `DevSection` (o sezione dedicata), sempre IT+EN.
+
+### 15.3 — Promemoria operativi a fine lavoro (per entrambi)
+
+- `next build` → export statico **10/10**, ispezionare `out/` nei due locale.
+- Aggiornare `Architecture.md`, la memoria (`website-lorenzoliva-decisioni`), e questo file (stato + nuova sezione di esecuzione).
+- Se si introducono dipendenze o si misura il layout in headless, rimuovere gli artefatti di debug a fine sessione (come fatto con `puppeteer-core`, §14.2/§14.4).

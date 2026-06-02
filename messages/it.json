@@ -93,6 +93,12 @@
     "tryProject": "Prova il progetto",
     "subtitleThisSite": "Questo sito",
     "subtitleExercises": "Esercitazioni",
-    "goTo": "Vai a..."
+    "goTo": "Vai a...",
+    "navSkills": "Skills",
+    "navLinks": "Link",
+    "navExperience": "Esperienza",
+    "navPortfolio": "Portfolio",
+    "navContacts": "Contatti",
+    "experienceTitle": "Esperienza"
   }
 }

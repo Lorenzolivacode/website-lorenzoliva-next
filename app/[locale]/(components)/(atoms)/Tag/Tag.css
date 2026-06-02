@@ -1,0 +1,7 @@
+/* Tag generico: le dimensioni della "cosa" stanno qui (component class, CLAUDE.md §7.1);
+   colore (semi-trasparente), raggio e font arrivano dalle utility passate via className. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+}

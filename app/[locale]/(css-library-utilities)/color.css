@@ -35,6 +35,10 @@
   background-color: var(--color-primary-medium-light-0d5);
 }
 
+.bg-primary-medium-light-0d3 {
+  background-color: var(--color-primary-medium-light-0d3);
+}
+
 .bg-primary-light {
   background-color: var(--color-primary-light);
 }
