@@ -474,6 +474,7 @@ Vincolo NDA (§8.4): "Riverloop srls" nominabile, ruolo + tipologie di progetto,
 ## 13. Interviste esperienze Riverloop (COMPATTATO) — esiti canonici in §12.9 + `(data)/experiences.tsx`
 
 > Domande mirate per concretizzare le descrizioni; risposte recepite e già fuse nei contenuti finali. Sintesi dei fatti (NDA: niente clienti/repo/screenshot):
+>
 > - **Full Stack:** gestionali/SaaS in ambiti vari (alcune con AI); backend in prima persona (PostgreSQL + Prisma, layer GraphQL/Pothos); frontend Next.js/React con UX/UI spesso in autonomia; team di 2 pari, autonomia totale, sprint autogestiti, studio architetturale sugli ultimi progetti; ~2-3 mesi in solitaria sugli ultimi due.
 > - **Docente:** adulti principianti (~10), lezioni teorico-pratiche su JS/React/Next.js, materiale proprio (slide/esercizi/Notion).
 > - **AI come metodo** (studio/pianificazione/architettura + revisione critica): resa come frase finale nella descrizione full-stack; voce skill dedicata rinviata.
@@ -649,12 +650,14 @@ Q1 bilingue sul renderizzato · Q2 selezione curata, **niente emoji, grafica acc
 Build statico **10/10** (12 pagine, `/dev/freedihare` IT+EN). Tutto verificato nell'export.
 
 **File creati:**
+
 - `Interface/IPersonalProject.tsx`, `(data)/personalProjects.tsx` (Freedihare).
 - `(components)/(organisms)/PersonalProjectCard/PersonalProjectCard.tsx` + `.css`.
 - `(routes)/dev/freedihare/page.tsx` + `Freedihare.css`.
 - `public/assets/projects-img/freedihare/freedihare-logo.svg` (copiato da doc_reference).
 
 **File modificati:**
+
 - `(components)/(organisms)/PortfolioList/PortfolioList.tsx` — `getIcon` esteso (`electron`, `nodejs`).
 - `(components)/(molecules)/NavbarDev-client/NavbarDev.tsx` — condizione `/\/dev\/?$/` (nascosta sulle sotto-rotte).
 - `(routes)/dev/page.tsx` — sottosezione "Progetti personali" tra "Questo sito" e "Esercitazioni".
@@ -692,36 +695,80 @@ Su richiesta utente: ridurre ridondanze e generalizzare. Nessun cambio visivo, b
 
 ---
 
-## 20. 15.2b — Sottosezione "Collaborazioni" + campo `category` ⬅️ DOMANDE DA COMPILARE
+## 20. 15.2b — Sottosezione "Collaborazioni"
 
-> **Contesto (verificato sul codice):** `IPortfolioData` NON ha ancora `category`. Approccio previsto (piano §15.2): aggiungere `category` (default `"exercise"` sui 14 progetti) e far filtrare `portfolioData` alle sottosezioni. Le Collaborazioni sono **progetti esterni / di team non legati al lavoro Riverloop** (quello è la sezione Experience; vale comunque l'NDA se commissionati). La card riuserebbe `PortfolioList` (screenshot + icone tech via `TechIconList` + button via `ProjectLinkButton`).
->
-> Posso costruire **subito lo scaffolding** (campo `category` + filtro + sottotitolo) senza tue risposte; ma per **popolare** la sottosezione mi servono i progetti reali. Rispondi sotto ogni voce.
+### 20.1 — Scaffolding FATTO (2026-06-02)
 
-**Q1 — Quali progetti vanno in "Collaborazioni"?** Per ciascuno servono: titolo, screenshot (file in `public/assets/projects-img/`), tech (chiavi requirement: react/next/typescript/...), descrizione IT/EN (o tue note → redigo la bozza), link GitHub e/o live, data.
-_Default:_ nessuno pronto ora → costruisco solo lo scaffolding e la sottosezione resta **nascosta** finché non ci sono progetti (niente sezione vuota).
-**Risposta:** \_
+**Deciso: NIENTE campo `category`** → si usa un **oggetto raggruppato** (scelta utente, più diretto del filtro; supera la Q4 originale). Struttura e rendering pronti, build 12/12:
 
-**Q2 — Riclassificare progetti esistenti?** Tra i 14 "esercitazioni" alcuni sono di team (es. **HeracleApp**, prototipo di 5 persone). Vuoi spostarne qualcuno in "Collaborazioni"? Quali?
-_Default:_ no, restano esercitazioni; riclassifico solo quelli che indichi esplicitamente.
-**Risposta:** \_
+- `(data)/portfolioProjects.tsx`: `export const portfolioData = { exercises, collaborations, personalProjects }`. `exercises` = i 14; `collaborations: IPortfolioData[] = []` (vuoto); `personalProjects: IPersonalProject[]` (Freedihare, **spostato qui** → `(data)/personalProjects.tsx` **rimosso**). `thisWebsite`/`skills`/`links` restano export a sé (non liste di progetti).
+- `dev/page.tsx`: rendering **esplicito per sottosezione** (opzione Y; `exercises`/`collaborations` → `PortfolioList`, `personalProjects` → `PersonalProjectCard`). **Collaborazioni nascosta finché vuota** (`collaborations.length > 0`). Ordine: Questo sito → Progetti personali → Collaborazioni → Esercitazioni.
+- `freedihare/page.tsx`: import → `portfolioData.personalProjects`.
+- i18n: `subtitleCollaborations` (IT "Collaborazioni" / EN "Collaborations").
 
-**Q3 — Forma della card.** Collaborazioni riusa la card "Esercitazioni" (screenshot + icone tech + button GitHub/live)?
-_Default:_ sì, riusa la card esercitazioni (progetti esterni con repo/demo); niente rotta di approfondimento (a differenza di Freedihare).
-**Risposta:** \_
+**Decisioni chiuse:** card Collaborazioni = `PortfolioList` (screenshot + tech + link, niente rotta di approfondimento); modello = grouped object; ordine confermato e implementato.
 
-**Q4 — Modello dati.** Confermo `category: "exercise" | "collaboration"` su `IPortfolioData` (default `"exercise"` sui 14) + due `PortfolioList` filtrate in `dev/page.tsx`? Oppure preferisci un array separato `collaborations`?
-_Default:_ campo `category` + filtro su `portfolioData` (una sola fonte, come da piano §15.2).
-**Risposta:** \_
+### 20.2 — Domande di CONTENUTO (per popolare Collaborazioni) ⬅️ COMPILARE QUI
 
-**Q5 — Ordine sottosezioni Portfolio.** "Questo sito → Progetti personali → Collaborazioni → Esercitazioni"? O Collaborazioni prima di Progetti personali?
-_Default:_ Questo sito → Progetti personali → Collaborazioni → Esercitazioni.
-**Risposta:** \_
+> Manca solo il contenuto reale. Le Collaborazioni sono progetti **esterni / di team non legati al lavoro Riverloop** (quello è la sezione Experience). Niente dettagli inventati: uso solo ciò che scrivi qui.
 
-**Q6 — NDA / link.** I progetti di collaborazione hanno repo/demo pubblici mostrabili? O alcuni sono riservati (solo descrizione, niente link)?
-_Default:_ mostro i link quando ci sono; per i riservati il button resta disabilitato (già gestito da `ProjectLinkButton`).
-**Risposta:** \_
+**C1 — Quali progetti?** Per ciascuno: **titolo** · **screenshot** (file in `public/assets/projects-img/`, formato ~quadrato come gli altri) · **tech** (chiavi requirement: react/next/typescript/…) · **descrizione IT/EN** (o tue note → redigo la bozza) · **link** GitHub e/o live · **data** (`YYYY-MM-DD`).
+**Risposta:**
 
-**Q7 — Intro della sottosezione.** Una riga introduttiva sotto il titolo "Collaborazioni" (es. "Progetti realizzati in team o per terzi") o solo il sottotitolo come le altre?
-_Default:_ solo `SubtitlePortfolio` come le altre (coerenza); intro eventuale dopo.
-**Risposta:** \_
+> prendi riferimento dalla home esterna di [`https://jobinbox.it/`]; il progetto appartiene a Fabrizia Fisichella con riferimento a [`https://portfolio-rho-drab-24.vercel.app/it`]
+> ho caricato l'immagine da utilizzare (logo) in[`website-lorenzoliva-next\0_lorenzoliva_studies\img_reference\JIB_1.2.2.svg`] (attenzione, c'è una parte di logo duplicata, se non riesci a isolare i path del logo mi dici e ti fornisco un svg unico da utilizzare)
+> tech stack: React native con typeScript + funcion supabase
+> crea la descrizione a partire dal link fornito (it + en)
+> link esterno a [`https://jobinbox.it/`]
+> data 2026
+
+**C2 — Riclassificare esistenti?** Spostare in Collaborazioni qualcuno dei 14 (es. **HeracleApp**, prototipo di un team di 5; o altri di team)? Quali?
+**Risposta:** no
+
+**C3 — NDA / link.** Qualche progetto è riservato (solo descrizione, niente repo/demo)? Per quelli il button resta disabilitato (già gestito da `ProjectLinkButton`).
+**Risposta:** unico progetto > solo info fornite in C1
+
+**C4 — Intro sottosezione.** Una riga sotto il titolo "Collaborazioni" (es. "Progetti realizzati in team o per terzi") o solo il sottotitolo come le altre?
+**Risposta:** Valuta, intendo inserire lavori svolti in collab con terzi dove non ho preso parte a ideazione, architettura e grosso del lavoro ma lavorato in alcune porzioni e contribuito in generale nel ragionamento (ovviamente questa sdescrizione è troppo lunga, dovresti vedere cosa scrivere)
+
+**Post presentazione progetto**
+« La ricerca del lavoro è diventata essa stessa un lavoro. »
+È una frase inflazionata, lo so, ma non per questo meno vera.
+
+Cercare lavoro nel 2026 significa perdersi in un labirinto infinito fatto di curriculum inviati su decine di siti diversi e non sapere più che fine fanno. Se riceviamo una chiamata o un'email, è più facile prendere appunti su un post-it che in modo organizzato.
+
+Lo so. Mi è successo.
+Ringrazio il mio bisogno di ordine - e le lunghe discussioni con il mio collega Lorenzo Oliva, che ha condiviso con me idee, dubbi, soluzioni e ore di implementazione attiva - per aver risolto il problema.
+
+Dopotutto, perché prendere appunti su ogni candidatura e tenerne traccia a mano, quando è tutto nella mia email ed è pronto per essere riorganizzato in modo pulito e, soprattutto, automatico?
+
+𝗝𝗼𝗯𝗜𝗻𝗕𝗼𝘅 è nato per questo.
+Lo colleghi alla tua casella di posta, lui identifica le email dei principali siti di ricerca lavoro e mette ordine per te. Tutto il resto non lo prende neanche in considerazione.
+
+Nello specifico, 𝗝𝗜𝗕 fa due cose:
+• tiene traccia delle tue #candidature generando record che contengono informazioni facilmente consultabili ed editabili;
+• recupera tutte le #offerte di lavoro che ricevi e crea un feed univoco, sempre aggiornato agli ultimi trenta giorni, che centralizza tutto in un pannello facilmente consultabile.
+
+La cosa bella è che lo fa in automatico.
+
+Ricevi un'email di conferma candidatura o un alert su una nuova offerta?
+𝗝𝗜𝗕 lo nota e crea i nuovi record per te, senza che tu faccia niente.
+
+LinkedIn ti avvisa che la tua candidatura è stata visualizzata o rifiutata?
+Ti contattano su Indeed per darti informazioni sulla tua candidatura?
+𝗝𝗜𝗕 se ne accorge e aggiorna lo status al posto tuo.
+
+L'importante è che tu abbia le notifiche per email attivate sui servizi supportati. Al momento sono soltanto LinkedIn, Indeed e Glassdoor - ma la lista si allungherà periodicamente.
+
+𝗝𝗼𝗯𝗜𝗻𝗕𝗼𝘅 è in open beta: qualsiasi feedback è ben accetto!
+( Anzi, più me ne date e meglio è. )
+
+---
+
+### 20.3 — ESITO Collaborazioni + ShowcaseCard (FATTO 2026-06-02)
+
+Risposte recepite (C1 JobInBox · C2 no riclassifica · C3 unico progetto · C4 intro corta). **Card-logo generalizzata** da `PersonalProjectCard` → **`ShowcaseCard`** (interfaccia `IShowcaseProject`: `link {href, labelKey, external}`), usata da Progetti personali (link interno) e Collaborazioni (link esterno). `PersonalProjectCard`/`IPersonalProject` rimossi.
+
+**JobInBox** aggiunto a `portfolioData.collaborations`: descrizione **originale** IT/EN sintetizzata dal post di lancio (non copiata), tech `react·typescript·supabase` (aggiunto `supabase` a `BRAND_ICONS`; React Native → icona React), logo `public/assets/projects-img/jobinbox-logo.svg` (SVG col path duplicato, **da verificare a vista**), button esterno → jobinbox.it. i18n nuove: `visitSite`, `collaborationsIntro`. Build statico **12/12**, Collaborazioni verificata visibile in IT+EN con link `target=_blank`.
+
+**File:** nuovi `Interface/IShowcaseProject.tsx`, `(organisms)/ShowcaseCard/{tsx,css}`; modificati `(data)/portfolioProjects.tsx` (JobInBox + tipi), `(data)/techIcons.tsx` (supabase), `dev/page.tsx` (ShowcaseCard + intro), `messages/*.json`; rimossi `PersonalProjectCard/`, `IPersonalProject.tsx`. **15.2 CHIUSA** (Progetti personali + Collaborazioni).

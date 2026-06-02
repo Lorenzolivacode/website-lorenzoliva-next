@@ -15,6 +15,7 @@ import {
   siPrisma,
   siPostgresql,
   siElectron,
+  siSupabase,
 } from "simple-icons";
 
 // Registro unico delle icone-brand (simple-icons), chiave = requirement lowercase.
@@ -37,6 +38,7 @@ export const BRAND_ICONS: Record<string, { title: string; path: string }> = {
   prisma: siPrisma,
   postgresql: siPostgresql,
   electron: siElectron,
+  supabase: siSupabase,
 };
 
 // requirement sconosciuto → undefined: il chiamante salta l'elemento (niente icona rotta).

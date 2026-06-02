@@ -1,6 +1,6 @@
 import { BRAND_ICONS } from "./techIcons";
 import { IPortfolioData } from "../Interface/IPortfolioProject";
-import { IPersonalProject } from "../Interface/IPersonalProject";
+import { IShowcaseProject } from "../Interface/IShowcaseProject";
 
 const generateId = () => {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -274,12 +274,26 @@ const exercises = [
 ];
 
 // Collaborazioni: progetti esterni / di team non legati al lavoro Riverloop.
-// Stessa forma delle esercitazioni (IPortfolioData). Vuoto finché non si aggiungono progetti reali.
-const collaborations: IPortfolioData[] = [];
+// Card-logo (IShowcaseProject), come i progetti personali. Link esterno al sito del progetto.
+const collaborations: IShowcaseProject[] = [
+  {
+    id: "jobinbox",
+    title: "JobInBox",
+    logo: "/assets/projects-img/jobinbox-logo.svg",
+    tagline: {
+      italian:
+        "App mobile che organizza in automatico la ricerca del lavoro. Si collega alla casella email, riconosce i messaggi dei principali portali (LinkedIn, Indeed, Glassdoor) e ne ricava un quadro ordinato: tiene traccia delle candidature e centralizza le offerte in un feed sempre aggiornato, aggiornando da sé lo stato di ciascuna. In open beta.",
+      english:
+        "Mobile app that organises your job search automatically. It connects to your inbox, recognises messages from the main job portals (LinkedIn, Indeed, Glassdoor) and turns them into a tidy overview: it tracks your applications and centralises offers in an always-updated feed, updating each application's status on its own. In open beta.",
+    },
+    tech: ["react", "typescript", "supabase"],
+    link: { href: "https://jobinbox.it/", labelKey: "visitSite", external: true },
+  },
+];
 
-// Progetti personali (forma propria IPersonalProject: logo + rotta di approfondimento, niente
-// screenshot/link esterni). Resi da PersonalProjectCard.
-const personalProjects: IPersonalProject[] = [
+// Progetti personali (card-logo IShowcaseProject: logo + un link, niente screenshot/doppio link).
+// Resi da ShowcaseCard. Freedihare → link interno alla rotta di approfondimento.
+const personalProjects: IShowcaseProject[] = [
   {
     id: "freedihare",
     title: "Freedihare",
@@ -290,7 +304,7 @@ const personalProjects: IPersonalProject[] = [
       english:
         "Desktop application to plan, log and analyse your daily nutrition: calories, macros, goals and trends over time, with sharing between linked accounts. Currently a structured MVP in testing, being actively expanded.",
     },
-    route: "/dev/freedihare",
+    link: { href: "/dev/freedihare", labelKey: "discoverMore", external: false },
     tech: [
       "electron",
       "react",
@@ -304,7 +318,7 @@ const personalProjects: IPersonalProject[] = [
 ];
 
 // Fonte unica dei dati del portfolio /dev, raggruppati per sottosezione.
-// exercises/collaborations → card PortfolioList; personalProjects → card PersonalProjectCard.
+// exercises → card PortfolioList (screenshot); collaborations/personalProjects → ShowcaseCard (logo).
 // (thisWebsite resta export a sé: è un singolo elemento in evidenza, non una lista.)
 export const portfolioData = {
   exercises,

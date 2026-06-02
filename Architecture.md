@@ -177,7 +177,7 @@ app/layout.tsx                          → CSS globali, shell HTML minima
 | Footer         | No     | Compone SectionFooter + testi copyright (`useTranslations`) |
 | PortfolioList  | No     | Lista progetti con Carousel (dati da portfolioProjects.tsx) |
 | ExperienceList | No     | Card esperienze professionali (dati da experiences.tsx); `useLocale` per i contenuti bilingui; descrizione come `<p>` intero; periodo reso con atomo `Tag`; tech come icone `BrandIcon` (via `getIcon`) |
-| PersonalProjectCard | No | Card progetto personale (sottosezione `#portfolio` "Progetti personali"): logo + descrizione breve + icone tech (`getIcon`) + CTA `Link` interna verso la rotta di approfondimento |
+| ShowcaseCard | No | Card-logo riusabile per "Progetti personali" e "Collaborazioni": logo + descrizione + icone tech (`TechIconList`) + un button **interno** (`Link` i18n, rotta) o **esterno** (`<a>` _blank, sito) secondo `project.link.external` |
 
 ---
 
@@ -220,7 +220,7 @@ Nessun API, nessun database. Tutti i dati sono in file TSX:
 ### `portfolioProjects.tsx`
 
 Esporta:
-- `portfolioData: IPortfolioData[]` — 14 progetti con titolo, tech requirements, immagine, descrizione bilingue, link GitHub/live
+- `portfolioData` — **oggetto raggruppato per sottosezione** di `/dev #portfolio` (niente campo `category`): `{ exercises: IPortfolioData[]` (i 14 progetti formativi, card screenshot)`, collaborations: IShowcaseProject[]` (progetti esterni/di team, card-logo; oggi: **JobInBox**, link esterno; sottosezione nascosta se vuota)`, personalProjects: IShowcaseProject[]` (Freedihare, card-logo, link interno)`}`. `exercises` → `PortfolioList`; `collaborations`/`personalProjects` → `ShowcaseCard`.
 - `skills: {id, icon, label}[]` — tecnologie della griglia /dev; `icon` è un oggetto `simple-icons` preso dal registro **`BRAND_ICONS`** (`(data)/techIcons.tsx`), reso da `BrandIcon`. ID statici.
 
 ### `techIcons.tsx`
@@ -245,10 +245,7 @@ Esporta:
 Esporta:
 - `experiences: IExperience[]` — esperienze professionali dev (ruolo, azienda, periodo, descrizione bilingue, tech, `current`). Vincolo NDA: nomi azienda/ruolo/tipologie, niente clienti/repo. Renderizzate da `ExperienceList` nella sezione `/dev #experience`.
 
-### `personalProjects.tsx`
-
-Esporta:
-- `personalProjects: IPersonalProject[]` — progetti personali (sottosezione `/dev #portfolio` "Progetti personali"). Forma dedicata (logo, tagline bilingue, `route` interna, `tech`), distinta da `IPortfolioData` (che è per screenshot + link esterni). Primo elemento: **Freedihare** → rotta di approfondimento `/dev/freedihare`. Reso da `PersonalProjectCard`.
+> Nota: le card-logo (`IShowcaseProject`: logo, tagline bilingue, `tech`, `link {href, labelKey, external}`; forma distinta da `IPortfolioData`) coprono sia `personalProjects` (Freedihare → link interno `/dev/freedihare`) sia `collaborations` (JobInBox → link esterno). Vivono dentro `portfolioData` in `portfolioProjects.tsx`; rese da `ShowcaseCard`. Il file separato `personalProjects.tsx` e l'interfaccia `IPersonalProject` sono stati rimossi/sostituiti.
 
 ### `socialNetwork.tsx`
 

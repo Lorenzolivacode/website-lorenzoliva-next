@@ -13,7 +13,7 @@ import {
 import { experiences } from "./../../(data)/experiences";
 import PortfolioList from "../../(components)/(organisms)/PortfolioList/PortfolioList";
 import ExperienceList from "../../(components)/(organisms)/ExperienceList/ExperienceList";
-import PersonalProjectCard from "../../(components)/(organisms)/PersonalProjectCard/PersonalProjectCard";
+import ShowcaseCard from "../../(components)/(organisms)/ShowcaseCard/ShowcaseCard";
 import BrandIcon from "../../(components)/(atoms)/BrandIcon/BrandIcon";
 import TechIconList from "../../(components)/(molecules)/TechIconList/TechIconList";
 import ProjectLinkButton from "../../(components)/(molecules)/ProjectLinkButton/ProjectLinkButton";
@@ -82,6 +82,24 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
         className="section-code-page flex-center flex-column gap-30px"
       >
         <h2 className="f-bold f-size-1d35-1d65">{t("portfolioLabel")}</h2>
+        <SubtitlePortfolio label={t("subtitlePersonalProjects")} />
+        <div className="w-full flex-column gap-20px">
+          {portfolioData.personalProjects.map((project) => (
+            <ShowcaseCard key={project.id} project={project} />
+          ))}
+        </div>
+        {/* Collaborazioni: stessa card-logo dei progetti personali; mostrata solo se non vuota */}
+        {portfolioData.collaborations.length > 0 && (
+          <>
+            <SubtitlePortfolio label={t("subtitleCollaborations")} />
+            <p className="w-full f-size-0d95-1d05">{t("collaborationsIntro")}</p>
+            <div className="w-full flex-column gap-20px">
+              {portfolioData.collaborations.map((project) => (
+                <ShowcaseCard key={project.id} project={project} />
+              ))}
+            </div>
+          </>
+        )}
         <SubtitlePortfolio label={t("subtitleThisSite")} />
         <div className="project-list-el carousel-child p-y-12px">
           <div className="project-el-show overflow-hidden shadow-light-small flex-column flex-cross-center flex-evenly relative">
@@ -115,19 +133,6 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
             />
           </div>
         </div>
-        <SubtitlePortfolio label={t("subtitlePersonalProjects")} />
-        <div className="w-full flex-column gap-20px">
-          {portfolioData.personalProjects.map((project) => (
-            <PersonalProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-        {/* Collaborazioni: mostrata solo quando ci sono progetti (niente sezione vuota) */}
-        {portfolioData.collaborations.length > 0 && (
-          <>
-            <SubtitlePortfolio label={t("subtitleCollaborations")} />
-            <PortfolioList data={portfolioData.collaborations} />
-          </>
-        )}
         <SubtitlePortfolio label={t("subtitleExercises")} />
         <PortfolioList data={portfolioData.exercises} />
       </section>
