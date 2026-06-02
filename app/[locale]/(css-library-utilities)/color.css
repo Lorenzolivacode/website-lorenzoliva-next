@@ -111,6 +111,10 @@
   color: var(--color-primary-medium);
 }
 
+.txt-c-primary-medium-light {
+  color: var(--color-primary-medium-light);
+}
+
 .txt-c-primary-very-light {
   color: var(--color-primary-very-light);
 }

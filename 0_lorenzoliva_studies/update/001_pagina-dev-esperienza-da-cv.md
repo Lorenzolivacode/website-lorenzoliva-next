@@ -572,6 +572,17 @@ Scelta utente: **Skills · Experience · Portfolio · Links** (Contacts ultima, 
 
 ### 15.1 — Aggiornare la sezione Skills (da CV)
 
+> **DECISO 2026-06-02 (icone/loghi tech) — stile MONOCROMATICO tinto sito, via `simple-icons`.**
+> Sostituisce la nota "icone brand via getIcon" del §15.2 sopra: non più loghi PNG full-color, ma silhouette monocromatiche coerenti per TUTTA la griglia Skills e per i tag-icona del Portfolio.
+>
+> - **Meccanismo:** dipendenza `simple-icons` (npm), stessa logica già accettata per `lucide-react`. Espone per ogni brand `{ title, slug, hex, path }`; si rende un `<svg viewBox="0 0 24 24"><path d={icon.path} fill="currentColor"/></svg>`. Risolve anche PostgreSQL (path ufficiale incluso) senza disegnare a mano.
+> - **Tinta:** `var(--color-primary-medium-light)` = `#7a9dc7` (azzurro accento del sito), impostata via `color`/`currentColor` su classe utility (creare `.txt-c-primary-medium-light` se non esiste, convenzione nome=valore §7.1). Niente hover-variant (scelta utente).
+> - **Nuovo atomo `BrandIcon`** `(components)/(atoms)/BrandIcon/`: server component, prop `{ slug | icon, size, color? }`; rende il path simple-icons tinto. Riusato a 72px nella griglia Skills e a 24px nei tag Portfolio.
+> - **Refactor `getIcon`** (`PortfolioList`): da ritorno path-PNG a slug/icona simple-icons reso con `BrandIcon` (oggi `<Image src=getIcon(...)>` → `<BrandIcon .../>`); aggiungere fallback per requirement sconosciuto.
+> - **Restyle griglia Skills** in `dev/page.tsx`: da `<Image>` PNG → `BrandIcon`. I PNG in `public/assets/skills-img/` restano inutilizzati (come gli SVG nav dopo lucide), non bloccanti.
+> - **Brand da coprire:** esistenti (GitHub, HTML5, CSS, JavaScript, React, React Router, Tailwind, Sass, TypeScript, Next.js, Firebase) + nuovi dal CV (GraphQL, Prisma; PostgreSQL per i tag Portfolio). Allineare l'elenco `skills` al CV.
+> - **AI-assisted (rinviata):** resta su icona `lucide` (`Sparkles`/`Bot`), non è un brand simple-icons; coerente come icona-UI, inquadrata sul metodo.
+
 - **Dove:** array `skills` in `(data)/portfolioProjects.tsx` (`{ id, label, icon }`, `icon` = path asset in `public/assets/skills-img/`). Reso nella `<section id="skills">` di `dev/page.tsx` (griglia immagini, hover mostra label).
 - **Skill attuali:** GitHub, HTML, CSS, JavaScript, React, ReactRouter, Tailwind, Sass, TypeScript, NextJs, Google Firebase.
 - **Dal CV** risultano anche **GraphQL** e **Prisma** (già citati come testo nei tech delle esperienze). Per aggiungerli alla griglia servono i **loghi** (asset PNG/SVG in `skills-img/`): da reperire/ottimizzare. Allineare l'elenco a quanto dichiarato nel CV.
@@ -597,3 +608,29 @@ Scelta utente: **Skills · Experience · Portfolio · Links** (Contacts ultima, 
 - `next build` → export statico **10/10**, ispezionare `out/` nei due locale.
 - Aggiornare `Architecture.md`, la memoria (`website-lorenzoliva-decisioni`), e questo file (stato + nuova sezione di esecuzione).
 - Se si introducono dipendenze o si misura il layout in headless, rimuovere gli artefatti di debug a fine sessione (come fatto con `puppeteer-core`, §14.2/§14.4).
+
+---
+
+## 16. ESITO 15.1 — Skills + sistema icone tech (2026-06-02)
+
+Implementato lo stile **monocromatico tinto** deciso al §15.1. Build statico **10/10** (clean build: la `.next` sporca dà un falso errore `collect-build-traces`/ENOENT, irrilevante per l'export); export verificato (54 svg `brand-icon` in `out/it/dev.html`, GraphQL/Prisma presenti, tinta `txt-c-primary-medium-light` applicata).
+
+**Dipendenza:** `simple-icons` aggiunta a `package.json`.
+
+**File creati:**
+- `app/[locale]/(components)/(atoms)/BrandIcon/BrandIcon.tsx` (server component: rende un path simple-icons come svg `fill=currentColor`, colore via classe).
+
+**File modificati:**
+- `(css-library-utilities)/color.css` — nuova utility `.txt-c-primary-medium-light` (var `#7a9dc7`).
+- `(data)/portfolioProjects.tsx` — `skills` con `icon`=oggetto simple-icons + **ID statici**; aggiunte **GraphQL** e **Prisma**; rimosso `crypto.randomUUID()` per le skill (resta `generateId` per links/portfolio).
+- `(components)/(organisms)/PortfolioList/PortfolioList.tsx` — `getIcon` ora mappa requirement→oggetto simple-icons (con `postgresql`, pronto per 15.2) e ritorna `undefined` se sconosciuto; tag resi con `BrandIcon` (salto se senza icona).
+- `(routes)/dev/page.tsx` — griglia Skills e tech di "Questo sito" da `<Image>` → `BrandIcon`.
+- `(routes)/dev/Dev.css` — selettore `.skills-container img` → `svg`.
+- `Architecture.md`, memoria `website-lorenzoliva-decisioni.md` + `MEMORY.md`.
+
+**Scelte applicate:** tinta azzurra `medium-light` (no hover-variant); esperienze invariate (tag testuali `Tag`); PNG `skills-img/` lasciati (inutilizzati nella griglia, restano per i Links LinkedIn/GitHub).
+
+**Decisioni utente 2026-06-02 (15.1 CHIUSA):**
+1. **Skill tenute tutte** — GitHub/ReactRouter/Sass/Firebase restano in griglia (niente potatura verso il CV).
+2. **Skill "AI-assisted"** resta solo nel racconto dell'esperienza, non entra nella griglia.
+3. Validazione visiva a carico dell'utente ("completa e vedo io").

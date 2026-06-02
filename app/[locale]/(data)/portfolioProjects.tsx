@@ -1,65 +1,44 @@
-import { useTranslations } from "next-intl";
+import {
+  siGithub,
+  siHtml5,
+  siCss,
+  siJavascript,
+  siReact,
+  siReactrouter,
+  siTailwindcss,
+  siSass,
+  siTypescript,
+  siNextdotjs,
+  siNodedotjs,
+  siGraphql,
+  siPrisma,
+  siElectron,
+  siFirebase,
+} from "simple-icons";
 
 const generateId = () => {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 };
 
+// Competenze rese nella griglia /dev #skills. ID statici; icona = oggetto simple-icons
+// (path monocromatico), tinto via classe utility nel rendering (non più asset PNG a colori).
+// Elenco allineato al CV: aggiunte GraphQL e Prisma rispetto al set precedente.
 export const skills = [
-  {
-    id: crypto.randomUUID(),
-    label: "GitHub",
-    icon: "/assets/skills-img/GitHub-Light-Logo.png",
-  },
-  {
-    id: crypto.randomUUID(),
-    label: "HTML",
-    icon: "/assets/skills-img/Html-Logo.png",
-  },
-  {
-    id: crypto.randomUUID(),
-    label: "CSS",
-    icon: "/assets/skills-img/Css-Logo.png",
-  },
-  {
-    id: crypto.randomUUID(),
-    label: "JavaScript",
-    icon: "/assets/skills-img/Js-Logo.png",
-  },
-  {
-    id: crypto.randomUUID(),
-    label: "React",
-    icon: "/assets/skills-img/React-Logo.png",
-  },
-  {
-    id: crypto.randomUUID(),
-    label: "ReactRouter",
-    icon: "/assets/skills-img/React-Router-Logo.png",
-  },
-  {
-    id: crypto.randomUUID(),
-    label: "Tailwind",
-    icon: "/assets/skills-img/Tailwind-Logo.png",
-  },
-  {
-    id: crypto.randomUUID(),
-    label: "Sass",
-    icon: "/assets/skills-img/Sass-Logo.png",
-  },
-  {
-    id: crypto.randomUUID(),
-    label: "TypeScript",
-    icon: "/assets/skills-img/Typescript-Logo.png",
-  },
-  {
-    id: crypto.randomUUID(),
-    label: "NextJs",
-    icon: "/assets/skills-img/Next-bl-Logo.png",
-  },
-  {
-    id: crypto.randomUUID(),
-    label: "Google Firebase",
-    icon: "/assets/skills-img/Firebase-Logo.svg",
-  },
+  { id: "skill-github", label: "GitHub", icon: siGithub },
+  { id: "skill-html", label: "HTML", icon: siHtml5 },
+  { id: "skill-css", label: "CSS", icon: siCss },
+  { id: "skill-javascript", label: "JavaScript", icon: siJavascript },
+  { id: "skill-react", label: "React", icon: siReact },
+  { id: "skill-reactrouter", label: "ReactRouter", icon: siReactrouter },
+  { id: "skill-tailwind", label: "Tailwind", icon: siTailwindcss },
+  { id: "skill-sass", label: "Sass", icon: siSass },
+  { id: "skill-typescript", label: "TypeScript", icon: siTypescript },
+  { id: "skill-nextjs", label: "NextJs", icon: siNextdotjs },
+  { id: "skill-nodejs", label: "Node.js", icon: siNodedotjs },
+  { id: "skill-graphql", label: "GraphQL", icon: siGraphql },
+  { id: "skill-prisma", label: "Prisma", icon: siPrisma },
+  { id: "skill-electron", label: "Electron", icon: siElectron },
+  { id: "skill-firebase", label: "Google Firebase", icon: siFirebase },
 ];
 
 export const links = [

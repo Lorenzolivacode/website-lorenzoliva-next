@@ -4,12 +4,6 @@
   padding: 20px;
 }
 
-/* il periodo resta allineato in alto (in linea col ruolo) anche quando l'header va a capo */
-.experience-period {
-  align-self: flex-start;
-  white-space: nowrap;
-}
-
 @media screen and (max-width: 480px) {
   .experience-card {
     padding: 14px;

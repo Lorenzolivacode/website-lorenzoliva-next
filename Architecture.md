@@ -13,7 +13,7 @@ Nessun backend, nessun database, nessuna autenticazione. Dati hardcoded, output 
 | Framework  | Next.js 14.2.13 (App Router)       |
 | Linguaggio | TypeScript (strict: false)          |
 | Styling    | CSS custom utility library (no preprocessor, no Tailwind) |
-| Icone      | `lucide-react` per le voci del menu `/dev` (NavbarDev); loghi brand (skills/links/progetti) restano asset PNG/SVG in `public/` |
+| Icone      | `lucide-react` per le voci del menu `/dev` (NavbarDev); `simple-icons` per i loghi tech (griglia Skills + tag-icona dei progetti), resi monocromatici tinti via l'atomo `BrandIcon`; i loghi brand dei **Links** (LinkedIn/GitHub) restano asset PNG in `public/` (contenuto) |
 | i18n       | next-intl ^3.20.0 (IT, EN)         |
 | Font       | Google Fonts (Zain) via `@import` in globals.css. I file Geist/GeistMono in `app/fonts/` esistono ma **non sono referenziati** (non importati) |
 | Deploy     | Static export (`output: "export"`) → Aruba hosting Linux base (Apache) |
@@ -137,6 +137,7 @@ app/layout.tsx                          → CSS globali, shell HTML minima
 | Componente                  | Client | Descrizione                                |
 | --------------------------- | ------ | ------------------------------------------ |
 | BlurBlue                    | No     | Elemento decorativo blur                   |
+| BrandIcon                   | No     | Logo-brand monocromatico da `simple-icons` (prop `icon`=oggetto simple-icons, `size`, `title`); colore via classe utility (`currentColor`→`fill`). Usato in griglia Skills (72px) e tag-icona Portfolio (24px) |
 | BtnClose                    | No     | Bottone chiudi                             |
 | Jumper                      | No     | Animazione decorativa (usato in 404)       |
 | ParagraphList-client        | Si     | Lista paragrafi con scroll, legge `useLocale` per scegliere lingua descrizione |
@@ -171,7 +172,7 @@ app/layout.tsx                          → CSS globali, shell HTML minima
 | Header         | No     | Compone ButtonHam + Navbar + NavbarDev                     |
 | Footer         | No     | Compone SectionFooter + testi copyright (`useTranslations`) |
 | PortfolioList  | No     | Lista progetti con Carousel (dati da portfolioProjects.tsx) |
-| ExperienceList | No     | Card esperienze professionali (dati da experiences.tsx); `useLocale` per i contenuti bilingui, riusa `ParagraphList` + token grafici esistenti |
+| ExperienceList | No     | Card esperienze professionali (dati da experiences.tsx); `useLocale` per i contenuti bilingui; descrizione come `<p>` intero; periodo reso con atomo `Tag`; tech come icone `BrandIcon` (via `getIcon`) |
 
 ---
 
@@ -215,7 +216,7 @@ Nessun API, nessun database. Tutti i dati sono in file TSX:
 
 Esporta:
 - `portfolioData: IPortfolioData[]` — 14 progetti con titolo, tech requirements, immagine, descrizione bilingue, link GitHub/live
-- `skills: {id, icon, label}[]` — loghi tecnologie conosciute
+- `skills: {id, icon, label}[]` — tecnologie della griglia /dev; `icon` è un oggetto `simple-icons` (path monocromatico), reso da `BrandIcon`. ID statici. `getIcon(requirement)` (esportato da `PortfolioList`) mappa i requirement dei progetti agli stessi oggetti `simple-icons` (undefined se sconosciuto → il chiamante salta)
 - `links: {id, icon, label, title, url}[]` — link esterni (GitHub, LinkedIn, contatti)
 - `thisWebsite: IPortfolioData` — dati del sito stesso (mostrato separatamente in dev page)
 

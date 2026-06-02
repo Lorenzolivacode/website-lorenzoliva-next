@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Freedihare · Guida all'uso</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --bg-card: #1e293b;
+        --bg-card-alt: #162032;
+        --text: #e2e8f0;
+        --text-muted: #94a3b8;
+        --accent: #53b6d6;
+        --accent-green: #c1f8a0;
+        --border: #334155;
+        --fat: #5b9bd5;
+        --carbs: #f0c040;
+        --protein: #e8836b;
+        --sugar: #f472b6;
+        --fiber: #6ee7b7;
+        --salt: #2dd4bf;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+      }
+
+      /* ── Header ────────────────────────── */
+      .header {
+        text-align: center;
+        padding: 48px 0 32px;
+      }
+      .header img {
+        width: 260px;
+        margin-bottom: 16px;
+        filter: drop-shadow(0 0 24px rgba(83, 182, 214, 0.15));
+      }
+      .header h1 {
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: var(--text-muted);
+        letter-spacing: 0.02em;
+      }
+
+      /* ── Sections ──────────────────────── */
+      hr {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 48px 0;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--border);
+      }
+      h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--accent-green);
+        margin: 28px 0 12px;
+      }
+      h4 {
+        margin-bottom: 16px;
+      }
+
+      p {
+        margin-bottom: 14px;
+        color: var(--text-muted);
+      }
+      strong {
+        color: var(--text);
+      }
+
+      /* ── Lists ─────────────────────────── */
+      ul,
+      ol {
+        padding: 0;
+        margin-bottom: 16px;
+      }
+      ul {
+        list-style: none;
+      }
+      ul li {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 6px;
+        color: var(--text-muted);
+      }
+      ul li::before {
+        content: "";
+        position: absolute;
+        left: 2px;
+        top: 10px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+      ol {
+        list-style: none;
+        counter-reset: step;
+      }
+      ol li {
+        position: relative;
+        padding-left: 36px;
+        margin-bottom: 10px;
+        color: var(--text-muted);
+      }
+      ol li::before {
+        counter-increment: step;
+        content: counter(step);
+        position: absolute;
+        left: 0;
+        top: 1px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: var(--bg);
+        font-size: 0.8rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* ── Feature grid ──────────────────── */
+      .feature-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin: 20px 0 24px;
+      }
+      .feature-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 20px;
+        transition: border-color 0.2s;
+      }
+      .feature-card:hover {
+        border-color: var(--accent);
+      }
+      .feature-card h4 {
+        font-size: 0.95rem;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+      .feature-card p {
+        font-size: 0.85rem;
+        margin: 0;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+      .feature-icon {
+        font-size: 1.3rem;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      /* ── Flow cards ─────────────────────── */
+      .flow-box {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 24px;
+        margin: 16px 0 24px;
+      }
+      .flow-box h4 {
+        color: var(--text);
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+      }
+      .flow-box ol {
+        margin-bottom: 0;
+      }
+      .flow-box ol li:last-child {
+        margin-bottom: 0;
+      }
+
+      /* ── Macro palette ─────────────────── */
+      .macro-palette {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0 20px;
+      }
+      .macro-chip {
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border: 1px solid;
+      }
+
+      /* ── Nav pills ─────────────────────── */
+      .nav-pills {
+        display: flex;
+        gap: 12px;
+        margin: 16px 0 24px;
+        flex-wrap: wrap;
+      }
+      .nav-pill {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 20px;
+        color: var(--text);
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-align: center;
+        flex: 1;
+        min-width: 120px;
+      }
+      .nav-pill span {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+
+      /* ── Responsive ────────────────────── */
+      @media (max-width: 640px) {
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-pills {
+          flex-direction: column;
+        }
+        body {
+          padding: 24px 16px 60px;
+        }
+        .header img {
+          width: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ════════════════ HEADER ════════════════ -->
+    <div class="header">
+      <img src="app/public/freedihare_logo.svg" alt="Freedihare logo" />
+      <h1>Nutrizione consapevole, sotto controllo.</h1>
+    </div>
+
+    <!-- ════════════════ INTRODUZIONE ════════════════ -->
+    <h2>Cos'&egrave; Freedihare</h2>
+    <h4>
+      <strong>Free</strong> + <strong>Feeding</strong> + <strong>Share</strong>.
+    </h4>
+    <p style="font-size: 1.05rem; color: var(--text)">
+      Freedihare &egrave; un'app pensata <strong>per le persone</strong>: il suo
+      scopo &egrave; portare consapevolezza nell'alimentazione attraverso la
+      condivisione e la comunicazione, per ridare a ciascuno
+      <strong>libert&agrave; nel proprio modo di mangiare</strong>.
+    </p>
+    <p>
+      Freedihare &egrave; un'applicazione desktop per
+      <strong>pianificare, registrare e analizzare la tua alimentazione</strong>
+      giorno per giorno. Tieni traccia di tutto quello che mangi, crea le tue
+      ricette, imposta obiettivi nutrizionali personalizzati e osserva i tuoi
+      progressi con grafici chiari e immediati.
+    </p>
+    <p>
+      Non servono competenze tecniche: apri l'app, registra i tuoi pasti e
+      Freedihare calcola tutto in automatico: calorie, macro, bilancio
+      giornaliero e trend nel tempo.
+    </p>
+    <p>
+      Al primo avvio un <strong>tour guidato</strong> ti accompagna tra le
+      sezioni principali, e una <strong>pagina Guida</strong> resta sempre a
+      disposizione nel men&ugrave; per ogni dubbio.
+    </p>
+
+    <hr />
+
+    <!-- ════════════════ NAVIGAZIONE ════════════════ -->
+    <h2>Le 5 sezioni principali</h2>
+    <p>
+      L'app si divide in cinque aree, accessibili dalla barra laterale (o dalla
+      barra in basso su schermi piccoli):
+    </p>
+
+    <div class="nav-pills">
+      <div class="nav-pill">Dashboard<span>Giornata di oggi</span></div>
+      <div class="nav-pill">Diario<span>Storico e trend</span></div>
+      <div class="nav-pill">Alimenti<span>Cibi e ricette</span></div>
+      <div class="nav-pill">Pasti<span>I tuoi preferiti</span></div>
+      <div class="nav-pill">Profilo<span>Dati e obiettivi</span></div>
+    </div>
+
+    <hr />
+
+    <!-- ════════════════ DASHBOARD ════════════════ -->
+    <h2>Dashboard · La tua giornata</h2>
+    <p>
+      La Dashboard &egrave; la schermata principale: mostra la giornata di oggi
+      e ti permette di registrare i pasti in modo rapido.
+    </p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="feature-icon">&#128197;</span>
+        <h4>Calendario settimanale</h4>
+        <p>
+          Naviga tra i giorni con il calendario in alto. Usa le frecce per
+          spostarti o il pulsante "Oggi" per tornare alla data corrente.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#127860;</span>
+        <h4>Pasti del giorno</h4>
+        <p>
+          Visualizza tutti i pasti registrati (colazione, pranzo, cena,
+          spuntini) con i macro riassuntivi per ciascuno.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#127919;</span>
+        <h4>Bilancio in tempo reale</h4>
+        <p>
+          Vedi calorie consumate vs. obiettivo con un grafico circolare, e i
+          macro rimanenti per il resto della giornata.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#9878;&#65039;</span>
+        <h4>Peso e misure</h4>
+        <p>
+          Registra il peso del giorno e consulta BMI e massa grassa calcolati
+          automaticamente.
+        </p>
+      </div>
+    </div>
+
+    <h3>Come registrare un pasto</h3>
+    <div class="flow-box">
+      <ol>
+        <li>Clicca <strong>"Aggiungi pasto"</strong> nella Dashboard</li>
+        <li>Scegli il tipo di pasto (Colazione, Pranzo, Cena o Spuntino)</li>
+        <li>
+          Cerca gli alimenti o le ricette e aggiungili al pasto, indicando il
+          peso in grammi
+        </li>
+        <li>
+          I macro si aggiornano in tempo reale man mano che aggiungi gli
+          ingredienti
+        </li>
+        <li>Clicca <strong>"Conferma pasto"</strong> per salvare</li>
+      </ol>
+    </div>
+
+    <p>
+      <strong>Scorciatoie utili:</strong> puoi
+      <strong>importare un pasto dai preferiti</strong> per non ricompilare
+      tutto da zero, oppure <strong>copiare un'intera giornata</strong> da una
+      data precedente.
+    </p>
+
+    <hr />
+
+    <!-- ════════════════ DIARIO ════════════════ -->
+    <h2>Diario · Storico e analisi</h2>
+    <p>
+      Il Diario ti permette di <strong>guardare indietro</strong>: rivedi le
+      giornate passate, confronta i periodi e scopri i tuoi trend alimentari.
+    </p>
+
+    <h3>Cosa puoi fare</h3>
+    <ul>
+      <li>
+        Scegli il periodo di analisi: <strong>settimana</strong>,
+        <strong>mese</strong> o <strong>anno</strong>
+      </li>
+      <li>
+        Filtra per <strong>fase nutrizionale</strong> (es. solo i giorni della
+        fase di definizione)
+      </li>
+      <li>
+        Consulta i <strong>grafici del periodo</strong>: calorie attese vs.
+        consumate, andamento del peso, BMI, composizione dei macro
+      </li>
+      <li>
+        Clicca su una <strong>giornata</strong> per aprire il dettaglio completo
+        con pasti e macro
+      </li>
+      <li>Modifica o aggiungi pasti anche a giornate passate</li>
+    </ul>
+
+    <h3>Grafici disponibili</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="feature-icon">&#128200;</span>
+        <h4>Calorie nel tempo</h4>
+        <p>
+          Confronto tra calorie attese e consumate, giorno per giorno, sul
+          periodo selezionato.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#128201;</span>
+        <h4>Bilancio calorico</h4>
+        <p>
+          Barre che mostrano se sei rimasto in linea, in surplus o in deficit
+          rispetto all'obiettivo.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#128202;</span>
+        <h4>Composizione macro</h4>
+        <p>
+          Distribuzione di proteine, grassi, carboidrati, zuccheri e fibre nel
+          periodo.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#128170;</span>
+        <h4>Trend corporei</h4>
+        <p>Andamento del peso, BMI e massa grassa nel tempo.</p>
+      </div>
+    </div>
+
+    <hr />
+
+    <!-- ════════════════ ALIMENTI ════════════════ -->
+    <h2>Alimenti · Il tuo database alimentare</h2>
+    <p>
+      Qui gestisci il catalogo di <strong>cibi e ricette</strong> che poi usi
+      per comporre i pasti. Trovi anche gli strumenti per tenerlo in ordine:
+      <strong>marche</strong>, <strong>negozi</strong>,
+      <strong>categorie</strong> e <strong>tipi di cucina</strong>.
+    </p>
+
+    <h3>Cerca alimento</h3>
+    <p>
+      Cerca qualsiasi alimento nel tuo database per nome, sottocategoria, marca
+      o negozio. Apri il dettaglio per vedere i
+      <strong>valori nutrizionali per 100g</strong> e le varianti disponibili.
+    </p>
+
+    <h3>Cerca ricetta</h3>
+    <p>
+      Trova le tue ricette salvate. Ogni ricetta mostra gli ingredienti con i
+      relativi pesi e i <strong>macro totali calcolati automaticamente</strong>.
+      Puoi modificarla o usarla direttamente in un pasto.
+    </p>
+
+    <h3>Crea alimento</h3>
+    <div class="flow-box">
+      <ol>
+        <li>Inserisci il nome dell'alimento e la sottocategoria</li>
+        <li>
+          Compila i valori nutrizionali per 100g (kcal, proteine, grassi,
+          carboidrati, fibre, sale&hellip;)
+        </li>
+        <li>Aggiungi la marca e il negozio (opzionale)</li>
+        <li>
+          Definisci porzioni tipo (es. "1 cucchiaio = 5g", "1 tazza = 200g")
+        </li>
+        <li>
+          Salva: l'alimento &egrave; pronto per essere usato nei pasti e nelle
+          ricette
+        </li>
+      </ol>
+    </div>
+
+    <h3>Crea ricetta</h3>
+    <div class="flow-box">
+      <ol>
+        <li>Dai un nome alla ricetta e scegli la categoria</li>
+        <li>Cerca e aggiungi gli ingredienti, indicando il peso di ciascuno</li>
+        <li>
+          Se la ricetta prevede cottura, seleziona la pentola per calcolare il
+          calo peso
+        </li>
+        <li>
+          I macro totali si aggiornano automaticamente in base agli ingredienti
+        </li>
+        <li>Definisci le porzioni (es. "1 porzione = 150g") e salva</li>
+      </ol>
+    </div>
+    <p>
+      <strong>Ricette dentro ricette:</strong> puoi usare una ricetta come
+      ingrediente di un'altra (es. una salsa come ingrediente di un piatto). I
+      macro vengono ricalcolati a cascata.
+    </p>
+
+    <hr />
+
+    <!-- ════════════════ PASTI ════════════════ -->
+    <h2>Pasti · I tuoi preferiti</h2>
+    <p>
+      I <strong>pasti preferiti</strong> sono combinazioni di alimenti che usi
+      spesso: la colazione di tutti i giorni, lo spuntino post-allenamento, il
+      pranzo tipo. Salvali una volta e ricaricali con un clic, senza
+      riaggiungere gli ingredienti ogni volta.
+    </p>
+    <ul>
+      <li>Crea un preferito da zero o salva un pasto gi&agrave; composto</li>
+      <li>Aggiungi una descrizione per ritrovarlo facilmente</li>
+      <li>Modificalo o eliminalo quando le tue abitudini cambiano</li>
+      <li>Importalo nella Dashboard mentre registri un nuovo pasto</li>
+    </ul>
+
+    <hr />
+
+    <!-- ════════════════ PROFILO ════════════════ -->
+    <h2>Profilo · I tuoi dati e obiettivi</h2>
+    <p>
+      Il Profilo raccoglie le tue informazioni personali, le misurazioni nel
+      tempo e le <strong>fasi nutrizionali</strong>, cio&egrave; i periodi con
+      obiettivi alimentari specifici.
+    </p>
+
+    <h3>Dati personali</h3>
+    <p>
+      Altezza, et&agrave;, sesso e i valori calcolati:
+      <strong>metabolismo basale</strong> (quante calorie bruci a riposo),
+      <strong>fabbisogno giornaliero</strong>, BMI e percentuale di grasso
+      corporeo.
+    </p>
+
+    <h3>Misurazioni fisiche</h3>
+    <p>
+      Registra le misure del corpo associate a una data: peso, girovita, petto,
+      braccia, cosce, polpacci, collo. Queste misurazioni alimentano i grafici
+      di trend nel Diario.
+    </p>
+
+    <h3>Fasi nutrizionali</h3>
+    <p>
+      Le fasi sono il cuore della pianificazione. Una fase rappresenta un
+      <strong>periodo con obiettivi macro definiti</strong> (es. "Definizione
+      marzo-maggio" o "Mantenimento estivo").
+    </p>
+    <div class="flow-box">
+      <h4>Come creare una fase</h4>
+      <ol>
+        <li>
+          Clicca <strong>"+ Nuova fase"</strong> e dai un nome (es. "Cut
+          primaverile")
+        </li>
+        <li>
+          Scegli il livello di attivit&agrave; (sedentario, normale, attivo) per
+          calibrare il fabbisogno
+        </li>
+        <li>Imposta le date di inizio e fine</li>
+        <li>
+          Configura gli obiettivi: percentuali di grassi, carboidrati, proteine,
+          zuccheri, fibre e sale
+        </li>
+        <li>
+          Regola il <strong>delta calorico</strong> (es. &minus;15% per una fase
+          di cut, +10% per un bulk)
+        </li>
+        <li>
+          Salva: da quel momento la Dashboard confronter&agrave; il consumo con
+          gli obiettivi della fase attiva
+        </li>
+      </ol>
+    </div>
+
+    <h3>Pentole e padelle</h3>
+    <p>
+      Registra i tuoi utensili da cucina con il loro
+      <strong>peso a vuoto</strong> (tara). Quando crei una ricetta con cottura,
+      seleziona la pentola e l'app calcola automaticamente il calo peso tra
+      crudo e cotto.
+    </p>
+
+    <hr />
+
+    <!-- ════════════════ MULTI-UTENTE ════════════════ -->
+    <h2>Account collegati · Condividi con chi vuoi</h2>
+    <p>
+      Puoi
+      <strong>collegare il tuo account a quello di un'altra persona</strong>: un
+      partner, un familiare, il tuo nutrizionista. Il collegamento &egrave;
+      reciproco: entrambi vedete e riutilizzate i rispettivi alimenti, ricette e
+      pentole.
+    </p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="feature-icon">&#129309;</span>
+        <h4>Cosa condividete</h4>
+        <p>
+          Le varianti degli alimenti, le ricette e le pentole create da
+          ciascuno. Inoltre puoi copiare un'intera giornata di pasti dal diario
+          dell'altro.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#128274;</span>
+        <h4>Cosa resta privato</h4>
+        <p>
+          Peso, misure e statistiche fisiche, le fasi nutrizionali, il diario e
+          i pasti, i pasti preferiti. Sono sempre e solo tuoi.
+        </p>
+      </div>
+    </div>
+
+    <p>
+      Gli account collegati possono <strong>modificare</strong> le ricette e gli
+      alimenti condivisi, ma solo chi li ha creati pu&ograve;
+      <strong>eliminarli</strong>. Puoi passare da un account all'altro in
+      qualsiasi momento, <strong>senza fare logout</strong>, dall'icona nella
+      barra in alto.
+    </p>
+
+    <hr />
+
+    <!-- ════════════════ AZIONI RAPIDE ════════════════ -->
+    <h2>Scorciatoie che fanno risparmiare tempo</h2>
+    <p>
+      Freedihare &egrave; pieno di piccole funzioni pensate per farti registrare
+      di pi&ugrave; digitando di meno:
+    </p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="feature-icon">&#128203;</span>
+        <h4>Duplica una ricetta</h4>
+        <p>
+          Parti da una ricetta esistente (anche condivisa) e creane una copia
+          personale da modificare a piacere.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#10133;</span>
+        <h4>Crea un alimento al volo</h4>
+        <p>
+          Ti manca un cibo mentre componi un pasto o una ricetta? Aggiungilo
+          subito, senza uscire dalla schermata.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#128260;</span>
+        <h4>Sposta una variante</h4>
+        <p>
+          Hai associato un prodotto all'alimento sbagliato? Spostalo su quello
+          giusto senza doverlo ricreare.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#129518;</span>
+        <h4>Calcolo proporzioni</h4>
+        <p>
+          "Quanti grammi di torta mi servono per 30g di proteine?" La ricetta te
+          lo dice in un attimo.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#9878;&#65039;</span>
+        <h4>Riscala una ricetta</h4>
+        <p>
+          Adatta le quantit&agrave; per ingrediente, per peso totale a crudo o
+          per peso finale cotto.
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">&#127869;&#65039;</span>
+        <h4>Porzioni e tara</h4>
+        <p>
+          Clicca sulle porzioni predefinite per impostare il peso, e sottrai la
+          tara della pentola con un tocco.
+        </p>
+      </div>
+    </div>
+
+    <p>
+      <strong>Sulla tastiera:</strong> su desktop puoi muoverti tra i risultati
+      di ricerca con le frecce, avviare la ricerca con <strong>Invio</strong> e
+      passare da un campo peso al successivo sempre con <strong>Invio</strong>,
+      senza mai staccare le mani dalla tastiera.
+    </p>
+
+    <hr />
+
+    <!-- ════════════════ FLUSSO TIPO ════════════════ -->
+    <h2>Una giornata tipo con Freedihare</h2>
+
+    <div class="flow-box">
+      <ol>
+        <li>
+          <strong>Mattina</strong> · Pesati a digiuno e salva il peso del
+          giorno. Poi registra la colazione dalla Dashboard: se &egrave; la
+          solita, importala dai preferiti con un clic.
+        </li>
+        <li>
+          <strong>Pranzo</strong> · Aggiungi il pasto, cerca gli alimenti,
+          indica i pesi. I macro rimanenti si aggiornano subito.
+        </li>
+        <li>
+          <strong>Spuntino</strong> · Registra anche lo snack: ogni dato conta
+          per il bilancio.
+        </li>
+        <li>
+          <strong>Cena</strong> · Ultimo pasto della giornata. Controlla il
+          grafico calorie: sei in linea con l'obiettivo?
+        </li>
+        <li>
+          <strong>Fine giornata</strong> · Segna la giornata come "completa".
+        </li>
+        <li>
+          <strong>Nel tempo</strong> · Passa al Diario per vedere come stai
+          andando su settimana, mese o anno.
+        </li>
+      </ol>
+    </div>
+
+    <hr />
+
+    <!-- ════════════════ MACRO PALETTE ════════════════ -->
+    <h2>I macro tracciati</h2>
+    <p>
+      Freedihare tiene sotto controllo 8 valori nutrizionali per ogni alimento,
+      ricetta e pasto:
+    </p>
+    <div class="macro-palette">
+      <span class="macro-chip" style="color: #afd482; border-color: #afd482"
+        >Kcal</span
+      >
+      <span class="macro-chip" style="color: #d47461; border-color: #d47461"
+        >Proteine</span
+      >
+      <span class="macro-chip" style="color: #8ec8f2; border-color: #8ec8f2"
+        >Grassi</span
+      >
+      <span class="macro-chip" style="color: #c4d9e9; border-color: #c4d9e9"
+        >Grassi saturi</span
+      >
+      <span class="macro-chip" style="color: #fbcd6a; border-color: #fbcd6a"
+        >Carboidrati</span
+      >
+      <span class="macro-chip" style="color: #ffe2a2; border-color: #ffe2a2"
+        >Zuccheri</span
+      >
+      <span class="macro-chip" style="color: #dbc89c; border-color: #dbc89c"
+        >Fibre</span
+      >
+      <span class="macro-chip" style="color: #b6e3e1; border-color: #b6e3e1"
+        >Sale</span
+      >
+    </div>
+    <p>
+      I colori si ritrovano in tutta l'app: nei badge dei pasti, nei grafici e
+      negli indicatori di warning quando un valore supera l'obiettivo della
+      fase.
+    </p>
+
+    <hr />
+
+    <!-- ════════════════ PRIMO ACCESSO ════════════════ -->
+    <h2>Primo accesso</h2>
+    <div class="flow-box">
+      <ol>
+        <li>Avvia l'app e clicca <strong>"Registrati"</strong></li>
+        <li>
+          Inserisci nome, email, password, sesso, data di nascita e altezza
+        </li>
+        <li>
+          Dopo la registrazione, effettua il login con le credenziali appena
+          create
+        </li>
+        <li>
+          Vai nel <strong>Profilo</strong> e crea la tua prima fase nutrizionale
+          con gli obiettivi macro
+        </li>
+        <li>
+          Vai in <strong>Alimenti</strong> e inizia a popolare il database con i
+          cibi che consumi di solito
+        </li>
+        <li>
+          Torna alla <strong>Dashboard</strong> e registra il tuo primo pasto!
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>

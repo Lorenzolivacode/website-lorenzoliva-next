@@ -15,6 +15,7 @@ import PortfolioList, {
   getIcon,
 } from "../../(components)/(organisms)/PortfolioList/PortfolioList";
 import ExperienceList from "../../(components)/(organisms)/ExperienceList/ExperienceList";
+import BrandIcon from "../../(components)/(atoms)/BrandIcon/BrandIcon";
 import SubtitlePortfolio from "../../(components)/(atoms)/SubtitlePortfolio/SubtitlePortfolio";
 import ParagraphList from "../../(components)/(atoms)/ParagraphList-client/ParagraphList";
 import BlurBlue from "../../(components)/(atoms)/BlurBlue/BlurBlue";
@@ -56,12 +57,11 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
         <div className="skills-container flex-wrap flex-center">
           {skills.map((skill) => (
             <div key={skill.id} className="img-skill-container">
-              <Image
-                width={72}
-                height={72}
-                src={skill.icon}
-                alt={skill.label}
+              <BrandIcon
+                icon={skill.icon}
+                size={72}
                 title={skill.label}
+                className="txt-c-primary-medium-light"
               />
               <p className="skill-label txt-center f-bold f-size-0d95-1d05 txt-c-primary-very-light">
                 {skill.label}
@@ -98,15 +98,15 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
             </div>
             <div className="technical-list flex-wrap gap-10px flex-center max-w-70p bg-primary-very-dark-0d6 p-8px radius-8px">
               {thisWebsite.tecnicalRequirements.map((requirement, index) => {
+                const icon = getIcon(requirement);
+                if (!icon) return null; // requirement senza icona: salto
                 return (
-                  <Image
-                    width={24}
-                    height={24}
+                  <BrandIcon
                     key={`${thisWebsite.id}-${index}`}
-                    className="w-24px"
-                    src={getIcon(requirement)}
-                    alt={requirement}
+                    icon={icon}
+                    size={24}
                     title={requirement}
+                    className="txt-c-primary-medium-light"
                   />
                 );
               })}

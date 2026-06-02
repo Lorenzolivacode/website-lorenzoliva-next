@@ -8,34 +8,43 @@ import { portfolioData } from "../../../(data)/portfolioProjects";
 
 import Image from "next/image";
 import ParagraphList from "../../(atoms)/ParagraphList-client/ParagraphList";
+import BrandIcon from "../../(atoms)/BrandIcon/BrandIcon";
 import { IPortfolioData } from "../../../Interface/IPortfolioProject";
+import {
+  siHtml5,
+  siCss,
+  siJavascript,
+  siReact,
+  siReactrouter,
+  siTailwindcss,
+  siSass,
+  siTypescript,
+  siNextdotjs,
+  siFirebase,
+  siGraphql,
+  siPrisma,
+  siPostgresql,
+} from "simple-icons";
 
-export const getIcon = (requirement: string) => {
-  switch (requirement) {
-    case "html":
-      return "/assets/skills-img/Html-Logo.png";
-    case "css":
-      return "/assets/skills-img/Css-Logo.png";
-    case "javascript":
-      return "/assets/skills-img/Js-Logo.png";
-    case "react":
-      return "/assets/skills-img/React-Logo.png";
-    case "reactrouter":
-      return "/assets/skills-img/React-Router-Logo.png";
-    case "tailwind":
-      return "/assets/skills-img/Tailwind-Logo.png";
-    case "sass":
-      return "/assets/skills-img/Sass-Logo.png";
-    case "typescript":
-      return "/assets/skills-img/Typescript-Logo.png";
-    case "next":
-      return "/assets/skills-img/Next-bl-Logo.png";
-    case "supabase":
-      return "/assets/skills-img/Supabase-Logo.svg";
-    case "firebase":
-      return "/assets/skills-img/Firebase-Logo.svg";
-  }
+// mappa requirement (stringa lowercase nei dati progetto) → icona simple-icons.
+// Ritorna undefined per un requirement sconosciuto: il chiamante salta l'elemento (niente icona rotta).
+const ICON_BY_REQUIREMENT: Record<string, { title: string; path: string }> = {
+  html: siHtml5,
+  css: siCss,
+  javascript: siJavascript,
+  react: siReact,
+  reactrouter: siReactrouter,
+  tailwind: siTailwindcss,
+  sass: siSass,
+  typescript: siTypescript,
+  next: siNextdotjs,
+  firebase: siFirebase,
+  graphql: siGraphql,
+  prisma: siPrisma,
+  postgresql: siPostgresql,
 };
+
+export const getIcon = (requirement: string) => ICON_BY_REQUIREMENT[requirement];
 
 export function PortfolioList({ data }: { data: IPortfolioData[] }) {
   const t = useTranslations("DevSection");
@@ -62,16 +71,15 @@ export function PortfolioList({ data }: { data: IPortfolioData[] }) {
             </h2>
             <div className="technical-list flex-wrap gap-10px flex-center max-w-70p bg-primary-very-dark-0d6 p-8px radius-8px">
               {project.tecnicalRequirements.map((requirement, index) => {
-                /* console.log(project.title, ": ", requirement); */
+                const icon = getIcon(requirement);
+                if (!icon) return null; // requirement senza icona: salto (niente svg vuoto)
                 return (
-                  <Image
-                    width={24}
-                    height={24}
+                  <BrandIcon
                     key={`${project.id}-${index}`}
-                    className="w-24px"
-                    src={getIcon(requirement)}
-                    alt={requirement}
+                    icon={icon}
+                    size={24}
                     title={requirement}
+                    className="txt-c-primary-medium-light"
                   />
                 );
               })}

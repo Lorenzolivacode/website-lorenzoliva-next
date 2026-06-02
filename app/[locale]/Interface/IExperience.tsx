@@ -7,8 +7,8 @@ export interface IExperience {
   id: string;
   role: IDescriptionPData; // ruolo (bilingue)
   company: string; // datore di lavoro (invariato nelle due lingue)
-  period: IDescriptionPData; // es. "Gen 2025 – presente" / "Jan 2025 – present"
+  period: IDescriptionPData; // es. "da gennaio 2025" / "since January 2025" (reso come Tag)
   description: IDescriptionPData; // racconto bilingue dell'esperienza
-  tech: string[]; // tag tecnologici come testo (pill)
+  tech: string[]; // chiavi requirement lowercase → icona via getIcon/BrandIcon
   current: boolean; // ruolo ancora in corso (metadato: nessun badge, riservato a un indicatore visivo futuro)
 }

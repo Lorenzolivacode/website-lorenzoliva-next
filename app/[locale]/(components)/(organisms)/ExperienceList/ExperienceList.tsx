@@ -3,6 +3,8 @@ import "./ExperienceList.css";
 import { useLocale } from "next-intl";
 import { IExperience } from "../../../Interface/IExperience";
 import Tag from "../../(atoms)/Tag/Tag";
+import BrandIcon from "../../(atoms)/BrandIcon/BrandIcon";
+import { getIcon } from "../PortfolioList/PortfolioList";
 
 // Lista delle esperienze professionali (sezione /dev #experience).
 // Server component: nessuna interattività; sceglie la lingua dei contenuti bilingui via useLocale.
@@ -25,19 +27,25 @@ function ExperienceList({ data }: { data: IExperience[] }) {
                 {exp.company}
               </p>
             </div>
-            <p className="experience-period f-size-0d95-1d05 txt-c-primary-very-light">
-              {exp.period[lang]}
-            </p>
+            <Tag label={exp.period[lang]} color="primary" />
           </div>
 
           <p className="f-size-0d95-1d05">{exp.description[lang]}</p>
 
           <ul className="experience-tech-list flex-wrap gap-10px flex-cross-center">
-            {exp.tech.map((tech, index) => (
-              <li key={`${exp.id}-tech-${index}`}>
-                <Tag label={tech} color="primary" />
-              </li>
-            ))}
+            {exp.tech.map((req, index) => {
+              const icon = getIcon(req);
+              if (!icon) return null; // requirement senza icona: salto
+              return (
+                <li key={`${exp.id}-tech-${index}`}>
+                  <BrandIcon
+                    icon={icon}
+                    size={24}
+                    className="txt-c-primary-medium-light"
+                  />
+                </li>
+              );
+            })}
           </ul>
         </li>
       ))}

@@ -11,8 +11,8 @@ export const experiences: IExperience[] = [
     },
     company: "Riverloop srls",
     period: {
-      italian: "Gen 2025 – presente",
-      english: "Jan 2025 – present",
+      italian: "da gennaio 2025",
+      english: "since January 2025",
     },
     description: {
       italian:
@@ -20,7 +20,7 @@ export const experiences: IExperience[] = [
       english:
         "Full-stack development of commissioned web applications in a small team, with full autonomy: from design and architectural planning through to delivery. I built management systems and SaaS platforms across different sectors, some featuring AI-based functionality. On the backend I personally handle data modelling and APIs: PostgreSQL with Prisma and a GraphQL layer (Pothos). On the frontend I develop the interface in Next.js and React, with care for UX/UI, often defining the design myself. I consistently integrate AI tools into my workflow (not just to generate code, but for study, planning and architectural reasoning), running the process in a structured, critically-reviewed way.",
     },
-    tech: ["Next.js", "React", "TypeScript", "PostgreSQL", "Prisma", "GraphQL (Pothos)"],
+    tech: ["next", "react", "typescript", "postgresql", "prisma", "graphql"],
     current: true,
   },
   {
@@ -31,8 +31,8 @@ export const experiences: IExperience[] = [
     },
     company: "Riverloop srls",
     period: {
-      italian: "Mar 2025 – presente",
-      english: "Mar 2025 – present",
+      italian: "da marzo 2025",
+      english: "since March 2025",
     },
     description: {
       italian:
@@ -40,7 +40,7 @@ export const experiences: IExperience[] = [
       english:
         "Web development instructor for adult beginner students, in groups of around ten. I deliver structured theory-and-practice lessons focused on JavaScript, React and Next.js, and I personally prepare the teaching materials: slides, exercises and lessons organised in Notion.",
     },
-    tech: ["JavaScript", "React", "Next.js"],
+    tech: ["javascript", "react", "next"],
     current: true,
   },
 ];

@@ -37,7 +37,8 @@
   padding: 16px;
 }
 
-.skills-container img {
+/* l'icona skill (ora svg BrandIcon, prima img) è centrata in absolute nella cella 80x80 */
+.skills-container svg {
   position: absolute;
 }
 
