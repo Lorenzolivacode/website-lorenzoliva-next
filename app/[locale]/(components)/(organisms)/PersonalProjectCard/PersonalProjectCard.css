@@ -1,7 +1,9 @@
 /* Card progetto personale: classe-componente (descrive una "cosa", dimensioni libere).
    Colori/raggi/ombre arrivano dalle utility nel JSX (CLAUDE.md §7.1); qui solo layout. */
+/* nessun riquadro attorno alla card (coerente con le altre voci del Portfolio):
+   solo spaziatura verticale, il logo resta come thumbnail sul suo pannello */
 .personal-card {
-  padding: 20px;
+  padding: 12px 0;
 }
 
 .personal-card-logo {
@@ -16,9 +18,6 @@
 }
 
 @media screen and (max-width: 480px) {
-  .personal-card {
-    padding: 14px;
-  }
   .personal-card-logo {
     width: 100%;
     height: 120px;

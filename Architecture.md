@@ -163,6 +163,8 @@ app/layout.tsx                          → CSS globali, shell HTML minima
 | ModalDocs-client      | Si     | Modale documenti (CV, portfolio PDF)                |
 | ModalHam-client       | Si     | Menu mobile (createPortal)                          |
 | ModalHello-client     | Si     | Modale benvenuto con foto                           |
+| ProjectLinkButton     | No     | Button-link esterno (GitHub/live) con stato disabled; testi via props. Fonte unica del pattern (PortfolioList ×2, dev/page "Questo sito") |
+| TechIconList          | No     | Lista icone tecnologiche da chiavi requirement (`getIcon`+`BrandIcon`+skip). Fonte unica, prima duplicata in 5 punti; `listClassName` per il contenitore del chiamante |
 | Navbar-client         | Si     | Navigazione principale (Link da i18n/routing)       |
 | NavbarDev-client      | Si     | Navigazione sezione dev (anchor link a sezioni). Voci/ordine/barra derivati dalla fonte unica `devSections`; icone come componenti lucide (mappa `iconKey`→componente) |
 | SectionFooter-client  | Si     | Contenuto footer (contatti, docs, social)           |
@@ -219,7 +221,17 @@ Nessun API, nessun database. Tutti i dati sono in file TSX:
 
 Esporta:
 - `portfolioData: IPortfolioData[]` — 14 progetti con titolo, tech requirements, immagine, descrizione bilingue, link GitHub/live
-- `skills: {id, icon, label}[]` — tecnologie della griglia /dev; `icon` è un oggetto `simple-icons` (path monocromatico), reso da `BrandIcon`. ID statici. `getIcon(requirement)` (esportato da `PortfolioList`) mappa i requirement dei progetti agli stessi oggetti `simple-icons` (undefined se sconosciuto → il chiamante salta)
+- `skills: {id, icon, label}[]` — tecnologie della griglia /dev; `icon` è un oggetto `simple-icons` preso dal registro **`BRAND_ICONS`** (`(data)/techIcons.tsx`), reso da `BrandIcon`. ID statici.
+
+### `techIcons.tsx`
+
+Fonte di verità unica delle icone-brand. Esporta:
+- `BRAND_ICONS: Record<string, SimpleIcon>` — registro chiave requirement → oggetto `simple-icons` (unico punto con gli import simple-icons). Alimenta sia `skills` sia `getIcon`.
+- `getIcon(requirement)` — ritorna l'icona o `undefined` (il chiamante salta). Usato dalla molecola `TechIconList`. (Prima viveva in `PortfolioList`.)
+
+### `freedihareContent.tsx`
+
+Config statica della pagina `/dev/freedihare`: `fhPills`, `fhSections` (con `iconKey`→lucide nella pagina), `fhMacros`, `fhDay`, `fhShots`. Dati puri, niente UI.
 - `links: {id, icon, label, title, url}[]` — link esterni (GitHub, LinkedIn, contatti)
 - `thisWebsite: IPortfolioData` — dati del sito stesso (mostrato separatamente in dev page)
 

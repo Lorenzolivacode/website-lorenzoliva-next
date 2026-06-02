@@ -3,8 +3,7 @@ import "./ExperienceList.css";
 import { useLocale } from "next-intl";
 import { IExperience } from "../../../Interface/IExperience";
 import Tag from "../../(atoms)/Tag/Tag";
-import BrandIcon from "../../(atoms)/BrandIcon/BrandIcon";
-import { getIcon } from "../PortfolioList/PortfolioList";
+import TechIconList from "../../(molecules)/TechIconList/TechIconList";
 
 // Lista delle esperienze professionali (sezione /dev #experience).
 // Server component: nessuna interattività; sceglie la lingua dei contenuti bilingui via useLocale.
@@ -32,21 +31,10 @@ function ExperienceList({ data }: { data: IExperience[] }) {
 
           <p className="f-size-0d95-1d05">{exp.description[lang]}</p>
 
-          <ul className="experience-tech-list flex-wrap gap-10px flex-cross-center">
-            {exp.tech.map((req, index) => {
-              const icon = getIcon(req);
-              if (!icon) return null; // requirement senza icona: salto
-              return (
-                <li key={`${exp.id}-tech-${index}`}>
-                  <BrandIcon
-                    icon={icon}
-                    size={24}
-                    className="txt-c-primary-medium-light"
-                  />
-                </li>
-              );
-            })}
-          </ul>
+          <TechIconList
+            tech={exp.tech}
+            listClassName="experience-tech-list flex-wrap gap-10px flex-cross-center"
+          />
         </li>
       ))}
     </ul>

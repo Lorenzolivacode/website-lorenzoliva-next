@@ -10,13 +10,31 @@ import {
   Heart,
   UserRound,
   Users,
+  LucideIcon,
 } from "lucide-react";
 
 import { buildMetadata } from "../../../seo";
 import BlurBlue from "../../../(components)/(atoms)/BlurBlue/BlurBlue";
-import BrandIcon from "../../../(components)/(atoms)/BrandIcon/BrandIcon";
-import { getIcon } from "../../../(components)/(organisms)/PortfolioList/PortfolioList";
+import TechIconList from "../../../(components)/(molecules)/TechIconList/TechIconList";
 import { personalProjects } from "../../../(data)/personalProjects";
+import {
+  fhPills,
+  fhSections,
+  fhMacros,
+  fhDay,
+  fhShots,
+} from "../../../(data)/freedihareContent";
+import FhSection from "./FhSection";
+
+// mappa iconKey (dato) → componente lucide (UI): i dati restano puri
+const SECTION_ICONS: Record<string, LucideIcon> = {
+  dashboard: LayoutDashboard,
+  diary: LineChart,
+  foods: Database,
+  meals: Heart,
+  profile: UserRound,
+  sharing: Users,
+};
 
 // og:url + canonical propri della pagina di approfondimento
 export async function generateMetadata({
@@ -28,52 +46,15 @@ export async function generateMetadata({
 }
 
 // Scheda di approfondimento del progetto personale Freedihare.
-// Chassis = stile lorenzoliva (tema scuro, utility, BlurBlue, .btn); identità Freedihare
-// come accento scoped (.freedihare-page tiene le custom property --fh-*). Niente <header>
-// (regola globale lo schiaccerebbe); blocchi in <div> per non interferire col SectionObserver di /dev.
+// Chassis = stile lorenzoliva (tema scuro, utility, BlurBlue); identità Freedihare come accento
+// scoped (.freedihare-page tiene le custom property --fh-*). Niente <header> (regola globale lo
+// schiaccerebbe); blocchi <div> (FhSection) per non interferire col SectionObserver di /dev.
 function FreedipharePage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
   const t = useTranslations("Freedihare");
 
   const logo = "/assets/projects-img/freedihare/freedihare-logo.svg";
   const freedihare = personalProjects.find((p) => p.id === "freedihare");
-
-  const pills = [
-    { label: "pillDashboard", sub: "pillDashboardSub" },
-    { label: "pillDiary", sub: "pillDiarySub" },
-    { label: "pillFoods", sub: "pillFoodsSub" },
-    { label: "pillMeals", sub: "pillMealsSub" },
-    { label: "pillProfile", sub: "pillProfileSub" },
-  ];
-
-  const sections = [
-    { Icon: LayoutDashboard, title: "dashboardTitle", text: "dashboardText" },
-    { Icon: LineChart, title: "diaryTitle", text: "diaryText" },
-    { Icon: Database, title: "foodsTitle", text: "foodsText" },
-    { Icon: Heart, title: "mealsTitle", text: "mealsText" },
-    { Icon: UserRound, title: "profileTitle", text: "profileText" },
-    { Icon: Users, title: "sharingTitle", text: "sharingText" },
-  ];
-
-  const macros = [
-    { label: "macroKcal", cls: "fh-macro-kcal" },
-    { label: "macroProteins", cls: "fh-macro-proteins" },
-    { label: "macroFats", cls: "fh-macro-fats" },
-    { label: "macroSaturated", cls: "fh-macro-saturated" },
-    { label: "macroCarbs", cls: "fh-macro-carbs" },
-    { label: "macroSugars", cls: "fh-macro-sugars" },
-    { label: "macroFiber", cls: "fh-macro-fiber" },
-    { label: "macroSalt", cls: "fh-macro-salt" },
-  ];
-
-  const day = ["dayMorning", "dayLunch", "dayDinner", "dayTrend"];
-
-  // screenshot reali (verticali) dell'app, resi in cornici "finestra" nella vetrina
-  const shots = [
-    { src: "/assets/projects-img/freedihare/dashboard.webp", w: 571, h: 773, cap: "pillDashboard" },
-    { src: "/assets/projects-img/freedihare/diary.webp", w: 592, h: 853, cap: "pillDiary" },
-    { src: "/assets/projects-img/freedihare/profile.webp", w: 571, h: 874, cap: "pillProfile" },
-  ];
 
   return (
     <div className="freedihare-page w-full">
@@ -109,12 +90,9 @@ function FreedipharePage({ params: { locale } }: { params: { locale: string } })
       </div>
 
       {/* VETRINA: screenshot reali dell'app (verticali) in cornici "finestra" */}
-      <div className="fh-section">
-        <h2 className="fh-section-title f-bold f-size-1d35-1d65">
-          {t("showcaseTitle")}
-        </h2>
+      <FhSection title={t("showcaseTitle")}>
         <ul className="fh-showcase">
-          {shots.map((s) => (
+          {fhShots.map((s) => (
             <li key={s.cap} className="fh-shot">
               <div className="fh-shot-frame">
                 <Image
@@ -129,61 +107,55 @@ function FreedipharePage({ params: { locale } }: { params: { locale: string } })
             </li>
           ))}
         </ul>
-      </div>
+      </FhSection>
 
       {/* PANORAMICA: le 5 sezioni */}
-      <div className="fh-section">
-        <h2 className="fh-section-title f-bold f-size-1d35-1d65">
-          {t("overviewTitle")}
-        </h2>
+      <FhSection title={t("overviewTitle")}>
         <p className="f-size-0d95-1d05">{t("overviewLead")}</p>
         <ul className="fh-pills">
-          {pills.map((p) => (
+          {fhPills.map((p) => (
             <li key={p.label} className="fh-pill">
               <span className="fh-pill-label f-bold">{t(p.label)}</span>
               <span className="fh-pill-sub f-size-0d875">{t(p.sub)}</span>
             </li>
           ))}
         </ul>
-      </div>
+      </FhSection>
 
       {/* BLOCCHI SEZIONE: card con icona lucide */}
-      <div className="fh-section">
+      <FhSection>
         <ul className="fh-grid">
-          {sections.map(({ Icon, title, text }) => (
-            <li key={title} className="fh-card">
-              <span className="fh-card-icon flex-center radius-50p">
-                <Icon size={22} aria-hidden />
-              </span>
-              <h3 className="f-bold f-size-1d25-1d5">{t(title)}</h3>
-              <p className="f-size-0d95-1d05">{t(text)}</p>
-            </li>
-          ))}
+          {fhSections.map((s) => {
+            const Icon = SECTION_ICONS[s.iconKey];
+            return (
+              <li key={s.title} className="fh-card">
+                <span className="fh-card-icon flex-center radius-50p">
+                  <Icon size={22} aria-hidden />
+                </span>
+                <h3 className="f-bold f-size-1d25-1d5">{t(s.title)}</h3>
+                <p className="f-size-0d95-1d05">{t(s.text)}</p>
+              </li>
+            );
+          })}
         </ul>
-      </div>
+      </FhSection>
 
       {/* MACRO: chip coi colori reali dell'app */}
-      <div className="fh-section">
-        <h2 className="fh-section-title f-bold f-size-1d35-1d65">
-          {t("macrosTitle")}
-        </h2>
+      <FhSection title={t("macrosTitle")}>
         <p className="f-size-0d95-1d05">{t("macrosText")}</p>
         <ul className="fh-macros">
-          {macros.map((m) => (
+          {fhMacros.map((m) => (
             <li key={m.label} className={`fh-macro ${m.cls} f-size-0d875 f-bold`}>
               {t(m.label)}
             </li>
           ))}
         </ul>
-      </div>
+      </FhSection>
 
       {/* GIORNATA TIPO: flusso numerato */}
-      <div className="fh-section">
-        <h2 className="fh-section-title f-bold f-size-1d35-1d65">
-          {t("dayTitle")}
-        </h2>
+      <FhSection title={t("dayTitle")}>
         <ol className="fh-flow">
-          {day.map((k, i) => (
+          {fhDay.map((k, i) => (
             <li key={k} className="fh-flow-step">
               <span className="fh-flow-num flex-center radius-50p f-bold">
                 {i + 1}
@@ -192,30 +164,15 @@ function FreedipharePage({ params: { locale } }: { params: { locale: string } })
             </li>
           ))}
         </ol>
-      </div>
+      </FhSection>
 
-      {/* SOTTO IL COFANO: stack + CTA */}
-      <div className="fh-section">
-        <h2 className="fh-section-title f-bold f-size-1d35-1d65">
-          {t("closingTitle")}
-        </h2>
+      {/* SOTTO IL COFANO: stack tecnico */}
+      <FhSection title={t("closingTitle")}>
         <p className="f-size-0d95-1d05">{t("closingText")}</p>
-        <ul className="fh-tech">
-          {freedihare?.tech.map((req) => {
-            const icon = getIcon(req);
-            if (!icon) return null;
-            return (
-              <li key={req}>
-                <BrandIcon
-                  icon={icon}
-                  size={28}
-                  className="txt-c-primary-medium-light"
-                />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+        {freedihare && (
+          <TechIconList tech={freedihare.tech} size={28} listClassName="fh-tech" />
+        )}
+      </FhSection>
     </div>
   );
 }

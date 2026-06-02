@@ -1,20 +1,4 @@
-import {
-  siGithub,
-  siHtml5,
-  siCss,
-  siJavascript,
-  siReact,
-  siReactrouter,
-  siTailwindcss,
-  siSass,
-  siTypescript,
-  siNextdotjs,
-  siNodedotjs,
-  siGraphql,
-  siPrisma,
-  siElectron,
-  siFirebase,
-} from "simple-icons";
+import { BRAND_ICONS } from "./techIcons";
 
 const generateId = () => {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -24,21 +8,21 @@ const generateId = () => {
 // (path monocromatico), tinto via classe utility nel rendering (non più asset PNG a colori).
 // Elenco allineato al CV: aggiunte GraphQL e Prisma rispetto al set precedente.
 export const skills = [
-  { id: "skill-github", label: "GitHub", icon: siGithub },
-  { id: "skill-html", label: "HTML", icon: siHtml5 },
-  { id: "skill-css", label: "CSS", icon: siCss },
-  { id: "skill-sass", label: "Sass", icon: siSass },
-  { id: "skill-tailwind", label: "Tailwind", icon: siTailwindcss },
-  { id: "skill-javascript", label: "JavaScript", icon: siJavascript },
-  { id: "skill-typescript", label: "TypeScript", icon: siTypescript },
-  { id: "skill-react", label: "React", icon: siReact },
-  { id: "skill-reactrouter", label: "ReactRouter", icon: siReactrouter },
-  { id: "skill-nextjs", label: "NextJs", icon: siNextdotjs },
-  { id: "skill-nodejs", label: "Node.js", icon: siNodedotjs },
-  { id: "skill-firebase", label: "Google Firebase", icon: siFirebase },
-  { id: "skill-graphql", label: "GraphQL", icon: siGraphql },
-  { id: "skill-prisma", label: "Prisma", icon: siPrisma },
-  { id: "skill-electron", label: "Electron", icon: siElectron },
+  { id: "skill-github", label: "GitHub", icon: BRAND_ICONS.github },
+  { id: "skill-html", label: "HTML", icon: BRAND_ICONS.html },
+  { id: "skill-css", label: "CSS", icon: BRAND_ICONS.css },
+  { id: "skill-sass", label: "Sass", icon: BRAND_ICONS.sass },
+  { id: "skill-tailwind", label: "Tailwind", icon: BRAND_ICONS.tailwind },
+  { id: "skill-javascript", label: "JavaScript", icon: BRAND_ICONS.javascript },
+  { id: "skill-typescript", label: "TypeScript", icon: BRAND_ICONS.typescript },
+  { id: "skill-react", label: "React", icon: BRAND_ICONS.react },
+  { id: "skill-reactrouter", label: "ReactRouter", icon: BRAND_ICONS.reactrouter },
+  { id: "skill-nextjs", label: "NextJs", icon: BRAND_ICONS.next },
+  { id: "skill-nodejs", label: "Node.js", icon: BRAND_ICONS.nodejs },
+  { id: "skill-firebase", label: "Google Firebase", icon: BRAND_ICONS.firebase },
+  { id: "skill-graphql", label: "GraphQL", icon: BRAND_ICONS.graphql },
+  { id: "skill-prisma", label: "Prisma", icon: BRAND_ICONS.prisma },
+  { id: "skill-electron", label: "Electron", icon: BRAND_ICONS.electron },
 ];
 
 export const links = [

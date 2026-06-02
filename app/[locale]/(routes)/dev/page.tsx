@@ -12,16 +12,15 @@ import {
 } from "./../../(data)/portfolioProjects";
 import { experiences } from "./../../(data)/experiences";
 import { personalProjects } from "./../../(data)/personalProjects";
-import PortfolioList, {
-  getIcon,
-} from "../../(components)/(organisms)/PortfolioList/PortfolioList";
+import PortfolioList from "../../(components)/(organisms)/PortfolioList/PortfolioList";
 import ExperienceList from "../../(components)/(organisms)/ExperienceList/ExperienceList";
 import PersonalProjectCard from "../../(components)/(organisms)/PersonalProjectCard/PersonalProjectCard";
 import BrandIcon from "../../(components)/(atoms)/BrandIcon/BrandIcon";
+import TechIconList from "../../(components)/(molecules)/TechIconList/TechIconList";
+import ProjectLinkButton from "../../(components)/(molecules)/ProjectLinkButton/ProjectLinkButton";
 import SubtitlePortfolio from "../../(components)/(atoms)/SubtitlePortfolio/SubtitlePortfolio";
 import ParagraphList from "../../(components)/(atoms)/ParagraphList-client/ParagraphList";
 import BlurBlue from "../../(components)/(atoms)/BlurBlue/BlurBlue";
-import Link from "next/link";
 import { buildMetadata } from "../../seo";
 
 // og:url + canonical propri della pagina /dev
@@ -98,21 +97,10 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
                 className="img-bg-project-el "
               />
             </div>
-            <div className="technical-list flex-wrap gap-10px flex-center max-w-70p bg-primary-very-dark-0d6 p-8px radius-8px">
-              {thisWebsite.tecnicalRequirements.map((requirement, index) => {
-                const icon = getIcon(requirement);
-                if (!icon) return null; // requirement senza icona: salto
-                return (
-                  <BrandIcon
-                    key={`${thisWebsite.id}-${index}`}
-                    icon={icon}
-                    size={24}
-                    title={requirement}
-                    className="txt-c-primary-medium-light"
-                  />
-                );
-              })}
-            </div>
+            <TechIconList
+              tech={thisWebsite.tecnicalRequirements}
+              listClassName="technical-list flex-wrap gap-10px flex-center max-w-70p bg-primary-very-dark-0d6 p-8px radius-8px"
+            />
           </div>
           <div className="project-el-details flex-column flex-between f-size-0d95-1d05">
             <ParagraphList
@@ -120,28 +108,12 @@ function Dev({ params: { locale } }: { params: { locale: string } }) {
               description={thisWebsite.description}
             />
 
-            <Link
-              href={
-                thisWebsite.linkGithub.length >= 2
-                  ? thisWebsite.linkGithub
-                  : "#"
-              }
-              target={thisWebsite.linkGithub.length >= 2 ? "_blank" : "_self"}
-              rel="noopener noreferrer"
+            <ProjectLinkButton
+              href={thisWebsite.linkGithub}
+              label={t("lookCode")}
               title={t("followCode")}
-              aria-disabled={
-                thisWebsite.linkGithub.length < 2 ? true : undefined
-              }
-              tabIndex={thisWebsite.linkGithub.length < 2 ? -1 : undefined}
-              className={`${
-                thisWebsite.linkGithub.length < 2
-                  ? "opacity-4 pointer-events-none"
-                  : ""
-              } btn change-img-link p-4px radius-8px f-size-0d95-1d05 txt-decoration-none txt-c-inherit p-l-20px flex-cross-center gap-10px`}
-            >
-              <div className="img-git-30 w-30px ratio-1" />
-              {t("lookCode")}
-            </Link>
+              iconClass="img-git-30"
+            />
           </div>
         </div>
         <SubtitlePortfolio label={t("subtitlePersonalProjects")} />

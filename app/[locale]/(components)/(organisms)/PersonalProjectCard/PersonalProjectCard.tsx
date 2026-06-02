@@ -5,8 +5,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Link } from "../../../../../i18n/routing";
 import { IPersonalProject } from "../../../Interface/IPersonalProject";
-import BrandIcon from "../../(atoms)/BrandIcon/BrandIcon";
-import { getIcon } from "../PortfolioList/PortfolioList";
+import TechIconList from "../../(molecules)/TechIconList/TechIconList";
 
 // Card di un progetto personale (sottosezione /dev #portfolio "Progetti personali").
 // Server component: sceglie la lingua via useLocale; logo + descrizione + icone tech + CTA interna.
@@ -16,7 +15,7 @@ function PersonalProjectCard({ project }: { project: IPersonalProject }) {
   const t = useTranslations("DevSection");
 
   return (
-    <article className="personal-card flex-wrap flex-cross-center gap-20px shadow-light-small radius-20px w-full">
+    <article className="personal-card flex-wrap flex-cross-center gap-20px w-full">
       <div className="personal-card-logo flex-center radius-20px bg-primary-very-dark-0d6">
         <Image src={project.logo} alt={project.title} width={110} height={110} />
       </div>
@@ -25,21 +24,10 @@ function PersonalProjectCard({ project }: { project: IPersonalProject }) {
         <h3 className="f-bold f-size-1d25-1d5">{project.title}</h3>
         <p className="f-size-0d95-1d05">{project.tagline[lang]}</p>
 
-        <ul className="personal-card-tech flex-wrap gap-10px flex-cross-center">
-          {project.tech.map((req, index) => {
-            const icon = getIcon(req);
-            if (!icon) return null; // requirement senza icona: salto
-            return (
-              <li key={`${project.id}-tech-${index}`}>
-                <BrandIcon
-                  icon={icon}
-                  size={24}
-                  className="txt-c-primary-medium-light"
-                />
-              </li>
-            );
-          })}
-        </ul>
+        <TechIconList
+          tech={project.tech}
+          listClassName="personal-card-tech flex-wrap gap-10px flex-cross-center"
+        />
 
         <Link
           href={project.route}
