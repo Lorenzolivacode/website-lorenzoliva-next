@@ -19,15 +19,22 @@ function ExperienceList({ data }: { data: IExperience[] }) {
           key={exp.id}
           className="experience-card flex-column gap-10px shadow-light-small radius-20px"
         >
-          <div className="experience-card-head flex-wrap flex-between flex-cross-center gap-10px">
-            <div className="flex-column gap-5px">
-              <h3 className="f-bold f-size-1d25-1d5">{exp.role[lang]}</h3>
-              <p className="f-size-0d95-1d05 txt-c-primary-very-light">
-                {exp.company}
-              </p>
-            </div>
-            <Tag label={exp.period[lang]} color="primary" />
-          </div>
+          <h3 className="f-bold f-size-1d25-1d5">{exp.role[lang]}</h3>
+
+          {/* Collocazioni: stesso ruolo presso una o più aziende, ognuna col suo periodo. */}
+          <ul className="experience-placements flex-column gap-5px">
+            {exp.placements.map((p) => (
+              <li
+                key={p.company}
+                className="experience-placement flex-wrap flex-between flex-cross-center gap-10px"
+              >
+                <p className="f-size-0d95-1d05 txt-c-primary-very-light">
+                  {p.company}
+                </p>
+                <Tag label={p.period[lang]} color="primary" />
+              </li>
+            ))}
+          </ul>
 
           <p className="f-size-0d95-1d05">{exp.description[lang]}</p>
 

@@ -8,15 +8,15 @@ Nessun backend, nessun database, nessuna autenticazione. Dati hardcoded, output 
 
 ## Stack
 
-| Layer      | Tecnologia                          |
-| ---------- | ----------------------------------- |
-| Framework  | Next.js 14.2.13 (App Router)       |
-| Linguaggio | TypeScript (strict: false)          |
-| Styling    | CSS custom utility library (no preprocessor, no Tailwind) |
+| Layer      | Tecnologia                                                                                                                                                                                                                                                                    |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework  | Next.js 14.2.13 (App Router)                                                                                                                                                                                                                                                  |
+| Linguaggio | TypeScript (strict: false)                                                                                                                                                                                                                                                    |
+| Styling    | CSS custom utility library (no preprocessor, no Tailwind)                                                                                                                                                                                                                     |
 | Icone      | `lucide-react` per le voci del menu `/dev` (NavbarDev); `simple-icons` per i loghi tech (griglia Skills + tag-icona dei progetti), resi monocromatici tinti via l'atomo `BrandIcon`; i loghi brand dei **Links** (LinkedIn/GitHub) restano asset PNG in `public/` (contenuto) |
-| i18n       | next-intl ^3.20.0 (IT, EN)         |
-| Font       | Google Fonts (Zain) via `@import` in globals.css. I file Geist/GeistMono in `app/fonts/` esistono ma **non sono referenziati** (non importati) |
-| Deploy     | Static export (`output: "export"`) → Aruba hosting Linux base (Apache) |
+| i18n       | next-intl ^3.20.0 (IT, EN)                                                                                                                                                                                                                                                    |
+| Font       | Google Fonts (Zain) via `@import` in globals.css. I file Geist/GeistMono in `app/fonts/` esistono ma **non sono referenziati** (non importati)                                                                                                                                |
+| Deploy     | Static export (`output: "export"`) → Aruba hosting Linux base (Apache)                                                                                                                                                                                                        |
 
 ---
 
@@ -67,7 +67,7 @@ website-lorenzoliva-next/
 │       └── Interface/
 │           ├── IPortfolioProject.tsx  # Interfaccia TypeScript per i progetti
 │           ├── IDevSection.tsx        # Forma voce navigazione /dev
-│           └── IExperience.tsx        # Forma singola esperienza professionale
+│           └── IExperience.tsx        # Esperienza raggruppata per ruolo + IExperiencePlacement (azienda/periodo/current)
 │
 ├── i18n/
 │   ├── routing.ts                    # Config locale + export Link, usePathname, useRouter, redirect
@@ -106,13 +106,13 @@ website-lorenzoliva-next/
 
 ## Route e URL
 
-| URL pattern     | File                                  | Contenuto           |
-| --------------- | ------------------------------------- | ------------------- |
-| `/`             | `app/page.js`                         | Redirect a `/{locale}` |
-| `/{locale}`     | `app/[locale]/page.tsx`               | Home page           |
-| `/{locale}/dev` | `app/[locale]/(routes)/dev/page.tsx`  | Portfolio sviluppatore (skills, esperienza, portfolio, links) |
+| URL pattern                | File                                            | Contenuto                                                                                                                   |
+| -------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `/`                        | `app/page.js`                                   | Redirect a `/{locale}`                                                                                                      |
+| `/{locale}`                | `app/[locale]/page.tsx`                         | Home page                                                                                                                   |
+| `/{locale}/dev`            | `app/[locale]/(routes)/dev/page.tsx`            | Portfolio sviluppatore (skills, esperienza, portfolio, links)                                                               |
 | `/{locale}/dev/freedihare` | `app/[locale]/(routes)/dev/freedihare/page.tsx` | Approfondimento progetto personale Freedihare (stile sito + accenti app). NavbarDev nascosta qui (condizione `/\/dev\/?$/`) |
-| `/{locale}/art` | `app/[locale]/(routes)/art/page.tsx`  | Portfolio artistico |
+| `/{locale}/art`            | `app/[locale]/(routes)/art/page.tsx`            | Portfolio artistico                                                                                                         |
 
 Locale validi: `it`, `en`. Default: `it`.
 
@@ -136,48 +136,48 @@ app/layout.tsx                          → CSS globali, shell HTML minima
 
 ### Atoms (`(components)/(atoms)/`)
 
-| Componente                  | Client | Descrizione                                |
-| --------------------------- | ------ | ------------------------------------------ |
-| BlurBlue                    | No     | Elemento decorativo blur                   |
+| Componente                  | Client | Descrizione                                                                                                                                                                                                    |
+| --------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BlurBlue                    | No     | Elemento decorativo blur                                                                                                                                                                                       |
 | BrandIcon                   | No     | Logo-brand monocromatico da `simple-icons` (prop `icon`=oggetto simple-icons, `size`, `title`); colore via classe utility (`currentColor`→`fill`). Usato in griglia Skills (72px) e tag-icona Portfolio (24px) |
-| BtnClose                    | No     | Bottone chiudi                             |
-| Jumper                      | No     | Animazione decorativa (usato in 404)       |
-| ParagraphList-client        | Si     | Lista paragrafi con scroll, legge `useLocale` per scegliere lingua descrizione |
-| RoundedIconEl               | No     | Icona tonda con link (usa `Link` da i18n/routing); accetta un'icona come componente lucide (`Icon`) **o** come immagine (`src`) |
-| SectionDocs                 | No     | Sezione documenti (usa `useTranslations`)  |
-| SectionObserver-client      | Si     | Observer per tracking sezione visibile     |
-| SelectLanguage-client       | Si     | Dropdown `<select>` cambio lingua          |
-| SubtitlePortfolio           | No     | Sottotitolo sezione portfolio              |
-| SwitchLanguageInline-client | Si     | Switch lingua con bandiere (click)         |
-| Tag                         | No     | Etichetta generica con sfondo semi-trasparente; colore via prop (`color`, default `"primary"`). Usato per il tech stack delle esperienze |
-| Toast                       | No     | Notifica toast — **stub vuoto** (`return <div></div>`), non utilizzato |
+| BtnClose                    | No     | Bottone chiudi                                                                                                                                                                                                 |
+| Jumper                      | No     | Animazione decorativa (usato in 404)                                                                                                                                                                           |
+| ParagraphList-client        | Si     | Lista paragrafi con scroll, legge `useLocale` per scegliere lingua descrizione                                                                                                                                 |
+| RoundedIconEl               | No     | Icona tonda con link (usa `Link` da i18n/routing); accetta un'icona come componente lucide (`Icon`) **o** come immagine (`src`)                                                                                |
+| SectionDocs                 | No     | Sezione documenti (usa `useTranslations`)                                                                                                                                                                      |
+| SectionObserver-client      | Si     | Observer per tracking sezione visibile                                                                                                                                                                         |
+| SelectLanguage-client       | Si     | Dropdown `<select>` cambio lingua                                                                                                                                                                              |
+| SubtitlePortfolio           | No     | Sottotitolo sezione portfolio                                                                                                                                                                                  |
+| SwitchLanguageInline-client | Si     | Switch lingua con bandiere (click)                                                                                                                                                                             |
+| Tag                         | No     | Etichetta generica con sfondo semi-trasparente; colore via prop (`color`, default `"primary"`). Usato per il tech stack delle esperienze                                                                       |
+| Toast                       | No     | Notifica toast — **stub vuoto** (`return <div></div>`), non utilizzato                                                                                                                                         |
 
 ### Molecules (`(components)/(molecules)/`)
 
-| Componente            | Client | Descrizione                                         |
-| --------------------- | ------ | --------------------------------------------------- |
-| ButtonDocs-client     | Si     | Bottone apertura documenti                          |
-| ButtonHam             | No     | Bottone hamburger menu                              |
-| ButtonPhoto-client    | Si     | Bottone foto con modale                             |
-| Carousel-client       | Si     | Carousel progetti (legge `useLocale`) — **non importato da nessuna page** (codice morto: `PortfolioList` usa direttamente la classe CSS `.carousel`) |
-| ModalDocs-client      | Si     | Modale documenti (CV, portfolio PDF)                |
-| ModalHam-client       | Si     | Menu mobile (createPortal)                          |
-| ModalHello-client     | Si     | Modale benvenuto con foto                           |
-| ProjectLinkButton     | No     | Button-link esterno (GitHub/live) con stato disabled; testi via props. Fonte unica del pattern (PortfolioList ×2, dev/page "Questo sito") |
-| TechIconList          | No     | Lista icone tecnologiche da chiavi requirement (`getIcon`+`BrandIcon`+skip). Fonte unica, prima duplicata in 5 punti; `listClassName` per il contenitore del chiamante |
-| Navbar-client         | Si     | Navigazione principale (Link da i18n/routing)       |
-| NavbarDev-client      | Si     | Navigazione sezione dev (anchor link a sezioni). Voci/ordine/barra derivati dalla fonte unica `devSections`; icone come componenti lucide (mappa `iconKey`→componente) |
-| SectionFooter-client  | Si     | Contenuto footer (contatti, docs, social)           |
+| Componente           | Client | Descrizione                                                                                                                                                            |
+| -------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ButtonDocs-client    | Si     | Bottone apertura documenti                                                                                                                                             |
+| ButtonHam            | No     | Bottone hamburger menu                                                                                                                                                 |
+| ButtonPhoto-client   | Si     | Bottone foto con modale                                                                                                                                                |
+| Carousel-client      | Si     | Carousel progetti (legge `useLocale`) — **non importato da nessuna page** (codice morto: `PortfolioList` usa direttamente la classe CSS `.carousel`)                   |
+| ModalDocs-client     | Si     | Modale documenti (CV, portfolio PDF)                                                                                                                                   |
+| ModalHam-client      | Si     | Menu mobile (createPortal)                                                                                                                                             |
+| ModalHello-client    | Si     | Modale benvenuto con foto                                                                                                                                              |
+| ProjectLinkButton    | No     | Button-link esterno (GitHub/live) con stato disabled; testi via props. Fonte unica del pattern (PortfolioList ×2, dev/page "Questo sito")                              |
+| TechIconList         | No     | Lista icone tecnologiche da chiavi requirement (`getIcon`+`BrandIcon`+skip). Fonte unica, prima duplicata in 5 punti; `listClassName` per il contenitore del chiamante |
+| Navbar-client        | Si     | Navigazione principale (Link da i18n/routing)                                                                                                                          |
+| NavbarDev-client     | Si     | Navigazione sezione dev (anchor link a sezioni). Voci/ordine/barra derivati dalla fonte unica `devSections`; icone come componenti lucide (mappa `iconKey`→componente) |
+| SectionFooter-client | Si     | Contenuto footer (contatti, docs, social)                                                                                                                              |
 
 ### Organisms (`(components)/(organisms)/`)
 
-| Componente    | Client | Descrizione                                                |
-| ------------- | ------ | ---------------------------------------------------------- |
-| Header         | No     | Compone ButtonHam + Navbar + NavbarDev                     |
-| Footer         | No     | Compone SectionFooter + testi copyright (`useTranslations`) |
-| PortfolioList  | No     | Lista progetti con Carousel (dati da portfolioProjects.tsx) |
-| ExperienceList | No     | Card esperienze professionali (dati da experiences.tsx); `useLocale` per i contenuti bilingui; descrizione come `<p>` intero; periodo reso con atomo `Tag`; tech come icone `BrandIcon` (via `getIcon`) |
-| ShowcaseCard | No | Card-logo riusabile per "Progetti personali" e "Collaborazioni": logo + descrizione + (opz.) credito autore (`projectBy` + link al sito) + icone tech (`TechIconList`) + un button **interno** (`Link` i18n, rotta) o **esterno** (`<a>` _blank, sito) secondo `project.link.external` |
+| Componente     | Client | Descrizione                                                                                                                                                                                                                                                                             |
+| -------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Header         | No     | Compone ButtonHam + Navbar + NavbarDev                                                                                                                                                                                                                                                  |
+| Footer         | No     | Compone SectionFooter + testi copyright (`useTranslations`)                                                                                                                                                                                                                             |
+| PortfolioList  | No     | Lista progetti con Carousel (dati da portfolioProjects.tsx)                                                                                                                                                                                                                             |
+| ExperienceList | No     | Card esperienze professionali (dati da experiences.tsx); `useLocale` per i contenuti bilingui; ruolo come titolo, poi lista `placements` (azienda + periodo reso con atomo `Tag`), descrizione condivisa come `<p>` intero; tech come icone `BrandIcon` (via `getIcon`)                 |
+| ShowcaseCard   | No     | Card-logo riusabile per "Progetti personali" e "Collaborazioni": logo + descrizione + (opz.) credito autore (`projectBy` + link al sito) + icone tech (`TechIconList`) + un button **interno** (`Link` i18n, rotta) o **esterno** (`<a>` \_blank, sito) secondo `project.link.external` |
 
 ---
 
@@ -220,50 +220,56 @@ Nessun API, nessun database. Tutti i dati sono in file TSX:
 ### `portfolioProjects.tsx`
 
 Esporta:
+
 - `portfolioData` — **oggetto raggruppato per sottosezione** di `/dev #portfolio` (niente campo `category`): `{ exercises: IPortfolioData[]` (i 14 progetti formativi, card screenshot)`, collaborations: IShowcaseProject[]` (progetti esterni/di team, card-logo; oggi: **JobInBox**, link esterno; sottosezione nascosta se vuota)`, personalProjects: IShowcaseProject[]` (Freedihare, card-logo, link interno)`}`. `exercises` → `PortfolioList`; `collaborations`/`personalProjects` → `ShowcaseCard`.
 - `skills: {id, icon, label}[]` — tecnologie della griglia /dev; `icon` è un oggetto `simple-icons` preso dal registro **`BRAND_ICONS`** (`(data)/techIcons.tsx`), reso da `BrandIcon`. ID statici.
 
 ### `techIcons.tsx`
 
 Fonte di verità unica delle icone-brand. Esporta:
+
 - `BRAND_ICONS: Record<string, SimpleIcon>` — registro chiave requirement → oggetto `simple-icons` (unico punto con gli import simple-icons). Alimenta sia `skills` sia `getIcon`.
 - `getIcon(requirement)` — ritorna l'icona o `undefined` (il chiamante salta). Usato dalla molecola `TechIconList`. (Prima viveva in `PortfolioList`.)
 
 ### `freedihareContent.tsx`
 
 Config statica della pagina `/dev/freedihare`: `fhPills`, `fhSections` (con `iconKey`→lucide nella pagina), `fhMacros`, `fhDay`, `fhShots`. Dati puri, niente UI.
+
 - `links: {id, icon, label, title, url}[]` — link esterni (GitHub, LinkedIn, contatti)
 - `thisWebsite: IPortfolioData` — dati del sito stesso (mostrato separatamente in dev page)
 
 ### `devSections.tsx`
 
 Esporta:
+
 - `devSections: IDevSection[]` — fonte unica delle voci `/dev` (id, `titleKey` i18n, `iconKey` per la mappa lucide, `isPageSection`). L'ordine guida menu, barra di avanzamento e highlight in `NavbarDev`. `contacts` ha `isPageSection: false` (voce solo-menu: i contatti vivono nel footer).
 
 ### `experiences.tsx`
 
 Esporta:
-- `experiences: IExperience[]` — esperienze professionali dev (ruolo, azienda, periodo, descrizione bilingue, tech, `current`). Vincolo NDA: nomi azienda/ruolo/tipologie, niente clienti/repo. Renderizzate da `ExperienceList` nella sezione `/dev #experience`.
+
+- `experiences: IExperience[]` — esperienze professionali dev. **Raggruppate per ruolo:** `role`/`description`/`tech` sono condivisi; `placements: IExperiencePlacement[]` elenca le aziende/periodi (`company`, `period` bilingue, `current` per-collocazione). Così lo stesso ruolo presso più aziende (es. "Docente" @ Riverloop + Startcode) NON duplica la descrizione. Vincolo NDA: nomi azienda/ruolo/tipologie, niente clienti/repo. Renderizzate da `ExperienceList` nella sezione `/dev #experience`.
 
 > Nota: le card-logo (`IShowcaseProject`: logo, tagline bilingue, `tech`, `link {href, labelKey, external}`, `author?` opzionale `{name, href?}`; forma distinta da `IPortfolioData`) coprono sia `personalProjects` (Freedihare → link interno `/dev/freedihare`) sia `collaborations` (JobInBox → link esterno). Vivono dentro `portfolioData` in `portfolioProjects.tsx`; rese da `ShowcaseCard`. Il file separato `personalProjects.tsx` e l'interfaccia `IPersonalProject` sono stati rimossi/sostituiti.
 
 ### `socialNetwork.tsx`
 
 Esporta:
+
 - `socialNetwork: {id, label, icon, url}[]` — 2 social (usati in art page)
 
 ### `IPortfolioProject.tsx`
 
 ```ts
 interface IPortfolioData {
-  id: string
-  title: string
-  tecnicalRequirements: string[]
-  img: string
-  description: { italian: string, english: string }
-  linkGithub: string
-  linkProject: string
-  created: string
+  id: string;
+  title: string;
+  tecnicalRequirements: string[];
+  img: string;
+  description: { italian: string; english: string };
+  linkGithub: string;
+  linkProject: string;
+  created: string;
 }
 ```
 
@@ -273,19 +279,19 @@ interface IPortfolioData {
 
 12 file in `(css-library-utilities)/`, importati via `library-import.css`:
 
-| File           | Contenuto                                                  |
-| -------------- | ---------------------------------------------------------- |
-| animation.css  | Keyframe e classi animazione                               |
-| border.css     | Border radius, border styles                               |
+| File           | Contenuto                                                                     |
+| -------------- | ----------------------------------------------------------------------------- |
+| animation.css  | Keyframe e classi animazione                                                  |
+| border.css     | Border radius, border styles                                                  |
 | color.css      | Variabili CSS colori (primary/secondary con varianti opacita'), classi txt/bg |
-| components.css | Classi componenti riutilizzabili (btn, shadow, ecc.)       |
-| display.css    | Display, visibility, overflow, pointer, z-index            |
-| flex.css       | Flex utilities (center, between, column, wrap, gap)        |
-| font.css       | Font family, size, weight (Google Fonts Zain)              |
-| layout.css     | Main width, section widths, media queries breakpoint       |
-| position.css   | Position fixed/absolute/relative, top/left/right/bottom    |
-| size.css       | Width, height, ratio, min/max                              |
-| spacing.css    | Padding, margin (utility classes tipo p-10px, m-auto)      |
+| components.css | Classi componenti riutilizzabili (btn, shadow, ecc.)                          |
+| display.css    | Display, visibility, overflow, pointer, z-index                               |
+| flex.css       | Flex utilities (center, between, column, wrap, gap)                           |
+| font.css       | Font family, size, weight (Google Fonts Zain)                                 |
+| layout.css     | Main width, section widths, media queries breakpoint                          |
+| position.css   | Position fixed/absolute/relative, top/left/right/bottom                       |
+| size.css       | Width, height, ratio, min/max                                                 |
+| spacing.css    | Padding, margin (utility classes tipo p-10px, m-auto)                         |
 
 Le variabili colore principali sono definite in `globals.css` come CSS custom properties (`--color-primary-*`, `--color-secondary-*`).
 
@@ -301,9 +307,9 @@ Context con `currentHash` (string) e `setCurrentHash`. **Utilizzato da `NavbarDe
 
 ## Assets
 
-| Cartella                  | Contenuto                                    | Peso     |
-| ------------------------- | -------------------------------------------- | -------- |
-| `public/assets/`          | Immagini profilo, icone nav, skill, progetti | ~3MB     |
-| `public/assets/projects-img/` | Screenshot progetti in WebP              | incluso  |
-| `public/doc/dev-doc/`     | PDF curriculum dev                           | 188KB    |
-| `public/doc/art-doc/`     | PDF portfolio artistico + CV                 | ~86.5MB  |
+| Cartella                      | Contenuto                                    | Peso    |
+| ----------------------------- | -------------------------------------------- | ------- |
+| `public/assets/`              | Immagini profilo, icone nav, skill, progetti | ~3MB    |
+| `public/assets/projects-img/` | Screenshot progetti in WebP                  | incluso |
+| `public/doc/dev-doc/`         | PDF curriculum dev                           | 188KB   |
+| `public/doc/art-doc/`         | PDF portfolio artistico + CV                 | ~86.5MB |
